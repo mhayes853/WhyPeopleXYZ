@@ -1,0 +1,52 @@
+.lists {
+  display: flex;
+  flex-direction: column;
+  width: min(calc(100% - 2em), 600px);
+  align-items: flex-start;
+  row-gap: 4em;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 100%;
+  text-align: left;
+}
+
+.list-header {
+}
+
+.list-content {
+  display: flex;
+  max-width: infinity;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 100%;
+  row-gap: 0.5em;
+}
+
+.contact-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 1em;
+}
+
+.card {
+  background-color: light-dark(#f2f0f0, #26323d);
+  border-radius: 16px;
+  max-width: 100%;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 16px 32px
+    light-dark(rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.15));
+}
+
+.root-article {
+  display: flex;
+  max-width: 600px;
+  align-items: flex-start;
+}

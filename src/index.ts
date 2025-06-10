@@ -1,5 +1,5 @@
 import "./style.css";
-import { renderCoreCrystal } from "./CoreCrystal";
+import "./index.css";
 
 type Article = {
   title: string;
@@ -26,9 +26,16 @@ const PROJECTING_MY_INSANITY_ARTICLES = [
   {
     title: "Command Handlers Don't Scale",
     blurb:
-      "Technology and societies needs to be collaborative, and not enable their own destruction by refusing to question their own requirements.",
+      "Technology, organizations, and societies need to be collaborative, and not enable their own destruction by refusing to question their own requirements.",
     link: "command-handlers-dont-scale.html",
   },
 ];
 
-renderCoreCrystal();
+const articleHTML = (a: Article) => {
+  return `
+  <a id="article-${a.title}" class="card">
+    <h3>${a.title}</h3>
+    <p>${a.blurb}</p>
+  </a>
+  `;
+};
