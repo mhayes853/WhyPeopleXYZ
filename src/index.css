@@ -10,11 +10,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 100%;
+  width: 100%;
   text-align: left;
 }
 
 .list-header {
+  width: 100%;
 }
 
 .list-content {
@@ -22,7 +23,7 @@
   max-width: infinity;
   flex-direction: column;
   justify-content: flex-start;
-  max-width: 100%;
+  width: 100%;
   row-gap: 0.5em;
 }
 
@@ -34,9 +35,10 @@
 }
 
 .card {
-  background-color: light-dark(#f2f0f0, #26323d);
+  background-color: light-dark(#f6f6f6, #243f57);
   border-radius: 16px;
-  max-width: 100%;
+  padding: 1em;
+  width: 100%;
   transition: box-shadow 0.3s ease;
 }
 
