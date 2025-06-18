@@ -1,5 +1,6 @@
 import "../shared-assets/style.css";
 import "./liquid-glass.css";
+import backgroundImage from "./assets/background.avif";
 import vertexShaderCode from "./assets/vertex.glsl?raw";
 import fragmentShaderCode from "./assets/fragment.glsl?raw";
 
@@ -69,7 +70,7 @@ const background = gl.createTexture();
 
 const image = new Image();
 image.crossOrigin = "anonymous";
-image.src = "./liquid-glass/assets/background.avif";
+image.src = backgroundImage;
 image.onload = () => {
   const aspect = image.width / image.height;
   const cssWidth = canvas.parentElement!.clientWidth;
