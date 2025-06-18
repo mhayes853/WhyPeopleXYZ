@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/jpeg" href="/icon.jpeg" />
+    <link rel="icon" type="image/jpeg" href="./shared-assets/icon.jpeg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Matthew Hayes, dreading</title>
     <link rel="canonical" href="/" />
@@ -11,7 +11,7 @@
       property="og:description"
       content="By trade, I build apps and developer tools for iOS and Android, but my true motives lie further. Wouldn't it be fun for you to deduce those yourself?"
     />
-    <meta property="og:image" content="/icon.jpeg" />
+    <meta property="og:image" content="./shared-assets/icon.jpeg" />
     <meta property="og:url" content="/" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Matthew Hayes, dreading" />
@@ -19,18 +19,13 @@
       name="twitter:description"
       content="By trade, I build apps and developer tools for iOS and Android, but my true motives lie further. Wouldn't it be fun for you to deduce those yourself?"
     />
-    <meta name="twitter:image" content="/icon.jpeg" />
+    <meta name="twitter:image" content="./shared-assets/icon.jpeg" />
     <meta name="twitter:url" content="/" />
   </head>
   <body>
     <div id="app">
       <div class="core-crystal-container">
-        <img
-          width="300"
-          height="150"
-          src="/core-crystal.svg"
-          class="core-crystal"
-        />
+        <img width="300" height="150" src="./shared-assets/core-crystal.svg" />
       </div>
       <h1>Matthew Hayes</h1>
       <p>
@@ -48,7 +43,7 @@
             <p>Justifying my existence.</p>
           </div>
           <div class="list-content">
-            <a class="card" href="/root.html">
+            <a class="card" href="/root">
               <h3>The Root</h3>
               <p>
                 A formal declaration of my insanity (AKA my motivations for
@@ -59,15 +54,16 @@
         </div>
         <div class="list">
           <div class="list-header">
-            <h2>Building Products</h2>
+            <h2>Building Products and Tools</h2>
             <p>
               Content related to working directly with current industry
               technologies and day-to-day work building products that bring
-              value to society.
+              value to society. This will be the interesting stuff if you work
+              in the software industry.
             </p>
           </div>
           <div class="list-content">
-            <a class="card" href="/liquid-glass.html">
+            <a class="card" href="/liquid-glass">
               <h3>Thoughts on Liquid Glass</h3>
               <p>
                 What I think of Apple's new aesthetic in the grand scheme of
@@ -88,7 +84,7 @@
             </p>
           </div>
           <div class="list-content">
-            <a class="card" href="/command-handlers-dont-scale.html">
+            <a class="card" href="/command-handlers-dont-scale">
               <h3>Command Handlers Don't Scale</h3>
               <p>
                 Technology, organizations, and societies need to be
@@ -107,17 +103,17 @@
             <a class="contact-link" href="https://github.com/mhayes853">
               <picture>
                 <source
-                  srcset="/index/github-mark-white.svg"
+                  srcset="./index/assets/github-mark-white.svg"
                   media="(prefers-color-scheme: dark)"
                 />
                 <source
-                  srcset="/index/github-mark.svg"
+                  srcset="./index/assets/github-mark.svg"
                   media="(prefers-color-scheme: light)"
                 />
                 <img
                   width="40"
                   height="40"
-                  src="/index/github-mark.svg"
+                  src="./index/assets/github-mark.svg"
                   alt="Github"
                 />
               </picture>
@@ -130,7 +126,7 @@
               <img
                 width="40"
                 height="40"
-                src="/index/blue-sky-logo.svg"
+                src="./index/assets/blue-sky-logo.svg"
                 alt="Bluesky"
               />
               <p>whypeople.bsky.social</p>
@@ -138,17 +134,17 @@
             <a class="contact-link" href="mailto:matthewha853@gmail.com">
               <picture>
                 <source
-                  srcset="/index/email-icon-dark.svg"
+                  srcset="./index/assets/email-icon-dark.svg"
                   media="(prefers-color-scheme: dark)"
                 />
                 <source
-                  srcset="/index/email-icon-light.svg"
+                  srcset="./index/assets/email-icon-light.svg"
                   media="(prefers-color-scheme: light)"
                 />
                 <img
                   width="40"
                   height="40"
-                  src="/index/email-icon-light.svg"
+                  src="./index/assets/email-icon-light.svg"
                   alt="Email"
                 />
               </picture>
@@ -158,6 +154,6 @@
         </div>
       </div>
     </div>
-    <script type="module" src="/src/index.ts"></script>
+    <script type="module" src="./index/index.ts"></script>
   </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/jpeg" href="/icon.jpeg" />
+    <link rel="icon" type="image/jpeg" href="./shared-assets/icon.jpeg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Command Handlers Don't Scale</title>
     <meta property="og:title" content="Command Handlers Don't Scale" />
@@ -10,7 +10,7 @@
       property="og:description"
       content="Technology, organizations, and societies need to be collaborative, and not enable their own destruction by refusing to question their own requirements."
     />
-    <meta property="og:image" content="/icon.jpeg" />
+    <meta property="og:image" content="./shared-assets/icon.jpeg" />
     <meta property="og:url" content="/" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Command Handlers Don't Scale" />
@@ -18,18 +18,13 @@
       name="twitter:description"
       content="Technology, organizations, and societies need to be collaborative, and not enable their own destruction by refusing to question their own requirements."
     />
-    <meta name="twitter:image" content="/icon.jpeg" />
+    <meta name="twitter:image" content="./shared-assets/icon.jpeg" />
     <meta name="twitter:url" content="/" />
   </head>
   <body>
     <div id="app">
       <a class="core-crystal-container" href="/">
-        <img
-          width="300"
-          height="150"
-          src="/core-crystal.svg"
-          class="core-crystal"
-        />
+        <img width="300" height="150" src="./shared-assets/core-crystal.svg" />
       </a>
       <article>
         <h1 id="command-handlers-don-t-scale">Command Handlers Don’t Scale</h1>
@@ -81,6 +76,7 @@
           This article will largely have a broad focus on many domains, as such
           deeper dives into specific domains may not be fully addressed.
         </p>
+         <br />
         <h2 id="defining-commands-and-command-handlers">
           Defining Commands and Command Handlers
         </h2>
@@ -134,6 +130,7 @@ console.log(`The number is now ${number}!`)
           out are the command handlers, and those who create the commands are
           the commanders.
         </p>
+        <br />
         <h2 id="scaling-issues">Scaling Issues</h2>
         <p>
           So, <strong><em>why don’t command handlers scale</em></strong
@@ -292,7 +289,7 @@ public class ItemValidator {
           number of systems that have little or no form of automated/rapidly
           available testing pipelines.
           <img
-            src="/command-handlers-dont-scale/item-service.png"
+            src="./command-handlers-dont-scale/assets/item-service.png"
             alt="The class hierarchy of an ItemService that contains many typical classes that you would see in a Spring application, all depending on the Item class."
           />
         </p>
@@ -310,7 +307,7 @@ public class ItemValidator {
         <p>
           To visualize this.
           <img
-            src="/command-handlers-dont-scale/item-system.png"
+            src="./command-handlers-dont-scale/assets/item-system.png"
             alt="Many different company services written in different languages that each have to define their own Item class and validation logic for the item."
           />
           Each node of this system needs to define an <code>Item</code> class
@@ -488,6 +485,7 @@ public class ItemValidator {
           often arise due to this lack of understanding (eg. why many vibe
           coding attempts fail).
         </p>
+         <br />
         <h2 id="another-way-of-thinking">Another Way of Thinking</h2>
         <p>
           The first and total opposite mindset shift we can have is to trust
@@ -659,6 +657,7 @@ public class Item {
           handlers that act as servants in accordance to the user prompts they
           receive. Often, the prompts themselves need to be questioned.)
         </p>
+         <br />
         <h2 id="not-a-silver-bullet">Not a Silver Bullet</h2>
         <p>
           Imagine a world where there was no downside to everyone trusting each
@@ -715,6 +714,7 @@ public class Item {
           command handling can function effectively. Managing the trust factor
           is therefore a crucial part of designing efficient systems that scale.
         </p>
+         <br />
         <h2 id="to-end-with-a-question">To End With a Question</h2>
         <p>
           <em
@@ -725,6 +725,6 @@ public class Item {
         <p>— 6/8/25</p>
       </article>
     </div>
-    <script type="module" src="/src/command-handlers-dont-scale.ts"></script>
+    <script type="module" src="./command-handlers-dont-scale/command-handlers-dont-scale.ts"></script>
   </body>
 </html>

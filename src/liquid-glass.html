@@ -2,16 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/jpeg" href="/icon.jpeg" />
+    <link rel="icon" type="image/jpeg" href="./shared-assets/icon.jpeg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thoughts on Liquid Glass</title>
-    <script type="module" src="/src/liquid-glass.ts"></script>
     <meta property="og:title" content="Thoughts on Liquid Glass" />
     <meta
       property="og:description"
       content="What I think of Apple's new aesthetic in the grand scheme of things."
     />
-    <meta property="og:image" content="/icon.jpeg" />
+    <meta property="og:image" content="./shared-assets/icon.jpeg" />
     <meta property="og:url" content="/" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Thoughts on Liquid Glass" />
@@ -19,13 +18,13 @@
       name="twitter:description"
       content="What I think of Apple's new aesthetic in the grand scheme of things."
     />
-    <meta name="twitter:image" content="/icon.jpeg" />
+    <meta name="twitter:image" content="./shared-assets/icon.jpeg" />
     <meta name="twitter:url" content="/" />
   </head>
   <body>
     <div id="app">
       <a class="core-crystal-container" href="/">
-        <img width="300" height="150" src="/core-crystal.svg" />
+        <img width="300" height="150" src="./shared-assets/core-crystal.svg" />
       </a>
       <div class="glass-container">
         <canvas id="canvas"></canvas>
@@ -38,6 +37,11 @@
           <b>By Matthew Hayes</b>
         </div>
       </div>
+      <p class="caption">
+        Move your cursor around, or tap around the image on mobile to see how
+        accessible the text is in different areas.
+      </p>
+      <br />
       <article>
         <p>
           I’ve installed the new iPadOS 26 beta on my iPad Pro this week, and
@@ -70,17 +74,18 @@
         <p>
           Making an app look visually pleasing, “easy to use”, and “accessible”
           are only some of the more superficial concerns of an app’s overall
-          design. You can have all 3 of those things, but still have a terrible
-          overall experience if your app doesn’t “provide real value”. “Real
-          value” generally comes from providing the information necessary to
-          answer the user’s questions and help to guide them make decisions on
-          navigating their life.
+          design. They are a neccessary evil to represent and obtain the "real
+          value" of software. You can have all 3 of those things, but still have
+          a terrible overall experience if your app doesn’t provide "real
+          value”. “Real value” generally comes from providing the information
+          necessary to answer the user’s questions and help to guide them make
+          decisions on navigating their life.
         </p>
         <p>
           For instance, take an empty day on the newly liquid glassified
           calendar app.
           <img
-            src="/liquid-glass/calendar-1.jpeg"
+            src="./liquid-glass/assets/calendar-1.jpeg"
             alt="An empty day on the newly designed iPadOS calendar app depicting Friday, June 20th, 2025."
           />
           It’s clear that I have no events planned for this day, and that the
@@ -135,7 +140,7 @@
         <p>
           For instance, take this slice of a particular day.
           <img
-            src="/liquid-glass/calendar-2.jpeg"
+            src="./liquid-glass/assets/calendar-2.jpeg"
             alt="A view of part of my day on Tuesday, June 10th, 2025 on the new iPadOS calendar app."
           />
           Here, I’m attending an all day event known as “CommunityKit”. Though,
@@ -190,5 +195,6 @@
         </p>
       </article>
     </div>
+    <script type="module" src="./liquid-glass/liquid-glass.ts"></script>
   </body>
 </html>
