@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpeg" href="./shared-assets/icon.jpeg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Realization on Low and High Level Languages</title>
+    <meta
+      property="og:title"
+      content="A Realization on Low and High Level Languages"
+    />
+    <meta
+      property="og:description"
+      content="Low and high level languages are tied to systems, not computer architecture."
+    />
+    <meta property="og:image" content="./shared-assets/icon.jpeg" />
+    <meta
+      property="og:url"
+      content="/a-realization-on-low-and-high-level-languages"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="A Realization on Low and High Level Languages"
+    />
+    <meta
+      name="twitter:description"
+      content="Low and high level languages are tied to systems, not computer architecture."
+    />
+    <meta name="twitter:image" content="./shared-assets/icon.jpeg" />
+    <meta
+      name="twitter:url"
+      content="/a-realization-on-low-and-high-level-languages"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <a class="core-crystal-container" href="/">
+        <img width="300" height="150" src="./shared-assets/core-crystal.svg" />
+      </a>
+      <article>
+        <h1 id="a-realization-on-low-and-high-level-languages">
+          A Realization on Low and High Level Languages
+        </h1>
+        <p>
+          If you write code, you’re probably familiar with the concept of high
+          and low level languages. In technical terms, low level means closer to
+          the machine, like assembly languages or machine code. Higher level in
+          technical terms means further from the machine like C, JavaScript,
+          Swift, and so on.
+        </p>
+        <p>
+          However, this shouldn’t be the case. Speaking of high and low levels
+          in the context of how close a language is to computer architecture is
+          quite a narrow view point on the world.
+        </p>
+        <p>
+          Rather, in the context of “real systems”, this distinction should be
+          reversed. In other words, C, JavaScript, and Swift are lower-level
+          languages. Meanwhile, assembly and machine code are higher-level
+          languages.
+        </p>
+        <p>
+          For instance, if we’re writing a pseudo random number generator, which
+          language do you think gives you a better <em>understanding</em> about
+          <em>the process</em> of how random numbers are generated?
+        </p>
+        <p><strong>x86-64 Assembly</strong></p>
+        <pre><code class="lang-x86">
+<span class="hljs-symbol">rotl:</span>
+        <span class="hljs-keyword">push</span>    <span class="hljs-built_in">rbp</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rbp</span>, <span class="hljs-built_in">rsp</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">8</span>], <span class="hljs-built_in">rdi</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">DWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">12</span>], <span class="hljs-built_in">esi</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">eax</span>, <span class="hljs-built_in">DWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">12</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rdx</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">8</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">ecx</span>, <span class="hljs-built_in">eax</span>
+        <span class="hljs-keyword">rol</span>     <span class="hljs-built_in">rdx</span>, <span class="hljs-built_in">cl</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">rdx</span>
+        <span class="hljs-keyword">pop</span>     <span class="hljs-built_in">rbp</span>
+        <span class="hljs-keyword">ret</span>
+
+<span class="hljs-symbol">xoshiro_256_next:</span>
+        <span class="hljs-keyword">push</span>    <span class="hljs-built_in">rbp</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rbp</span>, <span class="hljs-built_in">rsp</span>
+        <span class="hljs-keyword">push</span>    <span class="hljs-built_in">rbx</span>
+        <span class="hljs-keyword">sub</span>     <span class="hljs-built_in">rsp</span>, <span class="hljs-number">24</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>], <span class="hljs-built_in">rdi</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">8</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rdx</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">rdx</span>
+        <span class="hljs-keyword">sal</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">2</span>
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">rdx</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">esi</span>, <span class="hljs-number">7</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rdi</span>, <span class="hljs-built_in">rax</span>
+        <span class="hljs-keyword">call</span>    rotl
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rdx</span>, <span class="hljs-built_in">rax</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">rdx</span>
+        <span class="hljs-keyword">sal</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">3</span>
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">rdx</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">16</span>], <span class="hljs-built_in">rax</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">8</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>]
+        <span class="hljs-keyword">sal</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">17</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">24</span>], <span class="hljs-built_in">rax</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">16</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rcx</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rdx</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">16</span>
+        <span class="hljs-keyword">xor</span>     <span class="hljs-built_in">rdx</span>, <span class="hljs-built_in">rcx</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>], <span class="hljs-built_in">rdx</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">24</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rcx</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">8</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rdx</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">24</span>
+        <span class="hljs-keyword">xor</span>     <span class="hljs-built_in">rdx</span>, <span class="hljs-built_in">rcx</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>], <span class="hljs-built_in">rdx</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">8</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rcx</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">16</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rdx</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">8</span>
+        <span class="hljs-keyword">xor</span>     <span class="hljs-built_in">rdx</span>, <span class="hljs-built_in">rcx</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>], <span class="hljs-built_in">rdx</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rdx</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">24</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>]
+        <span class="hljs-keyword">xor</span>     <span class="hljs-built_in">rdx</span>, <span class="hljs-built_in">rax</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>], <span class="hljs-built_in">rdx</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">16</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rdx</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rdx</span>, <span class="hljs-number">16</span>
+        <span class="hljs-keyword">xor</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">24</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rdx</span>], <span class="hljs-built_in">rax</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">add</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-number">24</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rax</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rdx</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">32</span>]
+        <span class="hljs-keyword">lea</span>     <span class="hljs-built_in">rbx</span>, [<span class="hljs-built_in">rdx</span>+<span class="hljs-number">24</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">esi</span>, <span class="hljs-number">45</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rdi</span>, <span class="hljs-built_in">rax</span>
+        <span class="hljs-keyword">call</span>    rotl
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbx</span>], <span class="hljs-built_in">rax</span>
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">16</span>]
+        <span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rbx</span>, <span class="hljs-built_in">QWORD</span> <span class="hljs-built_in">PTR</span> [<span class="hljs-built_in">rbp</span>-<span class="hljs-number">8</span>]
+        <span class="hljs-keyword">leave</span>
+        <span class="hljs-keyword">ret</span>
+        </code></pre>
+        <p><strong>C</strong></p>
+        <pre><code class="lang-c">
+#include &lt;stdint.h&gt;
+
+static inline uint64_t rotl(const uint64_t x, int k) {
+  return (x &lt;&lt; k) | (x &gt;&gt; (<span class="hljs-number">64</span> - k));
+}
+
+uint64_t xoshiro_256_next(uint64_t s[<span class="hljs-number">4</span>]) {
+  const uint64_t result = rotl(s[<span class="hljs-number">1</span>] * <span class="hljs-number">5</span>, <span class="hljs-number">7</span>) * <span class="hljs-number">9</span>;
+  const uint64_t t = s[<span class="hljs-number">1</span>] &lt;&lt; <span class="hljs-number">17</span>;
+
+  s[<span class="hljs-number">2</span>] ^= s[<span class="hljs-number">0</span>];
+  s[<span class="hljs-number">3</span>] ^= s[<span class="hljs-number">1</span>];
+  s[<span class="hljs-number">1</span>] ^= s[<span class="hljs-number">2</span>];
+  s[<span class="hljs-number">0</span>] ^= s[<span class="hljs-number">3</span>];
+  s[<span class="hljs-number">2</span>] ^= t;
+  s[<span class="hljs-number">3</span>] = rotl(s[<span class="hljs-number">3</span>], <span class="hljs-number">45</span>);
+  return result;
+}
+        </code></pre>
+        <p>
+          I would imagine that you find that the C code describes the process of
+          generating a random number more clearly. In other words, the C code
+          describes reality more than x86 assembly.
+        </p>
+        <p>Take a line from the assembly example.</p>
+        <pre><code class="lang-x86"><span class="hljs-keyword">mov</span>     <span class="hljs-built_in">rax</span>, <span class="hljs-built_in">rdx</span></code></pre>
+        <p>
+          <code>mov</code> is a move instruction, and <code>rax</code> and
+          <code>rdx</code> are registers. As a whole, a move instruction can be
+          applied in an infinite number of programs, and <code>rax</code> and
+          <code>rdx</code> will also be a part of those infinite numbers of
+          programs. In other words, a move instruction is
+          <em>very high level</em> because it doesn’t describe the domain
+          specific processes of any particular program. It is therefore detached
+          from reality.
+        </p>
+        <p>
+          Notice how the concept of registers and instructions are only directly
+          relevant in the context of the assembly example. We don’t need to talk
+          about these things in C, because they are ultimately
+          <em>irrelevant</em> (only in the sense of understanding, not
+          execution) to the <em>larger process</em> of generating a random
+          number. The C code is closer to reality because it describes such
+          reality more accurately from an <em>understandings</em> stand point.
+        </p>
+        <p>
+          In assembly, because we’re so focused on primitive details like
+          registers and instructions, we easily miss the larger picture. We
+          therefore miss <em>reality</em>.
+        </p>
+        <p>
+          To conclude here, if we want to build great systems, we need to
+          optimize for understanding and reasoning about our systems. Computer
+          architecture is an implementation detail that is largely detached from
+          reality as it says nothing about our systems on its own. Sticking
+          closer to computer architecture may produce faster and more performant
+          programs, but it is often detached from the deeper truth of what we
+          directly create.
+        </p>
+        <p>
+          All in all, lower level means providing both full and real awareness
+          of the true reality of our systems, and higher level detaches itself
+          from that in order to focus more on abstractions. In this sense,
+          Assembly is higher level than C.
+        </p>
+        <p>
+          To end, in this exploration I stayed close to existing languages that
+          are used in the mainstream. I suppose one could therefore ask about a
+          language so low level that it describes and enhances reality
+          perfectly, and how that would look and operate. That is, something
+          that indeed may <a href="https://dynamicland.org/">exist</a> in a
+          primitive form.
+        </p>
+        <p>— 6/29/25</p>
+      </article>
+    </div>
+    <script
+      type="module"
+      src="./a-realization-on-low-and-high-level-languages/a-realization-on-low-and-high-level-languages.ts"
+    ></script>
+  </body>
+</html>
