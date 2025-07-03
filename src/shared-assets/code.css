@@ -28,7 +28,7 @@ pre {
   box-sizing: border-box;
 }
 
-p code {
+code {
   border-radius: 10px;
   padding: 0.2em 0.4em;
   background: light-dark(#f6f6f6, #293052);
