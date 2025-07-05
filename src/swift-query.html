@@ -72,24 +72,35 @@
         <p>
           The past 1.5 years using React Native at a startup is largely
           responsible for my inspirations for building Swift Query. In
-          particular, the networking/asynchronous data needs of many sizeable
-          applications are massive in this day and age, and I had the pleasure
-          of having to combine networked data from multiple different sources
-          and local databases stored on device. All of this data comes
-          asynchronously, and takes a non-trivial but varying amounts of time to
-          load from its source. As such, fetching asynchronous data itself
-          through code isn’t typically the hard part, in fact it’s often done in
-          just a few lines of code.
+          particular, I was often responsible for combining all sorts of
+          data (Location, Travel Estimates, Geo-spatially Separated Events,
+          Arrivals at Locations, and of course “Users”) from different sources
+          (Device APIs, SQLite, AWS, and our REST API). Additionally, much of
+          this data also needed to be observed in real-time. In other words,
+          it’s quite safe to say that many of us have worked on applications
+          like these, and managing such data in many different ways is common
+          place for today’s apps.
         </p>
         <p>
-          Yet, what does it mean to load asynchronous data? Such data comes from
-          the physical world, because something physical must work to provide
-          it, otherwise it we wouldn’t consider it “asynchronous”. As software
-          developers, we rarely ever have to think of design in the context of
-          the physical world. Rather, we love to create our own abstract worlds,
-          and demand physical reality bends to our world. As such, we loathe
-          error handling, keeping asynchronous data consistent when displayed in
-          the UI, and creating systems with the expectation of failure.
+          That being said, all of this data comes asynchronously, and takes a
+          non-trivial but varying amounts of time to load from its source. The
+          code itself to fetch the data often isn’t the hard part (unless it’s
+          paired with complex algorithmic processing afterwards), and can be
+          done in just a few lines for most data sources.
+        </p>
+        <p>
+          Yet, what does it mean to load asynchronous data? Such data comes
+          from the physical world, because something physical must work to
+          provide it, otherwise it we wouldn’t consider it “asynchronous”. As
+          software developers, we rarely ever have to think of design in the
+          context of the physical world. Rather, we love to create our own
+          abstract worlds, and demand physical reality bends to our world. As
+          such, we loathe error handling, keeping asynchronous data consistent
+          when displayed in the UI, and creating systems with the expectation
+          of failure. This is especially difficult considering modern UI
+          frameworks are declarative and are driven via local state variables,
+          whereas most data fetching is strictly imperative and affects the
+          application’s global state.
         </p>
         <p>
           <strong
@@ -529,6 +540,7 @@ const myQuery = useQuery({
           <code>async</code> function allows you to implement your queries no
           matter how well defined your app’s network layer is.
         </p>
+        <br />
         <h2 id="future-directions">Future Directions</h2>
         <p>
           In general, I think the library provides all of the essentials today,
