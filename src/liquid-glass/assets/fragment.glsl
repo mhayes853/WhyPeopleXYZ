@@ -84,7 +84,7 @@ void main() {
     vec2 curvedRefractUV = v_uv + refractVec * 0.03;
 
     // Edge contour refraction
-    float contourFalloff = exp(-abs(dist) * 0.4); // slightly stronger edge refraction
+    float contourFalloff = exp(-abs(dist) * 0.1); // slightly stronger edge refraction
     vec2 normal = getNormal(pixelUV, center, size, radius);
     vec2 domeNormalContour = normal * pow(contourFalloff, 1.5);
     vec2 refractVecContour = refract(vec2(0.0), domeNormalContour, eta);
@@ -98,7 +98,7 @@ void main() {
 
     vec3 refracted = texture2D(u_background, refractUV).rgb;
     vec3 blurred = blurBackground(refractUV, u_resolution);
-    vec3 base = mix(refracted, blurred, 0.5);
+    vec3 base = mix(refracted, blurred, 0.75);
 
     // Shadow
     float edgeFalloff = smoothstep(0.01, 0.0, dist);
