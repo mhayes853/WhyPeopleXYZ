@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpeg" href="./shared-assets/icon.jpeg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to Teach Monads in Programming</title>
+    <meta property="og:title" content="How to Teach Monads in Programming" />
+    <meta
+      property="og:description"
+      content="You don't learn monads by learning monads."
+    />
+    <meta property="og:image" content="./shared-assets/icon.jpeg" />
+    <meta property="og:url" content="/monads" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="How to Teach Monads in Programming" />
+    <meta
+      name="twitter:description"
+      content="You don't learn monads by learning monads."
+    />
+    <meta name="twitter:image" content="./shared-assets/icon.jpeg" />
+    <meta name="twitter:url" content="/monads" />
+  </head>
+  <body>
+    <div id="app">
+      <a class="core-crystal-container" href="/">
+        <img width="300" height="150" src="./shared-assets/core-crystal.svg" />
+      </a>
+      <article>
+        <h1 id="how-to-teach-someone-monads-in-programming" class="title">
+          How to Teach Monads in Programming
+        </h1>
+        <p>
+          So, how does one understand this seemingly impossible to understand
+          topic in programming? If seemingly, no one can explain it to a 5 year
+          old, do we truly understand this intellectual monstrosity?
+        </p>
+        <p>Google what a monad is, and this is one of the top image results.</p>
+        <img
+          src="./monads/assets/monad.png"
+          alt="A mathematical drawing of a monad that describes this function: (>>=):: ma → (a→ mb) → mb."
+        />
+        <p>
+          I’m sure that taught you a lot, and now I’m totally sure that you
+          really understand what a monad is…
+        </p>
+        <p>
+          Well, we could also try by showing you an example of one. Here, take a
+          look at the
+          <a href="https://developer.apple.com/documentation/swift/result"
+            >documentation</a
+          >
+          for <code>Result</code> in Swift!
+        </p>
+        <p>
+          Still doesn’t make you understand it… Ok, how about we have
+          <a
+            href="https://chatgpt.com/share/68796b83-f57c-8009-ab55-ca698d8de980"
+            >ChatGPT</a
+          >
+          give us a nice summary! (I’ll even tell it that I’m a 5 year old!)
+        </p>
+        <pre><code>
+Okay! Imagine you have <span class="hljs-keyword">a</span> **magic box**. This magic box can hold *<span class="hljs-literal">one</span> toy* inside.
+
+Now, this isn’t just <span class="hljs-keyword">any</span> box—<span class="hljs-keyword">it</span>’s <span class="hljs-keyword">a</span> **special box**:
+    <span class="hljs-number">1.</span>    You can **<span class="hljs-built_in">put</span>** <span class="hljs-keyword">a</span> toy <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> box.
+    <span class="hljs-number">2.</span>    You can **play** <span class="hljs-keyword">with</span> <span class="hljs-keyword">the</span> toy **inside** <span class="hljs-keyword">the</span> box, but only <span class="hljs-keyword">using</span> special gloves (because <span class="hljs-keyword">it</span>’s <span class="hljs-keyword">a</span> magic toy).
+    <span class="hljs-number">3.</span>    If <span class="hljs-keyword">the</span> toy does something special (like turning <span class="hljs-keyword">into</span> <span class="hljs-keyword">a</span> different toy), <span class="hljs-keyword">the</span> box makes sure everything stays safe <span class="hljs-keyword">and</span> magical.
+
+That’s kind <span class="hljs-keyword">of</span> what <span class="hljs-keyword">a</span> **monad** is <span class="hljs-keyword">in</span> programming:
+* It’s like <span class="hljs-keyword">a</span> box that **holds <span class="hljs-keyword">a</span> <span class="hljs-built_in">value</span>**.
+* You can **<span class="hljs-built_in">do</span> things <span class="hljs-keyword">with</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">value</span>**, but you have <span class="hljs-built_in">to</span> use special rules <span class="hljs-built_in">to</span> keep everything safe <span class="hljs-keyword">and</span> tidy.
+* It **knows how <span class="hljs-built_in">to</span> handle <span class="hljs-keyword">the</span> magic stuff** like errors, waiting, <span class="hljs-keyword">or</span> doing things <span class="hljs-keyword">in</span> order.
+
+So, <span class="hljs-keyword">a</span> monad is <span class="hljs-keyword">a</span> *magical box* that helps programmers **play nicely <span class="hljs-keyword">with</span> tricky things** like missing data, <span class="hljs-built_in">time</span> delays, <span class="hljs-keyword">or</span> big sequences <span class="hljs-keyword">of</span> steps—<span class="hljs-keyword">without</span> breaking <span class="hljs-keyword">the</span> game. 🧙📦✨
+
+Want <span class="hljs-keyword">a</span> grown-up <span class="hljs-built_in">version</span> too?
+        </code></pre>
+        <p>
+          ChatGPT has introduced concepts like “special box”, “holds a value”,
+          and “handles the magic stuff”… I think you’re probably more confused
+          now…
+        </p>
+        <br />
+        <h2 id="good-teaching-and-good-learning-are-experiential">
+          Good Teaching and Good Learning are Experiential
+        </h2>
+        <p>
+          This is one of my
+          <a href="https://whypeople.xyz/personal-laws-of-design"
+            >personal laws of design</a
+          >, and the core idea is that we learn best through using all of our
+          human senses (not just hearing and eyesight). Good education is not
+          just about transferring information from point A to point B, because
+          good education forces you to accept a style of action into your
+          lifestyle rather than focusing on concept retention.
+        </p>
+        <p>
+          Therefore, all existing online resources (including this article) will
+          never be able to teach you what a monad is in programming. Simply put,
+          only reading articles, looking at fancy diagrams, or looking at code
+          is not making you adopt the style of thinking that enables you to use
+          monads to their fullest potential.
+        </p>
+        <p>
+          <strong
+            ><em
+              >You’re failing to learn monads because you’re stuck trying to
+              “learn monads”!</em
+            ></strong
+          >
+        </p>
+        <br />
+        <h2 id="pain-is-the-only-way-to-learn-monads">
+          Pain is the Only Way to Learn Monads
+        </h2>
+        <p>
+          You’re going to learn monads through physical and mental pain. Yes,
+          you will experience pain over and over again as you write that same
+          repetitive and absolutely annoying code. In fact, you’re not even
+          going to be writing monads when you experience this pain, and you
+          don’t need to understand them to feel the pain. Eventually, this will
+          become so painful that monads will become the natural cure for that
+          pain.
+        </p>
+        <p>
+          I can show you examples (in words and code) that describes the
+          <em>information</em> of this pain. However, you will only be
+          enlightened once you <em>feel</em> that pain yourself.
+        </p>
+        <h3 id="arrays">Arrays</h3>
+        <p>You’ve probably written code like this before.</p>
+        <pre><code class="lang-swift">
+let<span class="hljs-built_in"> array </span>= [1, 2, 3]
+var doubled = [Int]()
+for num in<span class="hljs-built_in"> array </span>{
+  doubled.append(num * 2)
+}
+        </code></pre>
+        <p>
+          Now do this for every single time you want to iterate over an array in
+          your application. This is <em>painful</em>. You don’t want to write
+          <code>for element in array</code> every single freaking time, and then
+          either call <code>array.append</code> or filter through an if
+          statement every single time.
+        </p>
+        <pre><code class="lang-swift">
+let array = [1, 2, 3, 4]
+
+var tripled = [<span class="hljs-string">Int</span>](<span class="hljs-link"></span>)
+for num in array {
+  tripled.append(num * 3)
+}
+
+var even = [<span class="hljs-string">Int</span>](<span class="hljs-link"></span>)
+for num in tripled {
+  guard num.isMultiple(of: 2) else { continue }
+  even.append(num)
+}
+
+var stringified = [<span class="hljs-string">String</span>](<span class="hljs-link"></span>)
+for num in even {
+  stringified.append(String(num))
+}
+
+var joined = ""
+for str in stringified {
+  joined += "\(str), "
+}
+
+print(joined) // "612"
+        </code></pre>
+        <p>
+          Reading this code is painful. Writing it was also painful. Good, now
+          let’s have monads cure our pain!
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-keyword">let</span> str = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
+  .<span class="hljs-keyword">map</span> { $0 * <span class="hljs-number">3</span> }
+  .filter { $0.isMultiple(of: <span class="hljs-number">2</span>) }
+  .<span class="hljs-keyword">map</span>(String.init)
+  .joined(separator: <span class="hljs-string">", "</span>)
+        </code></pre>
+        <p>
+          Much more compact, much less <em>painful</em>. In this case, “the
+          magic stuff” (according to the ChatGPT explanation) is the iteration.
+          You no longer have to worry about the iteration, and instead you
+          specify what the iteration means.
+        </p>
+        <h3 id="result">Result</h3>
+        <p>
+          You’re probably familiar with <code>try catch</code> (Swift uses
+          <code>do catch</code> instead) for error handling. Sometimes, that can
+          be annoying such as when you want to store an <code>Error</code> in a
+          struct like so. (An example of where you would want to store an error
+          in a struct would be if you wanted to render an error message in your
+          UI.)
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-comment">// ❌ Bad</span>
+
+<span class="hljs-keyword">struct</span> MyData {
+  <span class="hljs-keyword">let</span> <span class="hljs-built_in">error</span>: (any <span class="hljs-built_in">Error</span>)?
+  <span class="hljs-keyword">let</span> value: <span class="hljs-keyword">String</span>
+}
+
+<span class="hljs-comment">// ✅ Good</span>
+
+<span class="hljs-keyword">struct</span> MyData {
+  <span class="hljs-keyword">let</span> result: Result&lt;<span class="hljs-keyword">String</span>, any <span class="hljs-built_in">Error</span>&gt;
+}
+        </code></pre>
+        <p>
+          So now let’s say we’ve got a function that throws, and returns a
+          <code>Result</code> that doesn’t contain a <code>String</code>.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">someWork</span><span class="hljs-params">()</span> -&gt; <span class="hljs-title">Result</span>&lt;<span class="hljs-title">UUID</span>, <span class="hljs-title">any</span> <span class="hljs-title">Error</span>&gt;</span> {
+  <span class="hljs-comment">// ...</span>
+}
+        </code></pre>
+        <p>
+          We need to pass a <code>Result&lt;String, any Error&gt;</code> to
+          <code>MyData</code>. So we’ll need to transform this result.
+        </p>
+        <pre><code class="lang-swift">
+func transform() -&gt; MyData {
+  <span class="hljs-function"><span class="hljs-keyword">switch</span> <span class="hljs-title">someWork</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">case</span> .success(let uuid):
+    MyData(result: .success(uuid.uuidString))
+  <span class="hljs-keyword">case</span> .failure(let <span class="hljs-keyword">error</span>):
+    MyData(result: .failure(<span class="hljs-keyword">error</span>))
+  }
+}
+        </code></pre>
+        <p>
+          This is <em>painful</em> code to write. I don’t want to think about
+          the failure case, instead I merely only care about the success case.
+          So let’s turn to monads to cure our pain.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">transform</span><span class="hljs-params">()</span> -&gt; <span class="hljs-title">MyData</span></span> {
+  MyData(result: someWork().<span class="hljs-keyword">map</span>(\.uuidString))
+}
+        </code></pre>
+        <p>
+          Nice! However, what if instead of a uuid string, we treated the
+          <code>UUID</code> as a user identifier of some kind, and then we
+          wanted to look up the user name for that identifier. If the user
+          doesn’t exist, we’ll return a failure result.
+        </p>
+        <pre><code class="lang-swift">
+func username(<span class="hljs-keyword">for</span> id: UUID) -&gt; Result&lt;String, any Error&gt; {
+  <span class="hljs-comment">// Return success if user with id exists, else failure...</span>
+}
+
+func transform() -&gt; MyData {
+  <span class="hljs-comment">// ❌ Won't compile because map returns Result&lt;Result&lt;String, any Error&gt;, any Error&gt;</span>
+  MyData(result: someWork().map { username(<span class="hljs-keyword">for</span>: $0) })
+}
+
+func compilingTransform() -&gt; MyData {
+  <span class="hljs-comment">// Back to switch...</span>
+  <span class="hljs-function"><span class="hljs-keyword">switch</span> <span class="hljs-title">someWork</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">case</span> .success(let uuid):
+    <span class="hljs-keyword">switch</span> username(<span class="hljs-keyword">for</span>: uuid) {
+    <span class="hljs-keyword">case</span> .success(let name):
+      MyData(result: .success(name))
+    <span class="hljs-keyword">case</span> .failure(let <span class="hljs-keyword">error</span>):
+      MyData(result: .failure(<span class="hljs-keyword">error</span>))
+    }
+  <span class="hljs-keyword">case</span> .failure(let <span class="hljs-keyword">error</span>):
+    MyData(result: .failure(<span class="hljs-keyword">error</span>))
+  }
+}
+        </code></pre>
+        <p>
+          Again, this is painful because we have to think about the failure and
+          success cases twice! My primary concern here is translating the UUID
+          into a username, so let’s turn to monads to cure our pain.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">transform</span><span class="hljs-params">()</span> -&gt; <span class="hljs-title">MyData</span> {</span>
+  MyData(result: someWork().flatMap { username(<span class="hljs-keyword">for</span>: $0) })
+}
+        </code></pre>
+        <p>
+          In this case, “the magic stuff” (according to the ChatGPT explanation)
+          is the handling the result for an operation. You don’t need to worry
+          about the result handling, and instead you specify what the result
+          handling means.
+        </p>
+        <br />
+        <h2 id="pain-gives-meaning-to-monads">Pain Gives Meaning to Monads</h2>
+        <p>
+          You still don’t understand monads from those examples. You won’t until
+          you feel the pain, the least I can do is show you what that pain feels
+          like, such that you can anticipate it. Pain is a method of learning.
+        </p>
+        <p>
+          Monads are actually an incredibly simple idea, just like this glass.
+        </p>
+        <img
+          src="./monads/assets/glass.jpeg"
+          alt="A glass that holds liquid."
+        />
+        <p>Yet how do you "learn a glass"? What does that even mean?</p>
+        <p>
+          A glass can do many things, it can hold liquid, dirt, toys, cash,
+          coins, etc. It can be used to cover or trap something by acting as a
+          surface. It’s also transparent, so we can see and learn from the
+          internals of what it holds.
+        </p>
+        <p>
+          Try drinking water without a glass or some other object. You’ll find
+          this is painful, and you’ll use the glass as a cure. The pain gives
+          meaning to the glass.
+        </p>
+        <p>
+          Since the glass is so simple, we don’t derive meaning from it, we
+          imbue it with meaning instead. Pouring different liquids give the
+          glass a different meaning in a certain context. All of these meanings
+          combined is what gives us an understanding of what a glass is.
+        </p>
+        <p>
+          Understanding monads in programming has nothing to do with functors.
+          endofunctors, or mathematical functions. Those terms do not describe
+          the systems you’re building because they describe mathematics. You
+          describe the systems you’re building with the artifacts at your
+          disposal, and monads are an artifact to augment your ability to do so.
+        </p>
+        <p>So, to end this particular discussion.</p>
+        <p>
+          <strong
+            ><em
+              >Don’t find meaning in Monads, give Monads your meaning.</em
+            ></strong
+          >
+        </p>
+        <p>— 7/17/25</p>
+      </article>
+    </div>
+    <script type="module" src="./monads/monads.ts"></script>
+  </body>
+</html>
