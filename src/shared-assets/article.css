@@ -37,6 +37,13 @@ article {
   text-align: left;
 }
 
+article img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  padding: 1em 0em 1em 0em;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;

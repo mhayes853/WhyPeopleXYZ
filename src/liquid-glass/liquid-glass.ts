@@ -1,4 +1,4 @@
-import "../shared-assets/style.css";
+import "../shared-assets/article";
 import "./liquid-glass.css";
 import backgroundImage from "./assets/background.avif";
 import vertexShaderCode from "./assets/vertex.glsl?raw";

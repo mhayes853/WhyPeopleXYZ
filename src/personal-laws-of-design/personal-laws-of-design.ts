@@ -1,1 +1,1 @@
-import "../shared-assets/style.css";
+import "../shared-assets/article";
