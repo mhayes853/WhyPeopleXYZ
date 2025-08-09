@@ -238,13 +238,10 @@ let package = Package(
           When building your package, you can specify which traits you want to
           build the package with like so.
         </p>
-        <pre><code class="lang-sh">
-<span class="hljs-keyword">swift </span><span class="hljs-keyword">build </span>--traits <span class="hljs-keyword">SwiftUUIDV7Tagged</span>
-        </code></pre>
+        <pre><code class="lang-sh"><span class="hljs-keyword">swift </span><span class="hljs-keyword">build </span>--traits <span class="hljs-keyword">SwiftUUIDV7Tagged</span></code></pre>
         <p>You can also enable all traits like so.</p>
-        <pre><code class="lang-sh">
-<span class="hljs-keyword">swift </span><span class="hljs-keyword">build </span>--enable-all-traits
-        </code></pre>
+        <pre><code class="lang-sh"><span class="hljs-keyword">swift </span><span class="hljs-keyword">build </span>--enable-all-traits</code></pre>
+        <br />
         <h2 id="how-do-i-use-package-traits-">How do I use package traits?</h2>
         <p>
           We’ve gone over how to add package traits to a package, so now let’s
@@ -282,6 +279,31 @@ let <span class="hljs-keyword">package</span> = <span class="hljs-keyword">Packa
 )
         </code></pre>
         <p>That’s all, you can now begin using them right away!</p>
+        <p>
+          However, passing an explicit set of traits will disable the default
+          trait. If you still want to enable the default trait, you must also
+          pass <code>.default</code> to the set of traits.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-comment">// swift-tools-version: 6.2</span>
+<span class="hljs-comment">// The swift-tools-version declares the minimum version of Swift required to build this package.</span>
+
+<span class="hljs-keyword">import</span> PackageDescription
+
+let <span class="hljs-keyword">package</span> = <span class="hljs-keyword">Package</span>(
+  <span class="hljs-comment">// ...</span>
+  <span class="hljs-keyword">dependencies</span>: [
+    <span class="hljs-comment">// ...</span>
+    .<span class="hljs-keyword">package</span>(
+      url: <span class="hljs-string">"https://github.com/swiftlang/swift-subprocess.git"</span>,
+      branch: <span class="hljs-string">"main"</span>,
+
+      <span class="hljs-comment">// Keeps the default trait enabled despite passing an explicit set of traits.</span>
+      traits: [.default]
+    )
+  ],
+)
+        </code></pre>
         <br />
         <h2 id="using-traits-to-integrate-with-other-packages">
           Using Traits to Integrate with Other Packages
@@ -301,7 +323,8 @@ let <span class="hljs-keyword">package</span> = <span class="hljs-keyword">Packa
           own project. For instance.
         </p>
         <pre><code class="lang-swift">
-<span class="hljs-comment">// In your project...</span>
+<span class="hljs-comment">// Inside your project...</span>
+
 <span class="hljs-keyword">import</span> UUIDV7
 <span class="hljs-keyword">import</span> StructuredQueries
 
@@ -321,6 +344,16 @@ let <span class="hljs-keyword">package</span> = <span class="hljs-keyword">Packa
           Rather, we can use package traits to solve this issue, and provide an
           official conformance that can be used in any project.
         </p>
+        <pre><code class="lang-swift">
+<span class="hljs-comment">// Inside swift-uuidv7...</span>
+
+#<span class="hljs-keyword">if</span> <span class="hljs-type">SwiftUUIDV7StructuredQueries</span>
+  <span class="hljs-keyword">import</span> Foundation
+  <span class="hljs-keyword">import</span> StructuredQueriesCore
+
+  <span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">UUIDV7</span>: <span class="hljs-title">QueryBindable</span> </span>{}
+#endif
+        </code></pre>
         <h3 id="who-adds-the-trait-">Who adds the trait?</h3>
         <p>
           In the above example, either <code>StructuredQueries</code> or
@@ -364,9 +397,13 @@ let <span class="hljs-keyword">package</span> = <span class="hljs-keyword">Packa
           packages like <code>UUIDV7</code> should not offer any package
           integration traits, and instead only let other more volatile and
           larger packages (eg. GRDB, Structured Queries) define such traits.
-          From the standpoint of how I <a href="personal-laws-of-design#objects-are-best-used-as-agents-of-knowledge">think of objects</a>, this makes a lot of
-          sense because larger packages with more knowledge give meaning to the
-          smaller and simpler packages with less knowledge.
+          From the standpoint of how I
+          <a
+            href="personal-laws-of-design#objects-are-best-used-as-agents-of-knowledge"
+            >think of objects</a
+          >, this makes a lot of sense because larger packages with more
+          knowledge give meaning to the smaller and simpler packages with less
+          knowledge.
         </p>
         <p>
           However, this now creates a problem where maintainers of more volatile
@@ -398,23 +435,21 @@ let <span class="hljs-keyword">package</span> = <span class="hljs-keyword">Packa
         <hr />
         <br />
         <p>
-          <p>
-            PS. I’m creating a new series of content that I will call “Swift
-            Bits” that will contain small Swift-specific articles such as these.
-          </p>
-          <p>
-            I mainly want to focus my writing more on higher level ideas that
-            apply to building products and creating new mediums of spreading
-            ideas. Those ideas carry over into how I write Swift on a day-to-day
-            basis, but I think only focusing on Swift as a whole is quite a
-            narrow viewpoint on designing real systems.
-          </p>
-          <p>
-            Still, seeing language specifics directly can be useful given the
-            detachment most programming languages have from the systems they
-            create. Therefore, from time to time I think this kind of writing
-            makes sense.
-          </p>
+          PS. I’m creating a new series of content that I will call “Swift Bits”
+          that will contain small Swift-specific articles such as these.
+        </p>
+        <p>
+          I mainly want to focus my writing more on higher level ideas that
+          apply to building products and creating new mediums of spreading
+          ideas. Those ideas carry over into how I write Swift on a day-to-day
+          basis, but I think only focusing on Swift as a whole is quite a narrow
+          viewpoint on designing real systems.
+        </p>
+        <p>
+          Still, seeing language specifics directly can be useful given the
+          detachment most programming languages have from the systems they
+          create. In that sense, I do believe that this kind of writing is
+          worthwhile from time to time.
         </p>
       </article>
     </div>
