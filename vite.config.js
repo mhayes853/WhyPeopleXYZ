@@ -1,6 +1,7 @@
 // vite.config.ts
 import { defineConfig } from "vite";
 import fg from "fast-glob"; // npm i -D fast-glob
+import { viteStaticCopy } from "vite-plugin-static-copy";
 import { resolve, dirname } from "path";
 
 export default defineConfig(() => {
@@ -23,5 +24,10 @@ export default defineConfig(() => {
       outDir: "../dist",
       rollupOptions: { input },
     },
+    plugins: [
+      viteStaticCopy({
+        targets: [{ src: "src/caniclimb-mountains.json", dest: "json-files" }],
+      }),
+    ],
   };
 });
