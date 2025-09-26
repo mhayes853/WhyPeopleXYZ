@@ -26,7 +26,7 @@ export default defineConfig(() => {
     },
     plugins: [
       viteStaticCopy({
-        targets: [{ src: "src/caniclimb-mountains.json", dest: "json-files" }],
+        targets: [{ src: "./caniclimb-mountains.json", dest: "json-files" }],
       }),
     ],
   };
