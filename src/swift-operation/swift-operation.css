@@ -1,0 +1,9 @@
+.dev-tools-image {
+  width: 300px;
+}
+
+@media (max-width: 768px) {
+  .dev-tools-image {
+    width: 100%;
+  }
+}
