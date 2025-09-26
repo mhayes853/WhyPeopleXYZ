@@ -1,0 +1,2312 @@
+[
+  {
+    "id": "01998303-cf5d-766e-8938-f7f659ce48c2",
+    "name": "Denali (Mount McKinley)",
+    "displayDescription": "Alaska Native Athabaskan lands; fierce subarctic storms and massive relief make Denali a legendary undertaking.",
+    "elevation": {
+      "value": 6190,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Alaska", "part2": "United States" },
+      "coordinate": { "latitude": 63.069, "longitude": -151.007 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 95,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Wonder_Lake_and_Denali.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7590-9c0a-10a428f08865",
+    "name": "Mount Saint Elias (US–Canada)",
+    "displayDescription": "Straddling Tlingit/First Nations territories; notorious weather and glaciation define its remote seriousness.",
+    "elevation": {
+      "value": 5489,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Alaska", "part2": "United States" },
+      "coordinate": { "latitude": 60.293, "longitude": -140.928 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 92,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Mt_Saint_Elias%2C_South_Central_Alaska.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7b79-b92c-a6f89aeccf49",
+    "name": "Mount Foraker",
+    "displayDescription": "In the central Alaska Range; culturally tied to Denali expeditions with big, cold alpine faces.",
+    "elevation": {
+      "value": 5304,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Alaska", "part2": "United States" },
+      "coordinate": { "latitude": 62.961, "longitude": -151.399 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 90,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Mt._Foraker._Shot_from_Talkeetna%2C_Alaska_%2825711013851%29.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7b02-a057-570d4f46b5d4",
+    "name": "Mount Bona",
+    "displayDescription": "Wrangell–St. Elias icefields; ski-mountaineering on huge glaciers with serious crevasse hazards.",
+    "elevation": {
+      "value": 5005,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Alaska", "part2": "United States" },
+      "coordinate": { "latitude": 61.385, "longitude": -141.731 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 88,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/01/Mt._Bona%2C_Alaska.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7cf4-903e-21d3f1904baa",
+    "name": "Mount Blackburn",
+    "displayDescription": "Vast icefields and remote access; weather and isolation boost the commitment.",
+    "elevation": {
+      "value": 4996,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Alaska", "part2": "United States" },
+      "coordinate": { "latitude": 61.733, "longitude": -143.408 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 88,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/MtBlackburn-KennicottGlacier.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-79fa-bf41-56edb10e5155",
+    "name": "Mount Wrangell",
+    "displayDescription": "Active shield volcano; rolling icefields where weather and crevasses test parties.",
+    "elevation": {
+      "value": 4317,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Alaska", "part2": "United States" },
+      "coordinate": { "latitude": 62.009, "longitude": -144.018 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 75,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/43/Mount_Wrangell.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-75ea-aeb8-30af9c4f7c72",
+    "name": "Mount Fairweather (US–Canada)",
+    "displayDescription": "Named for rare clear days; coastal storms and glaciation make it anything but fair.",
+    "elevation": {
+      "value": 4671,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Alaska", "part2": "United States" },
+      "coordinate": { "latitude": 58.905, "longitude": -137.529 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 90,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/Fairweather_and_Quincy_Adams.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7660-a042-e35d1150964d",
+    "name": "Mount Whitney",
+    "displayDescription": "On Paiute land; highest in the Lower 48, with a strong Sierra hiking culture and strict permit system.",
+    "elevation": {
+      "value": 4421,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "California", "part2": "United States" },
+      "coordinate": { "latitude": 36.5785, "longitude": -118.2923 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 60,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Mount_Whitney_2003-03-25.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7940-a9d2-67b34672a9de",
+    "name": "Mount Rainier",
+    "displayDescription": "Tahoma to the Puyallup; glaciated volcano with serac hazard and famous U.S. alpine training routes.",
+    "elevation": {
+      "value": 4392,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Washington", "part2": "United States" },
+      "coordinate": { "latitude": 46.8523, "longitude": -121.7603 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 78,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Rainier20200906.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7c69-bcd3-5ff0551775f1",
+    "name": "Mount Elbert",
+    "displayDescription": "Highest in the Rockies; popular 14er with gentle standard routes and deep summit traditions.",
+    "elevation": {
+      "value": 4401,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 39.1178, "longitude": -106.4454 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 52,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Mt._Elbert.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7879-b475-5434ef225851",
+    "name": "Mount Massive",
+    "displayDescription": "Rival to Elbert; high, broad ridges with typical Colorado 14er culture.",
+    "elevation": {
+      "value": 4398,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 39.1875, "longitude": -106.3208 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 50,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/15/Mount_Massive.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-78ff-af37-3243292a5f25",
+    "name": "Mount Harvard",
+    "displayDescription": "Collegiate Peaks namesake; long but non-technical for experienced hikers.",
+    "elevation": {
+      "value": 4395,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 38.9243, "longitude": -106.3207 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 54,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Harvard_from_Boulder_Field.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-71ed-853b-15d69d1be95b",
+    "name": "Pikes Peak",
+    "displayDescription": "Ute territory; a highway and cog railway coexist with classic Barr Trail traditions.",
+    "elevation": {
+      "value": 4302,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 38.8409, "longitude": -105.0423 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 40,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Beautiful_Image_of_Pikes_Peak_%28IMG_0136%29.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7a75-8c33-33ef2a5ef3c5",
+    "name": "Longs Peak",
+    "displayDescription": "Rocky Mountain icon with the airy Keyhole Route and Front Range mountaineering lore.",
+    "elevation": {
+      "value": 4346,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 40.2549, "longitude": -105.616 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 65,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Fall05-LongsPeakCU_JPG_RSZ_md.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7fcb-8e3b-ed1b34271ba7",
+    "name": "Mount Blue Sky (Mount Evans)",
+    "displayDescription": "High road access meets tundra winds; easy summit but serious weather.",
+    "elevation": {
+      "value": 4350,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 39.5883, "longitude": -105.6438 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 38,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Mevans.JPG",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7bec-b75e-3a73b429a764",
+    "name": "Quandary Peak",
+    "displayDescription": "One of the most climbed 14ers; avalanche awareness in winter is part of local culture.",
+    "elevation": {
+      "value": 4349,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 39.397, "longitude": -106.106 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 45,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/89/QuandaryPeak.JPG",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-78e9-b1f4-c309d9f6ecf9",
+    "name": "Capitol Peak",
+    "displayDescription": "Knife-edge ridges and loose rock: a rite of passage in the Elk Range.",
+    "elevation": {
+      "value": 4309,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 39.1503, "longitude": -107.0829 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 82,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Capitol_Peak_CO.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7a8b-81a2-35ad39634df4",
+    "name": "Maroon Peak (Maroon Bells)",
+    "displayDescription": "‘Deadly Bells’ shale; gorgeous but infamous for rock quality and route-finding.",
+    "elevation": {
+      "value": 4317,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 39.0707, "longitude": -106.989 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 80,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Maroon_Bells_%2811553%29a.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-77f2-af8f-5a8b4a86897c",
+    "name": "Mount Sneffels",
+    "displayDescription": "San Juan gem; couloirs and wildflower basins with old mining-town heritage.",
+    "elevation": {
+      "value": 4315,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 38.003, "longitude": -107.792 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 60,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c2/MtSneffelsMarch2008.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7730-9b67-c1f03fe2fb6d",
+    "name": "Mount Wilson",
+    "displayDescription": "Complex ridge systems and lingering snow; Telluride’s rugged skyline.",
+    "elevation": {
+      "value": 4342,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 37.839, "longitude": -107.991 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 78,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Mount_Wilson_cropped.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7214-af9a-54b15c8d060c",
+    "name": "Uncompahgre Peak",
+    "displayDescription": "Broad San Juan summit with sweeping tundra; summer thunderstorms common.",
+    "elevation": {
+      "value": 4361,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 38.0717, "longitude": -107.4628 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 55,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/79/Uncompahgre_peak.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-75f4-9a01-fccaa733f20b",
+    "name": "San Luis Peak",
+    "displayDescription": "Quiet La Garita Wilderness; solitude and afternoon storm timing define success.",
+    "elevation": {
+      "value": 4303,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 37.9867, "longitude": -106.9306 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 50,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/San_Luis_Peak%2C_San_Juan_Mountains%2C_Saguache_County%2C_Colorado%2C_USA_01.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-77b9-8492-345e2521e042",
+    "name": "Mount of the Holy Cross",
+    "displayDescription": "Cross couloir snowfields inspire pilgrimages; fickle weather demands care.",
+    "elevation": {
+      "value": 4280,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 39.4666, "longitude": -106.4814 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 62,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Mount_of_the_Holy_Cross%2C_2009.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-714b-bfae-686f340ef002",
+    "name": "Mount Democrat",
+    "displayDescription": "Part of the ‘Decalibron’ circuit—a cultural loop of four 14ers in a day.",
+    "elevation": {
+      "value": 4315,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 39.339, "longitude": -106.139 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 48,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Mt_Democrat.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7e4b-b495-17227e24e11b",
+    "name": "Mount Lincoln",
+    "displayDescription": "Mining history underfoot; typical high alpine weather patterns.",
+    "elevation": {
+      "value": 4354,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 39.351, "longitude": -106.111 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 50,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/82/Mount_Lincoln_Colorado_July_2016.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7fe5-83da-1cf345cc98f3",
+    "name": "Mount Bross",
+    "displayDescription": "Access etiquette and private land considerations are part of the climb.",
+    "elevation": {
+      "value": 4321,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Colorado", "part2": "United States" },
+      "coordinate": { "latitude": 39.335, "longitude": -106.106 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 46,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Mt_Bross.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7be2-901b-40a1b43b37fd",
+    "name": "White Mountain Peak",
+    "displayDescription": "Ancient bristlecones and a high, dry Great Basin feel with road-adjacent routes.",
+    "elevation": {
+      "value": 4344,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "California", "part2": "United States" },
+      "coordinate": { "latitude": 37.6339, "longitude": -118.255 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 58,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/77/White_Mountain_CA.JPG",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7d75-b327-38f68cacded9",
+    "name": "Mount Shasta",
+    "displayDescription": "Karuk land; glaciated volcano with revered spiritual significance and steep spring snow.",
+    "elevation": {
+      "value": 4322,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "California", "part2": "United States" },
+      "coordinate": { "latitude": 41.409, "longitude": -122.195 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 68,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/22/MtShasta_aerial.JPG",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7051-acd4-43c5cb568292",
+    "name": "Mount Hood",
+    "displayDescription": "Wy’east in local tradition; crevasse rescues and early-morning summit culture.",
+    "elevation": {
+      "value": 3429,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Oregon", "part2": "United States" },
+      "coordinate": { "latitude": 45.3735, "longitude": -121.6959 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 65,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Oregon_Mount_Hood_from_Trillium_Lake_2024.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7448-9bd5-b547c1b18e6e",
+    "name": "Mount Jefferson (Oregon)",
+    "displayDescription": "Remote glaciers and volcanic spires; fewer crowds than Hood, more objective hazard.",
+    "elevation": {
+      "value": 3199,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Oregon", "part2": "United States" },
+      "coordinate": { "latitude": 44.674, "longitude": -121.801 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 70,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Mt._Jefferson_from_Three_Fingered_Jack.JPG",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-76da-8b4c-6fcc224a9be9",
+    "name": "Glacier Peak",
+    "displayDescription": "One of the most remote Cascade volcanoes; long approaches through wild valleys.",
+    "elevation": {
+      "value": 3213,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Washington", "part2": "United States" },
+      "coordinate": { "latitude": 48.1129, "longitude": -121.1139 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 72,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Glacier_Peak_7118.JPG",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7cb3-b58b-107f90bbf2fc",
+    "name": "Mount Baker",
+    "displayDescription": "Kulshan’s icefall routes are a rite of passage for PNW alpinists.",
+    "elevation": {
+      "value": 3286,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Washington", "part2": "United States" },
+      "coordinate": { "latitude": 48.777, "longitude": -121.814 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 68,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/Mount_Baker_from_Boulder_Creek.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7bc5-8c58-59895ee7a8b1",
+    "name": "Mount Adams",
+    "displayDescription": "Large, glaciated but with mellow standard routes; corn skiing culture.",
+    "elevation": {
+      "value": 3743,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Washington", "part2": "United States" },
+      "coordinate": { "latitude": 46.202, "longitude": -121.49 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 58,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Mount_Adams_Morrison_Creek_ski_tour_%286_May_2025%29.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7bd4-b55c-4a48b63a28dd",
+    "name": "Mount St. Helens",
+    "displayDescription": "A living geology classroom; permits and volcano monitoring shape the experience.",
+    "elevation": {
+      "value": 2550,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Washington", "part2": "United States" },
+      "coordinate": { "latitude": 46.199, "longitude": -122.188 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 52,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/dc/MSH82_st_helens_plume_from_harrys_ridge_05-19-82.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7e11-aa53-d2f91620a6c2",
+    "name": "Mount Olympus (WA)",
+    "displayDescription": "Hoh Rain Forest approaches and coastal weather create a uniquely wild climb.",
+    "elevation": {
+      "value": 2432,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Washington", "part2": "United States" },
+      "coordinate": { "latitude": 47.799, "longitude": -123.706 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 70,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Mount_Olympus_Washington.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7b47-b58f-bf25678cc9bd",
+    "name": "Half Dome",
+    "displayDescription": "Ahwahneechee homeland; cables-route permits and granite big-wall culture.",
+    "elevation": {
+      "value": 2694,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "California", "part2": "United States" },
+      "coordinate": { "latitude": 37.7459, "longitude": -119.5332 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 62,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Half_Dome_late_October_2024.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-73f0-876a-f3f01c4ac3d1",
+    "name": "El Capitan",
+    "displayDescription": "Global center of big-wall culture; technical rock expertise and multi-day systems.",
+    "elevation": {
+      "value": 2308,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "California", "part2": "United States" },
+      "coordinate": { "latitude": 37.7336, "longitude": -119.637 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 85,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/66/El_Capitan_en_Californie.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-728d-888f-5e137dfae864",
+    "name": "Lassen Peak",
+    "displayDescription": "Active in historic times; classic spring snow routes and national-park education.",
+    "elevation": {
+      "value": 3187,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "California", "part2": "United States" },
+      "coordinate": { "latitude": 40.488, "longitude": -121.504 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 50,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Lassen_Peak_in_June_2020.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-73c5-ba5d-dbac06b67222",
+    "name": "Telescope Peak",
+    "displayDescription": "Death Valley’s rooftop: extreme temperature swings and vast desert views.",
+    "elevation": {
+      "value": 3368,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "California", "part2": "United States" },
+      "coordinate": { "latitude": 36.169, "longitude": -117.089 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 48,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/TelescopePeak031411.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7fc2-8941-d9738992c3c7",
+    "name": "Mount San Jacinto",
+    "displayDescription": "Cahuilla land; cable car approaches meet alpine granite traditions.",
+    "elevation": {
+      "value": 3293,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "California", "part2": "United States" },
+      "coordinate": { "latitude": 33.8145, "longitude": -116.679 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 50,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Santa_Rosa_and_San_Jacinto_Mountains_283.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7e28-955b-f1f801cdc707",
+    "name": "San Gorgonio Mountain",
+    "displayDescription": "SoCal’s high point; snow travel in winter contrasts with hot chaparral summers.",
+    "elevation": {
+      "value": 3506,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "California", "part2": "United States" },
+      "coordinate": { "latitude": 34.099, "longitude": -116.824 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 50,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/San_Gorgonio%2C_snowcapped%2C_clouds.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-73c8-87a6-ad4dfc61c74c",
+    "name": "Mount San Antonio (Mt Baldy)",
+    "displayDescription": "Weekend rite for LA hikers; winter ‘Baldy Bowl’ brings alpine skills into play.",
+    "elevation": {
+      "value": 3068,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "California", "part2": "United States" },
+      "coordinate": { "latitude": 34.288, "longitude": -117.646 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 48,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Mount_San_Antonio_%28Mount_Baldy%29%2C_California.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7775-9a42-db953036f721",
+    "name": "Mauna Kea",
+    "displayDescription": "Sacred to Native Hawaiians; thin air above the Pacific and observatory access complexities.",
+    "elevation": {
+      "value": 4207,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Hawaii", "part2": "United States" },
+      "coordinate": { "latitude": 19.8207, "longitude": -155.4681 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 62,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Mauna_Kea_from_the_ocean.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-74e4-8a02-585f647091fc",
+    "name": "Mauna Loa",
+    "displayDescription": "World’s largest shield volcano; long, hot lava fields and recent eruptions inform planning.",
+    "elevation": {
+      "value": 4169,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Hawaii", "part2": "United States" },
+      "coordinate": { "latitude": 19.475, "longitude": -155.608 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 58,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Mauna_Loa_Volcano.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7055-ab06-9c3028a608e1",
+    "name": "Haleakalā",
+    "displayDescription": "House of the Sun; crater traverses and Hawaiian cultural stewardship.",
+    "elevation": {
+      "value": 3055,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Hawaii", "part2": "United States" },
+      "coordinate": { "latitude": 20.709, "longitude": -156.253 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 45,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Haleakala_crater_%281%29.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7488-a21d-690afd7421c3",
+    "name": "Mount Waialeale",
+    "displayDescription": "Among the wettest places on Earth; near-constant rain and mud make for serious travel.",
+    "elevation": {
+      "value": 1570,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Hawaii", "part2": "United States" },
+      "coordinate": { "latitude": 22.066, "longitude": -159.498 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 70,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Whylake.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5d-7be6-8fce-fede2e3619be",
+    "name": "Mount Washington",
+    "displayDescription": "Abenaki lands; infamous for record winds and fast-changing weather.",
+    "elevation": {
+      "value": 1917,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "New Hampshire", "part2": "United States" },
+      "coordinate": { "latitude": 44.2706, "longitude": -71.3033 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 62,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/White_Mountains_12_30_09_81.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-75e3-992c-55fec3dfef31",
+    "name": "Mount Mansfield",
+    "displayDescription": "Green Mountain ridge-walk culture, alpine zones protected by local ethics.",
+    "elevation": {
+      "value": 1340,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Vermont", "part2": "United States" },
+      "coordinate": { "latitude": 44.5438, "longitude": -72.8143 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 40,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Mount_mansfield_20040926.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-774e-a7a5-2771a3b9280f",
+    "name": "Katahdin",
+    "displayDescription": "Baxter State Park ethos; Knife Edge thrills and Appalachian Trail lore.",
+    "elevation": {
+      "value": 1606,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Maine", "part2": "United States" },
+      "coordinate": { "latitude": 45.904, "longitude": -68.921 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 66,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/16/Katahdin.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-74c1-a38b-9f1036dd78e4",
+    "name": "Mount Marcy",
+    "displayDescription": "Adirondack High Peaks culture: rugged trails, lean-tos, and summit stewards.",
+    "elevation": {
+      "value": 1629,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "New York", "part2": "United States" },
+      "coordinate": { "latitude": 44.112, "longitude": -73.923 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 42,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Mount_Marcy_viewed_from_Mount_Skylight_in_summer.png",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-73b6-8fda-1f6f03391393",
+    "name": "Mount Mitchell",
+    "displayDescription": "Highest east of the Mississippi; spruce-fir ecology and Blue Ridge Parkway access.",
+    "elevation": {
+      "value": 2037,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "North Carolina", "part2": "United States" },
+      "coordinate": { "latitude": 35.765, "longitude": -82.265 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 38,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Mount_Mitchell_from_Mt._Mitchell_overlook_NC.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7723-98e6-8f342ade3da0",
+    "name": "Clingmans Dome",
+    "displayDescription": "Cherokee homeland; high humidity and frequent fog on the Appalachian spine.",
+    "elevation": {
+      "value": 2025,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Tennessee/North Carolina", "part2": "United States" },
+      "coordinate": { "latitude": 35.562, "longitude": -83.498 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 34,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Clingmans_Dome_Sevierville_TN.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7f36-94b9-2a2983d5eee1",
+    "name": "Mount Rogers",
+    "displayDescription": "High meadows, wild ponies nearby; gentle but often windy.",
+    "elevation": {
+      "value": 1746,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Virginia", "part2": "United States" },
+      "coordinate": { "latitude": 36.659, "longitude": -81.546 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 34,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/2017-05-16_09_51_01_View_west-northwest_toward_Mount_Rogers_from_the_summit_of_Pine_Mountain_within_the_summit_of_Pine_Mountain_within_the_Mount_Rogers_National_Recreation_Area_in_Grayson_County%2C_Virginia.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-72cd-a8d6-c875824d1cc0",
+    "name": "Black Elk Peak",
+    "displayDescription": "Sacred to the Lakota; granite fire-lookout culture and rolling forests.",
+    "elevation": {
+      "value": 2208,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "South Dakota", "part2": "United States" },
+      "coordinate": { "latitude": 43.866, "longitude": -103.531 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 36,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Black_Elk_Peak%2C_the_highest_point_in_South_Dakota.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7395-b9f9-76400c598955",
+    "name": "Borah Peak",
+    "displayDescription": "Knife-edge Class 3 and big elevation gain; intermountain weather swings.",
+    "elevation": {
+      "value": 3859,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Idaho", "part2": "United States" },
+      "coordinate": { "latitude": 44.137, "longitude": -113.781 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 64,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/59/Mount_Borah_2009.JPG",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-75d9-8f32-0c39f7cbb099",
+    "name": "Gannett Peak",
+    "displayDescription": "Wind River glaciers and long approaches—classic Western wilderness mountaineering.",
+    "elevation": {
+      "value": 4209,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Wyoming", "part2": "United States" },
+      "coordinate": { "latitude": 43.184, "longitude": -109.654 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 78,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/54/Gannett_Peak.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7b73-b39b-4ffdc42ea3c2",
+    "name": "Granite Peak (Montana)",
+    "displayDescription": "Exposed scrambling, fickle storms, and remote routes in the Beartooths.",
+    "elevation": {
+      "value": 3904,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Montana", "part2": "United States" },
+      "coordinate": { "latitude": 45.163, "longitude": -109.807 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 76,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Granite_Peak_Montana_2.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-780c-ac56-7808cf43a981",
+    "name": "Kings Peak",
+    "displayDescription": "High Uinta backcountry culture; long but non-technical with afternoon storm timing.",
+    "elevation": {
+      "value": 4123,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Utah", "part2": "United States" },
+      "coordinate": { "latitude": 40.776, "longitude": -110.372 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 54,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Kings_Peak%2C_Uinta_Mountains%2C_Duchesne_County%2C_Utah%2C_USA_02.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7934-8adc-5dbc73fe5ba1",
+    "name": "Mount Timpanogos",
+    "displayDescription": "Beloved Wasatch classic; wildflower basins and lingering snowfields.",
+    "elevation": {
+      "value": 3584,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Utah", "part2": "United States" },
+      "coordinate": { "latitude": 40.39, "longitude": -111.645 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 52,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Mount_Timpanogos_-_01-07-08.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7877-9251-ce554501787c",
+    "name": "Humphreys Peak",
+    "displayDescription": "San Francisco Peaks; monsoon lightning and wind exposure define summer ascents.",
+    "elevation": {
+      "value": 3851,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Arizona", "part2": "United States" },
+      "coordinate": { "latitude": 35.346, "longitude": -111.678 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 52,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/San_Francisco_Peaks%2C_winter.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-78e5-8dab-6e225b72e8c3",
+    "name": "Guadalupe Peak",
+    "displayDescription": "Chihuahuan Desert views; high winds common along exposed ridges.",
+    "elevation": {
+      "value": 2667,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Texas", "part2": "United States" },
+      "coordinate": { "latitude": 31.891, "longitude": -104.859 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 40,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Guadalupe_Nima2.JPG",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-70cb-9978-38ad68336f6c",
+    "name": "Boundary Peak",
+    "displayDescription": "Great Basin scree; often combined with Montgomery Peak across the border.",
+    "elevation": {
+      "value": 4007,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Nevada", "part2": "United States" },
+      "coordinate": { "latitude": 38.123, "longitude": -118.351 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 50,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Boundary_Peak_Nevada_USA.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7b7d-b555-e17f5bd0bb50",
+    "name": "Wheeler Peak (New Mexico)",
+    "displayDescription": "Taos Pueblo region; alpine lakes and summer thunder tradition.",
+    "elevation": {
+      "value": 4013,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "New Mexico", "part2": "United States" },
+      "coordinate": { "latitude": 36.556, "longitude": -105.416 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 52,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Wheeler_Peak%2C_NM.JPG",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7a06-af92-9fd135f43b70",
+    "name": "Charleston Peak",
+    "displayDescription": "Desert island of bristlecones above Las Vegas; fast weather shifts.",
+    "elevation": {
+      "value": 3632,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Nevada", "part2": "United States" },
+      "coordinate": { "latitude": 36.271, "longitude": -115.695 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 44,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/58/Mount_Charleston_and_Trout_Canyon_aerial.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7116-8f72-af256350b91c",
+    "name": "Mount Olympus (Utah)",
+    "displayDescription": "Local Salt Lake rite; steep, rocky trails with big views over the valley.",
+    "elevation": {
+      "value": 3020,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Utah", "part2": "United States" },
+      "coordinate": { "latitude": 40.653, "longitude": -111.772 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 46,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Mount_Olympus_Utah.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7cf6-8d5b-a308713b3a65",
+    "name": "Mount Hoodoo (proxy for Three Sisters area)",
+    "displayDescription": "Volcanic Cascade culture—glacier travel skills and route-finding around tephra slopes.",
+    "elevation": {
+      "value": 2376,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Oregon", "part2": "United States" },
+      "coordinate": { "latitude": 44.395, "longitude": -121.881 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 58,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Three_sisters2.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7a53-bf93-e3953fd596ca",
+    "name": "Mount Washington (Oregon)",
+    "displayDescription": "Classic Oregon volcano cone with crumbly rock and airy ridges.",
+    "elevation": {
+      "value": 2390,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Oregon", "part2": "United States" },
+      "coordinate": { "latitude": 44.378, "longitude": -121.838 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 55,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Mount_Washington%2C_OR%2C_USFS.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7d97-a303-ecdb0585eaa5",
+    "name": "Mount Shuksan",
+    "displayDescription": "Photogenic North Cascades icon; complex glacier systems and alpine rock.",
+    "elevation": {
+      "value": 2783,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Washington", "part2": "United States" },
+      "coordinate": { "latitude": 48.834, "longitude": -121.602 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 70,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/36/MyShuksanSunset.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-71d1-91d0-7f062b6b602c",
+    "name": "Mount Rainier Little Tahoma",
+    "displayDescription": "Sharp sub-peak of Rainier with steep snow/ice—serious despite stature.",
+    "elevation": {
+      "value": 3395,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Washington", "part2": "United States" },
+      "coordinate": { "latitude": 46.844, "longitude": -121.725 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 72,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Little_Tahoma_seen_from_the_Sunrise_parking_lot.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-75f6-8102-31edb440f746",
+    "name": "Mount Whitney (Mountaineer’s Route)",
+    "displayDescription": "Steeper historical line adds snow/ice complexity to the Sierra high point.",
+    "elevation": {
+      "value": 4421,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "California", "part2": "United States" },
+      "coordinate": { "latitude": 36.5785, "longitude": -118.2923 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 70,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Mount_Whitney_2003-03-25.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7395-ad62-2bfeb3b27c4c",
+    "name": "Mount Hood (North Side)",
+    "displayDescription": "Icefall labyrinths and steeper gullies define the more technical faces.",
+    "elevation": {
+      "value": 3429,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Oregon", "part2": "United States" },
+      "coordinate": { "latitude": 45.3735, "longitude": -121.6959 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 75,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Oregon_Mount_Hood_from_Trillium_Lake_2024.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7747-bcbe-28159f6b7a4d",
+    "name": "Mount Everest",
+    "displayDescription": "Chomolungma/Sagarmatha: high-altitude culture, Sherpa logistics, and jet-stream windows.",
+    "elevation": {
+      "value": 8849,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Himalaya", "part2": "Nepal/China (Tibet)" },
+      "coordinate": { "latitude": 27.9881, "longitude": 86.925 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 96,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Mount_Everest_as_seen_from_Drukair2_PLW_edit_Cropped.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-78d4-bb1f-a5ffc6fbd77d",
+    "name": "K2",
+    "displayDescription": "Savage Mountain: technical, avalanche-prone, and weather-marginal with intense basecamp culture.",
+    "elevation": {
+      "value": 8611,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Karakoram", "part2": "Pakistan/China" },
+      "coordinate": { "latitude": 35.8818, "longitude": 76.5133 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 99,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Chogori.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7d93-9937-1095919ae7c8",
+    "name": "Kangchenjunga",
+    "displayDescription": "Sacred summit customs; traditionally stopping short out of respect in Sikkimese lore.",
+    "elevation": {
+      "value": 8586,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Himalaya", "part2": "India/Nepal" },
+      "coordinate": { "latitude": 27.7025, "longitude": 88.1475 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 95,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Kangchenjunga%2C_India.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7bd7-baed-af6de1f7caaf",
+    "name": "Lhotse",
+    "displayDescription": "Linked to Everest’s Western Cwm; steep couloirs and thin air.",
+    "elevation": {
+      "value": 8516,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Himalaya", "part2": "Nepal/China (Tibet)" },
+      "coordinate": { "latitude": 27.9617, "longitude": 86.933 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 94,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/Lhotse-fromChukhungRi.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-73ed-b012-75b552391b9d",
+    "name": "Makalu",
+    "displayDescription": "Pyramid of ice and rock; remote approaches and fierce winds.",
+    "elevation": {
+      "value": 8485,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Himalaya", "part2": "Nepal/China (Tibet)" },
+      "coordinate": { "latitude": 27.8897, "longitude": 87.0883 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 95,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/19/Makalu.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-742a-8317-03734f3d43c3",
+    "name": "Cho Oyu",
+    "displayDescription": "Considered one of the 'easier' 8000ers yet demands serious glacier travel.",
+    "elevation": {
+      "value": 8188,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Himalaya", "part2": "Nepal/China (Tibet)" },
+      "coordinate": { "latitude": 28.0942, "longitude": 86.6608 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 88,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/ChoOyu-fromGokyo.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-70a4-9ec0-df282ccab1f4",
+    "name": "Dhaulagiri I",
+    "displayDescription": "Storm-battered ridges over deep Kali Gandaki; austere and avalanche-prone.",
+    "elevation": {
+      "value": 8167,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Himalaya", "part2": "Nepal" },
+      "coordinate": { "latitude": 28.697, "longitude": 83.487 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 95,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Dhaulagiri_-_view_from_aircraft.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7799-872b-37f90febbc98",
+    "name": "Manaslu",
+    "displayDescription": "Popular 8000er with cultural circuits around Gurung villages.",
+    "elevation": {
+      "value": 8163,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Himalaya", "part2": "Nepal" },
+      "coordinate": { "latitude": 28.5497, "longitude": 84.5617 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 90,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Sunrise%2C_Manaslu.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-746a-8be3-2b6c35315e8d",
+    "name": "Nanga Parbat",
+    "displayDescription": "Dramatic relief above Indus Valley; notorious Rupal Face and weather.",
+    "elevation": {
+      "value": 8126,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Himalaya", "part2": "Pakistan" },
+      "coordinate": { "latitude": 35.237, "longitude": 74.589 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 98,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Fairy_Meadows_and_the_view_of_Nanga_Parbat.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-72ee-a040-e20ebbfd15b8",
+    "name": "Annapurna I",
+    "displayDescription": "Steep, avalanche-loaded faces; name tied to both trekking culture and serious alpinism.",
+    "elevation": {
+      "value": 8091,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Himalaya", "part2": "Nepal" },
+      "coordinate": { "latitude": 28.5958, "longitude": 83.8203 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 98,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f2/South_Face_of_Annapurna_I_%28Main%29.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7f2e-b7bf-ad9181a0ee35",
+    "name": "Aconcagua",
+    "displayDescription": "Highest outside Asia; dry cold, high winds, and a vibrant Mendoza base culture.",
+    "elevation": {
+      "value": 6961,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Andes", "part2": "Argentina" },
+      "coordinate": { "latitude": -32.653, "longitude": -70.011 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 78,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Aconcagua2016.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7dde-92f5-cd4b99d7abd2",
+    "name": "Ojos del Salado",
+    "displayDescription": "World’s highest volcano; Atacama logistics and bone-dry altitude.",
+    "elevation": {
+      "value": 6893,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Andes", "part2": "Chile/Argentina" },
+      "coordinate": { "latitude": -27.109, "longitude": -68.541 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 82,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Ojos_del_Salado_looming_big_on_the_horizon.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-76fc-97fc-ca86878b7894",
+    "name": "Fitz Roy (Cerro Chaltén)",
+    "displayDescription": "Patagonian weather roulette with technical granite and wild gaucho culture in El Chaltén.",
+    "elevation": {
+      "value": 3405,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Patagonia", "part2": "Argentina/Chile" },
+      "coordinate": { "latitude": -49.271, "longitude": -73.045 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 97,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Fitz_Roy_Chalten_Argentina_Todor_Bozhinov_2013.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-792e-88ad-63d9f1cc4f24",
+    "name": "Cerro Torre",
+    "displayDescription": "Rime ice mushrooms, fierce winds—an apex of modern alpinism.",
+    "elevation": {
+      "value": 3128,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Patagonia", "part2": "Argentina/Chile" },
+      "coordinate": { "latitude": -49.3, "longitude": -73.088 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 99,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Cerro_torre_1987.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7963-b7b5-376acba94948",
+    "name": "Huascarán Sur",
+    "displayDescription": "Quechua heartland; glacier collapse risks and high tropical snow.",
+    "elevation": {
+      "value": 6768,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Andes", "part2": "Peru" },
+      "coordinate": { "latitude": -9.119, "longitude": -77.605 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 88,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/16/Nevado_Huascar%C3%A1n_%28south_view%29.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-79b8-b704-4006d29b760e",
+    "name": "Alpamayo",
+    "displayDescription": "Perfect fluted faces; steep ice lines framed by Andean village culture.",
+    "elevation": {
+      "value": 5947,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Andes", "part2": "Peru" },
+      "coordinate": { "latitude": -8.944, "longitude": -77.65 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 92,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Alpamayo_12.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7f13-827f-e772184632cb",
+    "name": "Chimborazo",
+    "displayDescription": "Closest summit to the Sun (equatorial bulge); cold, windy nights above paramo.",
+    "elevation": {
+      "value": 6263,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Andes", "part2": "Ecuador" },
+      "coordinate": { "latitude": -1.469, "longitude": -78.817 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 82,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Volc%C3%A1n_Chimborazo%2C_%22El_Taita_Chimborazo%22_%28cropped%29.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7348-bedb-05f9d296ddff",
+    "name": "Cotopaxi",
+    "displayDescription": "Active stratovolcano; glacier skills and Cotopaxi National Park traditions.",
+    "elevation": {
+      "value": 5897,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Andes", "part2": "Ecuador" },
+      "coordinate": { "latitude": -0.68, "longitude": -78.437 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 72,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/20/Cotopaxi_volcano_2008-06-27T1322.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-709c-b1fb-78a0df44aa0b",
+    "name": "Pico de Orizaba (Citlaltépetl)",
+    "displayDescription": "Highest in Mexico; hut culture and glacier caps above Puebla/Veracruz.",
+    "elevation": {
+      "value": 5636,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Trans-Mexican Volcanic Belt", "part2": "Mexico" },
+      "coordinate": { "latitude": 19.029, "longitude": -97.269 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 70,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/34/Pico_de_Orizaba_desde_Hidalgo%2C_Puebla.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7801-a8e2-bb2abb194558",
+    "name": "Popocatépetl",
+    "displayDescription": "Active volcano with frequent closures; deeply woven into Mexica legend.",
+    "elevation": {
+      "value": 5426,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Central Mexico", "part2": "Mexico" },
+      "coordinate": { "latitude": 19.023, "longitude": -98.622 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 85,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Mexico-Popocatepetl.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7adc-a1a8-60fbfcf3f016",
+    "name": "Iztaccíhuatl",
+    "displayDescription": "‘Sleeping Woman’; high-altitude hike over a series of false summits.",
+    "elevation": {
+      "value": 5230,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Central Mexico", "part2": "Mexico" },
+      "coordinate": { "latitude": 19.179, "longitude": -98.642 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 68,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/74/IztaccihualtSacromonte1.JPG",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7860-90b5-90de56a3c189",
+    "name": "Kilimanjaro",
+    "displayDescription": "Chagga porters and huts; rainforest-to-alpine desert in a single climb.",
+    "elevation": {
+      "value": 5895,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "East Africa", "part2": "Tanzania" },
+      "coordinate": { "latitude": -3.0674, "longitude": 37.3556 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 70,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Kilimanjaro_from_Amboseli.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7fc5-867f-8fa4bb4c6487",
+    "name": "Mount Kenya (Batian)",
+    "displayDescription": "Technical rock on equatorial granite spires with Afro-alpine moorlands.",
+    "elevation": {
+      "value": 5199,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "East Africa", "part2": "Kenya" },
+      "coordinate": { "latitude": -0.152, "longitude": 37.308 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 86,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Peak_of_Mount_Kenya_2025.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-75ad-854d-50a8dc2a57c0",
+    "name": "Margherita Peak (Rwenzori)",
+    "displayDescription": "‘Mountains of the Moon’: boggy approaches and equatorial glaciers.",
+    "elevation": {
+      "value": 5109,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Rwenzori", "part2": "Uganda/DRC" },
+      "coordinate": { "latitude": 0.385, "longitude": 29.885 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 84,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/85/MtStanley_2.JPG",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7b21-a2be-004b2ae6812d",
+    "name": "Mont Blanc",
+    "displayDescription": "Birthplace of alpinism; tramways, refuges, and crevasse/serac hazards.",
+    "elevation": {
+      "value": 4808,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Alps", "part2": "France/Italy" },
+      "coordinate": { "latitude": 45.8326, "longitude": 6.8652 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 78,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Monte_bianco.JPG",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7a5f-9151-1956eb6cedfb",
+    "name": "Matterhorn",
+    "displayDescription": "Pyramidal icon; fixed-rope guides, rockfall, and exposed ridges above Zermatt.",
+    "elevation": {
+      "value": 4478,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Alps", "part2": "Switzerland/Italy" },
+      "coordinate": { "latitude": 45.9763, "longitude": 7.6586 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 92,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Matterhorn_from_Domh%C3%BCtte_-_2.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7c3f-83d5-55a00132372b",
+    "name": "Eiger",
+    "displayDescription": "North Face legends; a museum of bold climbs in harsh alpine weather.",
+    "elevation": {
+      "value": 3967,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Alps", "part2": "Switzerland" },
+      "coordinate": { "latitude": 46.5775, "longitude": 8.005 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 94,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/North_face.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-79ef-a760-fc7f7e689399",
+    "name": "Jungfrau",
+    "displayDescription": "Railway access meets glaciated terrain and classic Swiss hut culture.",
+    "elevation": {
+      "value": 4158,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Alps", "part2": "Switzerland" },
+      "coordinate": { "latitude": 46.5363, "longitude": 7.9629 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 72,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Jungfrau03.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-78da-b077-118b4b4ff089",
+    "name": "Dufourspitze (Monte Rosa)",
+    "displayDescription": "Highest of Monte Rosa; big glaciers and border-hut camaraderie.",
+    "elevation": {
+      "value": 4634,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Alps", "part2": "Switzerland/Italy" },
+      "coordinate": { "latitude": 45.9369, "longitude": 7.8663 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 80,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Monte_Rosa_summit.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7060-b9af-63b0c63a9d2e",
+    "name": "Elbrus",
+    "displayDescription": "Cableways, snowcats, and brutal winds; a Seven Summits staple.",
+    "elevation": {
+      "value": 5642,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Caucasus", "part2": "Russia" },
+      "coordinate": { "latitude": 43.3499, "longitude": 42.4453 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 74,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Mount_Elbrus_%28cropped%29.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-75a6-bd09-fe27c46d402f",
+    "name": "Mount Ararat",
+    "displayDescription": "Sacred in Armenian tradition; high, cold volcanic dome.",
+    "elevation": {
+      "value": 5137,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Eastern Anatolia", "part2": "Türkiye" },
+      "coordinate": { "latitude": 39.702, "longitude": 44.298 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 72,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Mount_Ararat_and_the_Yerevan_skyline_in_spring_%2850mm%29.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7c33-8918-f152b0f07d80",
+    "name": "Damavand",
+    "displayDescription": "Fumaroles and Persian mountaineering clubs—classic summer ascent with sulfur whiffs.",
+    "elevation": {
+      "value": 5610,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Alborz", "part2": "Iran" },
+      "coordinate": { "latitude": 35.951, "longitude": 52.11 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 72,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/981012-Damavand-South-IMG_9861-2.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-724e-98dc-207c23553e3d",
+    "name": "Mount Elgon (Wagagai)",
+    "displayDescription": "Extinct shield volcano with unique afro-alpine flora and cave traditions.",
+    "elevation": {
+      "value": 4321,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "East Africa", "part2": "Uganda/Kenya" },
+      "coordinate": { "latitude": 1.115, "longitude": 34.597 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 58,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Mount_elgon_topo.jpg",
+      "colorScheme": "light"
+    }
+  },
+  {
+    "id": "01998303-cf5e-7674-aa3c-5529b0731897",
+    "name": "Mount Fuji",
+    "displayDescription": "Pilgrimage routes, torii gates, and sunrise ‘Goraikō’ culture during the climbing season.",
+    "elevation": {
+      "value": 3776,
+      "unit": {
+        "symbol": "m",
+        "converter": { "constant": 0, "coefficient": 1 }
+      }
+    },
+    "location": {
+      "name": { "part1": "Honshu", "part2": "Japan" },
+      "coordinate": { "latitude": 35.3606, "longitude": 138.7274 }
+    },
+    "dateAdded": 1758843715,
+    "difficulty": 55,
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f8/View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg",
+      "colorScheme": "light"
+    }
+  }
+]
