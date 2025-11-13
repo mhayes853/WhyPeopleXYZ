@@ -1,0 +1,1515 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpeg" href="./shared-assets/icon.jpeg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>The Root</title>
+    <meta property="og:title" content="Protocols and Possibility" />
+    <meta
+      property="og:description"
+      content="Protocol size determines possibility, and possibilities are a good thing."
+    />
+    <meta property="og:image" content="./shared-assets/icon.jpeg" />
+    <meta property="og:url" content="/on-package-traits" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Protocols and Possibility" />
+    <meta
+      name="twitter:description"
+      content="Protocol size determines possibility, and possibilities are a good thing."
+    />
+    <meta name="twitter:image" content="./shared-assets/icon.jpeg" />
+    <meta name="twitter:url" content="/on-package-traits" />
+  </head>
+  <body>
+    <div id="app">
+      <a class="core-crystal-container" href="/">
+        <img width="300" height="150" src="./shared-assets/core-crystal.svg" />
+      </a>
+      <article>
+        <h1 id="protocols-and-possibility" class="title">
+          Protocols and Possibility
+        </h1>
+        <p>
+          I recently dove into looking at Bitwarden’s iOS codebase for fun, and
+          to find resources for other engineers that I work with to learn native
+          the native mobile languages. Since Bitwarden is quite large, they
+          actually have to take architecture seriously from a code readability,
+          testability, and maintainability standpoint, and not leave it off as a
+          nice to have.
+        </p>
+        <p>Regardless, I saw a lot of massive protocols like this.</p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">AuthService</span> </span>{
+    <span class="hljs-keyword">var</span> callbackUrlScheme: <span class="hljs-type">String</span> { <span class="hljs-keyword">get</span> }
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">answerLoginRequest</span><span class="hljs-params">(<span class="hljs-number">_</span> request: LoginRequest, approve: Bool)</span></span> async <span class="hljs-keyword">throws</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">checkPendingLoginRequest</span><span class="hljs-params">(withId id: String)</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">LoginRequest</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">denyAllLoginRequests</span><span class="hljs-params">(<span class="hljs-number">_</span> requests: [LoginRequest])</span></span> async <span class="hljs-keyword">throws</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">generateSingleSignOnUrl</span><span class="hljs-params">(from organizationIdentifier: String)</span></span> async <span class="hljs-keyword">throws</span> -&gt; (url: <span class="hljs-type">URL</span>, state: <span class="hljs-type">String</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">getPendingAdminLoginRequest</span><span class="hljs-params">(userId: String?)</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">PendingAdminLoginRequest</span>?
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">getPendingLoginRequest</span><span class="hljs-params">(withId id: String?)</span></span> async <span class="hljs-keyword">throws</span> -&gt; [<span class="hljs-type">LoginRequest</span>]
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">hashPassword</span><span class="hljs-params">(password: String, purpose: HashPurpose)</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">String</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">initiateLoginWithDevice</span><span class="hljs-params">(
+        email: String,
+        type: AuthRequestType
+    )</span></span> async <span class="hljs-keyword">throws</span> -&gt; (authRequestResponse: <span class="hljs-type">AuthRequestResponse</span>, requestId: <span class="hljs-type">String</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">loginWithDevice</span><span class="hljs-params">(
+        <span class="hljs-number">_</span> loginRequest: LoginRequest,
+        email: String,
+        isAuthenticated: Bool,
+        captchaToken: String?
+    )</span></span> async <span class="hljs-keyword">throws</span> -&gt; (<span class="hljs-type">String</span>, <span class="hljs-type">String</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">loginWithMasterPassword</span><span class="hljs-params">(
+        <span class="hljs-number">_</span> password: String,
+        username: String,
+        captchaToken: String?,
+        isNewAccount: Bool
+    )</span></span> async <span class="hljs-keyword">throws</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">loginWithSingleSignOn</span><span class="hljs-params">(code: String, email: String)</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">LoginUnlockMethod</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">loginWithTwoFactorCode</span><span class="hljs-params">(
+        email: String,
+        code: String,
+        method: TwoFactorAuthMethod,
+        remember: Bool,
+        captchaToken: String?
+    )</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">LoginUnlockMethod</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">requirePasswordChange</span><span class="hljs-params">(
+        email: String,
+        isPreAuth: Bool,
+        masterPassword: String,
+        policy: MasterPasswordPolicyOptions?
+    )</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">Bool</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">resendVerificationCodeEmail</span><span class="hljs-params">()</span></span> async <span class="hljs-keyword">throws</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">resendNewDeviceOtp</span><span class="hljs-params">()</span></span> async <span class="hljs-keyword">throws</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setPendingAdminLoginRequest</span><span class="hljs-params">(<span class="hljs-number">_</span> adminLoginRequest: PendingAdminLoginRequest?, userId: String?)</span></span> async <span class="hljs-keyword">throws</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">webAuthenticationSession</span><span class="hljs-params">(
+        url: URL,
+        completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler
+    )</span></span> -&gt; <span class="hljs-type">ASWebAuthenticationSession</span>
+}
+        </code></pre>
+        <p>This protocol has 18 requirements, which is quite a lot.</p>
+        <p>
+          However, I’ve also seen such large protocols parroted around as
+          general advice, though not explicitly. No one is literally saying,
+          “You should make protocols as large as possible!”, but you probably
+          have heard of something called the Repository pattern. An average
+          Repository protocol looks like this.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">NotesRepository</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">findNote</span><span class="hljs-params">(by id: UUID)</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">Note</span>?
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">allNotes</span><span class="hljs-params">(<span class="hljs-keyword">for</span> notebookId: UUID?)</span></span> async <span class="hljs-keyword">throws</span> -&gt; [<span class="hljs-type">Note</span>]
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">findNotes</span><span class="hljs-params">(by text: String)</span></span> async <span class="hljs-keyword">throws</span> -&gt; [<span class="hljs-type">Note</span>]
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(note: Note)</span></span> async <span class="hljs-keyword">throws</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">moveNote</span><span class="hljs-params">(from srcNotebookId: UUID, to dstNotebookId: UUID)</span></span> async <span class="hljs-keyword">throws</span>
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">deleteNote</span><span class="hljs-params">(with ids: Set&lt;UUID&gt;)</span></span> async <span class="hljs-keyword">throws</span>
+}
+        </code></pre>
+        <p>
+          Even still, 6 protocol requirements is quite a lot. Most protocols
+          that you conform to from most libraries and frameworks, including
+          Apple’s, do not have nearly as many requirements. Or, if those
+          protocols do have lots of requirements, it’s usually an some kind of
+          “delegate” protocol where most of the requirements are optional, and
+          you only end up implementing a small subset of the requirements most
+          of the time.
+        </p>
+        <p>
+          I would rather have something like this instead of
+          <code>NotesRepository</code>. Where each protocol defines a small
+          class of cohesive functionality.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">NoteSaver</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(note: Note)</span></span> async <span class="hljs-keyword">throws</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">NoteMover</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">moveNote</span><span class="hljs-params">(from srcNotebookId: UUID, to dstNotebookId: UUID)</span></span> async <span class="hljs-keyword">throws</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">NoteDeleter</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">deleteNote</span><span class="hljs-params">(with ids: Set&lt;UUID&gt;)</span></span> async <span class="hljs-keyword">throws</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">NoteFinder</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">findNote</span><span class="hljs-params">(by id: UUID)</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">Note</span>?
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">allNotes</span><span class="hljs-params">(<span class="hljs-keyword">for</span> notebookId: UUID?)</span></span> async <span class="hljs-keyword">throws</span> -&gt; [<span class="hljs-type">Note</span>]
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">findNotes</span><span class="hljs-params">(by text: String)</span></span> async <span class="hljs-keyword">throws</span> -&gt; [<span class="hljs-type">Note</span>]
+}
+        </code></pre>
+        <p>
+          Inevitably, this will turn into a piece about what an optimal protocol
+          size is. Naturally, my answer is of course that “it depends”, but it’s
+          usually not the kind of large protocols that you more commonly see in
+          the wild. Rather, it’s about leaving open as many different
+          conformance possibilities as possible, and large protocols with many
+          requirements tend to not provide many conformance possibilities.
+        </p>
+        <br />
+        <h2 id="the-case-against-large-protocols">
+          The Case Against Large Protocols
+        </h2>
+        <p>
+          Before jumping in, I don’t want to give the impression that such
+          protocols are always bad. Large protocols are fine if the context they
+          are used in has an answer for the generalized case that I will bring
+          against them.
+        </p>
+        <p>
+          There are 2 primary pain points that I have with large protocols.
+          First, is the fact that often no parts of your app need to depend on
+          the entire protocol, but rather only a few requirements of it at a
+          time. Second, larger protocols are harder to conform to in general,
+          and are harder to compose (ie. Creating large pieces of functionality
+          by composing smaller conformance’s together).
+        </p>
+        <p>
+          The main point that you should take away from this is that smaller and
+          easier it is to conform to a protocol, you obtain more possibilities
+          for implementing that protocol. This in turn gives you more options
+          when you need to add or modify a feature in your code.
+        </p>
+        <h3 id="unnecessary-dependence">Unnecessary Dependence</h3>
+        <p>
+          The functionality that often depends on large protocols often only
+          needs a small subset of the requirements (typically only 1-3 in 90% of
+          cases).
+        </p>
+        <p>
+          For instance, this could be a pure SwiftUI view, view model, or TCA
+          reducer for a UI component only needs to depend on functionality that
+          performs the data actions taken by the user. This could be something
+          like adding a new note an HTTP API when a new note is created through
+          a form. In this case, such a pure view, view model, or reducer only
+          needs to depend on this protocol.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">NoteSaver</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(note: Note)</span></span> async <span class="hljs-keyword">throws</span>
+}
+        </code></pre>
+        <p>Yet instead, we often end up depending on this.</p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">NotesRepository</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">findNote</span><span class="hljs-params">(by id: Int)</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">Note</span>?
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">allNotes</span><span class="hljs-params">(<span class="hljs-keyword">for</span> notebookId: Int?)</span></span> async <span class="hljs-keyword">throws</span> -&gt; [<span class="hljs-type">Note</span>]
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">findNotes</span><span class="hljs-params">(by text: String)</span></span> async <span class="hljs-keyword">throws</span> -&gt; [<span class="hljs-type">Note</span>]
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(note: Note)</span></span> async <span class="hljs-keyword">throws</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">moveNote</span><span class="hljs-params">(from srcNotebookId: Int, to dstNotebookId: Int)</span></span> async <span class="hljs-keyword">throws</span>
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">deleteNote</span><span class="hljs-params">(with ids: Set&lt;Int&gt;)</span></span> async <span class="hljs-keyword">throws</span>
+}
+        </code></pre>
+        <p>
+          If we’re using Xcode previews, it would be wise to be able to preview
+          what our UI is like when the save operation invoked by a note creation
+          form fails. This allows us to experience the user’s pain as they
+          try-try-try again to use our broken app. We’ll likely rely on a mock
+          to achieve this, because this makes it easy to put the UI in a failing
+          state.
+        </p>
+        <p>
+          Since our <code>NoteSaver</code> protocol only has a single
+          requirement, creating a mock is quite easy. In fact, we can just
+          create it directly in the preview block because it’s so easy. We can
+          even throw in some fake delay, just to simulate the mindless wait that
+          our frustrated user will experience for real.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AddNoteForm</span>: <span class="hljs-title">View</span> </span>{
+  <span class="hljs-keyword">init</span>(saver: any <span class="hljs-type">NoteSaver</span>) {
+    <span class="hljs-comment">// ...</span>
+  }
+  <span class="hljs-comment">// ...</span>
+}
+
+#<span class="hljs-type">Preview</span> {
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">FailingSaver</span>: <span class="hljs-title">NoteSaver</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(note: Note)</span></span> async <span class="hljs-keyword">throws</span> {
+      <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SomeError</span>: <span class="hljs-title">Error</span> </span>{}
+
+      <span class="hljs-keyword">try</span> await <span class="hljs-type">Task</span>.sleep(<span class="hljs-keyword">for</span>: .seconds(<span class="hljs-number">3</span>))
+      <span class="hljs-keyword">throw</span> <span class="hljs-type">SomeError</span>()
+    }
+  }
+
+  <span class="hljs-type">AddNoteForm</span>(saver: <span class="hljs-type">FailingSaver</span>())
+}
+        </code></pre>
+        <p>
+          Ok… Now let’s decrease the delay to see what happens to a user with a
+          higher speed connection.
+        </p>
+        <pre><code class="lang-diff">
+#<span class="hljs-type">Preview</span> {
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">FailingSaver</span>: <span class="hljs-title">NoteSaver</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(note: Note)</span></span> async <span class="hljs-keyword">throws</span> {
+      <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SomeError</span>: <span class="hljs-title">Error</span> </span>{}
+
+-      <span class="hljs-keyword">try</span> await <span class="hljs-type">Task</span>.sleep(<span class="hljs-keyword">for</span>: .seconds(<span class="hljs-number">3</span>))
++      <span class="hljs-keyword">try</span> await <span class="hljs-type">Task</span>.sleep(<span class="hljs-keyword">for</span>: .seconds(<span class="hljs-number">1</span>))
+      <span class="hljs-keyword">throw</span> <span class="hljs-type">SomeError</span>()
+    }
+  }
+
+  <span class="hljs-type">AddNoteForm</span>(saver: <span class="hljs-type">FailingSaver</span>())
+}
+        </code></pre>
+        <p>
+          I can easily do this because our <code>FailingSaver</code> is quite
+          small and is easy to change in isolation without affecting other
+          views.
+        </p>
+        <p>
+          Now instead of depending on small protocol, let’s try previewing
+          <code>AddNoteForm</code> this while depending on our larger
+          <code>NoteRepository</code> protocol.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AddNoteForm</span>: <span class="hljs-title">View</span> </span>{
+  <span class="hljs-keyword">init</span>(saver: any <span class="hljs-type">NoteRepository</span>) {
+    <span class="hljs-comment">// ...</span>
+  }
+  <span class="hljs-comment">// ...</span>
+}
+
+#<span class="hljs-type">Preview</span> {
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">FailingSaver</span>: <span class="hljs-title">NoteRepository</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">findNote</span><span class="hljs-params">(by id: Int)</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">Note</span>? { <span class="hljs-literal">nil</span> }
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">allNotes</span><span class="hljs-params">(<span class="hljs-keyword">for</span> notebookId: Int?)</span></span> async <span class="hljs-keyword">throws</span> -&gt; [<span class="hljs-type">Note</span>] { [] }
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">findNotes</span><span class="hljs-params">(by text: String)</span></span> async <span class="hljs-keyword">throws</span> -&gt; [<span class="hljs-type">Note</span>] { [] }
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(note: Note)</span></span> async <span class="hljs-keyword">throws</span> {
+      <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SomeError</span>: <span class="hljs-title">Error</span> </span>{}
+
+      <span class="hljs-keyword">try</span> await <span class="hljs-type">Task</span>.sleep(<span class="hljs-keyword">for</span>: .seconds(<span class="hljs-number">3</span>))
+      <span class="hljs-keyword">throw</span> <span class="hljs-type">SomeError</span>()
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">moveNote</span><span class="hljs-params">(from srcNotebookId: Int, to dstNotebookId: Int)</span></span> async <span class="hljs-keyword">throws</span> {}
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">deleteNote</span><span class="hljs-params">(with ids: Set&lt;Int&gt;)</span></span> async <span class="hljs-keyword">throws</span> {}
+  }
+
+  <span class="hljs-type">AddNoteForm</span>(saver: <span class="hljs-type">FailingSaver</span>())
+}
+        </code></pre>
+        <p>
+          There’s just so many extra requirements to implement here. Having a
+          bunch of adhoc conformances to <code>NoteRepository</code> would be
+          quite annoying. Often, most apps will just create a single mock, and
+          reuse it everywhere because creating many conformance’s is quite
+          annoying. This mock will need to get large to accommodate artificial
+          failure modes.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-comment">// In some other file...</span>
+
+<span class="hljs-comment">// This is the only mock conformance to NoteRepository in the app.</span>
+<span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MockNotesRepository</span>: <span class="hljs-title">NoteRepository</span> </span>{
+  <span class="hljs-keyword">var</span> notes = [<span class="hljs-type">Int</span>?: [<span class="hljs-type">Note</span>]]()
+  <span class="hljs-keyword">var</span> savedNotes = [<span class="hljs-type">Note</span>]()
+  <span class="hljs-keyword">var</span> saveError: (any <span class="hljs-type">Error</span>)?
+  <span class="hljs-keyword">var</span> moveError: (any <span class="hljs-type">Error</span>)?
+  <span class="hljs-keyword">var</span> deleteError: (any <span class="hljs-type">Error</span>)?
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">findNote</span><span class="hljs-params">(by id: Int)</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">Note</span>? {
+    <span class="hljs-comment">// ...</span>
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">allNotes</span><span class="hljs-params">(<span class="hljs-keyword">for</span> notebookId: Int?)</span></span> async <span class="hljs-keyword">throws</span> -&gt; [<span class="hljs-type">Note</span>] {
+    <span class="hljs-comment">// ...</span>
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">findNotes</span><span class="hljs-params">(by text: String)</span></span> async <span class="hljs-keyword">throws</span> -&gt; [<span class="hljs-type">Note</span>] {
+    <span class="hljs-comment">// ...</span>
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(note: Note)</span></span> async <span class="hljs-keyword">throws</span> {
+    <span class="hljs-comment">// ...</span>
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">moveNote</span><span class="hljs-params">(from srcNotebookId: Int, to dstNotebookId: Int)</span></span> async <span class="hljs-keyword">throws</span> {
+    <span class="hljs-comment">// ...</span>
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">deleteNote</span><span class="hljs-params">(with ids: Set&lt;Int&gt;)</span></span> async <span class="hljs-keyword">throws</span> {
+    <span class="hljs-comment">// ...</span>
+  }
+}
+        </code></pre>
+        <p>
+          Now, if we want to add our artificial delay to saving a note, we have
+          to update the global mock that’s used by all previews. Others may want
+          to do the same, and this leads to contention, and bloating the mock
+          with all sorts of weird functionality.
+        </p>
+        <p>
+          If we’re like Bitwarden, or we don’t want to end up with code that
+          regresses constantly, we’ll also likely have a test suite (though this
+          may be considered optional for some code bases). It turns out that
+          being able to spin up adhoc mocks is also quite useful in those cases.
+          For instance, if we drive <code>AddNoteForm</code> with an Observable
+          model, we may end up with this.
+        </p>
+        <pre><code class="lang-swift">
+@<span class="hljs-type">Observable</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddNoteFormModel</span> </span>{
+  <span class="hljs-keyword">init</span>(saver: any <span class="hljs-type">NoteSaver</span>) {
+    <span class="hljs-comment">// ...</span>
+  }
+  <span class="hljs-comment">// ...</span>
+}
+
+@<span class="hljs-type">Test</span>(<span class="hljs-string">"Shows Alert When Failing To Add Note"</span>)
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">showsAlertWhenFailingToAddNote</span><span class="hljs-params">()</span></span> async <span class="hljs-keyword">throws</span> {
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">FailingSaver</span>: <span class="hljs-title">NoteSaver</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(note: Note)</span></span> async <span class="hljs-keyword">throws</span> {
+      <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SomeError</span>: <span class="hljs-title">Error</span> </span>{}
+      <span class="hljs-keyword">throw</span> <span class="hljs-type">SomeError</span>()
+    }
+  }
+
+  <span class="hljs-keyword">let</span> model = <span class="hljs-type">AddNoteFormModel</span>(saver: <span class="hljs-type">FailingSaver</span>())
+  model.title = <span class="hljs-string">"My note"</span>
+  model.contents = <span class="hljs-string">"This is fun"</span>
+
+  #expect(model.alert == <span class="hljs-literal">nil</span>)
+  await model.submitted()
+  #expect(model.alert == .failedToSaveNote)
+}
+        </code></pre>
+        <p>
+          If we had made <code>AddNoteFormModel</code> depend on
+          <code>NotesRepository</code>, this process would again be cumbersome,
+          and we would likely have to resort to using our one and only
+          <code>MockNotesRepository</code>.
+        </p>
+        <p>
+          Now, I don’t think reusing a mock conformance is a bad idea. In fact,
+          it’s a great idea! However, a mock that’s reused everywhere also
+          cannot always have its behavior adjusted for a one-off experiments,
+          previews, or test cases. Continuously adjusting a shared mock in these
+          ways would lead to the shared mock becoming large, complicated, and
+          harder to change over time.
+        </p>
+        <h3 id="difficulty-of-conformance">Difficulty of Conformance</h3>
+        <p>
+          Think of protocols as a set of possibilities. That is, a protocol
+          defines a subset of types that conform to it. The
+          <code>Equatable</code> protocol defines the subset of types that have
+          an equality mechanism, and likewise SwiftUI’s
+          <code>View</code> protocol defines the subset of types that can be
+          rendered in a user interface. The harder it is to conform to the
+          protocol, the smaller the subset is. Each type in the subset
+          represents a different possibility of how its requirements are carried
+          out.
+        </p>
+        <p>
+          In other words, protocols that are easy to conform to have many
+          possibilities which means that you have <em>many options</em> for
+          conforming to them. On the flip side, a protocol that is harder to
+          conform to limits the number of options you have for making a
+          conformance.
+        </p>
+        <p>
+          It goes without saying that smaller protocols are often easier to
+          conform to, and therefore provide more possibilities.
+        </p>
+        <p>
+          With smaller protocols, you’re more likely to add new behavior to your
+          app by creating a new conformance. With larger protocols, you’re more
+          likely to make changes to the fewer existing conforming types you have
+          directly in order to add new behavior.
+        </p>
+        <h4 id="feed-filters-dsl">Feed Filters DSL</h4>
+        <p>
+          Here’s a small protocol that we’ll call <code>FeedFilter</code>. A
+          <code>FeedFilter</code> is a mechanism to filter out a specific
+          content type from a typical social media feed. Note that in this
+          example, there are multiple different content types, hence the
+          <code>Content</code> associated type.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">FeedFilter</span>&lt;<span class="hljs-title">Content</span>&gt; </span>{
+  associatedtype <span class="hljs-type">Content</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">shouldIncludeInFeed</span><span class="hljs-params">(content: Content)</span></span> async -&gt; <span class="hljs-type">Bool</span>
+}
+        </code></pre>
+        <p>
+          <code>FeedFilter</code> is an incredibly easy protocol to conform to,
+          so let’s make our first conformance!
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ThreadsExcludeIfControversialFilter</span>: <span class="hljs-title">FeedFilter</span> </span>{
+  <span class="hljs-keyword">let</span> preferences: <span class="hljs-type">Preferences</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">shouldIncludeInFeed</span><span class="hljs-params">(content: Thread)</span></span> -&gt; <span class="hljs-type">Bool</span> {
+    <span class="hljs-keyword">self</span>.preferences.threadFilterControvesyRate &lt; content.downvotePercentage
+  }
+}
+        </code></pre>
+        <p>That was easy! Let’s make another!</p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ThreadsExcludeIfDownvotedFilter</span>: <span class="hljs-title">FeedFilter</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">shouldIncludeInFeed</span><span class="hljs-params">(content: Thread)</span></span> -&gt; <span class="hljs-type">Bool</span> {
+    content.userVote != .downvote
+  }
+}
+        </code></pre>
+        <p>
+          Now, what if we want to create a filter that excludes thread if either
+          the user downvoted them, or if the thread if controversial? We can
+          certainly make a
+          <code>ThreadsExcludeIfDownvotedOrControversialFilter</code>, but now
+          we’re getting into
+          <code>AbstractSingletonProxyFactoryBean</code> territory. All we’re
+          trying to do either is run 1 filter before the other, so let’s make a
+          simple conformance to do just that.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">FeedFilter</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">run</span><span class="hljs-params">(
+    before other: some FeedFilter&lt;Content&gt;
+  )</span></span> -&gt; some <span class="hljs-type">FeedFilter</span>&lt;<span class="hljs-type">Content</span>&gt; {
+    <span class="hljs-type">RunBeforeFilter</span>(a: <span class="hljs-keyword">self</span>, b: other)
+  }
+}
+
+<span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">RunBeforeFilter</span>&lt;
+  <span class="hljs-title">A</span>: <span class="hljs-title">FeedFilter</span>,
+  <span class="hljs-title">B</span>: <span class="hljs-title">FeedFilter</span>
+&gt;: <span class="hljs-title">FeedFilter</span> <span class="hljs-title">where</span> <span class="hljs-title">A</span>.<span class="hljs-title">Content</span> == <span class="hljs-title">B</span>.<span class="hljs-title">Content</span> </span>{
+  <span class="hljs-keyword">let</span> a: <span class="hljs-type">A</span>
+  <span class="hljs-keyword">let</span> b: <span class="hljs-type">B</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">shouldIncludeInFeed</span><span class="hljs-params">(content: A.Content)</span></span> async -&gt; <span class="hljs-type">Bool</span> {
+    <span class="hljs-keyword">guard</span> await <span class="hljs-keyword">self</span>.a.shouldIncludeInFeed(content: content) <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+    }
+    <span class="hljs-keyword">return</span> await <span class="hljs-keyword">self</span>.b.shouldIncludeInFeed(content: content)
+  }
+}
+        </code></pre>
+        <p>
+          Now we can easily create our
+          <code>downvotedOrControvesialFilter</code> like so.
+        </p>
+        <pre><code class="lang-swift">
+let downvotedOrControversial = ThreadsExcludeIfControversialFilter()
+  .run(<span class="hljs-keyword">before</span>: <span class="hljs-title">ThreadsExcludeIfDownvotedFilter</span>())
+        </code></pre>
+        <p>
+          In fact <code>RunBeforeFilter</code> works for any content type, and
+          any 2 filters with the same content type. Now let’s try making another
+          conformance that also doesn’t care too much about the content type.
+          For instance, lots of scrollable content on social media contains some
+          very forbidden words. Let’s make a filter to filter those words.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">HiddenPhrasesFilterable</span> </span>{
+  <span class="hljs-keyword">var</span> language: <span class="hljs-type">Language</span> { <span class="hljs-keyword">get</span> }
+  <span class="hljs-keyword">var</span> textBlocks: [(<span class="hljs-type">String</span>, <span class="hljs-type">HiddenPhraseOptions</span>)] { <span class="hljs-keyword">get</span> }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">HiddenPhrasesFilter</span>&lt;<span class="hljs-title">Content</span>: <span class="hljs-title">HiddenPhrasesFilterable</span>&gt;: <span class="hljs-title">FeedFilter</span> </span>{
+  <span class="hljs-keyword">let</span> phrases: <span class="hljs-type">HiddenPhrases</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">shouldIncludeInFeed</span><span class="hljs-params">(content: Content)</span></span> -&gt; <span class="hljs-type">Bool</span> {
+    <span class="hljs-comment">// Tokenize the content by word with NLTokenizer and use a trie</span>
+    <span class="hljs-comment">// to efficiently match phrases in HiddenPhrases...</span>
+  }
+}
+        </code></pre>
+        <p>
+          I’ve omitted the implementation of
+          <code>HiddenPhrasesFilter</code> for brevity, but suffice to say it
+          used the algorithm described by the comment above. However, the main
+          point was that we now have a filter that works on any kind of content
+          that conforms to <code>HiddenPhrasesFilterable</code>.
+        </p>
+        <p>
+          Finally, let’s make a simple conformance that works with
+          <code>Comment</code>s instead of just <code>Thread</code>s.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">CommentExcludeIfNoRepliesFilter</span>: <span class="hljs-title">FeedFilter</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">shouldIncludeInFeed</span><span class="hljs-params">(content: Comment)</span></span> -&gt; <span class="hljs-type">Bool</span> {
+    content.replyCount &gt; <span class="hljs-number">0</span>
+  }
+}
+        </code></pre>
+        <p>
+          We can keep going, but the gist of this is that we can reuse filtering
+          logic to create separate content filtering pipelines. I ended up with
+          something like this.
+        </p>
+        <pre><code class="lang-swift">
+extension FeedFilter where Content == <span class="hljs-class">Thread </span>{
+  static func defaultThreads(
+<span class="hljs-symbol">    preferences:</span> Preferences,
+<span class="hljs-symbol">    accountsActor:</span> some SavedAccountsActor
+  ) -&gt; some FeedFilter<span class="hljs-params">&lt;Content&gt;</span> {
+    NSFWFilter(preferences: preferences)
+      .run(
+<span class="hljs-symbol">        before:</span> ThreadsExcludeIfUserDownvotedFilter()
+          .<span class="hljs-class">onlyRunIf </span>{ preferences.shouldFilterDownvotedThreads }
+      )
+      .run(
+<span class="hljs-symbol">        before:</span> ThreadsExcludeIfControversialFilter(preferences: preferences)
+          .<span class="hljs-class">onlyRunIf </span>{ preferences.shouldFilterControversialThreads }
+      )
+      .run(
+<span class="hljs-symbol">        before:</span> ContentMarkerFilter(
+<span class="hljs-symbol">          accountsActor:</span> accountsActor,
+<span class="hljs-symbol">          contentMarker:</span> .markedAsReadThreads
+        )
+        .<span class="hljs-class">onlyRunIf </span>{ preferences.shouldFilterThreadsMarkedAsRead }
+      )
+      .run(
+<span class="hljs-symbol">        before:</span> ContentMarkerFilter(
+<span class="hljs-symbol">          accountsActor:</span> accountsActor,
+<span class="hljs-symbol">          contentMarker:</span> .hiddenThreads
+        )
+      )
+      .run(before: HiddenPhrasesFilter(phrases: preferences.hiddenPhrases))
+      .keepingCurrentUserContent(using: accountsActor)
+  }
+}
+
+extension FeedFilter where Content == <span class="hljs-class">Comment </span>{
+  static func defaultPosts(
+<span class="hljs-symbol">    preferences:</span> Preferences,
+<span class="hljs-symbol">    accountsActor:</span> some SavedAccountsActor
+  ) -&gt; some FeedFilter<span class="hljs-params">&lt;Content&gt;</span> {
+    NSFWFilter(preferences: preferences)
+      .run(
+<span class="hljs-symbol">        before:</span> ContentMarkerFilter(
+<span class="hljs-symbol">          accountsActor:</span> accountsActor,
+<span class="hljs-symbol">          contentMarker:</span> .hiddenComments
+        )
+      )
+      .run(
+<span class="hljs-symbol">        before:</span> CommentExcludeIfNoRepliesFilter()
+          .<span class="hljs-class">onlyRunIf </span>{ preferences.shouldFilterUnrepliedComments }
+      )
+      .run(before: HiddenPhrasesFilter(phrases: preferences.hiddenPhrases))
+      .keepingCurrentUserContent(using: accountsActor)
+  }
+}
+
+<span class="hljs-comment">// More content types...</span>
+        </code></pre>
+        <p>
+          Adding new filtering logic was incredibly easy, because
+          <code>FeedFilter</code> was easy to conform to. The filters were also
+          relatively isolated from each other, and only handled a small concern,
+          which made them easy to compose together into a larger and more
+          meaningful filter.
+        </p>
+        <h4 id="composing-persistence-based-protocols">
+          Composing Persistence Based Protocols
+        </h4>
+        <p>
+          Now for a point of consideration, would you do what we did above with
+          <code>NotesRepository</code>?
+        </p>
+        <p>
+          Likely not because in many cases you would find it cumbersome, but
+          you’re probably also questioning why we would need to in the first
+          place. <code>NotesRepository</code> is an interface that implements IO
+          for notes, and that IO has a very specific data store (HTTP API, Local
+          Database, etc.). Therefore, if the implementation is just simple IO
+          calls, then why is there a need for the kind of composition that you
+          see with <code>FeedFilter</code>?
+        </p>
+        <p>
+          This point is true in most cases with persistence, but that doesn’t
+          mean that you want to leave out options arbitrarily. As long as the
+          overall operation can be split into different parts cleanly, you can
+          still rely on this composition. In fact, persistence has many
+          mechanisms which are composable.
+        </p>
+        <p>
+          This composability is literally why I decided to author
+          <a href="https://github.com/mhayes853/swift-operation"
+            >Swift Operation</a
+          >, and that library actually provides a similar DSL as
+          <code>FeedFilter</code> for <em>any async operation</em>.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">Post</span> </span>{
+  <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-keyword">for</span> id: ID)</span></span> -&gt; some <span class="hljs-type">QueryRequest</span>&lt;<span class="hljs-type">Post</span>, <span class="hljs-type">Query</span>.<span class="hljs-type">State</span>&gt; {
+    <span class="hljs-type">Self</span>.$query(id: id).retry(limit: <span class="hljs-number">3</span>)
+      .refetchOnChange(
+        of: .connected(to: <span class="hljs-type">NWPathMonitorObserver</span>.startingShared())
+      )
+      .deduplicated()
+  }
+
+  @<span class="hljs-type">QueryRequest</span>
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">query</span><span class="hljs-params">(id: ID)</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">Post</span> {
+    <span class="hljs-comment">// ...</span>
+  }
+}
+        </code></pre>
+        <p>
+          Just like that, we’ve configured retries, deduplication, and the
+          ability to refetch the post when the user’s network connection flips
+          from offline to online. This works for more than just network requests
+          by the way, it also works for calls to Apple Frameworks, and much
+          more.
+        </p>
+        <p>
+          You can create new building blocks of functionality by conforming to
+          the <code>OperationModifier</code> protocol. For instance, here’s a
+          simple one that adds artificial delay to an operation. You might
+          wonder why you want to do that. It turns out that in Xcode previews,
+          it’s very helpful to add such delay to see what the user experiences
+          when their connection is slow.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">DelayModifier</span>&lt;<span class="hljs-title">Operation</span>: <span class="hljs-title">OperationRequest</span>&gt;: <span class="hljs-title">OperationModifier</span> </span>{
+  <span class="hljs-keyword">let</span> delay: <span class="hljs-type">TimeInterval</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fetch</span><span class="hljs-params">(
+    isolation: isolated <span class="hljs-params">(any Actor)</span></span></span>?,
+    <span class="hljs-keyword">in</span> context: <span class="hljs-type">OperationContext</span>,
+    using operation: <span class="hljs-type">Operation</span>,
+    with continuation: <span class="hljs-type">OperationContinuation</span>&lt;<span class="hljs-type">Operation</span>.<span class="hljs-type">Value</span>&gt;
+  ) async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">Operation</span>.<span class="hljs-type">Value</span> {
+    <span class="hljs-keyword">try</span> await context.delayer.delay(<span class="hljs-keyword">for</span>: delay)
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">try</span> await operation.run(isolation: isolation, <span class="hljs-keyword">in</span>: context, with: continuation)
+  }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">OperationRequest</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">delay</span><span class="hljs-params">(<span class="hljs-keyword">for</span> duration: TimeInterval)</span></span> -&gt; <span class="hljs-type">ModifiedOperation</span>&lt;<span class="hljs-type">Self</span>, <span class="hljs-type">DelayModifier</span>&lt;<span class="hljs-type">Self</span>&gt;&gt; {
+    <span class="hljs-keyword">self</span>.modifier(<span class="hljs-type">DelayModifier</span>(delay: duration))
+  }
+}
+
+@<span class="hljs-type">QueryRequest</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">myQuery</span><span class="hljs-params">()</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">SomeData</span> {
+  <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-keyword">let</span> myQuery = $myQuery.delay(<span class="hljs-keyword">for</span>: <span class="hljs-number">0.3</span>)
+        </code></pre>
+        <p>
+          In the demo app for Swift Operation, I’ve even implemented such a
+          modifier that persists the results of each query to a database. This
+          allowed me to create dev tools that provide the opportunity to inspect
+          any query made by the app. Thanks to
+          <a href="https://github.com/pointfreeco/sqlite-data"
+            >￼￼<code>SQLiteData</code>￼￼</a
+          >, the results are even synced across iCloud, and can be viewed from
+          any device.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">StatefulOperationRequest</span> <span class="hljs-title">where</span> <span class="hljs-title">Self</span>: <span class="hljs-title">Sendable</span> </span>{
+  <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">analyzed</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">ModifiedOperation</span>&lt;<span class="hljs-type">Self</span>, _AnalysisModifier&lt;<span class="hljs-type">Self</span>&gt;&gt; {
+    <span class="hljs-keyword">self</span>.modifier(_AnalysisModifier())
+  }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">_AnalysisModifier</span>&lt;
+  <span class="hljs-title">Operation</span>: <span class="hljs-title">StatefulOperationRequest</span> &amp; <span class="hljs-title">Sendable</span>
+&gt;: <span class="hljs-title">OperationModifier</span>, <span class="hljs-title">Sendable</span> </span>{
+  <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">run</span><span class="hljs-params">(
+    isolation: isolated <span class="hljs-params">(any Actor)</span></span></span>?,
+    <span class="hljs-keyword">in</span> context: <span class="hljs-type">OperationContext</span>,
+    using query: <span class="hljs-type">Operation</span>,
+    with continuation: <span class="hljs-type">OperationContinuation</span>&lt;<span class="hljs-type">Operation</span>.<span class="hljs-type">Value</span>, <span class="hljs-type">Operation</span>.<span class="hljs-type">Failure</span>&gt;
+  ) async <span class="hljs-keyword">throws</span>(<span class="hljs-type">Operation</span>.<span class="hljs-type">Failure</span>) -&gt; <span class="hljs-type">Operation</span>.<span class="hljs-type">Value</span> {
+    @<span class="hljs-type">Dependency</span>(\.defaultDatabase) <span class="hljs-keyword">var</span> database
+    @<span class="hljs-type">Dependency</span>(\.continuousClock) <span class="hljs-keyword">var</span> clock
+    @<span class="hljs-type">Dependency</span>(<span class="hljs-type">ApplicationLaunch</span>.<span class="hljs-type">ID</span>.<span class="hljs-keyword">self</span>) <span class="hljs-keyword">var</span> launchId
+    @<span class="hljs-type">Dependency</span>(\.uuidv7) <span class="hljs-keyword">var</span> uuidv7
+
+    <span class="hljs-keyword">let</span> yields = <span class="hljs-type">Mutex</span>([<span class="hljs-type">Result</span>&lt;<span class="hljs-type">Operation</span>.<span class="hljs-type">Value</span>, <span class="hljs-type">Operation</span>.<span class="hljs-type">Failure</span>&gt;]())
+    <span class="hljs-keyword">let</span> continuation = <span class="hljs-type">OperationContinuation</span>&lt;<span class="hljs-type">Operation</span>.<span class="hljs-type">Value</span>, <span class="hljs-type">Operation</span>.<span class="hljs-type">Failure</span>&gt; {
+      result,
+      context <span class="hljs-keyword">in</span>
+      yields.withLock { $<span class="hljs-number">0</span>.append(result) }
+      continuation.yield(with: result, using: context)
+    }
+
+    <span class="hljs-keyword">var</span> result: <span class="hljs-type">Result</span>&lt;<span class="hljs-type">Operation</span>.<span class="hljs-type">Value</span>, <span class="hljs-type">Operation</span>.<span class="hljs-type">Failure</span>&gt;!
+    <span class="hljs-keyword">let</span> time = await clock.measure {
+      result = await <span class="hljs-type">Result</span> { @<span class="hljs-type">Sendable</span> () async <span class="hljs-keyword">throws</span>(<span class="hljs-type">Operation</span>.<span class="hljs-type">Failure</span>) -&gt; <span class="hljs-type">Operation</span>.<span class="hljs-type">Value</span> <span class="hljs-keyword">in</span>
+        <span class="hljs-keyword">try</span> await query.run(isolation: isolation, <span class="hljs-keyword">in</span>: context, with: continuation)
+      }
+    }
+
+    <span class="hljs-keyword">let</span> analysis = <span class="hljs-type">OperationAnalysis</span>(
+      id: <span class="hljs-type">OperationAnalysis</span>.<span class="hljs-type">ID</span>(uuidv7()),
+      launchId: launchId,
+      operation: query,
+      operationRetryAttempt: context.operationRetryIndex,
+      operationRuntimeDuration: time,
+      yieldedResults: yields.withLock { $<span class="hljs-number">0</span> },
+      finalResult: result
+    )
+
+    await withErrorReporting {
+      <span class="hljs-keyword">try</span> await database.write {
+        <span class="hljs-keyword">try</span> <span class="hljs-type">OperationAnalysisRecord</span>.insert { <span class="hljs-type">OperationAnalysisRecord</span>.<span class="hljs-type">Draft</span>(analysis) }.execute($<span class="hljs-number">0</span>)
+      }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">try</span> result.<span class="hljs-keyword">get</span>()
+  }
+}
+        </code></pre>
+        <p>
+          <img
+            src="./protocols-and-possibility/assets/dev-tools-1.png"
+            alt="A screen showing a list of all operations performed by an app for a particular app launch."
+          />
+          <img
+            src="./protocols-and-possibility/assets/dev-tools-2.png"
+            alt="A screen showing the result of a specific operation with statistics on its total runtime, number of retry attempts, and run date."
+          />
+        </p>
+        <p>
+          Suffice to say, doing this would be incredibly difficult with larger
+          protocols, as you would have to add the above behavior to each
+          requirement. Since <code>OperationModifier</code> is a small protocol
+          with a requirement, it was quite easy to add this Dev Tools interface,
+          as well as artificial delay, and much more that you can find in the
+          <a href="https://github.com/mhayes853/swift-operation">library</a>.
+        </p>
+        <br />
+        <h2 id="addressing-alternatives-and-concerns">
+          Addressing Alternatives and Concerns
+        </h2>
+        <p>
+          Now that I’ve laid out the case against large protocols, I want to
+          spend some time going through many strategies that I’ve seen in the
+          community to address some of the problems of large protocols.
+        </p>
+        <h3 id="struct-based-interfaces">Struct Based Interfaces</h3>
+        <p>
+          For the point on mocking, one may try to turn to a mutable struct of
+          closures instead of a protocol. PointFree has been the primary
+          advocate for this style as far as I can tell, and the docs of
+          <a
+            href="https://swiftpackageindex.com/pointfreeco/swift-dependencies/main/documentation/dependencies/designingdependencies#Struct-based-dependencies"
+            >Swift Dependencies</a
+          >
+          even have an entire article on this.
+        </p>
+        <p>
+          In other words, we would make <code>NotesRepository</code> a struct
+          like this.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-keyword">import</span> Dependencies
+
+<span class="hljs-meta">@DependencyClient</span>
+struct NotesRepository {
+  var <span class="hljs-string">findNote:</span> <span class="hljs-meta">@Sendable</span> (_ <span class="hljs-string">id:</span> Int) async <span class="hljs-keyword">throws</span> -&gt; Note?
+  var allNotes: <span class="hljs-meta">@Sendable</span> (_ <span class="hljs-string">notebookId:</span> Int?) async throws -&gt; [Note]
+  var findNotes: <span class="hljs-meta">@Sendable</span> (_ <span class="hljs-string">text:</span> String) async <span class="hljs-keyword">throws</span> -&gt; [Note]
+  var <span class="hljs-string">save:</span> <span class="hljs-meta">@Sendable</span> (<span class="hljs-string">note:</span> Note) async <span class="hljs-keyword">throws</span> -&gt; Void
+  var <span class="hljs-string">moveNote:</span> <span class="hljs-meta">@Sendable</span> (from <span class="hljs-string">srcNotebookId:</span> Int, to <span class="hljs-string">dstNotebookId:</span> Int) async <span class="hljs-keyword">throws</span> -&gt; Void
+  var <span class="hljs-string">deleteNote:</span> <span class="hljs-meta">@Sendable</span> (with <span class="hljs-string">ids:</span> Set&lt;Int&gt;) async <span class="hljs-keyword">throws</span> -&gt; Void
+}
+        </code></pre>
+        <p>
+          Now in tests, we can override specific properties to provide a mock
+          value.
+        </p>
+        <pre><code class="lang-swift">
+@<span class="hljs-type">Test</span>(<span class="hljs-string">"Shows Alert When Failing To Add Note"</span>)
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">showsAlertWhenFailingToAddNote</span><span class="hljs-params">()</span></span> async <span class="hljs-keyword">throws</span> {
+  <span class="hljs-keyword">try</span> await withDependencies {
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SomeError</span>: <span class="hljs-title">Error</span> </span>{}
+    $<span class="hljs-number">0</span>[<span class="hljs-type">NotesRepository</span>.<span class="hljs-keyword">self</span>].save = { <span class="hljs-number">_</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">throw</span> <span class="hljs-type">SomeError</span>() }
+  } operation: {
+    <span class="hljs-comment">// AddNoteFormModel would access NotesRepository through the</span>
+    <span class="hljs-comment">// @Dependency property wrapper.</span>
+    <span class="hljs-keyword">let</span> model = <span class="hljs-type">AddNoteFormModel</span>()
+    model.title = <span class="hljs-string">"My note"</span>
+    model.contents = <span class="hljs-string">"This is fun"</span>
+
+    #expect(model.alert == <span class="hljs-literal">nil</span>)
+    await model.submitted()
+    #expect(model.alert == .failedToSaveNote)
+  }
+}
+        </code></pre>
+        <p>
+          For the record, I used to use this style extensively. However, I often
+          found myself repeating the same patterns of code over and over again
+          for each test.
+        </p>
+        <pre><code class="lang-swift">
+@<span class="hljs-type">Test</span>(<span class="hljs-string">"Something"</span>)
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">something</span><span class="hljs-params">()</span></span> async <span class="hljs-keyword">throws</span> {
+  <span class="hljs-keyword">try</span> await withDependencies {
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SomeError</span>: <span class="hljs-title">Error</span> </span>{}
+    $<span class="hljs-number">0</span>[<span class="hljs-type">NotesRepository</span>.<span class="hljs-keyword">self</span>].save = { <span class="hljs-number">_</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">throw</span> <span class="hljs-type">SomeError</span>() }
+  } operation: {
+    <span class="hljs-comment">// ...</span>
+  }
+}
+
+@<span class="hljs-type">Test</span>(<span class="hljs-string">"Other Thing"</span>)
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">otherThing</span><span class="hljs-params">()</span></span> async <span class="hljs-keyword">throws</span> {
+  <span class="hljs-keyword">try</span> await withDependencies {
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SomeError</span>: <span class="hljs-title">Error</span> </span>{}
+    $<span class="hljs-number">0</span>[<span class="hljs-type">NotesRepository</span>.<span class="hljs-keyword">self</span>].save = { <span class="hljs-number">_</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">throw</span> <span class="hljs-type">SomeError</span>() }
+  } operation: {
+    <span class="hljs-comment">// ...</span>
+  }
+}
+
+<span class="hljs-comment">// So on...</span>
+        </code></pre>
+        <p>
+          Another annoying thing about this pattern has to do with spies
+          explicitly. In many cases, you need to use something like
+          <code>Mutex</code> to capture the value passed to the dependency
+          closure, and repeating this is not very fun either.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-keyword">import</span> Synchronization
+
+@<span class="hljs-type">Test</span>(<span class="hljs-string">"Spy Save"</span>)
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">spySave</span><span class="hljs-params">()</span></span> async <span class="hljs-keyword">throws</span> {
+  <span class="hljs-keyword">let</span> savedNotes = <span class="hljs-type">Mutex</span>([<span class="hljs-type">Note</span>]())
+  <span class="hljs-keyword">try</span> await withDependencies {
+    $<span class="hljs-number">0</span>[<span class="hljs-type">NotesRepository</span>.<span class="hljs-keyword">self</span>].save = { note <span class="hljs-keyword">in</span>
+      savedNotes.withLock { $<span class="hljs-number">0</span> = note }
+    }
+  } operation: {
+    <span class="hljs-comment">// ...</span>
+  }
+}
+        </code></pre>
+        <p>
+          If we want to do domain specific asserts on the spied values, we’re
+          also out of luck because we cannot just add an additional API to a
+          struct of closures that returns a property captured by those closures.
+        </p>
+        <p>
+          In the long run, I’ve often reduced duplication by creating simple and
+          reusable mocks that conform to a small protocol.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">FailingSaver</span>: <span class="hljs-title">NoteSaver</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(note: Note)</span></span> async <span class="hljs-keyword">throws</span> {
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SomeError</span>: <span class="hljs-title">Error</span> </span>{}
+    <span class="hljs-keyword">throw</span> <span class="hljs-type">SomeError</span>()
+  }
+}
+
+@<span class="hljs-type">MainActor</span>
+<span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpySaver</span>: <span class="hljs-title">NoteSaver</span> </span>{
+  <span class="hljs-keyword">private</span>(<span class="hljs-keyword">set</span>) <span class="hljs-keyword">var</span> savedNotes = [<span class="hljs-type">Note</span>]()
+
+  <span class="hljs-comment">// We also get domain-specific asserts with this approach.</span>
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">expectSaved</span><span class="hljs-params">(<span class="hljs-number">_</span> note: Note)</span></span> {
+    #expect(<span class="hljs-keyword">self</span>.savedNotes.<span class="hljs-built_in">contains</span>(note))
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(note: Note)</span></span> async <span class="hljs-keyword">throws</span> {
+    <span class="hljs-keyword">self</span>.savedNotes.append(note)
+  }
+}
+        </code></pre>
+        <p>
+          Despite these flaws, I actually think structs with closures are great
+          for certain kinds of problems. For instance, I often find myself
+          relying on bags of closures over creating a
+          <code>Delegate</code> protocol because delegates are often created in
+          an adhoc fashion.
+        </p>
+        <pre><code class="lang-swift">
+extension HapticaExtension {
+  public struct <span class="hljs-name">Delegate</span>: Sendable {
+    public var <span class="hljs-name">onJavaScriptExceptionThrown</span>:
+      <span class="hljs-function"><span class="hljs-params">(@Sendable (HapticaExtension, JavaScriptException) -&gt; Void)</span>?
+    public var onMetadataUpdated: <span class="hljs-params">(@Sendable (HapticaExtension, HapticaExtensionMetadata) -&gt; Void)</span>?
+
+    public init<span class="hljs-params">(
+      onJavaScriptExceptionThrown: (
+        @Sendable (HapticaExtension, HapticaExtension.JavaScriptException) -&gt; Void
+      )? = <span class="hljs-literal">nil</span>,
+      onMetadataUpdated: (@Sendable (HapticaExtension, HapticaExtensionMetadata) -&gt; Void)? = <span class="hljs-literal">nil</span>
+    )</span> {
+      self.onJavaScriptExceptionThrown = onJavaScriptExceptionThrown
+      self.onMetadataUpdated = onMetadataUpdated
+    }
+  }
+}</span>
+        </code></pre>
+        <p>
+          In other words, if the operation is very adhoc and is tightly coupled
+          to what the caller is doing (eg. The operation would change the
+          caller’s state somehow.), then I think closures suit that use case
+          better. Delegates are a perfect example of this, but many well-known
+          APIs also accept simple closures such as initializer of
+          <code>Task</code>.
+        </p>
+        <h3 id="small-protocols-are-a-lot-of-boilerplate">
+          Small Protocols are a lot of Boilerplate
+        </h3>
+        <p>
+          I won’t deny this, but a small increase in typing speed is not worth
+          time lost in friction. That is to say, I would rather deal with a bit
+          of boilerplate over not being able to rapidly iterate.
+        </p>
+        <p>
+          Perhaps you may also be thinking that I would advocate for small types
+          to conform to the small protocols. Naturally, this would result in an
+          explosition of small classes.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">NoteSaver</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(note: Note)</span></span> async <span class="hljs-keyword">throws</span>
+}
+
+<span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">APINoteSaver</span>: <span class="hljs-title">NoteSaver</span> </span>{
+  <span class="hljs-keyword">init</span>(api: <span class="hljs-type">NotesAPI</span>) {
+    <span class="hljs-comment">// ...</span>
+  }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">NoteDeleter</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">deleteNote</span><span class="hljs-params">(with id: Int)</span></span> async <span class="hljs-keyword">throws</span>
+}
+
+<span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">APINoteDeleter</span>: <span class="hljs-title">NoteSaver</span> </span>{
+  <span class="hljs-keyword">init</span>(api: <span class="hljs-type">NotesAPI</span>) {
+    <span class="hljs-comment">// ...</span>
+  }
+}
+        </code></pre>
+        <p>
+          Obviously, this would get quite annoying. Thankfully, Swift lets you
+          extend existing types to conform to protocols you own after the fact.
+          In most cases, I usually have a larger class that implements many of
+          these small protocols.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NotesAPI</span> </span>{
+  <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">NotesAPI</span>: <span class="hljs-title">NoteSaver</span> </span>{
+  <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">NotesAPI</span>: <span class="hljs-title">NoteDeleter</span> </span>{
+  <span class="hljs-comment">// ...</span>
+}
+        </code></pre>
+        <p>
+          Protocols represent possibilities, and so I would rather leave the
+          option for either a small class or large class to conform to them. For
+          instance, maybe we want to save the note to a local file as well as
+          the backend when it’s saved. We can address that with a simple
+          conformance without having to modify <code>NotesAPI</code>.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">FileSaver</span>&lt;<span class="hljs-title">Base</span>: <span class="hljs-title">NoteSaver</span>&gt;: <span class="hljs-title">NoteSaver</span> </span>{
+  <span class="hljs-keyword">let</span> base: <span class="hljs-type">Base</span>
+  <span class="hljs-keyword">let</span> baseURL: <span class="hljs-type">URL</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(note: Note)</span></span> async <span class="hljs-keyword">throws</span> {
+    <span class="hljs-keyword">try</span> await <span class="hljs-keyword">self</span>.base.save(note: note)
+    <span class="hljs-keyword">try</span> <span class="hljs-type">JSONEncoder</span>().encode(note)
+      .write(to: <span class="hljs-keyword">self</span>.baseURL.appending(path: <span class="hljs-string">"<span class="hljs-subst">\(note.id)</span>.json"</span>)
+  }
+}
+
+<span class="hljs-keyword">let</span> fileAPISaving = <span class="hljs-type">FileSaver</span>(base: <span class="hljs-type">NotesAPI</span>.shared)
+        </code></pre>
+        <p>
+          With the old <code>NotesRepository</code> approach, our only
+          reasonable option would’ve added this file saving functionality on to
+          our 1 potentially massive conforming type.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DefaultNotesRepository</span>: <span class="hljs-title">NotesRepository</span> </span>{
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> api: <span class="hljs-type">NotesAPI</span>
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> baseURL: <span class="hljs-type">URL</span>
+
+  <span class="hljs-comment">// ...</span>
+
+  <span class="hljs-keyword">init</span>(api: <span class="hljs-type">NotesAPI</span>, <span class="hljs-keyword">let</span> baseURL: <span class="hljs-type">URL</span>) {
+    <span class="hljs-comment">// ...</span>
+  }
+
+  <span class="hljs-comment">// ...</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">save</span><span class="hljs-params">(note: Note)</span></span> async <span class="hljs-keyword">throws</span> {
+    <span class="hljs-keyword">try</span> await <span class="hljs-keyword">self</span>.api.save(note: note)
+    <span class="hljs-keyword">try</span> <span class="hljs-type">JSONEncoder</span>().encode(note)
+      .write(to: <span class="hljs-keyword">self</span>.baseURL.appending(path: <span class="hljs-string">"<span class="hljs-subst">\(note.id)</span>.json"</span>)
+  }
+
+  <span class="hljs-comment">// ...</span>
+}
+        </code></pre>
+        <p>
+          I want to make clear that I’m not necessarily advocating for the
+          small-conformance style as the best way to implement local persistence
+          on top of an HTTP API. In most cases, I would directly implement it
+          alongside the API call in a larger conformance because that would be
+          easier to understand.
+        </p>
+        <p>
+          However, small protocols leaves open small conformances as an
+          <em>option</em>, and that option may fit your context better than
+          integrating it directly inside <code>DefaultNotesRepository</code>. If
+          we had more requirements to implement behind the
+          <code>NotesRepository</code> protocol, then it’s likely that we would
+          have to keep bloating <code>DefaultNotesRepository</code>. If the
+          implementation starts to become a bit bloated, it may be easier to add
+          new behavior to the overall operation of saving a note with a smaller
+          conformance.
+        </p>
+        <p>
+          Sometimes, an explosion of small conforming types is what we want (eg.
+          SwiftUI Views), but other times we want larger and more cohesive
+          conforming types. Small protocols give you both options, whereas
+          larger ones don’t.
+        </p>
+        <h3
+          id="you-can-just-autogenerate-mocks-with-a-package-mockingbird-swiftymocky-etc-"
+        >
+          You can just Autogenerate Mocks with a Package (Mockingbird,
+          SwiftyMocky, etc.)
+        </h3>
+        <p>
+          Outside of the obvious dependency problem this has, the other pain
+          point is that these kinds of packages tend to own the entire
+          generation pipeline for the mocks, and they often cannot be modified
+          after the fact. I actually think that this is <em>worse</em> than
+          spending the time to create your own larger and global mock. At least
+          the “one large mock” can be edited by its creators to accommodate
+          different scenarios.
+        </p>
+        <h3 id="mocks-are-bad-lmao">Mocks are Bad Lmao</h3>
+        <p>
+          In many cases this is true, and I certainly don’t advocate for mocking
+          everything. Without making this an entire piece on my opinion on
+          mocks,
+          <em>sometimes it’s just ok to use them as a weapon in your arsenal</em
+          >. In fact, when I do mock a protocol for 1 suite of tests, I’ll often
+          have another suite of tests that test the live implementation of the
+          mocked protocol.
+        </p>
+        <p>
+          Furthermore, I don’t want “mocking” to be the main idea that comes out
+          of this piece. Smaller protocols certainly make mocking easier, but
+          the larger idea is <em>possibility</em>. Mocking itself is a
+          possibility.
+        </p>
+        <h3 id="what-if-i-need-a-large-protocol-">
+          What if I need a Large Protocol?
+        </h3>
+        <p>Then make one.</p>
+        <p>
+          Alternatively, you can create larger protocols by composing smaller
+          ones. This is how <code>Codable</code> is done, and you can do it with
+          your own protocols too.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-keyword">typealias</span> <span class="hljs-type">NotesRepository</span> = <span class="hljs-type">NoteSaver</span> &amp; <span class="hljs-type">NoteDeleter</span> &amp; <span class="hljs-type">NotesFinder</span>
+
+<span class="hljs-comment">// OR Alternatively (this requires conforming types to explicitly</span>
+<span class="hljs-comment">// conform to NotesRepository)</span>
+<span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">NotesRepository</span>: <span class="hljs-title">NoteSaver</span>, <span class="hljs-title">NoteDeleter</span>, <span class="hljs-title">NotesFinder</span> </span>{}
+        </code></pre>
+        <h3 id="when-should-i-use-a-large-protocol-">
+          When should I use a Large Protocol?
+        </h3>
+        <p>The answer to this largely depends on how its is used.</p>
+        <p>Take this scenario.</p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">Large</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">r1</span><span class="hljs-params">()</span></span>
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">r2</span><span class="hljs-params">()</span></span>
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">r3</span><span class="hljs-params">()</span></span>
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">r4</span><span class="hljs-params">()</span></span>
+  <span class="hljs-comment">// All the way to r8...</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">foo</span><span class="hljs-params">(using large: some Large)</span></span> {
+  large.r1()
+  large.r2()
+  large.r3()
+  large.r4()
+  <span class="hljs-comment">// All the way to r8...</span>
+}
+        </code></pre>
+        <p>
+          Since <code>foo</code> uses all the requirements from
+          <code>Large</code>, then <code>Large</code> is a properly sized
+          protocol because there is no unnecessary dependence. Additionally, we
+          may not need a ton of possibility towards how <code>Large</code> is
+          implemented, so in this case a large protocol is a decent trade-off.
+        </p>
+        <p>
+          Another thing to consider on the unnecessary dependence point is that
+          the protocol has a cohesive set of requirements. For instance.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">ScheduleableAlarm</span> </span>{
+  <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">Authorizer</span>: <span class="hljs-title">AnyObject</span>, <span class="hljs-title">Sendable</span> </span>{
+    associatedtype <span class="hljs-type">Statuses</span>: <span class="hljs-type">AsyncSequence</span>&lt;<span class="hljs-type">ScheduleableAlarm</span>.<span class="hljs-type">AuthorizationStatus</span>, <span class="hljs-type">Never</span>&gt;
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">requestAuthorization</span><span class="hljs-params">()</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">AuthorizationStatus</span>
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">statuses</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">Statuses</span>
+  }
+
+  <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">AuthorizerKey</span>: <span class="hljs-title">DependencyKey</span> </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">var</span> liveValue: any <span class="hljs-type">Authorizer</span> {
+      <span class="hljs-comment">// ...</span>
+    }
+  }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">ScheduleableAlarm</span>.<span class="hljs-title">AuthorizationStatus</span> </span>{
+  <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">UpdatesKey</span>: <span class="hljs-title">SharedReaderKey</span> </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> authorizer: any <span class="hljs-type">ScheduleableAlarm</span>.<span class="hljs-type">Authorizer</span>
+
+    <span class="hljs-comment">// ...</span>
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">subscribe</span><span class="hljs-params">(
+      context: LoadContext&lt;Value&gt;,
+      subscriber: SharedSubscriber&lt;Value&gt;
+    )</span></span> -&gt; <span class="hljs-type">SharedSubscription</span> {
+      <span class="hljs-keyword">let</span> task = <span class="hljs-type">Task</span>.immediate {
+        <span class="hljs-keyword">for</span> await status <span class="hljs-keyword">in</span> <span class="hljs-keyword">self</span>.authorizer.statuses() {
+          withAnimation { subscriber.yield(status) }
+        }
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-type">SharedSubscription</span> { task.cancel() }
+    }
+  }
+}
+        </code></pre>
+        <p>
+          In this case <code>UpdatesKey</code> only uses the
+          <code>statuses</code> requirement from
+          <code>ScheduleableAlarm.Authorizer</code>. Yet, I still think
+          <code>ScheduleableAlarm.Authorizer</code> is properly sized for
+          because its requirements are coherent (ie. Requesting authorization
+          would be expected to have an impact on the status updates.), and
+          because it is still easy to conform to (ie. It only has 2
+          requirements.).
+        </p>
+        <p>
+          Another thing could be that the protocol has default implementations
+          for many of its requirements.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">QueryRequest</span>&lt;<span class="hljs-title">Value</span>, <span class="hljs-title">State</span>&gt;: <span class="hljs-title">QueryPathable</span>, <span class="hljs-title">Sendable</span>
+<span class="hljs-title">where</span> <span class="hljs-title">State</span>.<span class="hljs-title">QueryValue</span> == <span class="hljs-title">Value</span> </span>{
+  associatedtype <span class="hljs-type">Value</span>: <span class="hljs-type">Sendable</span>
+  associatedtype <span class="hljs-type">State</span>: <span class="hljs-type">QueryStateProtocol</span> = <span class="hljs-type">QueryState</span>&lt;<span class="hljs-type">Value</span>?, <span class="hljs-type">Value</span>&gt;
+
+  <span class="hljs-keyword">var</span> _debugTypeName: <span class="hljs-type">String</span> { <span class="hljs-keyword">get</span> }
+
+  <span class="hljs-keyword">var</span> path: <span class="hljs-type">QueryPath</span> { <span class="hljs-keyword">get</span> }
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setup</span><span class="hljs-params">(context: <span class="hljs-keyword">inout</span> QueryContext)</span></span>
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fetch</span><span class="hljs-params">(
+    <span class="hljs-keyword">in</span> context: QueryContext,
+    with continuation: QueryContinuation&lt;Value&gt;
+  )</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">Value</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">QueryRequest</span> </span>{
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">var</span> _debugTypeName: <span class="hljs-type">String</span> { typeName(<span class="hljs-type">Self</span>.<span class="hljs-keyword">self</span>) }
+
+  <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setup</span><span class="hljs-params">(context: <span class="hljs-keyword">inout</span> QueryContext)</span></span> {
+  }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">QueryRequest</span> <span class="hljs-title">where</span> <span class="hljs-title">Self</span>: <span class="hljs-title">Hashable</span> </span>{
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">var</span> path: <span class="hljs-type">QueryPath</span> {
+    <span class="hljs-type">QueryPath</span>(<span class="hljs-keyword">self</span>)
+  }
+}
+        </code></pre>
+        <p>
+          In this case, the only real requirement that a conformance often needs
+          to implement is <code>fetch</code>.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">Post</span> </span>{
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Query</span>: <span class="hljs-title">QueryRequest</span>, <span class="hljs-title">Hashable</span> </span>{
+    <span class="hljs-keyword">let</span> id: <span class="hljs-type">Int</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fetch</span><span class="hljs-params">(
+      <span class="hljs-keyword">in</span> context: QueryContext,
+      with continuation: QueryContinuation&lt;Post&gt;
+    )</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">Post</span> {
+      <span class="hljs-keyword">let</span> url = <span class="hljs-type">URL</span>(string: <span class="hljs-string">"https://jsonplaceholder.typicode.com/posts/<span class="hljs-subst">\(id)</span>"</span>)!
+      <span class="hljs-keyword">let</span> (data, <span class="hljs-number">_</span>) = <span class="hljs-keyword">try</span> await <span class="hljs-type">URLSession</span>.shared.data(from: url)
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">try</span> <span class="hljs-type">JSONDecoder</span>().decode(<span class="hljs-type">Post</span>.<span class="hljs-keyword">self</span>, from: data)
+    }
+  }
+}
+        </code></pre>
+        <h3 id="making-large-protocols-composable">
+          Making Large Protocols Composable
+        </h3>
+        <p>
+          You may be surprised to hear that it’s still possible to achieve much
+          of the compositional benefits of smaller protocols with large
+          protocols as well if you’re willing to write an entire modifier
+          system.
+        </p>
+        <p>
+          Swift Operation takes this approach because the
+          <code>OperationRequest</code> and
+          <code>StatefulOperationRequest</code> protocols have a bunch of
+          annoying requirements that don’t need to be considered when
+          implementing composable behavior.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">OperationRequest</span>&lt;<span class="hljs-title">Value</span>, <span class="hljs-title">Failure</span>&gt; </span>{
+  associatedtype <span class="hljs-type">Value</span>
+  associatedtype <span class="hljs-type">Failure</span>: <span class="hljs-type">Error</span>
+
+  <span class="hljs-keyword">var</span> _debugTypeName: <span class="hljs-type">String</span> { <span class="hljs-keyword">get</span> }
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setup</span><span class="hljs-params">(context: <span class="hljs-keyword">inout</span> OperationContext)</span></span>
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">run</span><span class="hljs-params">(
+    isolation: isolated <span class="hljs-params">(any Actor)</span></span></span>?,
+    <span class="hljs-keyword">in</span> context: <span class="hljs-type">OperationContext</span>,
+    with continuation: <span class="hljs-type">OperationContinuation</span>&lt;<span class="hljs-type">Value</span>, <span class="hljs-type">Failure</span>&gt;
+  ) async <span class="hljs-keyword">throws</span>(<span class="hljs-type">Failure</span>) -&gt; <span class="hljs-type">Value</span>
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">StatefulOperationRequest</span>&lt;<span class="hljs-title">State</span>&gt;: <span class="hljs-title">OperationRequest</span>
+<span class="hljs-title">where</span> <span class="hljs-title">Value</span>: <span class="hljs-title">Sendable</span>, <span class="hljs-title">State</span>.<span class="hljs-title">OperationValue</span> == <span class="hljs-title">Value</span>, <span class="hljs-title">State</span>.<span class="hljs-title">Failure</span> == <span class="hljs-title">Failure</span> </span>{
+  associatedtype <span class="hljs-type">State</span>: <span class="hljs-type">OperationState</span>
+  <span class="hljs-keyword">var</span> path: <span class="hljs-type">OperationPath</span> { <span class="hljs-keyword">get</span> }
+}
+        </code></pre>
+        <p>
+          If you were to implement composable behavior with
+          <code>OperationRequest</code>, chances are that you would forget to
+          forward <code>_debugTypeName</code>, <code>_path</code>, or
+          <code>setup</code>. This is why the library defines a simpler
+          <code>OperationModifier</code> protocol.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">OperationModifier</span>&lt;<span class="hljs-title">Value</span>, <span class="hljs-title">Failure</span>&gt; </span>{
+  associatedtype <span class="hljs-type">Operation</span>: <span class="hljs-type">OperationRequest</span>
+  associatedtype <span class="hljs-type">Value</span>
+  associatedtype <span class="hljs-type">Failure</span>: <span class="hljs-type">Error</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setup</span><span class="hljs-params">(context: <span class="hljs-keyword">inout</span> OperationContext, using operation: Operation)</span></span>
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">run</span><span class="hljs-params">(
+    isolation: isolated <span class="hljs-params">(any Actor)</span></span></span>?,
+    <span class="hljs-keyword">in</span> context: <span class="hljs-type">OperationContext</span>,
+    using operation: <span class="hljs-type">Operation</span>,
+    with continuation: <span class="hljs-type">OperationContinuation</span>&lt;<span class="hljs-type">Value</span>, <span class="hljs-type">Failure</span>&gt;
+  )
+}
+        </code></pre>
+        <p>
+          The library then provides a query called
+          <code>ModifiedOperation</code>, which does the hard work of adapting
+          your <code>OperationModifier</code> to work with an
+          <code>OperationRequest</code>.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ModifiedOperation</span>&lt;
+  <span class="hljs-title">Operation</span>: <span class="hljs-title">OperationRequest</span>,
+  <span class="hljs-title">Modifier</span>: <span class="hljs-title">OperationModifier</span>
+&gt;: <span class="hljs-title">OperationRequest</span> <span class="hljs-title">where</span> <span class="hljs-title">Modifier</span>.<span class="hljs-title">Operation</span> == <span class="hljs-title">Operation</span> </span>{
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">typealias</span> <span class="hljs-type">Value</span> = <span class="hljs-type">Modifier</span>.<span class="hljs-type">Value</span>
+
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">let</span> operation: <span class="hljs-type">Operation</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">let</span> modifier: <span class="hljs-type">Modifier</span>
+
+  @inlinable
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">var</span> _debugTypeName: <span class="hljs-type">String</span> {
+    <span class="hljs-keyword">self</span>.operation._debugTypeName
+  }
+
+  @inlinable
+  <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setup</span><span class="hljs-params">(context: <span class="hljs-keyword">inout</span> OperationContext)</span></span> {
+    <span class="hljs-keyword">self</span>.modifier.setup(context: &amp;context, using: <span class="hljs-keyword">self</span>.operation)
+  }
+
+  @inlinable
+  <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">run</span><span class="hljs-params">(
+    isolation: isolated <span class="hljs-params">(any Actor)</span></span></span>?,
+    <span class="hljs-keyword">in</span> context: <span class="hljs-type">OperationContext</span>,
+    with continuation: <span class="hljs-type">OperationContinuation</span>&lt;<span class="hljs-type">Modifier</span>.<span class="hljs-type">Value</span>, <span class="hljs-type">Modifier</span>.<span class="hljs-type">Failure</span>&gt;
+  ) async <span class="hljs-keyword">throws</span>(<span class="hljs-type">Modifier</span>.<span class="hljs-type">Failure</span>) -&gt; <span class="hljs-type">Modifier</span>.<span class="hljs-type">Value</span> {
+    <span class="hljs-keyword">try</span> await <span class="hljs-keyword">self</span>.modifier.run(
+      isolation: isolation,
+      <span class="hljs-keyword">in</span>: context,
+      using: <span class="hljs-keyword">self</span>.operation,
+      with: continuation
+    )
+  }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">ModifiedOperation</span>: <span class="hljs-title">StatefulOperationRequest</span>
+<span class="hljs-title">where</span>
+  <span class="hljs-title">Modifier</span>.<span class="hljs-title">Operation</span>: <span class="hljs-title">StatefulOperationRequest</span>,
+  <span class="hljs-title">Operation</span>.<span class="hljs-title">Value</span> == <span class="hljs-title">Modifier</span>.<span class="hljs-title">Value</span>,
+  <span class="hljs-title">Operation</span>.<span class="hljs-title">Failure</span> == <span class="hljs-title">Modifier</span>.<span class="hljs-title">Failure</span>
+</span>{
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">typealias</span> <span class="hljs-type">State</span> = <span class="hljs-type">Operation</span>.<span class="hljs-type">State</span>
+
+  @inlinable
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">var</span> path: <span class="hljs-type">OperationPath</span> {
+    <span class="hljs-keyword">self</span>.operation.path
+  }
+}
+        </code></pre>
+        <p>
+          SwiftUI also takes this approach for adapting composability for views.
+          For instance, the <code>View</code> protocol from SwiftUI actually
+          looks something like this.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">View</span> </span>{
+  nonisolated <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">_makeView</span><span class="hljs-params">(view: _GraphValue&lt;<span class="hljs-keyword">Self</span>&gt;, inputs: _ViewInputs)</span></span> -&gt; _ViewOutputs
+
+  nonisolated <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">_makeViewList</span><span class="hljs-params">(view: _GraphValue&lt;<span class="hljs-keyword">Self</span>&gt;, inputs: _ViewListInputs)</span></span> -&gt; _ViewListOutputs
+
+  nonisolated <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">_viewListCount</span><span class="hljs-params">(inputs: _ViewListCountInputs)</span></span> -&gt; <span class="hljs-type">Int</span>?
+
+  associatedtype <span class="hljs-type">Body</span>: <span class="hljs-type">View</span>
+
+  @<span class="hljs-type">ViewBuilder</span>
+  @<span class="hljs-type">MainActor</span>
+  @preconcurrency
+  <span class="hljs-keyword">var</span> body: <span class="hljs-type">Self</span>.<span class="hljs-type">Body</span> { <span class="hljs-keyword">get</span> }
+}
+        </code></pre>
+        <p>
+          However, you don’t ever implement those top 3 requirements. In fact,
+          you may not even have known about their existence because Xcode
+          doesn’t show them! Instead, a few select primitive views from SwiftUI
+          (eg. <code>Text</code>) implement those requirements whilst a default
+          implementation is used for the typical views that you create in your
+          app. Even if you tried to implement those requirements, chances are is
+          that it would be impossible because they use types that are largely
+          internal to SwiftUI.
+        </p>
+        <p>
+          This is why SwiftUI provides a <code>ViewModifier</code> and the
+          <code>ModifiedContent</code> view if you want to add composable
+          behavior to your views. <code>ModifiedContent</code> is a special view
+          that adapts your <code>ViewModifier</code> into a legitimate SwiftUI
+          view by providing proper implementations of
+          <code>_viewListCount</code>, <code>_makeViewList</code>, and
+          <code>_makeView</code> based on the child content in the view.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ModifiedContent</span>&lt;
+  <span class="hljs-title">Content</span>: <span class="hljs-title">View</span>,
+  <span class="hljs-title">Modifier</span>: <span class="hljs-title">ViewModifier</span>
+&gt;: <span class="hljs-title">View</span> </span>{
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">let</span> content: <span class="hljs-type">Content</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">let</span> modifier: <span class="hljs-type">Modifier</span>
+
+  <span class="hljs-comment">// See: https://github.com/OpenSwiftUIProject/OpenSwiftUI/blob/main/Sources/OpenSwiftUICore/Modifier/ViewModifier.swift</span>
+
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">_makeView</span><span class="hljs-params">(
+    view: _GraphValue&lt;<span class="hljs-keyword">Self</span>&gt;,
+    inputs: _ViewInputs
+  )</span></span> -&gt; _ViewOutputs {
+    <span class="hljs-type">Modifier</span>.makeDebuggableView(
+      modifier: view[offset: { .of(&amp;$<span class="hljs-number">0</span>.modifier) }],
+      inputs: inputs
+    ) {
+      <span class="hljs-type">Content</span>.makeDebuggableView(
+        view: view[offset: { .of(&amp;$<span class="hljs-number">0</span>.content) }],
+        inputs: $<span class="hljs-number">1</span>
+      )
+    }
+  }
+
+  <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">View</span> </span>{
+  <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">modifier</span>&lt;Modifier&gt;<span class="hljs-params">(
+    <span class="hljs-number">_</span> modifier: Modifier
+  )</span></span> -&gt; <span class="hljs-type">ModifiedContent</span>&lt;<span class="hljs-type">Self</span>, <span class="hljs-type">Modifier</span>&gt; {
+    <span class="hljs-comment">// ...</span>
+  }
+}
+        </code></pre>
+        <br />
+        <h2 id="conclusion">Conclusion</h2>
+        <p>
+          The more possibilities that your protocol provides, the easier it is
+          to add new features, perform one-off experiments, and make changes to
+          your code. Possibility comes by making your protocols easy to conform
+          to, which often means making them small with simpler requirements.
+        </p>
+        <p>
+          When you have possibility, it doesn’t matter if a “god” class, a tiny
+          one-off handwritten mock, or an entire DSL implements the protocol.
+          The important part is that you have the possibility to do any of those
+          things in the first place.
+        </p>
+        <p>
+          Unnecessary dependence on large protocols hinders the amount of
+          possibility for no good reason because it requires a larger than
+          necessary conformance. Furthermore, a large protocols with a bunch of
+          requirements, such as a “Repository” protocol, also hinders
+          possibility because there is more friction when conforming to larger
+          protocols.
+        </p>
+        <p>
+          However, if a large protocol can counter those 2 points in your
+          context, then feel free to create one. Additionally, you may find that
+          you can create a large protocol by composing it from smaller
+          protocols.
+        </p>
+        <p>
+          Lastly, you should check out
+          <a href="https://github.com/mhayes853/swift-operation"
+            >Swift Operation</a
+          >, it handles a lot of pain around asynchronous state management and
+          data fetching for you.
+        </p>
+        <p>— 11/13/25</p>
+      </article>
+    </div>
+    <script type="module" src="./root/root.ts"></script>
+  </body>
+</html>
