@@ -113,6 +113,16 @@ p {
   line-height: 1.5;
 }
 
+blockquote {
+  font-family: "Roboto Slab", serif;
+  font-optical-sizing: auto;
+  opacity: 0.5;
+}
+
+blockquote a {
+  opacity: 1;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
