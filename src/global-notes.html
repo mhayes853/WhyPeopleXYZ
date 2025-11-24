@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpeg" href="./shared-assets/icon.jpeg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Global Notes</title>
+    <meta property="og:title" content="Global Notes" />
+    <meta
+      property="og:description"
+      content="Ideas in my head that I don't have time to formally write about, and that are not easily expressible on social media."
+    />
+    <meta property="og:image" content="./shared-assets/icon.jpeg" />
+    <meta property="og:url" content="/global-notes" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Global Notes" />
+    <meta
+      name="twitter:description"
+      content="Ideas in my head that I don't have time to formally write about, and that are not easily expressible on social media."
+    />
+    <meta name="twitter:image" content="./shared-assets/icon.jpeg" />
+    <meta name="twitter:url" content="/Global Notes" />
+  </head>
+  <body>
+    <div id="app">
+      <a class="core-crystal-container" href="/">
+        <img width="300" height="150" src="./shared-assets/core-crystal.svg" />
+      </a>
+      <article>
+        <h1 id="global-notes" class="title">Global Notes</h1>
+        <p>
+          I have lots of ideas (as all INTPs seemingly do), but not enough time
+          to write about them formally. In that case, this will serve as a
+          structured in-the-moment brain dump for various things that are
+          half-baking in my hollow cranium.
+        </p>
+        <br />
+        <h2 id="computing-culture-origins">Computing Culture Origins</h2>
+        <p>
+          <img
+            src="./global-notes/assets/computing-culture-origins-1.jpeg"
+            alt="Computing is pop culture. [...] Pop culture holds a disdain for history. Pop culture is all about identity and feeling like you're participating. It has nothing to do with cooperation, the past or the future—it's living in the present. I think the same is true of most people who write code for money. They have no idea where [their culture came from]. -Alan Kay, in interview with Dr Dobb's Journal (2012)"
+          />
+          Show a random CS major or Software Engineer pictures of Netwon,
+          Einstein, and Feynman. Chances are they’ll recognize one of their
+          pictures, typically Einstein. These people are world reknowned
+          scientists.
+        </p>
+        <p>
+          Do the same with pictures of Dennis Ritchie, Bjarne Stroustrup, Ken
+          Thompson, Brain Kernighan, and Linus Torvalds. Chances are they’ll
+          recognize at least one of if not multiple of them if they’re
+          interested in their craft. These people are largely responsible for
+          the programming languages and operating systems they use.
+        </p>
+        <p>
+          Now do the same with Alan Kay, Doug Engelbart, Ivan Sutherland, and
+          Ted Nelson. In the vast majority of cases that I’ve tried this, no one
+          has been able to recognize even one of their pictures as well as their
+          names. These people are largely responsible for the fact that they
+          even have a laptop, desktop, or phone with the ability to interact in
+          an online ecosystem today.
+        </p>
+        <p>
+          Rather unfortunately, the ideas of the last group that have largely
+          been ignored, or butchered when implemented in today’s commercial
+          products.
+        </p>
+        <p>
+          If you take modern “OOP” languages like Java, C++, Kotlin, Swift, etc.
+          to be object-oriented, I recommend you really try to understand what
+          Kay was getting at with the term “object-oriented” (also look at
+          <a href="https://www.youtube.com/watch?v=6orsmFndx_o">Sketchpad</a> by
+          Ivan Sutherland).
+        </p>
+        <p>
+          If you take the web to be a ubiquitous online ecosystem rich with
+          discussion, convenience, and collaboration, then I recommend that you
+          really look into the work of Doug Engelbart (especially
+          <a href="https://www.dougengelbart.org/pubs/augment-3906.html">this</a
+          >), <a href="https://xanadu.com/">Ted Nelson</a>, and
+          <a href="https://en.wikipedia.org/wiki/ARPANET">many others</a>.
+        </p>
+        <p>
+          One modern sucessor to the work of these pioneers is
+          <a href="https://worrydream.com/">Bret Victor</a> and
+          <a href="https://dynamicland.org/">Dynamicland</a> (which is very
+          anti-Vision Pro). In fact, you can find archives of the
+          <a href="https://worrydream.com/refs/">work</a> of many of the above
+          pioneers on his
+          <a href="https://worrydream.com/Links2025/">website</a>.
+        </p>
+        <p>— 11/24/25</p>
+        <br />
+        <h2 id="-surveillance-driven-development-">
+          “Surveillance Driven Development”
+        </h2>
+        <p>
+          <img
+            src="./global-notes/assets/surveillance-driven-development-1.jpeg"
+            alt="As a thought experiment, try replacing the word data with surveillance, and observe if common phrases still sound so good [93]. How about this: 'In our surveillance-driven organization we collect real-time surveillance streams and store them in our surveillance warehouse. Our surveillance scientists use advanced analytics and surveillance processing in order to derive new insights.'"
+          />
+          This is one of the problems of the web and mass centralization. By its
+          very design, all remote data is centralized, and this design often
+          encourages such surveillance like behavior.
+        </p>
+        <p>
+          If anything, reading
+          <em>Designing Data Intensive Applications</em> (source of the quote)
+          has taught me that large centralized distributed systems that make
+          high-stakes decisions for people are terrible ideas. From the
+          technical standpoint, often the best state a large system can be in is
+          “eventually consistent”. That is, a state in which not all necessary
+          information (much of which is completely invisible to the end-user) is
+          guaranteed to be present to make a proper decision at any given
+          moment.
+        </p>
+        <p>
+          This isn’t even mentioning the fact that as system designers we are
+          often making systemic decisions in contexts that don’t reflect the
+          actual context in which the system operates in.
+        </p>
+        <p>
+          My take on this is that data and decision making power are best kept
+          by the individual, and not the organization. Rather, it should be the
+          job of the organization to enhance the decision making power of the
+          individual (eg. Public education teaches us to read, and reading helps
+          us make better decisions).
+        </p>
+        <p>
+          This is particularly why I’m interested in heavy client-side based
+          software solutions in today’s landscape (eg. Native mobile apps, local
+          LLMs) rather than remote/web based solutions. I try to limit the
+          server side component as much as possible on small/solo projects.
+          Often I find that it isn’t necessary to create a dedicated backend in
+          the first place for many useful products outside of proxying requests
+          to third parties.
+        </p>
+        <p>
+          Of course, long term I’m much more interested in tomorrow’s landscape,
+          which ideally will embrace the idea of individual creative freedom far
+          more than its predecessors. That is, I would rather we treat the
+          masses as capable creators rather than “the audience”. The web and
+          subsequent AI-driven culture fails horrifically at this.
+        </p>
+        <p>— 11/22/25</p>
+        <br />
+        <h2 id="why-not-social-media-">Why not Social Media?</h2>
+        <p>
+          I’m often asked why I’m not hyper active on platforms like X, Threads,
+          or Bluesky, and why I’m opting for this global notes style thing
+          instead.
+        </p>
+        <p>
+          The simple answer to this is that all the mainstream social media
+          platforms are not designed for real creative expression. They’ve
+          adopted the “easy to use, perpetual beginner” mindset, and have
+          amplified it across billions of users. This is quite disastrous in my
+          opinion.
+        </p>
+        <p>
+          On this website, I can use whatever HTML, CSS, and JavaScript I want
+          to express my work. I can even embed entire
+          <a href="https://whypeople.xyz/liquid-glass">interactable programs</a>
+          directly into my writing. (I wish to do this more in the future). On
+          social media, you’re essentially limited to plain text, video, and
+          photos, which is very rigid in comparison, and this is not even taking
+          the “algorithm” into account.
+        </p>
+        <p>
+          I am very fortunate to have had the natural interest in technology and
+          software, as well as the natural ability to understand the complex
+          abstact concepts that have enabled me to unlock this kind of
+          expression in my work. This is not most of the world, and it’s quite
+          saddening to see that they get much more limited forms of expression.
+        </p>
+        <p>
+          Text on a black background, simple photos, and static videos delivered
+          to a one-size-fits-all audience and displayed in a 6-inch rectangle
+          are not powerful enough mediums to communicate complex ideas that
+          determine the direction of society. Much of these ideas rely on trends
+          in large complex datasets, or disastrous things we cannot see (eg. The
+          climate problem). From a UI design standpoint, static content isn’t
+          enough to convey everything that’s needed with this complexity.
+        </p>
+        <p>
+          Additionally, centralized large-scale algorithms that make the
+          decisions on what media to surface are also not ideal when those
+          decisions are made based on impulsive trends. Nearly all influential
+          media in the world (eg. The US Constitution, “Common Sense”) did not
+          use extensive emotional/moral baiting rhetoric to convey their ideas
+          in the way we see on social media today. Thomas Paine didn’t need to
+          participate in the “attention economy” in writing “Common Sense”,
+          which was one of the influential documents in the wake of the American
+          Revolution.
+        </p>
+        <p>
+          It’s true that my “visibility” on this site is far lower than if I
+          were more active on social media, but my intention is only merely to
+          reach an audience with the capable creative abilities to seek
+          something greater. If you’re reading this of your own accord, there’s
+          a high chance that you have such ability, and you’re exactly the type
+          of person that I’m trying to reach.
+        </p>
+        <p>— 11/21/25</p>
+        <br />
+        <h2 id="cleanmymac-xcode">CleanMyMac + Xcode</h2>
+        <p>
+          CleanMyMac is software meant for cleaning up junk files on your mac
+          when your disk inevitably fills up with Xcode’s shenanigans.
+          Incredibly, CleanMyMac will refuse to launch when your disk space is
+          actually full!
+        </p>
+        <p>
+          Now the real question is why does Xcode need to take up so much space?
+          Even more importantly, why does Xcode go to such lengths to hide the
+          actual contents of the things it stores? This much invisibility is not
+          very nice…
+        </p>
+        <p>
+          Caches = storing information that allows us to access information…
+        </p>
+        <p>
+          The interesting thing is that the idea of disk-based storage forces us
+          to think in very abstract terms since you can’t visually see what’s
+          being stored, which most human minds massively fail at. MacOS also
+          likes to put a “user-friendly facade” around the whole thing, because
+          a lot of that storage is taken by various caches and internal
+          application data. This facade comes with the tradeoff that the larger
+          part of society is completely oblivious as to what their machines are
+          actually doing.
+        </p>
+        <p>— 11/20/25</p>
+        <br />
+        <h2 id="clean-code-good-ui-design-1-n-">
+          Clean Code == Good UI Design (1/N)
+        </h2>
+        <p>
+          I tend to think of writing clean code as good UI design (this is
+          something I want to write about extensively at some point).
+          Unfortunately, modern text editors and programming languages don’t see
+          things this way (this is also something I want to write about
+          extensively at some point), and I often find myself enjoying fun
+          illustrations like such.
+          <img
+            src="./global-notes/assets/clean-code-ui-design-1.png"
+            alt="A UI design showing how 3 sliders with no clear labels is essentially the same as calling a function with no argument labels in code."
+          />
+          <a href="https://worrydream.com/LearnableProgramming/">Source</a>
+        </p>
+        <p>— 11/19/25</p>
+        <h2 id="initial-tca-2-0-thoughts">Initial TCA 2.0 Thoughts</h2>
+        <p>
+          This looks interesting, as someone who’s casually used TCA since
+          pre-Reducer protocol days, I can give some thoughts here.
+        </p>
+        <p>
+          I like how the ping-ponging of actions has been taken away, this was
+          extremely annoying, and I generally gated all of these ping-ponging
+          actions inside an <code>Effect</code> enum. Eg.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-comment">// This</span>
+
+@Reducer
+<span class="hljs-keyword">struct</span> Feature {
+  <span class="hljs-comment">// ...</span>
+
+  <span class="hljs-keyword">enum</span> Action {
+    <span class="hljs-function"><span class="hljs-keyword">case</span> buttonTapped
+    <span class="hljs-keyword">case</span> <span class="hljs-title">effect</span>(<span class="hljs-params">Effect</span>)
+
+    <span class="hljs-keyword">enum</span> Effect </span>{
+      <span class="hljs-function"><span class="hljs-keyword">case</span> <span class="hljs-title">dataLoaded</span>(<span class="hljs-params">Result&lt;SomeData, any Error&gt;</span>)
+    }
+  }
+
+  <span class="hljs-keyword">var</span> body: some ReducerOf&lt;Self&gt; </span>{
+    Reduce { state, action <span class="hljs-keyword">in</span>
+      <span class="hljs-keyword">switch</span> action {
+      <span class="hljs-keyword">case</span> .buttonTapped:
+        <span class="hljs-keyword">return</span> .run { send <span class="hljs-keyword">in</span>
+          <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> Result { <span class="hljs-function"><span class="hljs-keyword">try</span> <span class="hljs-keyword">await</span> <span class="hljs-title">someWork</span>(<span class="hljs-params"></span>) }
+          <span class="hljs-keyword">await</span> <span class="hljs-title">send</span>(<span class="hljs-params">.effect(.dataLoaded(result</span>))
+        }
+      <span class="hljs-keyword">case</span> .<span class="hljs-title">effect</span>(<span class="hljs-params">.dataLoaded(<span class="hljs-keyword">let</span> result</span>)):
+        <span class="hljs-comment">// ...</span>
+      }
+    }
+  }
+}
+
+<span class="hljs-comment">// Now Becomes This</span>
+
+@Reducer
+<span class="hljs-keyword">struct</span> Feature </span>{
+  <span class="hljs-comment">// ...</span>
+
+  <span class="hljs-keyword">enum</span> Action {
+    <span class="hljs-keyword">case</span> buttonTapped
+  }
+
+  <span class="hljs-keyword">var</span> body: some ReducerOf&lt;Self&gt; {
+    Reduce { state, action <span class="hljs-keyword">in</span>
+      <span class="hljs-keyword">switch</span> action {
+      <span class="hljs-keyword">case</span> .buttonTapped:
+        <span class="hljs-keyword">return</span> .run { store <span class="hljs-keyword">in</span>
+          <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> Result { <span class="hljs-function"><span class="hljs-keyword">try</span> <span class="hljs-keyword">await</span> <span class="hljs-title">someWork</span>(<span class="hljs-params"></span>) }
+          <span class="hljs-keyword">try</span> store.modify </span>{ <span class="hljs-comment">/* Just set state in here */</span> }
+        }
+      }
+    }
+  }
+}
+        </code></pre>
+        <p>
+          With the old way of doing things, it was quite easy to lose focus of
+          the overall control flow.
+        </p>
+        <p>
+          In terms of <code>Store</code> vs <code>StoreActor</code>, I would
+          rather that they also have a non-Sendable store type, and simply wrap
+          the actor isolation on top. This is what I did with
+          <code>CactusLanguageModel</code> in
+          <a href="https://github.com/mhayes853/swift-cactus">Swift Cactus</a>,
+          and the flexibility is quite nice. I can choose to call the language
+          model synchronously in a thread-safe manner using <code>Mutex</code>,
+          or asynchronously by wrapping it in an actor. I think it should be the
+          same for the store as well.
+        </p>
+        <p>
+          <code>onMount</code> and <code>onDismount</code> are also healthy
+          additions, especially since they’re not tied to any one view system
+          (which I presume is necessary for the cross platform support they want
+          to achieve). Long ago, in one of my first apps, I remeber defining the
+          notion of an <code>AppearableAction</code> which essentially tried to
+          automate the whole <code>onAppear</code> and
+          <code>onDisappear</code> dance. Suffice to say,
+          <code>onMount</code> and <code>onDismount</code> are better than those
+          tools.
+        </p>
+        <p>
+          The new <code>onChange</code> behavior is also very welcome, and it’s
+          definitely more intuitive.
+        </p>
+        <p>
+          I also presume the removal of <code>BindingReducer</code> is a natural
+          consequence of wanting to make things cross platform.
+        </p>
+        <p>
+          I like the overall direction of turning features into descriptions
+          rather than imperative messes. Swift itself is still quite imperative
+          though which is admittedly annoying.
+        </p>
+        <p>— 11/19/25</p>
+        <br />
+        <h2 id="github-outage-dependence">Github Outage + Dependence</h2>
+        <p>
+          Trying to push code to a Swift
+          <a href="https://github.com/mhayes853/sqlite-vec-data">library</a> I’m
+          working on, but it seems github is facing issues according to their
+          status page. It looks like I “don’t have access” to pulling or pushing
+          changes to remote which sucks…
+        </p>
+        <p>
+          Thankfully, this is not a mission critical project, and I don’t have
+          to urgently deploy a fix to some issue anywhere else. However, it
+          makes one think about how Github itself is a single point of failure
+          for most serious software businesses.
+        </p>
+        <p>
+          I consider Github to be a safety critical system in the same vein as
+          software that controls vehicles or medical devices. A crash can
+          prevent an organization’s ability to urgently deploy a fix to users,
+          which can be fatal if the organization is also working on safety
+          critical systems.
+        </p>
+        <p>
+          From a systems design standpoint, I would be looking to more than just
+          Github as a code repository if I were working on safety critical
+          systems. A simple implementation of this could be using something
+          GitLab in conjunction, but could also mean building our own tools to
+          solve this problem. Git from a collaboration/communication UX
+          standpoint is quite poor IMO, it’s main value is the diffing engine.
+          <img
+            src="./global-notes/assets/github-outage-1.png"
+            alt="Me making fun of Sean for the github outage on Slack."
+          />
+          <img
+            src="./global-notes/assets/github-outage-2.png"
+            alt="Github saying they've likely found the root cause of the outage."
+          />
+          <img
+            src="./global-notes/assets/github-outage-3.png"
+            alt="An AI generated image of Sean's Ford Pickup Truck crashed into a data center."
+          />
+        </p>
+        <p>— 11/18/25 (12:52 PM)</p>
+      </article>
+    </div>
+    <script type="module" src="./global-notes/global-notes.ts"></script>
+  </body>
+</html>
