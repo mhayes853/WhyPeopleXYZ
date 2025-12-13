@@ -35,6 +35,434 @@
           half-baking in my hollow cranium.
         </p>
         <br />
+        <h2 id="some-planned-upcoming-writings">
+          Some Planned Upcoming Writings
+        </h2>
+        <p>
+          With tentative titles, organized by the sections you see on my home
+          page.
+        </p>
+        <p>* = In Progress</p>
+        <p><strong>New Mediums</strong></p>
+        <ul>
+          <li>
+            Locality of Decisions*
+            <ul>
+              <li>
+                Goes over the disasters of one-size-fits-all decision making,
+                and what we need to do to move away from this paradignm.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Redesigning Code Editors, A Conceptual Overview
+            <ul>
+              <li>
+                I’ve written quite a few notes on why I believe modern code
+                editors are quite bad at building systems, but great at writing
+                text. Though, I’ve yet to show any concrete examples of what a
+                “better editor” looks like (Hint: Agentic coding in its
+                widespread form isn’t the solution).
+              </li>
+            </ul>
+          </li>
+          <li>
+            Flying around the Aspects of Abstraction
+            <ul>
+              <li>
+                An alternative POV to Bret Victor’s
+                <a href="https://worrydream.com/LadderOfAbstraction/"
+                  >Up and Down the Ladder of Abstraction</a
+                >.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Mutual Ink, Creative Software and The Collaborative Interface*
+            <ul>
+              <li>
+                Depending on how things go, I may merge the stuff on code
+                editors into this piece. Mutual Ink is an app that I’m currently
+                working on in my free time that attempts to make LLMs (and
+                particularly local ones) be seen as tools that can help us think
+                better rather than take the thinking from us.
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p><strong>Building Products and Tools</strong></p>
+        <ul>
+          <li>
+            How I used the Physical World to Enhance App Design
+            <ul>
+              <li>
+                Goes over an experience I had recently in developing Mutual Ink
+                in which I laid out a grid of objects on my bed to design a
+                fault-tolerant and iCloud syncable navigation system.
+              </li>
+            </ul>
+          </li>
+          <li>
+            The Agent Framework, Why Cactus is Better than FoundationModels*
+            <ul>
+              <li>
+                I’ve already shipped low level Swift bindings to work with LLMs
+                powered by the Cactus inference engine. The engine itself is
+                very fast, efficient, optimized specifically for ARM, and
+                supports many different models.
+              </li>
+              <li>
+                However, FoundationModels, though less technically impressive,
+                has an API that’s much easier to use, and thus will likely see
+                more adoption despite its flaws.
+              </li>
+              <li>
+                This later point is why I’m currently developing an agent
+                framework for Cactus in my free time. The TLDR is that the
+                vision is “SwiftUI for dynamic inference and processes”. That
+                is, creating a traditional multi-step agent workflow is at the
+                same level of difficulty as creating a SwiftUI view.
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>— 12/12/25</p>
+        <br />
+        <h2 id="-reality-">“Reality”</h2>
+        <p>
+          Reality, whether physical or metaphorical, is by far the most painful
+          system design constraint, which is why the best systems designs tend
+          to make it qualitatively different.
+        </p>
+        <p>
+          Now I’ll go back to living inside my head (that is totally not
+          detached from reality) until further notice.
+        </p>
+        <p>— 12/12/25 (1:01 AM)</p>
+        <br />
+        <h2 id="qwen3-0-6b-vs-swift-strings">Qwen3 0.6b vs Swift Strings</h2>
+        <pre><code><span class="hljs-attribute">
+Difference</span>: …
+
+<span class="stata">       <span class="hljs-string">""</span>"
+    &lt;think&gt;
+    Okay, the user is asking <span class="hljs-keyword">about</span> how to make a pizza. I need to <span class="hljs-keyword">break</span> down the steps <span class="hljs-keyword">in</span> a <span class="hljs-keyword">clear</span> way. First, they might be looking <span class="hljs-keyword">for</span> a simple recipe. Let me start <span class="hljs-keyword">by</span> outlining the basic ingredients: dough, toppings, cheese, sauce. Then <span class="hljs-keyword">list</span> each step <span class="hljs-keyword">in</span> <span class="hljs-keyword">order</span>—prepping the dough first <span class="hljs-keyword">for</span> a good texture.
+   
+    Wait, but some people prefer a different approach. Maybe start with mixing ingredients instead of just preparing dough? Or is there something specific they want <span class="hljs-keyword">in</span> terms of steps? The user hasn't specified preferences, <span class="hljs-keyword">so</span> I should <span class="hljs-keyword">keep</span> it general but structured.
+   
+    I should mention key points like kneading the dough properly before adding toppings. Also, ensuring the sauce is well mixed and combined with cheese properly. Maybe add tips <span class="hljs-keyword">on</span> storage <span class="hljs-keyword">if</span> they're making it ahead of time.
+   
+    Is there anything <span class="hljs-keyword">else</span> I should <span class="hljs-keyword">include</span> that's common <span class="hljs-keyword">in</span> pizza-making? Like optional variations or checking <span class="hljs-keyword">for</span> any mistakes to avoid—like not using the right sauce or mixing too much cheese. That would make it a complete guide.
+    &lt;/think&gt;
+   
+    Here’s a step-<span class="hljs-keyword">by</span>-step guide to making a classic pizza:
+   
+    ### **Ingredients:**
+    - 1 cup all-purpose flour
+    - 1/4 cup water
+    - 2 cups milk (or almond milk)
+    - 1 egg (<span class="hljs-keyword">for</span> mixing)
+    - Salt and pepper (<span class="hljs-keyword">as</span> needed)
+   
+    ---
+   
+    ### **Steps:**
+   
+    #### **Step 1: Prepare the Dough**
+    Mix all dry ingredients together <span class="hljs-keyword">in</span> a bowl. Add wet ingredients slowly to avoid lumps—mix until you get a <span class="hljs-keyword">smooth</span> dough.
+   
+    #### **Step 2: Knead the Dough**
+    Knead <span class="hljs-keyword">for</span> <span class="hljs-keyword">about</span> *3 minutes* until it becomes elastic, tender, and has a good texture. <span class="hljs-keyword">If</span> it’s too flat or dry, add <span class="hljs-keyword">more</span> water or milk <span class="hljs-keyword">as</span> needed.
+   
+    #### **Step 3: Roll <span class="hljs-keyword">Out</span> (Optional)**
+    <span class="hljs-keyword">If</span> making pizza dough ahead of time:
+    - Let rest <span class="hljs-keyword">for</span> *1 hour*, then roll <span class="hljs-keyword">out</span> <span class="hljs-keyword">on</span> <span class="hljs-keyword">an</span> unshaken surface (like parchment paper) with your hands or machine to achieve even thickness.
+   
+    ---
+   
+    ### **Step 4: Add Toppings**
+    - Spread cheese evenly over the rolled-<span class="hljs-keyword">out</span> dough.
+    - Top with fresh tomato sauce, cheese slices, pepperoni slices (<span class="hljs-keyword">if</span> using), mushrooms, onions <span class="hljs-keyword">if</span> added before mixing the sauce.
+   
+    ### **Step 5: Mix Sauce and Cheese**
+    <span class="hljs-keyword">If</span> you want a tangy base:
+    1. <span class="hljs-keyword">In</span> a bowl, mix together tomato sauce and cheese until combined.
+    2. <span class="hljs-keyword">Use</span> this mixture to cover the toppings.
+   
+    ---
+   
+    ### **Step 6: Bake**
+    Place <span class="hljs-keyword">in</span> preheated oven at *375°F* (190°C). Bake <span class="hljs-keyword">for</span> *8–10 minutes*, then flip or serve immediately.
+   
+    ---
+   
+    ### **Tips:**
+    - Store leftovers <span class="hljs-keyword">in</span> <span class="hljs-keyword">an</span> air-tight container <span class="hljs-keyword">for</span> up to *4 days*.
+    - <span class="hljs-keyword">If</span> making pizza dough ahead of time, store it <span class="hljs-keyword">in</span> the fridge <span class="hljs-keyword">for</span> less than 2 hours before <span class="hljs-keyword">rolling</span> <span class="hljs-keyword">out</span> again.
+   
+  − Enjoy your homemade pizza! ���
+  + Enjoy your homemade pizza! 🍕
+    <span class="hljs-string">""</span>"
+
+(First: −, Second: +)</span>
+        </code></pre>
+        <p>— 12/11/25</p>
+        <br />
+        <h2 id="clean-code-good-ui-design-3-n-">
+          Clean Code == Good UI Design (3/N)
+        </h2>
+        <p>
+          I’ve been rumaging around through the 2nd edition of the Clean Code
+          book (the first 2 parts of this series were written prior to me having
+          knowledge of the 2nd edition), and made it to the first code example
+          in the book which has to do with roman numerals.
+        </p>
+        <p>This is the “unclean” version.</p>
+        <pre><code class="lang-java">
+package fromRoman;
+
+<span class="hljs-keyword">import</span> java.util.Arrays;
+
+public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FromRoman</span> {</span>
+  public static int convert(String roman) {
+    <span class="hljs-keyword">if</span> (roman.contains(<span class="hljs-string">"VIV"</span>) ||
+      roman.contains(<span class="hljs-string">"IVI"</span>) ||
+      roman.contains(<span class="hljs-string">"IXI"</span>) ||
+      roman.contains (<span class="hljs-string">"LXL"</span>) ||
+      roman.contains (<span class="hljs-string">"XLX"</span>) ||
+      roman.contains(<span class="hljs-string">"XCX"</span>) ||
+      roman.contains (<span class="hljs-string">"DCD"</span>) ||
+      roman.contains (<span class="hljs-string">"CDC"</span>) ||
+      roman.contains (<span class="hljs-string">"MCM"</span>)) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InvalidRomanNumeralException(roman);
+    }
+    roman = roman.replace (<span class="hljs-string">"IV"</span>, <span class="hljs-string">"4"</span>);
+    roman = roman.replace (<span class="hljs-string">"IX"</span>, <span class="hljs-string">"9"</span>);
+    roman = roman.replace (<span class="hljs-string">"XL"</span>, <span class="hljs-string">"F"</span>);
+    roman = roman.replace (<span class="hljs-string">"XC"</span>, <span class="hljs-string">"N"</span>);
+    roman = roman.replace (<span class="hljs-string">"CD"</span>, <span class="hljs-string">"G"</span>);
+    roman = roman.replace (<span class="hljs-string">"CM"</span>, <span class="hljs-string">"0"</span>);
+    <span class="hljs-keyword">if</span> (roman.contains <span class="hljs-string">"IIII"</span>) ||
+      roman.contains (<span class="hljs-string">"VV"</span>) ||
+      roman.contains (<span class="hljs-string">"XXXX"</span>) ||
+      roman.contains (<span class="hljs-string">"LL"</span>) ||
+      roman.contains (<span class="hljs-string">"CCCC"</span>) ||
+      roman.contains (<span class="hljs-string">"DD"</span>) ||
+      roman.contains (<span class="hljs-string">"MMMM"</span>)) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InvalidRomanNumeralException(roman);
+    }
+    int[] numbers = <span class="hljs-keyword">new</span> int [roman.length()];
+    int i = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (char digit : roman.toCharArray ()) {
+      <span class="hljs-keyword">switch</span> (digit) {
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'I'</span><span class="hljs-function"> -&gt;</span> numbers [i] = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'V'</span><span class="hljs-function"> -&gt;</span> numbers [i] = <span class="hljs-number">5</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'X'</span><span class="hljs-function"> -&gt;</span> numbers[il = <span class="hljs-number">10</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'L'</span><span class="hljs-function"> -&gt;</span> numbers [i] = <span class="hljs-number">50</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'C'</span><span class="hljs-function"> -&gt;</span> numbers [i] = <span class="hljs-number">100</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'D'</span><span class="hljs-function"> -&gt;</span> numbers [i] = <span class="hljs-number">500</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'M'</span><span class="hljs-function"> -&gt;</span> numbers[i] = <span class="hljs-number">1000</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'9'</span><span class="hljs-function"> -&gt;</span> numbers[i] = <span class="hljs-number">9</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'F'</span><span class="hljs-function"> -&gt;</span> numbers[il = <span class="hljs-number">40</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'N'</span><span class="hljs-function"> -&gt;</span> numbers[i] = <span class="hljs-number">90</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'G'</span><span class="hljs-function"> -&gt;</span> numbers[il = <span class="hljs-number">400</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'O'</span><span class="hljs-function"> -&gt;</span> numbers|i] = <span class="hljs-number">900</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'4'</span><span class="hljs-function"> -&gt;</span> numbers|i] = <span class="hljs-number">4</span>;
+        <span class="hljs-keyword">default</span><span class="hljs-function"> -&gt;</span> <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InvalidRomanNumeralException(roman);
+      }
+      i++;
+    }
+    int lastDigit = <span class="hljs-number">1000</span>;
+    <span class="hljs-keyword">for</span> (int number: numbers) {
+      <span class="hljs-keyword">if</span> (number &gt; lastDigit) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InvalidRomanNumeralException(roman);
+      }
+      lastDigit = number;
+    }
+    <span class="hljs-keyword">return</span> Arrays.stream(numbers).sum();
+  }
+}
+        </code></pre>
+        <p>This is the “clean” version.</p>
+        <pre><code class="lang-java">
+<span class="hljs-keyword">package</span> fromRoman;
+<span class="hljs-keyword">import</span> java.util.Arraylist;
+<span class="hljs-keyword">import</span> java.util.List;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+<span class="hljs-keyword">public</span> class FromRoman {
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">String</span> roman;
+  <span class="hljs-keyword">private</span> List&lt;Integer&gt; numbers = <span class="hljs-keyword">new</span> Arraylist&lt;&gt;();
+  <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> charIx;
+  <span class="hljs-keyword">private</span> <span class="hljs-built_in">char</span> nextChar;
+  <span class="hljs-keyword">private</span> Integer nextValue;
+  <span class="hljs-keyword">private</span> Integer value;
+  <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> nchars;
+  Map&lt;Character, Integer&gt; values = Map.of(
+    <span class="hljs-string">'I'</span>, <span class="hljs-number">1</span>,
+    <span class="hljs-string">'V'</span>, <span class="hljs-number">5</span>,
+    <span class="hljs-string">'X'</span>, <span class="hljs-number">10</span>,
+    <span class="hljs-string">'L'</span>, <span class="hljs-number">50</span>,
+    <span class="hljs-string">'C'</span>, <span class="hljs-number">100</span>,
+    <span class="hljs-string">'D'</span>, <span class="hljs-number">500</span>,
+    <span class="hljs-string">'M'</span>, <span class="hljs-number">1000</span>
+  );
+
+  <span class="hljs-keyword">public</span> FromRoman(<span class="hljs-keyword">String</span> roman) {
+    <span class="hljs-keyword">this</span>.roman = roman;
+  }
+
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span> convert(<span class="hljs-keyword">String</span> roman) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> FromRoman(roman).doConversion();
+  }
+
+  <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> doConversion() {
+    checkInitialSyntax();
+    convertLettersToNumbers();
+    checkNumbersInDecreasingOrder();
+    <span class="hljs-keyword">return</span> numbers.stream().reduce(<span class="hljs-number">0</span>, Integer:: sum);
+  }
+
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> checkInitialSyntax() {
+    checkForIllegalPrefixCombinations();
+    checkForImproperRepetitions();
+  }
+
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> checkForIllegalPrefixCombinations() {
+    checkForIllegalPatterns (
+      <span class="hljs-keyword">new</span> <span class="hljs-keyword">String</span>[]{<span class="hljs-string">"VIV"</span>, <span class="hljs-string">"IVI"</span>, <span class="hljs-string">"IXI"</span>, <span class="hljs-string">"IXV"</span>, <span class="hljs-string">"IXI"</span>, <span class="hljs-string">"XIX"</span>, <span class="hljs-string">"XCX"</span>, <span class="hljs-string">"XCL"</span>, <span class="hljs-string">"DCD"</span>, <span class="hljs-string">"CDC"</span>, <span class="hljs-string">"CMC"</span>, <span class="hljs-string">"CMD"</span>}
+    );
+  }
+
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> checkForImproperRepetitions() {
+    checkForIllegalPatterns(
+      <span class="hljs-keyword">new</span> <span class="hljs-keyword">String</span>[]{<span class="hljs-string">"IIII"</span>, <span class="hljs-string">"VV"</span>, <span class="hljs-string">"XXXX"</span>, <span class="hljs-string">"LL"</span>, <span class="hljs-string">"CCCC"</span>, <span class="hljs-string">"DD"</span>, <span class="hljs-string">"MMMM"</span>}
+    )
+  }
+
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> checkForIllegalPatterns(<span class="hljs-keyword">String</span>[] patterns) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">String</span> badstring : patterns)
+      <span class="hljs-keyword">if</span> (roman.contains (badstring))
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InvalidRomanNumeralException (roman);
+  }
+
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> convertlettersToNumbers() {
+    <span class="hljs-built_in">char</span>[] chars = roman.toCharArray();
+    nchars = chars. length;
+    <span class="hljs-keyword">for</span> (charIx = <span class="hljs-number">0</span>; charIx &lt; nchars; charIx++) {
+      nextChar = isLastChar() ? <span class="hljs-number">0</span>: chars[charIx + <span class="hljs-number">1</span>];
+      nextValue = values.<span class="hljs-built_in">get</span>(nextChar);
+      <span class="hljs-built_in">char</span> thisChar = chars[charIx];
+      value = values.<span class="hljs-built_in">get</span>(thisChar);
+      <span class="hljs-keyword">switch</span> (thisChar) {
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'I'</span> -&gt; addvalueConsideringPrefix(<span class="hljs-string">'V'</span>, <span class="hljs-string">'X'</span>);
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'X'</span> -&gt; addValueConsideringPrefix(<span class="hljs-string">'L'</span>, <span class="hljs-string">'C'</span>);
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'C'</span> -&gt; addValueConsideringPrefix(<span class="hljs-string">'D'</span>, <span class="hljs-string">'M'</span>);
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'V'</span>, <span class="hljs-string">'I'</span>, <span class="hljs-string">'D'</span>, <span class="hljs-string">'M'</span> -&gt; numbers.<span class="hljs-built_in">add</span>(value);
+        <span class="hljs-keyword">default</span> -&gt; <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InvalidRomanNumeralException(roman);
+      }
+    }
+  }
+
+  <span class="hljs-keyword">private</span> <span class="hljs-built_in">boolean</span> islastChar() {
+    <span class="hljs-keyword">return</span> charIx + <span class="hljs-number">1</span> == nchars;
+  }
+
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> addValueConsideringPrefix(<span class="hljs-built_in">char</span> pl, <span class="hljs-built_in">char</span> p2) {
+    <span class="hljs-keyword">if</span> (nextChar == pl || nextChar == p2) {
+      numbers.<span class="hljs-built_in">add</span>(nextValue - value);
+      charIx++;
+    } <span class="hljs-keyword">else</span> numbers.<span class="hljs-built_in">add</span> (value);
+  }
+
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> checkNumbersInDecreasingOrder() {
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; numbers.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i++)
+      <span class="hljs-keyword">if</span> (numbers.<span class="hljs-built_in">get</span>(i) &lt; numbers.<span class="hljs-built_in">get</span>(i + <span class="hljs-number">1</span>))
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InvalidRomanNumeralException(roman);
+  }
+}
+        </code></pre>
+        <p>And this is “Future Bob’s” comments on the “clean” version.</p>
+        <blockquote>
+          <p>
+            Two months later I&#39;m torn. The first version, ugly as it was,
+            was not as chopped up as this one. It&#39;s true that the names and
+            the ordering of the extracted functions read like a story and are a
+            big help in understanding the intent; but there were several times
+            that I had to scroll back up to the top to assure myself about the
+            types of instance variables. I found the choppiness, and the
+            scrolling, to be annoying. However, and this is critical, I am
+            reading this cleaned code after having first read the ugly version
+            and having gone through the work of understanding it. So now, as I
+            read this version, I am annoyed because I already understand it and
+            find the chopped-up functions and the instance variables redundant.
+          </p>
+          <p>
+            Don&#39;t get me wrong, I still think the cleaner version is better.
+            I just wasn&#39;t expecting the annoyance. When I first cleaned it,
+            I thought it was going to be annoyance free.
+          </p>
+          <p>
+            I suppose the question you should ask yourself is which of these two
+            pieces of code you would rather have read first. Which tells you
+            more about the intent? Which obscures the intent?
+          </p>
+          <p>Certainly the latter is better in that regard.</p>
+          <p>
+            This annoyance is an issue that John Ousterhout and I have debated.
+            When you understand an algorithm, the artifacts intended to help you
+            understand it become annoying. Worse, if you understand an
+            algorithm, the names or comments you write to help others will be
+            biased by that understanding and may not help the reader as much as
+            you think they will. A good example of that, in this code, is the
+            <code>addValueConsideringPrefix</code> function. That name made
+            perfect sense to me when I understood the algorithm. But it was a
+            bit jarring two months later. Perhaps not as jarring as
+            <code>49FNGO</code>, but still not quite as obvious as I had hoped
+            when I wrote it. It might have been better written as
+            <code>numbers.add (decrementValueIfThisCharIsaPrefix);</code> ,
+            since that would be symmetrical with the
+            <code>numbers.add(value);</code> in the nonprefixed case.
+          </p>
+          <p>
+            The bottom line is that your own understanding of what you are
+            cleaning will work against your ability to communicate with the next
+            person to come along. And this will be true whether you are
+            extracting well-named methods, or adding descriptive comments.
+            Therefore, take special care when choosing names and writing
+            comments; and don&#39;t be surprised if others are annoyed by your
+            choices. Lastly, a look after a few months can be both humbling and
+            profitable.
+          </p>
+        </blockquote>
+        <p>
+          It’s true that the “cleaned” version does a better job at describing
+          the overall <em>process</em> of what is actually going on here,
+          especially if you can read the entire thing on one screen. However,
+          modern editors will not show you the entirety of the code all at once
+          (rather only ~50 lines at a time), hence the scrolling annoyance.
+        </p>
+        <p>
+          When you scroll, you have to keep the context you can’t see in your
+          head. Given that code is a precise artifact, you’ll find that you
+          can’t easily hold the code for entire functions in your head. This
+          will cause you to constantly stumble and force you to refresh the
+          knowledge by scrolling back up to the previous code (or by jumping to
+          another file in some cases).
+        </p>
+        <p>
+          The interesting thing is that in UI design circles, the code would be
+          seen as information that needs to be presented with a more clear
+          visual hierarchy. Thus, the solution would be to find a way to present
+          the literal code itself in a much more intuitive manner (ie. Don’t
+          hide the important parts by default!).
+        </p>
+        <p>
+          In programming circles, we simply blame the programmer for poor UI
+          design choices of the editor, and tell them to refactor.
+        </p>
+        <p>— 12/11/25</p>
+        <br />
         <h2 id="notes-on-vibe-coding-for-software-engineers">
           Notes on Vibe Coding for Software Engineers
         </h2>
