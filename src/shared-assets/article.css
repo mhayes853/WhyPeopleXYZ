@@ -5,8 +5,9 @@
   padding: 0;
   margin: 0;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  --text-color: #1c1c1c;
+  color-scheme: light;
+  color: var(--text-color);
   --page-bg-start: #f0f3ff;
   --page-bg-end: #e2e6ff;
   --page-bg-gradient: linear-gradient(135deg, var(--page-bg-start), var(--page-bg-end));
@@ -130,7 +131,7 @@ blockquote a {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: var(--text-color);
     background-color: var(--page-bg-start);
     background-image: var(--page-bg-gradient);
   }
