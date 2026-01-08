@@ -37,10 +37,12 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background: var(--page-bg-gradient);
+  overflow-x: hidden;
 }
 
 article {
   text-align: left;
+  min-width: 0;
 }
 
 article img {
@@ -67,6 +69,7 @@ h1 {
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  min-width: 0;
 }
 
 .core-crystal-container {

@@ -1,5 +1,26 @@
+pre {
+  display: block;
+  border-radius: 20px;
+  overflow-x: hidden;
+  white-space: pre;
+  padding: 0.5em 1em;
+  background: #293052;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overscroll-behavior-x: contain;
+}
+
+code {
+  border-radius: 10px;
+  padding: 0.2em 0.4em;
+  font-size: 0.9rem;
+  background: light-dark(#f6f6f6, #293052);
+}
+
 pre code {
   display: block;
+  width: 100%;
   max-width: 100%;
   font-size: 1rem;
   line-height: 1.5;
@@ -8,34 +29,13 @@ pre code {
   word-break: normal;
   overflow-x: auto;
   box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
 
   background: #293052;
   color: #dfdfe0;
 }
 
-pre {
-  display: block;
-  border-radius: 20px;
-  overflow-x: auto;
-  white-space: pre;
-  -webkit-overflow-scrolling: touch;
-  padding: 0.5em 1em;
-  background: #293052;
-  max-width: 100vw;
-  box-sizing: border-box;
-}
-
-code {
-  border-radius: 10px;
-  padding: 0.2em 0.4em;
-  font-size: 0.9rem;
-  max-width: 100vw;
-  background: light-dark(#f6f6f6, #293052);
-}
-
 .hljs {
-  display: inline-block;
-  white-space: pre;
   color: #dfdfe0;
 }
 
