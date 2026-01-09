@@ -3,6 +3,9 @@ import "./liquid-glass.css";
 import backgroundImage from "./assets/background.avif";
 import vertexShaderCode from "./assets/vertex.glsl?raw";
 import fragmentShaderCode from "./assets/fragment.glsl?raw";
+import initProgressBar from "../shared-assets/progress-bar";
+
+initProgressBar();
 
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 
