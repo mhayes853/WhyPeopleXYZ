@@ -35,6 +35,332 @@
           half-baking in my hollow cranium.
         </p>
         <br />
+        <h2 id="brief-thoughts-on-clean-code-2nd-edition">
+          Brief Thoughts on Clean Code 2nd Edition
+        </h2>
+        <p>
+          I read the first edition a few years ago while in school, and while at
+          the time I dogmatically adopted those practices, I eventually found a
+          less dogmatic style for myself that was certainly shaped by those
+          principles. Largely, the first edition had been beaten to death by
+          others, so as a result the 2nd edition included a lot of “damage
+          control”. Though I think this damage control ultimately brought more
+          perspectives into the book which was nice.
+        </p>
+        <p>
+          Perhaps a longer more in-depth review is subject to a dedicated
+          writing of mine at some point, so instead I want to make my main
+          premise clear on this matter.
+        </p>
+        <p>
+          The way we write code is shaped by our tools, and primarily our
+          editors. Given the scale of massively terrible codebases in the wild,
+          this isn’t a massive skill issue, but rather one of giving chainsaws
+          to an army of monkeys. The real job is to understand and move
+          efficiently and deliberately in complex systems, and if our tools
+          aren’t helping with that then how do we expect things to improve?
+        </p>
+        <p>
+          Our primary tool for editing code has been fundamentally the same for
+          decades, yet the systems we’ve produced have massively scaled in
+          required (not accidental) complexity. Today’s editors are only great
+          for writing text, not understanding and working with complex systems.
+        </p>
+        <p>
+          The smaller function style is in theory quite a nice idea, because
+          small functions tend to describe the overall process far better than
+          inlined code. However, we also need to see the details and relate it
+          to the higher-level process without being forced to jump around
+          everywhere. No editor on the planet lets you see both views at once on
+          the same screen, and instead the authoring programmer has to decide
+          which one to show you by writing the code in that style.
+        </p>
+        <p>
+          The beginning of the chapter on comments also points this out to an
+          extent.
+        </p>
+        <p>
+          <em
+            >”Comments are, at best, a necessary evil. If our programming
+            languages were expressive enough, or if you and i had the talent to
+            subtly wield those languages to express our intent, we would not
+            need comments very muchperhaps not at all.</em
+          >
+        </p>
+        <p>
+          <em
+            >The proper use of comments is to compensate for our failure to
+            express ourselves in code. Note that I used the word failure. I
+            meant it. Comments are always failures of either our languages or
+            our abilities.”</em
+          >
+        </p>
+        <p>
+          If after 5 decades, we still haven’t yet found a universally
+          satisfiable way to express ourselves in the languages and tools we
+          use, what do you think the problem is?
+        </p>
+        <p>— 1/8/26</p>
+        <br />
+        <h2 id="a-blow-to-snapshot-testing">A Blow to Snapshot Testing</h2>
+        <p>
+          Tests that have large outputs to verify (eg. Macro Expansions, Codegen
+          Tools,) are tedious to write. In such cases, my go to strategy was to
+          always use
+          <a href="https://github.com/pointfreeco/swift-snapshot-testing"
+            >Snapshot Testing</a
+          >, which would instead capture the output into a file (or even
+          inline). Then, subsequent test runs would diff against the snapshot
+          output, which would alert you to changes. Of course, you would have to
+          scan the initial snapshot manually to ensure it looked correct the
+          first time.
+        </p>
+        <p>
+          Ideally, you would break up the code into smaller pieces that work on
+          smaller outputs, and can therefore be tested in isolation. Though at
+          some point, it is worth it to have that larger test case that ensures
+          the whole thing is tied together properly.
+        </p>
+        <p>
+          However, with the advent of agentic coding and LLMs, I’ve found less
+          of a need to rely on snapshot testing other than for
+          non-deterministic/hard to determine ahead of time output (eg. See
+          <code>CactusLanguageModelTests</code> in
+          <a
+            href="https://github.com/mhayes853/swift-cactus/blob/main/Tests/CactusTests/LanguageModelTests/CactusLanguageModelTests.swift#L363"
+            >Swift Cactus</a
+          >).
+        </p>
+        <p>
+          Here’s a recent test that I would’ve normally written with Snapshot
+          Testing.
+        </p>
+        <pre><code class="lang-swift">
+@Test
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+func `Streams JSON Large Negative Int128 Digits`() throws {
+  let json = "-170141183460469231731687303715884105727"
+  let expected: [Int128] = [
+    0,
+    -<span class="ruby"><span class="hljs-number">1</span>,
+</span>    -<span class="ruby"><span class="hljs-number">17</span>,
+</span>    -<span class="ruby"><span class="hljs-number">170</span>,
+</span>    -<span class="ruby"><span class="hljs-number">1_701</span>,
+</span>    -<span class="ruby"><span class="hljs-number">17_014</span>,
+</span>    -<span class="ruby"><span class="hljs-number">170_141</span>,
+</span>    -<span class="ruby"><span class="hljs-number">1_701_411</span>,
+</span>    -<span class="ruby"><span class="hljs-number">17_014_118</span>,
+</span>    -<span class="ruby"><span class="hljs-number">170_141_183</span>,
+</span>    -<span class="ruby"><span class="hljs-number">1_701_411_834</span>,
+</span>    -<span class="ruby"><span class="hljs-number">17_014_118_346</span>,
+</span>    -<span class="ruby"><span class="hljs-number">170_141_183_460</span>,
+</span>    -<span class="ruby"><span class="hljs-number">1_701_411_834_604</span>,
+</span>    -<span class="ruby"><span class="hljs-number">17_014_118_346_046</span>,
+</span>    -<span class="ruby"><span class="hljs-number">170_141_183_460_469</span>,
+</span>    -<span class="ruby"><span class="hljs-number">1_701_411_834_604_692</span>,
+</span>    -<span class="ruby"><span class="hljs-number">17_014_118_346_046_923</span>,
+</span>    -<span class="ruby"><span class="hljs-number">170_141_183_460_469_231</span>,
+</span>    -<span class="ruby"><span class="hljs-number">1_701_411_834_604_692_317</span>,
+</span>    -<span class="ruby"><span class="hljs-number">17_014_118_346_046_923_173</span>,
+</span>    -<span class="ruby"><span class="hljs-number">170_141_183_460_469_231_731</span>,
+</span>    -<span class="ruby"><span class="hljs-number">1_701_411_834_604_692_317_316</span>,
+</span>    -<span class="ruby"><span class="hljs-number">17_014_118_346_046_923_173_168</span>,
+</span>    -<span class="ruby"><span class="hljs-number">170_141_183_460_469_231_731_687</span>,
+</span>    -<span class="ruby"><span class="hljs-number">1_701_411_834_604_692_317_316_873</span>,
+</span>    -<span class="ruby"><span class="hljs-number">17_014_118_346_046_923_173_168_730</span>,
+</span>    -<span class="ruby"><span class="hljs-number">170_141_183_460_469_231_731_687_303</span>,
+</span>    -<span class="ruby"><span class="hljs-number">1_701_411_834_604_692_317_316_873_037</span>,
+</span>    -<span class="ruby"><span class="hljs-number">17_014_118_346_046_923_173_168_730_371</span>,
+</span>    -<span class="ruby"><span class="hljs-number">170_141_183_460_469_231_731_687_303_715</span>,
+</span>    -<span class="ruby"><span class="hljs-number">1_701_411_834_604_692_317_316_873_037_158</span>,
+</span>    -<span class="ruby"><span class="hljs-number">17_014_118_346_046_923_173_168_730_371_588</span>,
+</span>    -<span class="ruby"><span class="hljs-number">170_141_183_460_469_231_731_687_303_715_884</span>,
+</span>    -<span class="ruby"><span class="hljs-number">1_701_411_834_604_692_317_316_873_037_158_841</span>,
+</span>    -<span class="ruby"><span class="hljs-number">17_014_118_346_046_923_173_168_730_371_588_410</span>,
+</span>    -<span class="ruby"><span class="hljs-number">170_141_183_460_469_231_731_687_303_715_884_105</span>,
+</span>    -<span class="ruby"><span class="hljs-number">1_701_411_834_604_692_317_316_873_037_158_841_057</span>,
+</span>    -<span class="ruby"><span class="hljs-number">17_014_118_346_046_923_173_168_730_371_588_410_572</span>,
+</span>    -<span class="ruby"><span class="hljs-number">170_141_183_460_469_231_731_687_303_715_884_105_727</span>
+</span>  ]
+  try expectJSONStreamedValues(json, initialValue: Int128(0), expected: expected)
+}
+        </code></pre>
+        <p>Thankfully I didn’t have to write that by hand!</p>
+        <p>— 1/6/26</p>
+        <br />
+        <h2 id="-product-dev-vs-code-purist-">
+          “Product Dev” vs “Code Purist”
+        </h2>
+        <p>
+          I’ve seen a split of these 2 personalities come up recently as a
+          result of agentic coding gaining more adoption. Though, it seems to me
+          that one must identify with one of these camps, and vehemently disavow
+          the other one.
+        </p>
+        <p>
+          From the “product dev” perspective, they were tortured by 2 AM
+          debugging sessions, and is finally getting their freedom from those
+          elitist code purists. Likewise, the code purist perspective revels in
+          those debugging sessions, and now has their life energy sucked from
+          them been by those god damn LLMs.
+        </p>
+        <p>
+          One of the interesting things is that the “product dev” would’ve had
+          their way a long time ago if in the 80s we looked at the 70s more
+          critically. Smalltalk programs were incredibly tiny not because
+          Smalltalk programmers were geniuses, or because software was simpler.
+          The programs were incredibly tiny because programming wasn’t limited
+          to the act of writing abstract textual symbols, but rather the entire
+          GUI was the programming environment. Today’s level of AI
+          sophistication wasn’t ever needed for this overall effect.
+        </p>
+        <p>
+          The code purist also has a point, and I don’t see the act of manually
+          writing code disappearing for at least a decent amount of time. Really
+          complex programs, especially ones that require performance sensitive
+          optimizations will probably need a significant amount of manual labor
+          due to the required precision of the code. Also, I find that designing
+          APIs in library code is still more effective to do by hand rather than
+          through an LLM (though often the LLM can be used to write tests and
+          implement the API if you know what you’re doing). Some changes are
+          also quicker to do by hand as well depending on your choice of editor
+          and how much time you’ve dedicated to mastering your editor’s motions.
+        </p>
+        <p>
+          In other words, I think it’s worth noting a term for “precise coding”.
+          The more human involvement in your development process, the more
+          precision one gains over the symbolic representation of the system.
+        </p>
+        <p>
+          Though, for most serious programs, the bottleneck is almost never the
+          precise code, but rather the overall systems design and architecture.
+          Before writing out code as a set of symbols in our editor, there’s
+          often a longer period of rumination within one’s head about the system
+          itself which takes up most of the time. This judgement is quite
+          difficult for an LLM to do well, because it only knows
+          well-established patterns whereas serious systems are often trying to
+          define their industry in some novel/not well-established manner.
+        </p>
+        <p>
+          Reminder that at the end of the day, what we call LLMs are really just
+          incredible at detecting patterns and correlations. You wouldn’t get
+          very far if you had to discover novel ideas just by noticing patterns
+          in your head because there’s often a necessary intuitive reasoning
+          step that you must perform in your head to come at a novel judgement.
+        </p>
+        <p>
+          So which camp do I identify with on a fulfillment level, “product dev”
+          or “code purist”?
+        </p>
+        <p>
+          As a self-proclaimed “fledgling systems designer”, I would have to say
+          both. To me there’s no room for compromise on either of these camps if
+          one wants to build robust systems. Code is often the dominant symbolic
+          representation of the system’s runtime, which needs to be maintained
+          over time. I also very much care about the societal effect of the
+          system, which would be more along the “product dev” lines of thinking.
+        </p>
+        <p>
+          On a fulfillment note, the former bit is why I pay attention to code
+          quality even when “moving fast”, and the latter bit is why I enjoy
+          design and many of these higher level writings for instance. My entire
+          world perspective is a giant relation graph of both those camps, and
+          much more.
+        </p>
+        <p>— 12/28/25</p>
+        <br />
+        <h2 id="ios-could-ve-been-more-expressive">
+          iOS Could’ve Been More Expressive
+        </h2>
+        <p>
+          The Home Screen layout is a simple grid of app icons and widgets. This
+          is easy to use, but the expressive power is incredibly limited.
+        </p>
+        <p>
+          How can one draw relationships between different apps and different
+          widgets? Folders exist, but they are merely just another version of
+          the Home Screen without widget support. In other words, not very
+          expressive.
+        </p>
+        <p>
+          The Home Screen has been the fundamentally been the same since the
+          iPhone 2G in 2007. Certainly, 18 years later should be enough time for
+          the vast majority of users to learns to use a more expressive
+          interface at the cost of an initial learning curve.
+        </p>
+        <p>
+          On the surface level, one may ask why they need to draw a bunch of
+          complex relationships between various apps. This kind of question is
+          exactly the result of the problem I’m getting at here. It implies that
+          users don’t see the point in potential expressive power that lets them
+          think unthinkable and creative thoughts!
+        </p>
+        <p>
+          Social media is easy to use, both in creation and consumption, but the
+          forms of expression are incredibly limited. Simple video, text, and
+          photos have been around for decades, long before personal computing
+          was even commercialized. Certainly, a highly interactive multitouch
+          display that can now run embedded inference on an enormous corpus of
+          information would certainly be able to create new forms of media with
+          enhanced expressive power. This didn’t happen, and now we have a
+          common term for the end result, “brain rot”.
+        </p>
+        <p>
+          The problem with only focusing on “easy to use” is that it keeps users
+          as perpetual beginners. That is, they learn to appreciate the
+          simplicity of the interface rather than learning how to use the
+          interface to express their inner creative ideas to the fullest
+          potential. The latter requires interface design that goes against many
+          principles in the HIG (Apple’s human interface guidelines), and that
+          embeds a reasonable learning curve into the interface directly (the
+          HIG hates this) to learn the complex interactions.
+        </p>
+        <p>
+          This last point is hard to do correctly in today’s climate primarily
+          because of the culture, but I think it is possible to pull off
+          successfully in a commercialized manner. I will be attempting this
+          with Mutual Ink in the coming months. I think the first step is
+          creating something that is easy to use like everything else, but
+          adding explicit steps where the interface can instruct users directly
+          on how to use their expressive power more.
+        </p>
+        <p>
+          Yes, this is “explaining how to use the product” which seems to be
+          considered taboo. Yet, great games have been doing this for the
+          longest time in subtle ways through signifiers and tutorials that
+          blend with the main gameplay, and I think it’s more than doable to
+          pull it off in apps too.
+        </p>
+        <p>
+          Another counterpoint is something along the lines of “I just want to
+          send an email” or do some task that is considered to be simple. Most
+          often, that simple task is just a digitized form of something that was
+          previously done in a more physical manner.
+        </p>
+        <p>
+          My take on this is to ask whether or not we should be porting previous
+          mediums to a new medium. Email may have once been incredibly useful,
+          but is it the best way to communicate on a multitouch medium with
+          embedded inference on an enormous corpus of information?
+        </p>
+        <p>
+          What most people really mean when they want to “simple and easy to
+          use” is really code word for “I don’t want this thing to be annoying”.
+          A well-designed learning curve shouldn’t be annoying, but rather it
+          should be fun and engaging!
+        </p>
+        <p>
+          So here’s my controversial take on this whole topic put into a
+          singular quote.
+        </p>
+        <p>
+          <em
+            >Simple and easy to use tools that don’t require learning creates a
+            culture that despises learning. Do we really want that?</em
+          >
+        </p>
+        <p>— 12/26/25</p>
+        <br />
         <h2 id="notes-on-a-better-commercial-editor-1-n-">
           Notes on a Better Commercial Editor (1/N)
         </h2>
