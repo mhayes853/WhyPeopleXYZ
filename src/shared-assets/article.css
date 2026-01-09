@@ -12,7 +12,6 @@
   --page-bg-end: #e2e6ff;
   --page-bg-gradient: linear-gradient(135deg, var(--page-bg-start), var(--page-bg-end));
   background-color: var(--page-bg-start);
-  background-image: var(--page-bg-gradient);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -41,7 +40,12 @@ body {
   justify-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background: var(--page-bg-gradient);
+  background-color: var(--page-bg-start);
+  background-image: var(--page-bg-gradient);
+  background-repeat: no-repeat;
+  background-size: 100% 100vh;
+  background-attachment: fixed;
+  background-position: top left;
   overflow-x: hidden;
 }
 
@@ -178,7 +182,6 @@ blockquote a {
   :root {
     color: var(--text-color);
     background-color: var(--page-bg-start);
-    background-image: var(--page-bg-gradient);
   }
   a:hover {
     color: #747bff;
