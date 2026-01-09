@@ -65,10 +65,6 @@ pre code {
     width: 40px;
     height: 40px;
   }
-
-  .code-copy-icon {
-    --code-copy-icon-size: 26px;
-  }
 }
 
 .code-copy-button:hover {
@@ -91,7 +87,6 @@ pre code {
   align-items: center;
   justify-content: center;
   color: #dfdfe0;
-  --code-copy-icon-size: 22px;
 }
 
 .code-copy-icon svg {

@@ -3,6 +3,11 @@ import copyIconRaw from "./copy.svg?raw";
 import checkIconRaw from "./checkmark.svg?raw";
 
 const COPY_RESET_DELAY_MS = 1400;
+const DESKTOP_ICON_SIZE_PX = 22;
+const MOBILE_ICON_SIZE_PX = 26;
+
+const getIconSize = (): number =>
+  window.matchMedia("(max-width: 720px)").matches ? MOBILE_ICON_SIZE_PX : DESKTOP_ICON_SIZE_PX;
 
 const copyToClipboard = async (text: string): Promise<boolean> => {
   if (!text) {
@@ -47,10 +52,13 @@ const renderIcon = (container: HTMLElement, svgMarkup: string): void => {
     return;
   }
 
+  const size = `${getIconSize()}px`;
   svg.setAttribute("aria-hidden", "true");
   svg.setAttribute("focusable", "false");
-  svg.style.width = "var(--code-copy-icon-size)";
-  svg.style.height = "var(--code-copy-icon-size)";
+  svg.setAttribute("width", size);
+  svg.setAttribute("height", size);
+  svg.style.minWidth = size;
+  svg.style.minHeight = size;
 
   container.innerHTML = "";
   container.appendChild(svg);
