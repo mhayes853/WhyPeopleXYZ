@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { extractArticleDateFromHtml } from "./article-date";
+import { extractArticleDateFromHtml, parseDateText } from "./article-date";
 
 describe("extractArticleDateFromHtml", () => {
   it("finds the last date line even if text follows it", () => {
@@ -32,5 +32,29 @@ describe("extractArticleDateFromHtml", () => {
       </article>
     `;
     expect(extractArticleDateFromHtml(html)).toBeNull();
+  });
+});
+
+describe("parseDateText", () => {
+  it("parses dates with an em dash prefix", () => {
+    expect(parseDateText("— 1/2/26")).toBe(
+      new Date(2026, 0, 2, 0, 0).getTime(),
+    );
+  });
+
+  it("parses dates with a time and am/pm", () => {
+    expect(parseDateText("-- 9/26/25 1:30 pm")).toBe(
+      new Date(2025, 8, 26, 13, 30).getTime(),
+    );
+  });
+
+  it("parses dates with a time and no minutes", () => {
+    expect(parseDateText("– 9/26/25 5 pm")).toBe(
+      new Date(2025, 8, 26, 17, 0).getTime(),
+    );
+  });
+
+  it("returns null for invalid input", () => {
+    expect(parseDateText("not a date")).toBeNull();
   });
 });
