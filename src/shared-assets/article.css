@@ -103,6 +103,23 @@ h1 {
   justify-content: center;
 }
 
+.article-nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.article-nav-links a {
+  color: #1c1c1c;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  font-weight: 600;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
