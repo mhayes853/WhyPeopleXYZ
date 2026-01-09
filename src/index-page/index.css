@@ -81,7 +81,7 @@
 .global-notes-list {
   display: flex;
   flex-direction: column;
-  gap: 0.25em;
+  gap: 1rem;
 }
 
 .global-note-link {
