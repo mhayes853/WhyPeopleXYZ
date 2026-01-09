@@ -83,6 +83,26 @@ const injectStyles = () => {
     .note-collapsed .note-date {
       opacity: 0.6;
     }
+
+    @media (max-width: 720px) {
+      .note-section {
+        margin-bottom: 1.25rem;
+      }
+
+      .note-toggle {
+        min-width: 40px;
+        min-height: 40px;
+      }
+
+      .note-heading {
+        font-size: 0.95em;
+      }
+
+      .note-section.note-collapsed .note-date {
+        font-size: 0.75em;
+        opacity: 0.55;
+      }
+    }
   `;
   document.head.appendChild(style);
 };
