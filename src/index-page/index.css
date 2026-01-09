@@ -16,6 +16,11 @@
 
 .list-header {
   width: 100%;
+  padding-left: 0.6em;
+}
+
+.list-header p {
+  margin-top: 0.5em;
 }
 
 .list-content {
@@ -24,7 +29,7 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
-  row-gap: 0.5em;
+  row-gap: 0.8em;
 }
 
 .contact-link {
@@ -35,16 +40,58 @@
 }
 
 .card {
-  background-color: light-dark(#f6f6f6, #243f57);
-  border-radius: 16px;
-  padding: 1em;
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0.4em 0.6em;
   width: 100%;
-  transition: box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+  color: #1c1c1c;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .card:hover {
-  box-shadow: 0 16px 32px
-    light-dark(rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.15));
+  color: #000;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.card-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1em;
+  width: 100%;
+}
+
+.card-title {
+  margin: 0;
+  color: #000;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.card-date {
+  margin-left: auto;
+  font-size: 1em;
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+.card-subtitle {
+  margin: 0;
+  color: #1c1c1c;
+  font-size: 0.9em;
+}
+
+.card p,
+.card h3 {
+  margin: 0;
 }
 
 .root-article {

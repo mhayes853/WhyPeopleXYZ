@@ -1,4 +1,5 @@
 import "../shared-assets/article";
+import { findArticleDateText } from "../shared-assets/article-date";
 import chevronRaw from "../shared-assets/chevron.svg?raw";
 
 const STYLE_ID = "global-notes-collapsible-style";
@@ -98,24 +99,6 @@ const parseSvg = (markup: string) => {
   return svg;
 };
 
-const findNoteDateText = (body: HTMLElement) => {
-  const children = Array.from(body.children);
-  for (let i = children.length - 1; i >= 0; i -= 1) {
-    const element = children[i];
-    if (element.tagName === "BR") {
-      continue;
-    }
-    if (element.tagName === "P") {
-      const text = element.textContent?.trim();
-      if (text && (/^—/.test(text) || /^--/.test(text) || /^–/.test(text))) {
-        return text;
-      }
-    }
-    break;
-  }
-  return null;
-};
-
 const getTargetHeadingId = () => {
   const hash = window.location.hash.trim();
   if (!hash) {
@@ -150,7 +133,7 @@ const buildSections = (article: HTMLElement) => {
     }
 
     section.appendChild(body);
-    const dateText = findNoteDateText(body);
+    const dateText = findArticleDateText(body);
     return { section, heading, body, dateText };
   });
 };
@@ -178,7 +161,7 @@ const addToggleButton = (
   const date = document.createElement("span");
   date.className = "note-date";
   if (dateText) {
-    date.textContent = `${dateText}`;
+    date.textContent = dateText;
   }
 
   heading.appendChild(button);
