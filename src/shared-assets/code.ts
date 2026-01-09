@@ -66,7 +66,8 @@ const attachCopyButton = (codeBlock: HTMLElement): void => {
     return;
   }
 
-  pre.classList.add("code-block");
+  pre.classList.remove("code-block");
+  pre.style.position = "relative";
 
   const button = document.createElement("button");
   button.type = "button";
