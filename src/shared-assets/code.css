@@ -20,7 +20,7 @@ code {
   border-radius: 10px;
   padding: 0.2em 0.4em;
   font-size: 0.9rem;
-  background: light-dark(#f6f6f6, #293052);
+  background: #d8dcf1;
 }
 
 pre code {
