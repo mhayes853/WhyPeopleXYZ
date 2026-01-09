@@ -22,11 +22,16 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #d6414b;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #d6414b;
+}
+
+::selection {
+  background-color: #d6414b;
+  color: #fff;
 }
 
 body {
