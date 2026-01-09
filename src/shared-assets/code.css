@@ -11,6 +11,11 @@ pre {
   overscroll-behavior-x: contain;
 }
 
+pre.code-block {
+  position: relative;
+  padding-top: 2.6em;
+}
+
 code {
   border-radius: 10px;
   padding: 0.2em 0.4em;
@@ -33,6 +38,67 @@ pre code {
 
   background: #293052;
   color: #dfdfe0;
+}
+
+.code-copy-button {
+  position: absolute;
+  top: 0.6em;
+  right: 0.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #dfdfe0;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+@media (max-width: 720px) {
+  .code-copy-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .code-copy-icon {
+    --code-copy-icon-size: 26px;
+  }
+}
+
+.code-copy-button:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.code-copy-button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 2px;
+}
+
+.code-copy-button.is-copied {
+  background: rgba(117, 240, 201, 0.18);
+  border-color: rgba(117, 240, 201, 0.6);
+}
+
+.code-copy-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #dfdfe0;
+  --code-copy-icon-size: 22px;
+}
+
+.code-copy-icon svg {
+  display: block;
+  fill: currentColor;
+  margin: 0;
+  padding: 0;
 }
 
 .hljs {

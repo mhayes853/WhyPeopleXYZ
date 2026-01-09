@@ -1,5 +1,5 @@
 import "./code.css";
 import "./article.css";
-import hljs from "highlight.js";
+import initCodeBlocks from "./code";
 
-hljs.highlightAll();
+initCodeBlocks();
