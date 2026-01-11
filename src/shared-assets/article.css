@@ -10,7 +10,11 @@
   color: var(--text-color);
   --page-bg-start: #f0f3ff;
   --page-bg-end: #e2e6ff;
-  --page-bg-gradient: linear-gradient(135deg, var(--page-bg-start), var(--page-bg-end));
+  --page-bg-gradient: linear-gradient(
+    135deg,
+    var(--page-bg-start),
+    var(--page-bg-end)
+  );
   background-color: var(--page-bg-start);
 
   font-synthesis: none;
@@ -39,13 +43,7 @@ body {
   display: flex;
   justify-items: center;
   min-width: 320px;
-  min-height: 100vh;
-  background-color: var(--page-bg-start);
   background-image: var(--page-bg-gradient);
-  background-repeat: no-repeat;
-  background-size: 100% 100vh;
-  background-attachment: fixed;
-  background-position: top left;
   overflow-x: hidden;
 }
 
