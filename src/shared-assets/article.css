@@ -16,6 +16,7 @@
     var(--page-bg-end)
   );
   background-color: var(--page-bg-start);
+  --accent-red: #d6414b;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,15 +26,15 @@
 
 a {
   font-weight: 500;
-  color: #d6414b;
+  color: var(--accent-red);
   text-decoration: inherit;
 }
 a:hover {
-  color: #d6414b;
+  color: var(--accent-red);
 }
 
 ::selection {
-  background-color: #d6414b;
+  background-color: var(--accent-red);
   color: #fff;
 }
 
@@ -61,7 +62,7 @@ body {
 .progress-bar-fill {
   width: 100%;
   height: 100%;
-  background: #d6414b;
+  background: var(--accent-red);
   transform-origin: left center;
   transform: scaleX(0);
   transition: transform 120ms linear;

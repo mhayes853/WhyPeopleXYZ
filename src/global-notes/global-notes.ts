@@ -85,6 +85,10 @@ const injectStyles = () => {
       opacity: 0.6;
     }
 
+    .note-section:not(.note-collapsed) .note-date {
+      color: var(--accent-red);
+    }
+
     @media (max-width: 720px) {
       .note-section {
         margin-bottom: 1.25rem;
