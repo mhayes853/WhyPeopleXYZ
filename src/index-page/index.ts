@@ -20,7 +20,9 @@ const buildArticlePath = (href: string) => {
 };
 
 const enhanceCards = () => {
-  const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>(".card"));
+  const cards = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>(".card"),
+  );
   cards.forEach((card) => {
     if (card.querySelector(".card-header")) {
       return;
@@ -83,7 +85,9 @@ const parseGlobalNotes = (html: string) => {
     return [];
   }
 
-  const headings = Array.from(article.querySelectorAll<HTMLHeadingElement>("h2"));
+  const headings = Array.from(
+    article.querySelectorAll<HTMLHeadingElement>("h2"),
+  );
   return headings
     .map((heading) => {
       const container = doc.createElement("div");
@@ -111,7 +115,7 @@ const enhanceGlobalNotes = () => {
     return;
   }
 
-  fetch("/global-notes.html", { cache: "force-cache" })
+  fetch("/global-notes.html")
     .then((response) => (response.ok ? response.text() : null))
     .then((html) => {
       if (!html) {

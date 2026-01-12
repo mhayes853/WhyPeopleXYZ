@@ -43,6 +43,186 @@
           half-baking in my hollow cranium.
         </p>
         <br />
+        <h2 id="handwriting">Handwriting</h2>
+        <p>
+          With agentic coding seeming to gain more adoption, one has to ask what
+          will happen to the act of handwriting code, because seemingly LLMs are
+          generating more and more code. Anecdotally, I can atest to seeing a
+          large increase in LLM generated code in my work, but others seem to
+          report even larger swaths of code (up to 90% or even 100%!) being
+          written by LLMs.
+        </p>
+        <p>
+          Of course, one naturally has to still be responsible for the code at
+          the end of the day, no matter how it was written. Therefore, you can’t
+          just vibe code (ie. Not ever reading the code) your way through a
+          project if you want it to be taken seriously from an engineering
+          standpoint.
+        </p>
+        <p>
+          Though I’ve seen an almost complete rejection of handwritten code from
+          a lot of agentic coders in recent times. Almost to the point where
+          it’s become a social sign of weakness if you decide to write any sort
+          of functionallity by hand rather than using an LLM. It’s true that
+          with enough context/prompt engineering, you can get the LLM to output
+          anything that you want. Though, for some tasks, such as performance
+          intensive code where every line counts, it would probably just be
+          faster to write code by hand. Of course, I expect LLMs to be able to
+          cover more of these cases in the comming months with minimal
+          intervention, so the fact that handwriting is faster may only be a
+          temporary thing.
+        </p>
+        <p>
+          That brings me to my controversial take, which is that I’m not in
+          favor of the “absolutely everything has to be written by an LLM
+          mindset” because it undermines the value of handwriting. Why do we
+          write things in general?
+        </p>
+        <p>
+          It’s to <em>understand</em> things better, because writing is a form
+          of tinkering. Tinkering is what allows us to explore a tangible
+          concept from many different aspects, and by its own necessity it
+          requires failing over and over again. In traditional writing, you’ll
+          often make mistakes, be forced to press backspace, and try again. Each
+          backspace an re-attempt is a new attempt with more knowledge than the
+          previous attempt.
+        </p>
+        <p>
+          See Paul Graham write one of his essays in
+          <a href="https://byronm.com/13sentences.html">real time</a> to see
+          what I mean. If you play the animation, you’ll see the entire title of
+          the essay change from “startups in ten sentences” to “Startups in 13
+          Sentences” as he writes it! In the process of writing by hand, he
+          found 3 additional important points to make dedicated sentences.
+        </p>
+        <p>
+          In a world with massive amounts of code being generated, such
+          understanding becomes even more essential because now each system has
+          far more moving parts. If you just review the LLM generated code and
+          move on, you lose an entire dimension of learning, and ultimately your
+          skills to work at a deeper level will atrophy. Actually writing bits
+          of code by hand, even if most of the work is done by an LLM, will
+          still help quite a bit in that understanding because you’ll be
+          tinkering with the code.
+        </p>
+        <p>
+          Now from a cost benefits perspective, there’s definitely a tradeoff.
+          If you spend to much time tinkering, you risk moving too slow. If you
+          spend no time at all tinkering, the lack of understanding may in fact
+          slow you down in the long term. Will the models reach a point where
+          looking at handwritten code is no longer necessary, probably. However,
+          I still think we’re ways away from that, and even today people still
+          look at and read assembly code for all sorts of various reasons.
+          That’s why Godbolt exists.
+        </p>
+        <p>— 1/12/26</p>
+        <br />
+        <h2 id="opus-spam">Opus Spam</h2>
+        <p>
+          One of the interesting things I’ve taken note of is how many people
+          are doing essentially what I call “Opus Spam”, but the same can apply
+          to whatever model is considered the flagship model of the day. One
+          could also call this “GPT Spam” or “Gemini Spam” depending on which
+          lab has the lead in perceived model performance at any given point in
+          time. “Opus Spam” by its very definition is essentially just spamming
+          Claude Opus 4.5 to do essentially every task you can think of.
+        </p>
+        <p>
+          IMO, this is like using a forklift to pull a nail out of the ground
+          for many things. It’s true that Opus 4.5 can do a lot of complicated
+          things, but that doesn’t mean it should be used for everything. In
+          fact, smaller, cheaper, and less capable models can do quite a lot of
+          tasks. If you’re just trying to do a simple refactor on a class for
+          instance, you probably don’t need Opus 4.5.
+        </p>
+        <p>
+          The reason I bring this up is because Opus 4.5 is not a cheap model to
+          host and maintain by any means, and future flagship models of the day
+          likely won’t be either. Access to these expensive models for most is
+          only even possible because of the generous subscription tiers of the
+          big AI labs. For the record, none of those labs are profitable on
+          their AI capex at the moment, so only time will tell how well the
+          subscription tiers fare.
+        </p>
+        <p>
+          This is all to say that Opus Spam is essentially a massive waste of
+          resources, and we need to do better. We should be actively looking for
+          ways to make smaller and more specialized models an option for many
+          common tasks. Potentially, these models could be local models, which
+          would massively reduce the cost of inference for consumers.
+        </p>
+        <p>— 1/11/26</p>
+        <br />
+        <h2 id="tailwind-drama">Tailwind Drama</h2>
+        <p>
+          Tailwind is in trouble, but I wouldn’t normally be writing about this
+          because I haven’t had to actively maintain any super serious web
+          project before. Well that is unless you count this site as a “super
+          serious project” since it is an entire archive of my thoughts and
+          recollections after all, and I would like to keep it up for years to
+          come.
+        </p>
+        <p>
+          I don’t use tailwind, or any JS framework for this site for the
+          record. In fact, there are no dependencies other than highlight-js for
+          code blocks. If I wanted to, I could probably just write my own syntax
+          highlighter to get rid of the dependency entirely.
+        </p>
+        <p>
+          Regardless, recently I’ve found myself actually building a real
+          serious web project that will probably need to be maintained for a
+          while, though it’s not super big at the moment. At the time of writing
+          this, it’s set to ship likely sometime in the next week or two once
+          all the human elements are sorted out.
+        </p>
+        <p>
+          It so happens that on this project, Tailwind was the technology of
+          choice for styling. I have to say, I like it more than writing plain
+          CSS, but at the end of the day CSS is still the same layout system.
+          That being said, using tailwind at least makes it easier to control
+          styling from JS at the end of the day which is a huge step up compared
+          to needing to write out CSS classes in a separate file (or section of
+          a file if your use a framework like Svelte).
+        </p>
+        <p>
+          Anyways, in case you’ve been living under a rock, the company behind
+          Tailwind doesn’t seem to be doing so well. In fact, despite their
+          number of users growing considerably, their revenue is down 80%. The
+          catalyst seems to be LLMs having their weights particularly tuned to
+          Tailwind, which causes a drop in people going to the official site for
+          docs, which in turn causes less people to see their
+          <a href="https://tailwindcss.com/plus?ref=top">commercial products</a
+          >, which in turn causes less revenue.
+        </p>
+        <p>
+          As a whole, what does this mean for monetized open source work? If
+          LLMs can just be fine-tuned on the best practices of your project,
+          then you can’t just sell the expertise. In this day and age, you’ll
+          almost certainly have to close off essential points of your project
+          such that you can monetize, or you can sell convenience of hosting if
+          your project involves hosting something on the internet in some way.
+        </p>
+        <p>
+          Tailwind unfortunately has none of these, and given the kind of
+          project it is I doubt it ever could because it’s really just a CSS
+          wrapper at the end of the day. CSS is an open standard, so there’s
+          nothing proprietary to lean on and make closed source for
+          monetization. Additionally, Tailwind is specifically inlined in
+          frontend code, this also means that there’s no deployment costs
+          associated with it. The best that could be done was to sell closed
+          well-crafted UI components, but LLMs have unfortunately taken that
+          business model.
+        </p>
+        <p>
+          Despite the unfortunate troubles, I don’t think Tailwind as a project
+          will die. It seems to be an essential component for many projects, so
+          I’m sure there’s some company out there that can’t afford to lose
+          Tailwind. The main question is, how much will they be willing to spend
+          for it.
+        </p>
+        <p>— 1/10/26</p>
+
+        <br />
         <h2 id="brief-thoughts-on-clean-code-2nd-edition">
           Brief Thoughts on Clean Code 2nd Edition
         </h2>
