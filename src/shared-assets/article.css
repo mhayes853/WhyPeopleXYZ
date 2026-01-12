@@ -102,6 +102,18 @@ h1 {
   line-height: 1.1;
 }
 
+.article-reading-time,
+.notes-total-reading-time {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  font-size: 0.85em;
+}
+
 .title {
   text-align: center;
 }

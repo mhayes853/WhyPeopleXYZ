@@ -1,6 +1,7 @@
 import "../shared-assets/article";
 import { cleanDateLabel, findArticleDateText } from "../shared-assets/article-date";
 import chevronRaw from "../shared-assets/chevron.svg?raw";
+import { estimateReadingTime } from "../shared-assets/article-read-time";
 
 const STYLE_ID = "global-notes-collapsible-style";
 
@@ -163,6 +164,25 @@ const buildSections = (article: HTMLElement) => {
   });
 };
 
+const updateGlobalNotesReadingTime = (article: HTMLElement) => {
+  const readingElement =
+    article.querySelector<HTMLParagraphElement>(".notes-total-reading-time");
+  if (!readingElement) {
+    return;
+  }
+
+  const clone = article.cloneNode(true) as HTMLElement;
+  clone.querySelector(".notes-total-reading-time")?.remove();
+
+  const rawText = clone.textContent ?? "";
+  const minutes = estimateReadingTime(rawText);
+  const fallback = `Total Reading Time for all Notes: ${minutes} Minutes`;
+  const content = readingElement.textContent ?? fallback;
+  const replaced = content.replace("--", minutes.toString());
+
+  readingElement.textContent = replaced === content ? fallback : replaced;
+};
+
 const addToggleButton = (
   heading: HTMLHeadingElement,
   dateLabel: string | null,
@@ -210,6 +230,8 @@ const initGlobalNotes = () => {
   if (!article) {
     return;
   }
+
+  updateGlobalNotesReadingTime(article);
 
   injectStyles();
   const sections = buildSections(article);
