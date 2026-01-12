@@ -32,7 +32,8 @@ const injectStyles = () => {
     .note-date {
       margin-left: auto;
       font-size: 0.85em;
-      opacity: 0;
+      opacity: 1;
+      color: rgba(0, 0, 0, 0.65);
       transition: opacity 220ms ease;
       white-space: nowrap;
     }
