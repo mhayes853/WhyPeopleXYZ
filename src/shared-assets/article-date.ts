@@ -1,8 +1,11 @@
 const isDateText = (text: string) =>
   text.startsWith("—") || text.startsWith("--") || text.startsWith("–");
 
+const stripDatePrefix = (dateText: string) =>
+  dateText.replace(/^[-—–]{1,2}\s*/, "").trim();
+
 export const parseDateText = (dateText: string) => {
-  const cleaned = dateText.replace(/^[-—–]\s*/, "").trim();
+  const cleaned = stripDatePrefix(dateText);
   const match = cleaned.match(
     /^(\d{1,2})\/(\d{1,2})\/(\d{2,4})(?:\s+(\d{1,2})(?::(\d{2}))?\s*(am|pm)?)?$/i,
   );
@@ -47,6 +50,14 @@ export const findArticleDateText = (container: Element) => {
     }
   }
   return lastDate;
+};
+
+export const cleanDateLabel = (dateText?: string | null) => {
+  if (!dateText) {
+    return null;
+  }
+  const cleaned = stripDatePrefix(dateText);
+  return cleaned || null;
 };
 
 export const extractArticleDateFromHtml = (html: string) => {

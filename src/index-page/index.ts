@@ -1,5 +1,6 @@
 import "../shared-assets/article";
 import {
+  cleanDateLabel,
   extractArticleDateFromHtml,
   findArticleDateText,
   parseDateText,
@@ -62,8 +63,9 @@ const enhanceCards = () => {
           return;
         }
         const dateText = extractArticleDateFromHtml(html);
-        if (dateText) {
-          date.textContent = dateText;
+        const labelDate = cleanDateLabel(dateText);
+        if (labelDate) {
+          date.textContent = labelDate;
         } else {
           date.remove();
         }
@@ -131,7 +133,12 @@ const enhanceGlobalNotes = () => {
 
         const date = document.createElement("span");
         date.className = "global-note-date";
-        date.textContent = note.dateText ?? "";
+        const labelDate = cleanDateLabel(note.dateText);
+        if (labelDate) {
+          date.textContent = labelDate;
+        } else if (note.dateText) {
+          date.textContent = note.dateText;
+        }
 
         link.appendChild(title);
         link.appendChild(date);

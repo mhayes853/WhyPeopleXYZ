@@ -1,5 +1,5 @@
 import "../shared-assets/article";
-import { findArticleDateText } from "../shared-assets/article-date";
+import { cleanDateLabel, findArticleDateText } from "../shared-assets/article-date";
 import chevronRaw from "../shared-assets/chevron.svg?raw";
 
 const STYLE_ID = "global-notes-collapsible-style";
@@ -161,7 +161,7 @@ const buildSections = (article: HTMLElement) => {
 
 const addToggleButton = (
   heading: HTMLHeadingElement,
-  dateText: string | null,
+  dateLabel: string | null,
 ) => {
   const button = document.createElement("button");
   button.type = "button";
@@ -181,8 +181,8 @@ const addToggleButton = (
 
   const date = document.createElement("span");
   date.className = "note-date";
-  if (dateText) {
-    date.textContent = dateText;
+  if (dateLabel) {
+    date.textContent = dateLabel;
   }
 
   heading.appendChild(button);
@@ -223,7 +223,8 @@ const initGlobalNotes = () => {
   }
 
   sections.forEach(({ section, heading, dateText }) => {
-    const button = addToggleButton(heading, dateText);
+    const dateLabel = cleanDateLabel(dateText);
+    const button = addToggleButton(heading, dateLabel);
     const collapsed = !target || heading !== target.heading;
     setCollapsed(section, button, collapsed);
 
