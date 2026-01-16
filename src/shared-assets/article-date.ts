@@ -36,7 +36,6 @@ export const parseDateText = (dateText: string) => {
 
 export const findArticleDateText = (container: Element) => {
   const children = Array.from(container.children);
-  let lastDate: string | null = null;
   for (let i = children.length - 1; i >= 0; i -= 1) {
     const element = children[i];
     if (element.tagName === "BR") {
@@ -45,11 +44,11 @@ export const findArticleDateText = (container: Element) => {
     if (element.tagName === "P") {
       const text = element.textContent?.trim();
       if (text && isDateText(text)) {
-        lastDate = text;
+        return text;
       }
     }
   }
-  return lastDate;
+  return null;
 };
 
 export const cleanDateLabel = (dateText?: string | null) => {
