@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpeg" href="./shared-assets/icon.jpeg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Processes are Central to Programming</title>
+    <meta property="og:title" content="Processes are Central to Programming" />
+    <meta
+      property="og:description"
+      content="Why Rob Pike's perspective is flawed."
+    />
+    <meta property="og:image" content="./shared-assets/icon.jpeg" />
+    <meta property="og:url" content="/processes-are-central-to-programming" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Processes are Central to Programming" />
+    <meta
+      name="twitter:description"
+      content="Why Rob Pike's perspective is flawed."
+    />
+    <meta name="twitter:image" content="./shared-assets/icon.jpeg" />
+    <meta name="twitter:url" content="/processes-are-central-to-programming" />
+  </head>
+  <body>
+    <div id="app">
+      <a class="core-crystal-container" href="/">
+        <img width="300" height="150" src="./shared-assets/core-crystal.svg" />
+      </a>
+      <div class="article-nav-links">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+      </div>
+
+      <article>
+        <h1 id="processes-are-central-to-programming" class="title">
+          Processes are Central to Programming
+        </h1>
+        <p>
+          <img
+            src="./processes-are-central-to-programming/assets/question.jpeg"
+            alt="The question 'What do you think of Rob Pike's assertion that 'data structures, not algorithms, are central to programming'?' answered by Alan Kay on Quora in which he wants commenters to see the deadly flaw in Rob Pike's perspective."
+          />
+          <a href="https://qr.ae/pCSJcI"
+            >What do you think of Rob Pike&#39;s assertion that &quot;data
+            structures, not algorithms, are central to programming&quot;?</a
+          >
+        </p>
+        <p>
+          First, we have to identify what it means to create a program in
+          general, not just on computers. Generally speaking, the main idea is
+          to create some sort of process that carries out a set of goals. An
+          engineering program is a process to teach students engineering, a gym
+          program is a process to make its customers physically (and perhaps
+          mentally) fit, etc.
+        </p>
+        <p>
+          From this, we can see that software programs are no different, they
+          just carry out a set of goals by setting bits in memory. How those
+          bits are represented is a more or less a social/design convention.
+        </p>
+        <p>
+          Of course, arbitrary representations are something that have been
+          created for real world things as well. In this sense, one could equate
+          bits of memory to pencil strokes on a piece of paper. As a society,
+          we’ve decided that pencil strokes on a paper in a certain form denote
+          a written language.
+        </p>
+        <p>
+          Similarly, bits in memory in a certain format have their own
+          definitions (eg. A bitmap display, and perhaps what we call data
+          structures). So if we want to look at better programming, we have to
+          consider what representations are, and what it means to create such
+          representations.
+        </p>
+        <p>
+          In this sense, writing on a piece of paper is in its sense a program
+          carried out deliberately by a human. Similarly, one can say that a CPU
+          is also a writer, just that it writes to memory instead of paper.
+        </p>
+        <p>
+          So if programs are just processes to create representations, then what
+          do the representations mean? Of course, they have to at least be
+          correlated with our defined goals if they are to be useful at all.
+        </p>
+        <p>
+          The truth of the matter however, is that representations are often
+          subject to different interpretations by other programs. Those other
+          programs then produce different representations based on their
+          interpretations of the representation. In many cases this can be quite
+          problematic, especially if one looks at public discourse in political
+          arenas. As an example, what we call public <em>generalized</em> data
+          and statistics, especially those derived from science, are often
+          interpreted and used by others in various manners as “evidence” to win
+          a <em>specific</em> argument.
+        </p>
+        <p>
+          Thus far, we have 2 things, representations, and programs that create
+          representations. We can see that many representations themselves can
+          be misinterpreted. Both of these are tangible concepts, so can we
+          generalize here perhaps?
+        </p>
+        <p>
+          It turns out we can! What if we also consider programs themselves as
+          representations? If a program is a process to produce representations,
+          we can therefore have programs produce other programs. This akin to
+          how biological lifeforms produce other lifeforms, of which the
+          produced lifeforms are formed from biological processes themselves.
+        </p>
+        <p>
+          In essence, something formed of processes is generally alive and
+          running, as it would be dead if its representations weren’t actively
+          creating more representations.
+        </p>
+        <p>
+          However, if we look at nearly all software programs today, programming
+          langauges inject a prevailing view in their users that programs are
+          simply made up of simple static representations that aren’t runnable
+          processes. At a high level, these are of course data structures, and
+          the process of instructions being carried out by the CPU are of course
+          algorithms. Yet, the algorithms are also just representations, just a
+          more dynamic representation than bits in memory.
+        </p>
+        <p>
+          Therein lies the deadly flaw with Rob Pike’s perspective. If
+          everything is a representation, why choose one that can easily be
+          misinterpreted at scale?
+        </p>
+        <p>
+          Look at web browsers for instance. It turns out, that given an
+          arbitrary combination of HTML, CSS, and JavaScript, there is no
+          guarantee that all mainstream web browsers will produce the same
+          results from that combination. Some of the browsers (especially
+          Safari), will quite literally misinterpret the combination, whereas
+          others will interpret it in a desireable manner. Unfortunately, such
+          misinterpretations in web browsers are quite common in the real world,
+          and have resulted in numerous software bugs.
+        </p>
+        <p>
+          The more static the representation, the more trust we must place on
+          various other representations to interpret the representation
+          properly. In this sense, any networked process that responds with JSON
+          is therefore placing a high degree of trust on its recipient, and this
+          trust has of course been broken many times over the years (eg.
+          Outdated clients assuming the JSON payload will be a certain shape,
+          and subsequently throwing errors when its not that shape.)
+        </p>
+        <p>
+          Another harsher form of this are typical user interfaces. Currently,
+          the dominant paradigm is to have a UI designer design some user
+          interface in some part of the world, and distribute it to users in
+          other parts of the world. With this approach every user, no matter
+          their circumstances, gets the same user interface, so its up to the UI
+          designer to design something that satisfies all the needs of those
+          users. Secondly, the designer must also trust that all of those users
+          will use the interface in its intended manner.
+        </p>
+        <p>
+          Of course, this process almost never succeeds because different users
+          have all sorts of different needs, and the best those users can do is
+          interpret the user interface in the best manner that suits them. These
+          different expected interpretations are also one of the most common
+          causes of software bugs.
+        </p>
+        <p>
+          To end this off, what is central to programming is really much more
+          about processes as dynamic representations more so than data as static
+          representations. Any system capable of scaling must account for
+          misinterpretations of static representations by other dynamic
+          representations. Therefore, it’s often better if it can operate with
+          more powerful dynamic representations that can produce further
+          necessary tailored representations for a specific rather than abstract
+          context.
+        </p>
+        <p>— 1/18/26</p>
+      </article>
+    </div>
+    <script
+      type="module"
+      src="./processes-are-central-to-programming/index.ts"
+    ></script>
+  </body>
+</html>
