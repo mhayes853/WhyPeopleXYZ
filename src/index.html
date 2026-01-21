@@ -24,18 +24,20 @@
   </head>
   <body>
     <div id="app">
-      <div class="core-crystal-container">
-        <svg
-          viewBox="142.5 5.839188863210153 116.25000000000001 168.08522227669226"
-          xmlns="http://www.w3.org/2000/svg"
-          id="svg"
-          style="max-height: 500px"
-          width="116.25000000000001"
-          height="168.08522227669226"
-        >
-          <defs>
-            <!-- Bright liquid body (tuned for white background) -->
-            <radialGradient id="liquidBody" cx="35%" cy="22%" r="72%">
+      <div class="hero-visual">
+        <div class="core-row">
+          <div class="core-crystal-container rotated-left">
+          <svg
+            viewBox="142.5 5.839188863210153 116.25000000000001 168.08522227669226"
+            xmlns="http://www.w3.org/2000/svg"
+            id="svg"
+            style="max-height: 500px"
+            width="116.25000000000001"
+            height="168.08522227669226"
+          >
+            <defs>
+              <!-- Bright liquid body (tuned for white background) -->
+              <radialGradient id="liquidBody" cx="35%" cy="22%" r="72%">
               <stop offset="0%" stop-color="#ff7a8c" />
               <stop offset="45%" stop-color="#ff2f4f" />
               <stop offset="100%" stop-color="#ff1f3f" />
@@ -116,17 +118,24 @@
             stroke-width="1.0"
             filter="url(#innerGlow)"
           />
-        </svg>
+        </div>
+        <div class="human-image-wrapper rotated-right">
+          <img
+            src="./shared-assets/human_image.png"
+            width="400"
+            height="400"
+            alt="Human silhouette in red"
+          />
+        </div>
       </div>
+      <div class="purple-blob" aria-hidden="true"></div>
+      <div class="red-blob" aria-hidden="true"></div>
+    </div>
       <h1>Matthew Hayes</h1>
-      <p>
-        By trade, I build apps and developer tools for iOS and Android, but my
-        true motives lie further. Wouldn't it be fun for you to deduce those
-        yourself?
-      </p>
       <h3>
-        Seeking the deeper truth of ideas is needed to create a better world.
+        Writings about software, systems, and mediums.
       </h3>
+      <p>See <a href="/about">about</a> for more information about me, and <a href="/now">now</a> to see what I'm up to right now.</p>
       <div class="lists">
         <div class="list">
           <div class="list-header">
