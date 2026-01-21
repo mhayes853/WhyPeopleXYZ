@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap");
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
@@ -200,9 +202,16 @@ p {
 }
 
 blockquote {
-  font-family: "Roboto Slab", serif;
+  font-family: "PT Serif", "Times New Roman", serif;
+  font-style: normal;
+  font-weight: 400;
   font-optical-sizing: auto;
-  opacity: 0.5;
+  opacity: 0.9;
+  color: var(--text-color);
+  margin: 2rem 0;
+  padding: 0.75rem 0 0.75rem 1rem;
+  border-left: 4px solid rgba(28, 28, 28, 0.25);
+  line-height: 1.6;
 }
 
 blockquote a {
