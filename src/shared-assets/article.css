@@ -140,6 +140,10 @@ h1 {
   justify-content: center;
 }
 
+.core-crystal-container svg {
+  filter: drop-shadow(0 0 2.5rem rgba(214, 65, 75, 0.8));
+}
+
 .article-nav-links {
   display: flex;
   align-items: center;
