@@ -3,6 +3,49 @@ import "./article.css";
 import initCodeBlocks from "./code";
 import { estimateReadingTime } from "./article-read-time";
 
+const initHeroModal = () => {
+  const modal = document.getElementById("hero-modal") as HTMLDialogElement | null;
+  const trigger = document.querySelector<HTMLImageElement>(
+    ".human-image-wrapper img"
+  );
+  const closeButton = modal?.querySelector<HTMLButtonElement>(".hero-modal-close");
+
+  if (!modal || !trigger) {
+    return;
+  }
+
+  const setOpen = (open: boolean) => {
+    if (open && !modal.open) {
+      modal.showModal();
+    } else if (!open && modal.open) {
+      modal.close();
+    }
+    modal.setAttribute("aria-hidden", open ? "false" : "true");
+  };
+
+  const closeHandler = () => setOpen(false);
+  const keyHandler = (event: KeyboardEvent) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      setOpen(true);
+    }
+  };
+
+  trigger.addEventListener("click", () => setOpen(true));
+  trigger.addEventListener("keydown", keyHandler);
+  closeButton?.addEventListener("click", closeHandler);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeHandler();
+    }
+  });
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      closeHandler();
+    }
+  });
+};
+
 const updateArticleReadingTime = () => {
   const readingElement =
     document.querySelector<HTMLParagraphElement>(".article-reading-time");
@@ -27,3 +70,4 @@ const updateArticleReadingTime = () => {
 
 initCodeBlocks();
 updateArticleReadingTime();
+initHeroModal();
