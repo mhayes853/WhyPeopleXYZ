@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run generate:index
+npm run update:global-notes
 git add src/index.html
