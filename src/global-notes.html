@@ -134,6 +134,606 @@
           half-baking in my hollow cranium.
         </p>
         <br />
+
+        <h2 id="communicators-and-mediums">Communicators and Mediums</h2>
+        <p>
+          In the world, we often value one’s ability via their communication
+          skills. That is, the ability to communicate is weighed heavily in
+          one’s favor if they can do it. Likewise, not having strong innate
+          communication skills acts against a person often in ways they don’t
+          understand.
+        </p>
+        <p>
+          Let’s say I ask you to explain a complex topic to a 5 year old, like
+          Albert Einstein wants you to. Your explanation will likely diverge to
+          using visuals, and almost certainly not complicated text passages. In
+          this case, that would be a good use of your communication skills.
+        </p>
+        <p>
+          However, if I forbid you from using visuals, what would happen then?
+          Chances are, no matter how good of a communicator you are, you will
+          struggle with your explanation. 5 year olds don’t have a sophisticated
+          vocabulary or much understanding of complex ideas since their brains
+          are still developing, so it’s less likely that text passages (which
+          are incredibly abstract) will work.
+        </p>
+        <p>
+          I see this as a problem with common tools like Slack, Github, Zoom,
+          Google Docs, Excalidraw, etc. today. If your team uses all of these
+          tools, then the entire collective knowledge base held by your team is
+          essentially fragmented, and the only way to make any sense of it is
+          via good communication. Yet, even the best communicators accidentally
+          leave our relevant context, or otherwise mistate things. In my
+          experience, a lot of this is merely caused by simply forgetting to add
+          those points, or assuming that the audience has that context. The
+          latter can be an especially fatal mistake if the assumption is
+          incorrect.
+        </p>
+        <p>
+          This is why I hold the general view that one’s ability to communicate
+          is dependent both on their communication skills and the available
+          mediums of communication they have. Someone who can draw well, but not
+          talk, can draw a picture worth 10,000 words. Take away drawing as an
+          available medium, and they can’t communicate all of a sudden.
+        </p>
+        <p>
+          An interesting fact, we all seem to crave looking at graphs and charts
+          today, but did you ever consider how those things were invented? In
+          fact, in the nearly 200,000 year observable history of humanity, only
+          240 years ago in 1786 did William Playfair invent the modern chart in
+          his book <em>The Commercial and Political Atlas</em>.
+          <img
+            src="global-notes/assets/communicators-and-mediums-1.png"
+            alt="A graph from William Playfair's book."
+          />
+        </p>
+        <p>
+          Yes, that means that Newton, the invention of the modern state, the
+          Scientific Revolution, and much more were invented without such a
+          visual. Yet the key thing to understand here is that mediums like the
+          chart enabled far more scientific discoveries in subsequent centuries.
+        </p>
+        <p>
+          Computing went through this kind of revolution in the 60s and 70s
+          through the great research labs of the time (SRI, ARPA, Xerox, etc.),
+          and gave rise to the GUI, internet, personal computing, and much more
+          that we take for granted today. Though the key thing to understand was
+          that those groups had a very different view of computing as do we
+          today. Today, we’re obsessed with boosting productivity through
+          automating work-related tasks instead of boosting collaboration
+          through shared knowledge systems.
+        </p>
+        <p>
+          However, the thing to realize is how many ideas we’re missing because
+          there is no UI for them. If your team uses Slack, Zoom, Github, etc.,
+          then you’ve fragmented correlated knowledge across a bunch of isolated
+          apps. When 2 people are talking about a feature in Slack, is Slack
+          inherently linking the relevant lines of code, analytics, crash
+          reports, etc.? Or is it up to one of the those people to add the
+          relevant context? What if the relevant information is completely
+          external to the team? How does that get linked?
+        </p>
+        <p>
+          How many ideas are you simply not thinking of because you simply can’t
+          see them through the UIs presented by the standard suite of tools?
+          What if a different UI could get you to think of the right ideas?
+        </p>
+        <p>
+          In a world where everyone says its easier than ever to build your own
+          tools, I would expect there to be some progress in the near future.
+          Your internal recreations of Slack and Zoom into your team’s knowledge
+          ecosystem can crash a few times per day, don’t need a fancy UI, and
+          don’t need additional people to communicate with any third parties.
+        </p>
+        <p>
+          From a business competition standpoint, if you only use the standard
+          tools of today, then you’re on the same playing field as everyone
+          else. It’s now more possible than ever to change that no matter how
+          many resources you have.
+        </p>
+        <p>— 1/25/26</p>
+        <br />
+        <h2 id="performant-code-and-agents">Performant Code and Agents</h2>
+        <p>
+          Of all kinds of code that I’ve tried to get agents to write,
+          performant code is by far the hardest. It’s easy to get it to spit out
+          code for a parser or for some cool canvas effects in a web
+          application, however if you don’t know how those things behave with
+          heavy workloads it’s going to be quite rough.
+        </p>
+        <p>
+          I’ve also seen it suggest false paths with respect to performance
+          optimizations as well. For instance, in Swift Stream Parsing, the
+          primary bottleneck is key path indirection in writing to a value on
+          every single new byte, and the amount of branching from byte-by-byte
+          parsing. This massively slows things down, and due to the specific
+          nature of the library is completely unavoidable. That’s why I don’t
+          recommend it as a replacement for <code>JSONDecoder</code> and
+          <code>Codable</code>, but rather for very specific scenarios such as
+          parsing structured output from an LLM.
+        </p>
+        <p>
+          Yet the LLM will still try to come up with proposed speedups, possibly
+          for the sake of making one feel competent. (eg. It came up with an
+          approach that would cache a stack of appended key paths instead of
+          recreating the path from scratch on every new value detected. It turns
+          out that didn’t help all that much because the stack is often
+          obliterated and recreated when entering/exiting objects and arrays.)
+        </p>
+        <p>
+          Engineering knowledge is now more important than ever it seems,
+          especially when dealing with a confident sounding LLM. Let’s not
+          forget that.
+        </p>
+        <p>— 1/22/26</p>
+        <br />
+        <h2 id="geoffrey-huntley-did-not-kill-software-development">
+          Geoffrey Huntley Did Not Kill Software Development
+        </h2>
+        <p>
+          If you’ve been like me and are trying to not be left behind™ , you
+          may have heard of a recent development in which the Simpsons have
+          virally taken over twitter. If you haven’t heard, and because you
+          absolutely will be left behind™ otherwise, it’s called a
+          <a href="https://ghuntley.com/loop/">Ralph loop</a>. The idea is quite
+          simple, is not tied to any plugin or tool, and consists of running an
+          agent in a loop with a fresh context for each iteration. Often, if the
+          agent seems to be doing well in this loop, you can leave it
+          unsupervised to do its own thing.
+        </p>
+        <p>
+          However, if you’ve read any of Geoffrey Huntley’s posts, or watched
+          some of his talks, you’ll find that he likes to directly point out
+          that he, Geoffrey Huntley himself, has killed all of software
+          development. So, now that modern software development is $10.42 an
+          hour, how could he be wrong about this?
+        </p>
+        <p>
+          Let’s imagine an existing iterative development process in which
+          developers are assigned tickets, and they complete them one at a time
+          until the <em>process</em> is finished. Now, normally we’d like to
+          think there are no roadblocks, but it turns out they happen all the
+          time and intervention is needed. Some tickets get delayed, put on the
+          backlog, or even scraped entirely for all sorts of various reasons.
+        </p>
+        <p>
+          In the case of Ralph Loops, Geoffrey Huntley himself states that you
+          must step in and put your engineering hat on when one of these
+          roadblocks are encountered. Then supervise the agent for a few more
+          iterations before going back to DJ-ing.
+        </p>
+        <p>
+          So we have a live running process that we need to communicate with to
+          get around a road block in its current path. There seems to be a
+          required collaboration between machine and human to make this
+          communication possible. Therefore, there has to be an interface
+          somewhere to do this. The agent is perpetually running in a loop,
+          autonomously or not, so any updates to the process that we make will
+          therefore be received and implemented pretty quickly.
+        </p>
+        <p>
+          In other words, this is a form of live programming! It’s a concept
+          that was widely important in the 70s at PARC! Smalltalk was such a
+          good example of a live programming system, and any change to the code
+          would be recompiled into the system incredibly fast. So fast, that the
+          change itself would be visible in real time unlike most programs today
+          where you would have to recompile and run the entire binary from
+          scratch.
+        </p>
+        <p>
+          Once we start thinking about programming as moving around living and
+          real things, a lot of powerful ideas are unlocked. For instance, we
+          see how
+          <a href="https://whypeople.xyz/processes-are-central-to-programming"
+            >programming becomes more about dynamic processes</a
+          >
+          rather than manipulating static bits inside data structures. We’ll
+          also have to take parallels to the physical world in which beings in
+          society can be considered running programs, and how we design
+          infrastructure for those programs.
+        </p>
+        <p>
+          However, I want to make clear that a loop is just one kind of process,
+          and that thinking all of software development in terms of mere loops
+          is a very limited and short-sighted idea. This isn’t to say that the
+          Ralph Loop has no merit, but rather that on its own it’s not even
+          close to the style of thinking and operating that is actually needed
+          here. I think even Geoffrey would agree with that statement by the
+          way.
+        </p>
+        <p>
+          Us humans are also theoretical biological ralph loops that are always
+          running, but we don’t have to repeat very defined processes thanks to
+          free will. We generally have to make decisions based on information,
+          and we also very much like to say the words “if” and “when”.
+        </p>
+        <p>
+          How will one orchestrate this for continuously live running agents?
+          Well if how we handle the physical world tells us anything, we’ll need
+          lots of processes in place. Those processes will further have to be
+          compatible with dynamic behavior. Additional processes will also be
+          needed to create new processed in a meta-language like fashion.
+        </p>
+        <p>
+          So there will be quite a lot of software development in fact, because
+          inevitably there will be so many edge cases for Ralph loops that we’ll
+          need processes to handle them. In other words, at this moment is our
+          chance to create a new programming <em>environment</em> (not just
+          textual language) that prioritizes processes and building systems
+          rather than just enhancing our ability to write text faster.
+        </p>
+        <p>
+          This last thing is absolutely incredibly important, and messing it up
+          can have serious consequences. Anyone responsible for building such a
+          system at the bear minimum should take time to understand many of the
+          ideas from the pioneers of computing, and absolutely not proceed with
+          anything until
+          <a href="https://www.dougengelbart.org/pubs/augment-3906.html"
+            >this paper</a
+          >
+          has been fully read and understood. The last time someone attempted
+          this without reading that paper, we got the web and a lot of regret
+          from its creator.
+        </p>
+        <p>I would rather that not happen this time.</p>
+        <p>— 1/21/26</p>
+        <br />
+        <h2 id="most-systems-are-safety-critical">
+          Most Systems are Safety Critical
+        </h2>
+        <p>
+          This might sound quite ridiculous to say, but I think of TikTok as a
+          safety critical system. Yes, in the same sense as medical devices,
+          automobiles, etc.
+        </p>
+        <p>
+          With that latter kind of system, it’s quite easy to conclude that “bug
+          in software -&gt; potential death”.
+        </p>
+        <p>
+          For TikTok, I would say that “bug in user interface -&gt; potential
+          death”, where the user interface is naturally a subset of software.
+          TikTok’s biggest user interface bug is keeping you endlessly trapped
+          in a false perception of reality. This has no doubt led to deaths and
+          widespread pyschological issues across society.
+        </p>
+        <p>
+          Though even a simple bug in the code can cause issues. If TikTok was
+          taken offline from such a bug, you may think of it as just a simple
+          inconvenience. However, their user interface bug has created quite a
+          psychological dependence on the platform for younger generations, and
+          taking away an addictive substance abruptly usually isn’t a good cure.
+          Also, for better or for worse, TikTok is an archive of collective
+          knowledge that may need to be accessed for non-trivial purposes, so
+          workflows that depend on that archive (eg. Court) may be disrupted.
+        </p>
+        <p>
+          If we look at the overall landscape of damage, would we say that
+          automobile accidents, or mental health issues are bigger?
+        </p>
+        <p>
+          Of course, both are bad, but inuitively we more clearly see the
+          consequences of automobile accidents over mental health issues. In
+          fact, many say that mental health isn’t a real problem!
+        </p>
+        <p>
+          Automobile accidents are also very easy to measure compared to the
+          effects of mental health issues. To measure the latter, you need to
+          use more science, and often infer conclusions based on a number of
+          downstream indirect measurements (eg. An oversimplification: Poor
+          mental health -&gt; bad performance at job -&gt; company loses money).
+        </p>
+        <p>
+          Unfortunately, most people think of science as a jumble of facts
+          instead of as a way of thinking, and will use facts discovered by
+          scientific thinking when it’s convenient for them, which is often when
+          trying to win an argument. They’ll claim that their ideology “follows
+          the science”, but in truth they are just using rhetoric, which is
+          exactly the opposite of scientific thinking.
+        </p>
+        <p>
+          Jumbles of facts are also not a replacement for systems understanding.
+          If we don’t universally learn the latter as a society, we’ll never
+          acknowledge many of the real issues caused by our man-made systems.
+          You may believe that universal learning is practically impossible, but
+          we’ve already achieved it with literacy. Nearly every citizen on the
+          US can read at least a little bit thanks to public education, which is
+          why TikTok even works as a business in the first place.
+        </p>
+        <p>
+          Regardless, I’m going to take a wild guess and assume that most
+          software engineering at TikTok is the typical kind of gluing things
+          together, often between tightly coupled distributed services (Though
+          TikTok is at the scale where microservices make sense), possibly
+          skipping out on tests for time’s sake, and writing “good enough” code
+          to reach arbitrary deadlines.
+        </p>
+        <p>
+          Does TikTok need assembly level code verification like other safety
+          critical systems? Probably not. However, its user interface surely
+          needs to go through real clinical trials, and its infrastructure also
+          needs to be heavily audited to prevent outages from blocking data
+          access entirely.
+        </p>
+        <p>— 1/17/26</p>
+        <br />
+        <h2 id="llms-and-creatives">LLMs and Creatives</h2>
+        <p>
+          To add on to my never ending writings about LLMs and systems design,
+          we’ll now address actual creative work. To define creative work, I’ll
+          consider it as any body of work that inherently produces novelty. To
+          this extent, art, writing, music, etc. are all included.
+        </p>
+        <p>
+          As I’ve stated previously, the point of creation isn’t to have a model
+          generate a bunch of variants, and then have a human pick the best one.
+          Whilst a model can generate creative work far faster than a human can
+          create it, at the end of the day LLMs are really just incredible
+          statistical pattern matchers based on a limited context window.
+        </p>
+        <p>
+          Good creative work often doesn’t follow statistics, and is rather an
+          output of intuition. The intuition is required for novelty, because
+          statistics by its own nature must use what already exists.
+        </p>
+        <p>
+          My primary role in the economy is to build software, and to those ends
+          the code is required to be written in a certain way to produce a
+          quality system. Robust software often requires measuring statistics in
+          some form, whether that’s through tests, infrastructure costs,
+          performance benchmarks, analytics, or whatever else. Improving these
+          things is often an optimization problem, which is a perfect problem
+          shape for pattern detection algorithms like LLMs. Generally, this
+          doesn’t take the meaningful work out of creating software, because the
+          actual hard creative work typically happens in one’s head long before
+          that sit at their desk.
+        </p>
+        <p>
+          Similarly, the role of airline pilots is to transport passengers or
+          cargo from one destination to another. For each destination and the
+          environment around it, there is an optimal flight path that one can
+          take. This is an optimization problem for which autopilot is the
+          current solution.
+        </p>
+        <p>
+          However, art, music, and writing are absolutely
+          <em>not</em> optimization problems, and trying to make them
+          optimization problems is an absolutely terrible idea. The point of
+          pure creative output is to express ideas, often in an open-ended form,
+          and to communicate to other humans. Without that, we lose out on so
+          much, including learning novelty required to design more robust
+          systems.
+        </p>
+        <p>
+          Does that mean LLMs are an entirely bad idea in creative fields? No,
+          but they need to be working to enhance creative output rather than
+          taking away the process entirely. The solution to this clearly lies
+          with the design of LLM-based tools.
+        </p>
+        <p>
+          LLMs have an inherently large corpus of knowledge, and are more
+          available than other colleagues to review existing work for example.
+          As such, they can offer realtime feedback by picking up on queues from
+          watching humans create. In pair programming for instance, the partner
+          watching can pick up and learn from just seeing the driving partner
+          type code without any additional communication.
+        </p>
+        <p>
+          Right now, LLMs almost entirely accept specifically crafted
+          textual/file-based prompts as inputs. Often, these prompts are entered
+          into a tiny text box on a window somewhere off to the side of the
+          actual creative work. Therefore, by nature, one has to stop doing any
+          sort of creative work in order to engage with the LLM. This in turn,
+          takes one out of the creative flow, and as a result is likely to
+          produce a worse overall outcome.
+        </p>
+        <p>
+          In other words, we need more forms of inputs! If you keep the input
+          mechanism to entering text and dragging files into a tiny text box,
+          almost certainly people will be upset that the fun is being taken out
+          of the creative work.
+        </p>
+        <p>— 1/17/26</p>
+        <br />
+        <h2 id="skill-atrophy">Skill Atrophy</h2>
+        <p>
+          One of the biggest counter arguments I’ve seen to agentic coding is
+          the idea that your skills will atrophy if you start adopting agents to
+          write all the code. Firstly, while the agents are now good enough to
+          write most code in many cases, they certainly aren’t good enough to
+          write <em>all</em> code yet. So at least on that front, your
+          handwriting skills will still be necessary for quite some time.
+        </p>
+        <p>
+          However, the main point that I want to make here is that you can only
+          upskill so much by repeatedly manually writing simple UI components,
+          network calls, database queries, caching, or simple business logic.
+          That is, writing the code for these things isn’t typically all that
+          hard, but rather more time consuming than anything else. The hard part
+          is generally how all of those components are orchestrated in the
+          larger system, and how they are isolated from one another. That’s why
+          mobile developers love talking about app architecture and design
+          patterns.
+        </p>
+        <p>
+          For IO bound systems, you can generally write the code as verbose as
+          you want, as decoupled as you want, and favor readability over
+          performance. At the end of the day, you’ll likely still have fine
+          performance at the individual lines of code level regardless of the
+          style you choose. This is because the actual application performance
+          optimizations generally come from designing a better higher level
+          architecture with less latency/throughput/better resource
+          utilization/etc. This architecture largely exists outside of the code.
+        </p>
+        <p>
+          Now of course, for compute bound systems the actual code matters a lot
+          more. You can’t just add 15 levels of indirection, or use convenience
+          algorithms (eg. <code>.map</code> in JavaScript) if you need top-notch
+          performance. Even choosing between contiguous vs non-contiguous memory
+          based data structures can have a massive impact on performance in such
+          cases.
+        </p>
+        <p>
+          Thirdly, there are frameworks that often require stretching a language
+          to its limits to provide a more convenient API to end-users. Often
+          times, the interface needs to be carefully crafted, and in statically
+          typed languages, the way you define types is akin to a work of genuine
+          art. I still remember when my colleague wrote an internal TRPC clone,
+          and the typescript types were an absolutely beautiful work of art to
+          admire.
+        </p>
+        <p>
+          Generally speaking, I think skill increases for most programmers come
+          from either investing in better architecture, writing performance
+          intensive code, or writing framework code. Even just spending a
+          weekend writing a fast JSON parser by hand will probably improve your
+          skills a lot more than writing 300 HTTP API calls by hand over the
+          next few months.
+        </p>
+        <p>
+          Right now, I think those things are what agents are lacking in,
+          because both require lots of precision to get right. I imagine agents
+          will improve at both those things in the foreseeable future, but the
+          improvements will be slower than the ability to churn out more IO
+          based systems. In the real world, it just seems that more IO bound
+          systems are directly making money than compute bound systems, so
+          obviously the model improvements will follow that direction.
+        </p>
+        <p>
+          In the meantime, if you occasionally opt to write performance
+          intensive and code that requires precision by hand, then your skills
+          will probably continue to increase despite using agents for everything
+          else. At the end of the day, novelty in writing code will yield more
+          improvements.
+        </p>
+        <p>— 1/15/26</p>
+        <br />
+        <h2 id="the-agent-is-dark">The Agent is Dark</h2>
+        <p>
+          How much of your system can you see from this?
+          <img
+            src="global-notes/assets/the-agent-is-dark-1.jpeg"
+            alt="A screenshot of opencode circa January 2026."
+          />
+        </p>
+        <p>
+          Or this?
+          <img
+            src="global-notes/assets/the-agent-is-dark-2.jpeg"
+            alt="A screenshot of Claude Code circa January 2026."
+          />
+        </p>
+        <p>
+          I don’t see anything but a black background, a text box, and a weird
+          animal looking thing. We have a long to go…
+        </p>
+        <p>— 1/15/26 (2:13 AM)</p>
+        <br />
+        <h2 id="native-vs-react-native-in-2026">
+          Native vs React Native in 2026
+        </h2>
+        <p>Ah yes, the classic debate.</p>
+        <p>
+          For context, I’ve worked professionally in both Swift on the iOS and
+          watchOS side (alongside many open source libraries that I maintain),
+          and React Native with Expo.
+        </p>
+        <p>
+          In the past, my opinions on the matter were quite nuanced, but were
+          something like this.
+        </p>
+        <ul>
+          <li>
+            Native code generally has less dependencies, and platform feature
+            are available as soon as Apple releases them.
+          </li>
+          <li>
+            It’s easier to do platform UI and extensions (eg. Widgets) in
+            native.
+          </li>
+          <li>
+            Persistence and storage are definitely better in Native.
+            <ul>
+              <li>
+                <code>expo-sqlite</code> is quite limited compared to GRDB and
+                SQLiteData.
+              </li>
+              <li>
+                React Native libraries tend to be geared towards simple use
+                cases.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Native code is easier to get right and make performant given that
+            it’s generally compiled to machine code and not interpreted.
+            <ul>
+              <li>
+                Both Native and React Native can build great apps, but generally
+                the best apps I’ve used tend to be native.
+              </li>
+            </ul>
+          </li>
+          <li>React Native has the advantage of speed of shipping.</li>
+          <li>
+            React Native is great for unified UI across both iOS and Android.
+            <ul>
+              <li>Skia is also quite fine for graphics.</li>
+            </ul>
+          </li>
+          <li>
+            API back deployment is easier in React Native.
+            <ul>
+              <li>
+                It’s quite easy to build a React Native app that supports many
+                previous OS versions, whereas it’s annoying to support more than
+                the past 3 in native Swift apps.
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+          Generally speaking, the more platform integrated your app, the more
+          likely you want native. If you value more of a custom and brand
+          universal UI across multiple platforms, then React Native isn’t a bad
+          choice. In many cases, you can combine both.
+        </p>
+        <p>
+          However, I’m not sure this is the right stance to take for the coming
+          future. Agentic coding has made the cost of writing code cheap, and
+          the cost of understanding and building quality systems has only
+          increased. If code can be written faster, and existing systems can be
+          built faster, then the only way to stand out from the competition is
+          to build ever increasingly robust systems. We need to understand what
+          we’re building now more than ever.
+        </p>
+        <p>
+          React Native, Flutter, KMP were all created on the premise that you
+          wouldn’t have to write 2 codebases twice for the same app. This
+          benefit is negated if writing code is no longer the bottleneck it once
+          was. Instead, that time can be spent deeply understanding the
+          technical aspects of iOS and Android respectively, as well as doing a
+          host other design tasks.
+        </p>
+        <p>
+          In other words, I’m starting to see diminishing value in React Native.
+          Perhaps if you’re a one person team, and you’re already familiar with
+          React + TypeScript, it may be the best option.
+        </p>
+        <p>
+          Though I would strongly consider whether or not you could spend time
+          learning the native technology in depth, especially if agents can
+          handle a lot of the code for you.
+        </p>
+        <p>
+          Though I recommend avoiding Xcode as much as possible. I only use it
+          as a debugger and for SwiftUI previews, otherwise
+          <a href="https://zed.dev/">Zed</a>.
+        </p>
+        <p>— 1/14/26</p>
+
+        <br />
+
         <h2 id="handwriting">Handwriting</h2>
         <p>
           With agentic coding seeming to gain more adoption, one has to ask what
