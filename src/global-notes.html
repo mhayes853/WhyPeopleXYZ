@@ -134,6 +134,160 @@
           half-baking in my hollow cranium.
         </p>
         <br />
+        <h2 id="-the-permanent-underclass-">“The Permanent Underclass”</h2>
+        <p>
+          Besides the fact that term “underclass” makes me laugh for some reason
+          whenever I pronounce it, this dystopian horror is always ever
+          seemingly present. In fact, you have 2 years to escape apparently,
+          otherwise you’re screwed forever. Afterwards, all of those who managed
+          to escape will build a dedicated zone for all of their underclassmen
+          (does this not sound like high school?) that resembles an internment
+          camp.
+        </p>
+        <p>
+          If we take a critical look at these, we see that this term represents
+          a kind of invented status of sorts (that is the case in general for
+          the term “socio-economical status”). However, I really want to take a
+          deeper look at what makes someone part of the “underclass”. Certainly,
+          we can all recognize that average citizens in many authoritarian
+          regimes have it worse than those in more democratic regimes. Generally
+          speaking, authoritarianism has scaling problems in relation to a
+          regime that can be broken up into composable parts. This also goes for
+          incarcerated people, and I would even wager students in public
+          schooling to an extent.
+        </p>
+        <p>
+          Through society’s definition in this sense, most of the world is
+          already part of a global “permanent underclass”. The way of escaping
+          it is of course, better thinking, and better ideas. Thomas Paine once
+          famously wrote:
+        </p>
+        <blockquote>
+          <p>
+            <em
+              >For as in absolute governments the king imposes the law, so in
+              free government the law ought to impose the king; and there ought
+              to be no other.</em
+            >
+          </p>
+        </blockquote>
+        <p>
+          So in a society with a underclass problem, you need better systems
+          design to escape it.
+        </p>
+        <p>
+          Naturally, this was a fancy way of communicating the obvious fact that
+          those in charge have to be competent enough not to be tyrannical if we
+          want things to pan out well.
+        </p>
+        <p>
+          Then let’s look at what is tyrannical right now, something that makes
+          decisions with no regard for anything but what it deems correct. This
+          is most software today. When you ship a new app to the world, all
+          users get roughly the same design, have no direct ability to change
+          that design for their own purposes, and are forced to adapt it to
+          their needs rather than the other way around.
+        </p>
+        <p>
+          In such a case, the software imposes the law. So you need to flip this
+          on its head somehow (“The law imposes the software” sounds a bit
+          weird, and suggests that government regulation is the solution which
+          isn’t always the right idea.), and in doing so come to an idea in
+          which the software is formed by its direct environment rather than in
+          an office in San Francisco (unless of course it’s primary use is in an
+          office in San Francisco).
+        </p>
+        <p>
+          Once that is complete, the biggest tyrant in the room is gone, and we
+          transition towards seeing ordinary folk solve their own problems with
+          software just like with reading, writing, etc. From an intellectual
+          standpoint, this raises the entire IQ of society because everyone now
+          has new form of input for understanding the world. From a material
+          standpoint, this is a massive creation of wealth simply from the new
+          things that get invented as a result.
+        </p>
+        <p>
+          Ironically, LLMs are currently enabling at least a part of this, and
+          it’s never been easier than ever to “build something” without much
+          knowledge. Though, my bigger concern here is that LLMs themselves are
+          incredibly complicated, and there’s too much misinformation running
+          around about them as a result. Much of the tooling around LLMs are
+          also not enhancing the information or understanding of them either,
+          which is quite a difficult path to escape from a mass market
+          standpoint. Subsequently, the “AI bubble” is a result of this, but if
+          the existing “permanent underclass” expanded it would likely also be
+          the result of this.
+        </p>
+        <p>
+          So in my opinion, the real “permanent underclass” is a society that
+          lacks appropriate understanding of what is actually needed. For the
+          record, this class does not exclude rich people either, because almost
+          certainly they will not have much understanding either. Otherwise,
+          they would realize that remaining in perpetual power over their
+          underclassmen isn’t a net positive long-term strategy. In other words,
+          we all suffer.
+        </p>
+        <p>— 1/28/26</p>
+        <br />
+        <h2 id="prompts-as-libraries">Prompts as Libraries</h2>
+        <p>
+          One other point I didn’t address in the “Future of Libraries” is the
+          idea that prompts or specs themselves can be shared instead of source
+          code. In fact, this has already been explored in practice (see
+          <a
+            href="https://www.dbreunig.com/2026/01/08/a-software-library-with-no-code.html"
+            >whenwords</a
+          >).
+        </p>
+        <p>
+          I think this idea highlights a problem with spec driven development
+          and “plan mode” in agents, even though at the moment both of those
+          things are a part of my workflow. The idea that the representation of
+          the specification is different from the representation of the system
+          itself is not something I’m a fan of.
+        </p>
+        <p>
+          The problem with existing specifications and plans is that they are
+          weak representations that can easily be misinterpreted by the model
+          that carries them out. This is the same case for data transfer across
+          the network as well, 2 clients will not always interpret the same JSON
+          blob in the same manner, which can be quite problematic in some
+          scenarios.
+        </p>
+        <p>
+          Now, is the inherent idea of using plain English and/or markdown a bad
+          idea for a unified representation? Not by default (unless we want to
+          talk about whether or not Markdown is the right UI for something like
+          this in the first place), but the key thing is that the plan itself
+          should be an executable specification. That is, for any system the
+          interprets and implements the spec should get a result consistent with
+          its environment.
+        </p>
+        <p>
+          Of course, there will need to be a representation of the spec
+          somewhere that is more execution friendly, but that is an
+          optimization. It is no different of an optimization as compiling a
+          higher level language into machine code. Regardless, any good
+          representation should ensure that the primary meaning of the
+          information is kept (eg. A machine code binary keeps the same runtime
+          meaning as the HLL source code).
+        </p>
+        <p>
+          So in terms of sharing prompts instead of libraries, we have to ask
+          what it means to share systemic meaning. Right now, sharing the source
+          code preserves the intended runtime meaning, which may not always be
+          the case for sharing a spec (which is more akin to sharing a JSON blob
+          than a binary). Once again, reliability is a concern here.
+        </p>
+        <p>
+          Though if the meaning needs to be slightly different in a specific
+          context, the source code format may not be as necessary. Depending on
+          the meaning variance, and what meaning is trying to be replicated,
+          perhaps sharing a prompt is more suitable. However, I would suspect
+          that the prompt would need to be altered to suit that new meaning.
+        </p>
+        <p>— 1/27/26</p>
+        <br />
         <h2 id="thoughts-on-the-future-of-libraries">
           Thoughts on the Future of Libraries
         </h2>
