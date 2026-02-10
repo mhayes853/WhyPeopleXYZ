@@ -134,6 +134,320 @@
           half-baking in my hollow cranium.
         </p>
         <br />
+        <h2 id="representations-and-optimizations">
+          Representations and Optimizations
+        </h2>
+        <p>
+          If we are to program better in the future with Agentic tools, we’ll
+          have to understand the notion of process more and more. One of my
+          recent more fleshed out writings was a response to one of Alan Kay’s
+          call to arms on the notion that “Data Structures being more central to
+          programming than algorithms” was a deadly flawed idea. To summarize my
+          (and possibly Alan’s) response, both of those things are merely
+          defined representations, and really if anything should be optimized,
+          it’s the meaning of those representations.
+        </p>
+        <p>
+          Of course, that answer evades directly addressing the current
+          realities of programming in most languages today, and most others I’ve
+          asked this question to give the more typical answers. That is along
+          the lines of: “Good data structures make the algorithm obvious” or
+          “The algorithm itself must use the data structures efficiently”. These
+          typical answers are naturally something I disagree with. Picking the
+          right data structure doesn’t mean the algorithm will form itself,
+          because 2 separate implementations will use the data structure
+          differently (with variances in regard to efficiencies). Static bits in
+          memory just doesn’t maintain “meaning” well enough to scale.
+        </p>
+        <p>
+          For the record, I’m not only referring to basic algorithms like simple
+          sorts where there’s always a deterministic answer (in terms of
+          correctness). Machine learning is also something that one would
+          consider an algorithm, but its output is almost always
+          non-deterministic. Though truth be told, if we look at raw performance
+          in terms of latency, even the simple sort is non-deterministic because
+          it will run faster or slower on the CPU for any given run. In such a
+          manner, we can say that the more non-determinism, the more chance of
+          the meaning varying.
+        </p>
+        <p>
+          If you wanted to kill someone via sending a package in the mail, which
+          option would you pick?
+        </p>
+        <ul>
+          <li>
+            Send them a bomb that explodes in their face as soon as the package
+            is opened.
+          </li>
+          <li>
+            Send them the parts that make up a bomb, and hope they assemble it
+            themselves.
+          </li>
+        </ul>
+        <p>
+          <em
+            >Don’t ask why I picked this example of all things… It was funny to
+            run by a few colleagues.</em
+          >
+        </p>
+        <p>
+          Obviously, no terrorist is going to pick the second option, but the
+          second option is rather what we decide to do today in computing.
+        </p>
+        <p>
+          When we look at inefficient or incorrect implementations of even
+          simple algorithms, we’ll also find that they tend to pick the second
+          option, rather than the more direct first. Either the parts take extra
+          work to assemble which degrades performance, or the parts are
+          assembled incorrectly. So “picking the right data structure”, or
+          rather the right meaning of information has profound impacts on
+          performance.
+        </p>
+        <p>
+          Now let’s talk about general human to human communication a bit. Poor
+          communication causes incorrectness and inefficiences because either
+          the wrong work, or extra work is performed that isn’t necessary.
+          Generally, this is caused by poor preservation of “meaning” between
+          the communications, so in other words picking the wrong
+          representations.
+        </p>
+        <p>
+          If meaning is the center of programming, as Alan wanted to portray as
+          a general slogan in his answer, then certainly meaning encompasses
+          data structural representations, but also representations that are
+          relative to something. However, If we look at general purpose
+          programming languages today, that relativeness (I’m avoiding the term
+          relativity thanks to Einstein) is lost to general data structures and
+          algorithms.
+        </p>
+        <p>
+          What do I mean by relativeness? A simple model of this is a DSL, but
+          really static DSLs are also quite weak. If something is to be truly
+          relative, then it needs to be dynamic.
+        </p>
+        <p>
+          Take your inner social circle, and for simplicity your English
+          speaking inner circle. Even though English is used as the DSL to speak
+          with each person, you vary the form of English you speak with each
+          separate person. These variances are where relativity is formed, and
+          it is formed dynamically as you continue to speak with the person. Of
+          course, the reason you form these variances is to optimize the manner
+          in which you speak to the other person.
+        </p>
+        <p>
+          Why do we write pseudocode? In today’s agentic/LLM driven landscape,
+          I’m going to expand the term pseudocode to include prompts that are
+          intended to generate code.
+        </p>
+        <p>
+          It turns out that pseudocode is easy to write because we can keep its
+          representation quite relative to its goal, rather than to a general
+          purpose language. If we didn’t, the general purpose langauge would
+          impose its constraints on the pseudocode, causing it to lose meaning
+          in the grand scheme of things.
+        </p>
+        <p>
+          Of course, we also have to understand that the machine itself has its
+          own relative representation for executing process, that being machine
+          code. However, for us humans its quite hard to derive any sort of
+          meaning from machine code, at least in our overall understanding of
+          the process it represents. Obviously, this is why we have compilers
+          that take languages more relative to us, and translate them downwards.
+        </p>
+        <p>
+          So really, the optimization has to be relativeness. The more
+          relativeness, the easier to preserve the meaning and therefore
+          efficiency of process.
+        </p>
+        <p>— 2/6/26</p>
+        <br />
+        <h2 id="why-i-m-interested-in-edge-models-inference">
+          Why I’m Interested in Edge Models/Inference
+        </h2>
+        <p>
+          Apparently, just having some amount of information on the public
+          internet that even demonstrates a slight hint towards enjoying edge
+          models will get a few random people emailing you. Many of these emails
+          contain the typical talking points for why edge inference is a good
+          idea (privacy, offline, etc.). However, while those talking points are
+          good, they are not the primary reasons I’m interested in this space.
+        </p>
+        <p>
+          First and foremost, my biggest concern is systems design, and the way
+          in which people think about systems. The second of those is what I
+          want to elaborate on in this note, because the idea of that point is
+          to create mediums that enable better thinking.
+        </p>
+        <p>
+          Making people think better requires giving them framework for thought,
+          most often that is a typical GUI, but it also concerns the design of
+          frameworks in code.
+          <a href="https://youtu.be/AdNJ3fydeao?si=LKY7jna7VrHV9Gxm"
+            >Rethinking Reactivity</a
+          >
+          by Rich Harris is probably my all-time favorite frontend talk, and in
+          it he really pushes the idea that frameworks are tools for your mind,
+          not your code.
+        </p>
+        <p>
+          But let’s get back to traditional GUIs for a moment, because that is
+          the interface most people use for technology. Take Calendar apps for
+          example, of which we often claim as a “productivity tool”. Why is it
+          so productive to put events on your calendar? Really, it’s because the
+          calendar’s UI allows you to layout your daily events/schedule in a way
+          that allows you to come to an <em>understanding</em> about them. This
+          understanding is what makes you more productive.
+        </p>
+        <p>
+          When you use a calendar, you think a certain way. Likewise, when you
+          use a coding agent, you also think a certain way. When you talk to
+          someone, you think a certain way about your language and person you’re
+          talking to.
+        </p>
+        <p>
+          Doug Engelbart saw this trend in particular, and spent many years
+          researching various types of interfaces that would augment one’s
+          thinking instead of degrading it. In particular, he extended this idea
+          to groups of people more so than a single person, but
+          commercialization ultimately chose the path of the individual.
+        </p>
+        <p>
+          Likewise, I’m interested in interfaces that are malleable, almost like
+          spoken language. For instance, while you may speak English to 2
+          separate people, you will not speak the same form of English to both
+          of those people. As you further converse with someone, the language
+          you uses will change and adapt as more information is understood about
+          the person. English is used as the base, but it is mutated at runtime
+          (ie. In a conversation) to suit the needs of the receiver.
+        </p>
+        <p>
+          In other words, this mutation of English is a dynamic user interface,
+          one that adapts based on the context. It turns out that we have
+          technology that can: live in the user’s context, speak English
+          fluently, runs fast on consumer hardware, and can pattern match far
+          better than humans. In case you’re wondering, I’m talking about
+          running edge models and inference.
+        </p>
+        <p>
+          All in all, edge models and inference are a technology that I believe
+          can power the idea of a dynamic user interface. One might ask, why not
+          cloud models/inference? These models are far bigger and knowledgeable
+          than edge models, so one has to ask why I would accept potentially
+          degraded performance.
+        </p>
+        <p>
+          My answer to that is more so an engineering answer from an engineering
+          standpoint, in which I would say that the internet is too flaky and
+          slow for the real-time component of generating UIs in response to
+          quick user interactions. Edge models can easily hit generation speeds
+          of &gt;100 tps on the CPU alone given the right configuration, and are
+          not bottlenecked by network concerns. Additionally, it’s best if they
+          operate directly in the user’s context such that we don’t have to send
+          sensitive data across the network.
+        </p>
+        <p>
+          So yes, privacy and offline support are great reasons for why I’m
+          interested, but only from an engineering standpoint. That is, I see
+          them as more of an implementation detail rather than the ideals
+          themselves.
+        </p>
+        <p>— 2/4/26</p>
+        <br />
+        <h2 id="some-things-about-edge-models">
+          Some Things About Edge Models
+        </h2>
+        <p>
+          I talk with iOS developers sometimes, and FoundationModels is a more
+          popular topic in recent conversations. Notably, Apple is considered to
+          be “behind” in the AI arms race, and primarily I think the reason for
+          this is because of their focus on edge models. Instead of focusing on
+          burning billions in infrastructure costs to fuel the next generation
+          of lobsters running on Mac Minis, Apple has decided that they’ll just
+          run the inference on your phone instead.
+        </p>
+        <p>
+          One of the things I’ve realized is that most developers and
+          technically enthusiastic users, is that they expect the output of edge
+          models to be on par with GPT-5. Ok, maybe they don’t think that way
+          directly, but certainly my conversations have shown hope for being
+          able to use edge models for the same kinds of applications as cloud
+          models.
+        </p>
+        <p>
+          To an extent, this opinion is valid. I do believe that most of us
+          developers are throwing the biggest models at every problem (see Opus
+          Spam), when smaller models, or even just basic classifier models will
+          do. However, you’re not going to get good results attempting agentic
+          coding with a model that only has ~3B parameters and a 4K token
+          context window (the primary agentic coding models have at least 100B
+          parameters and and 150k token context length).
+        </p>
+        <p>
+          I keep hearing hopeful statements for this year’s up and coming WWDC
+          in which we’ll somehow get an edge model on par with the offerings
+          from the big AI labs. Unfortunately, that will likely not happen, at
+          least on the current generation of hardware.
+        </p>
+        <p>
+          That being said, I think edge models have lots of unique power over
+          cloud models besides the usual privacy and offline statements. One of
+          the things I haven’t talked about publicly yet, is the idea of doing
+          dynamic user interfaces that adapt in real time as a user uses an
+          application. Some may call this “Generative UI”, and there’s even an
+          SDK called <a href="https://github.com/tambo-ai/tambo">Tambo</a> for
+          this, but this SDK misses the main ideas of what I have in mind (In
+          future writings, you’ll see that real dynamic UI is much more than
+          merely tailoring the UI to each user based on a prompt).
+        </p>
+        <p>
+          I wouldn’t try to use a cloud model for dynamic UI because of either
+          network latency/reliability or because inference speeds are too slow.
+          It’s not uncommon for edge models to reach speeds of over &gt;100 tps
+          even just running on the CPU directly. The network issue is the bigger
+          problem here, because even inference speeds of &gt;1000 tps mean
+          nothing if the user’s network is down.
+        </p>
+        <p>
+          Another thing to note is that edge models can defeat the bigger cloud
+          models in some tasks, that is if you fine tune them. Any application
+          that seriously uses edge models should be using fine tuned models, and
+          I think this is a hole in the space that should be addressed from
+          available tooling. Most developers are completely unfamiliar with the
+          concept, and would rather be building feature instead of LoRA
+          adapters.
+        </p>
+        <p>
+          Lastly, one other big idea is remote control. Since edge models run
+          locally on the client, the system prompts are also going to have to be
+          present on the client. However, a hard-coded client-side system prompt
+          that’s dangerous will be incredibly hard to update, especially if
+          you’re deploying to the App Store. Once a prompt is hard-coded on the
+          client, it remains forever, so for that reason it’s ideal to have your
+          app check for system prompts updates at runtime such that you can
+          deploy new prompts without going through app review.
+        </p>
+        <p>
+          Now of course, you need to ensure that you take appropriate measures
+          to prevent MITM attacks from injecting bad prompts on the client.
+          Prompt injection still is a security problem at the end of the day.
+        </p>
+        <p>
+          Additionally, observability is also an important aspect. Particularly,
+          you’ll want to address the basics of detecting things like output
+          speeds, confidence thresholds, memory usage, etc. on a per-prompt
+          basis. However, good observability should also embed safety, and
+          therefore act as a NORAD in order to detect warning signs of things
+          going catastrophically wrong. (eg. A system prompt that’s doing more
+          harm than good to a user.)
+        </p>
+        <p>
+          I’ll have more to say on this topic in future writings. At the very
+          least, edge models are likely to be used as the implementation driver
+          of a lot of my upcoming design work, which is why I’m interested in
+          them.
+        </p>
+        <p>— 2/3/26</p>
+        <br />
         <h2 id="is-one-shotting-a-good-idea-">Is One Shotting a Good Idea?</h2>
         <p>
           If you’ve been using agents for a decent amount of time now, you’re
