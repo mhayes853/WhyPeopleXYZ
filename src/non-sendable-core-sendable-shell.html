@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpeg" href="./shared-assets/icon.jpeg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Root</title>
+    <meta property="og:title" content="Non-Sendable Core, Sendable Shell" />
+    <meta
+      property="og:description"
+      content="How to push Swift Concurrency to the edge, and make the rest of your code simpler."
+    />
+    <meta property="og:image" content="./shared-assets/icon.jpeg" />
+    <meta property="og:url" content="/on-package-traits" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Non-Sendable Core, Sendable Shell" />
+    <meta
+      name="twitter:description"
+      content="How to push Swift Concurrency to the edge, and make the rest of your code simpler."
+    />
+    <meta name="twitter:image" content="./shared-assets/icon.jpeg" />
+    <meta name="twitter:url" content="/on-package-traits" />
+  </head>
+  <body>
+    <div id="app">
+      <a class="core-crystal-container" href="/">
+        <svg
+          viewBox="142.5 5.839188863210153 116.25000000000001 168.08522227669226"
+          xmlns="http://www.w3.org/2000/svg"
+          id="svg"
+          style="max-height: 500px"
+          width="116.25000000000001"
+          height="168.08522227669226"
+        >
+          <defs>
+            <!-- Bright liquid body (tuned for white background) -->
+            <radialGradient id="liquidBody" cx="35%" cy="22%" r="72%">
+              <stop offset="0%" stop-color="#ff7a8c" />
+              <stop offset="45%" stop-color="#ff2f4f" />
+              <stop offset="100%" stop-color="#ff1f3f" />
+            </radialGradient>
+
+            <!-- Gentle inner depth (NO dark reds) -->
+            <radialGradient id="liquidDepth" cx="70%" cy="78%" r="80%">
+              <stop offset="0%" stop-color="#ff4a66" stop-opacity="0.35" />
+              <stop offset="100%" stop-color="#ff1f3f" stop-opacity="0.55" />
+            </radialGradient>
+
+            <!-- Clean specular highlight -->
+            <linearGradient
+              id="liquidHighlight"
+              x1="10%"
+              y1="5%"
+              x2="90%"
+              y2="95%"
+            >
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35" />
+              <stop offset="20%" stop-color="#ffffff" stop-opacity="0.14" />
+              <stop offset="38%" stop-color="#ffffff" stop-opacity="0.06" />
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+            </linearGradient>
+
+            <!-- Very subtle inner rim (glass thickness) -->
+            <filter id="innerGlow">
+              <feGaussianBlur stdDeviation="1.4" result="g" />
+              <feColorMatrix
+                in="g"
+                type="matrix"
+                values="
+                  1 0 0 0 0
+                  0 0.3 0 0 0
+                  0 0 0.3 0 0
+                  0 0 0 0.18 0"
+              />
+            </filter>
+
+            <clipPath id="shapeClip">
+              <path
+                d="M176.106 11.542 C 175.205 11.869,174.314 12.648,173.851 13.514 L 173.442 14.279 173.339 33.834 C 173.263 48.256,173.178 53.603,173.016 54.206 C 172.699 55.387,172.069 56.950,171.683 57.509 C 171.500 57.774,171.351 58.054,171.351 58.129 C 171.351 58.329,169.503 60.720,168.684 61.580 C 168.091 62.203,167.449 62.965,166.314 64.393 C 166.195 64.543,165.362 65.566,164.464 66.667 C 163.566 67.767,161.373 70.468,159.590 72.669 C 155.818 77.327,156.402 76.609,153.969 79.582 C 152.905 80.882,151.601 82.478,151.071 83.129 C 148.510 86.273,148.708 90.325,151.534 92.588 C 151.596 92.638,153.966 95.543,156.800 99.045 C 159.634 102.547,162.164 105.666,162.423 105.977 C 162.966 106.630,162.780 106.401,165.805 110.153 C 167.090 111.747,168.450 113.379,168.828 113.779 C 169.702 114.706,171.347 116.823,171.349 117.025 C 171.350 117.110,171.503 117.396,171.689 117.662 C 172.147 118.317,172.805 120.128,172.986 121.237 C 173.068 121.737,173.194 130.823,173.267 141.428 C 173.395 160.215,173.407 160.729,173.764 161.493 C 174.198 162.424,175.165 163.284,176.171 163.634 C 177.255 164.011,222.745 164.011,223.829 163.634 C 224.857 163.276,225.801 162.422,226.294 161.402 L 226.717 160.528 226.832 140.700 L 226.948 120.873 227.429 119.635 C 227.867 118.508,228.605 117.006,228.832 116.780 C 228.882 116.730,229.169 116.325,229.468 115.879 C 229.768 115.434,230.469 114.574,231.026 113.969 C 231.959 112.955,233.369 111.241,237.391 106.230 C 238.234 105.180,238.970 104.279,239.026 104.229 C 239.082 104.179,239.770 103.327,240.555 102.335 C 241.340 101.343,242.126 100.361,242.301 100.152 C 243.036 99.276,244.123 97.950,245.748 95.945 C 246.698 94.773,247.996 93.190,248.632 92.428 C 251.449 89.048,251.621 86.025,249.152 83.303 C 248.506 82.592,246.034 79.619,245.741 79.203 C 245.495 78.852,244.857 78.070,243.468 76.418 C 243.165 76.057,242.432 75.148,241.841 74.397 C 241.249 73.647,240.719 72.992,240.664 72.942 C 240.576 72.863,239.655 71.725,238.836 70.685 C 238.686 70.495,238.313 70.044,238.007 69.685 C 237.701 69.326,237.251 68.777,237.007 68.467 C 236.762 68.157,235.744 66.896,234.743 65.666 C 233.743 64.436,232.724 63.176,232.479 62.865 C 232.233 62.555,231.579 61.806,231.023 61.201 C 230.468 60.596,229.768 59.737,229.468 59.291 C 229.168 58.846,228.861 58.454,228.786 58.420 C 228.711 58.387,228.649 58.277,228.649 58.176 C 228.649 58.074,228.496 57.774,228.308 57.509 C 226.780 55.345,226.718 54.385,226.670 32.041 C 226.628 12.270,226.727 13.612,225.213 12.341 C 224.153 11.451,221.296 10.848,220.932 11.438 C 220.878 11.526,220.648 11.639,220.421 11.689 C 219.961 11.791,215.847 13.208,215.280 13.461 C 214.930 13.616,211.434 14.834,209.732 15.393 C 209.281 15.541,208.749 15.731,208.549 15.816 C 208.349 15.901,207.899 16.069,207.549 16.189 C 207.199 16.309,206.749 16.477,206.548 16.561 C 206.348 16.645,205.284 17.009,204.184 17.369 C 203.083 17.730,202.019 18.093,201.819 18.176 C 200.013 18.924,199.974 18.924,198.181 18.175 C 197.981 18.091,197.080 17.778,196.180 17.478 C 193.979 16.746,191.895 16.017,191.451 15.822 C 190.858 15.563,186.756 14.152,186.309 14.054 C 186.083 14.004,185.853 13.891,185.798 13.803 C 185.744 13.715,185.516 13.643,185.292 13.643 C 185.067 13.643,184.806 13.577,184.711 13.498 C 184.616 13.418,184.211 13.249,183.811 13.122 C 183.411 12.995,182.920 12.822,182.719 12.737 C 182.519 12.653,181.660 12.357,180.809 12.079 C 179.959 11.802,179.186 11.508,179.090 11.426 C 178.836 11.208,176.813 11.287,176.106 11.542"
+              />
+            </clipPath>
+          </defs>
+
+          <!-- Base shape -->
+          <path
+            d="M176.106 11.542 C 175.205 11.869,174.314 12.648,173.851 13.514 L 173.442 14.279 173.339 33.834 C 173.263 48.256,173.178 53.603,173.016 54.206 C 172.699 55.387,172.069 56.950,171.683 57.509 C 171.500 57.774,171.351 58.054,171.351 58.129 C 171.351 58.329,169.503 60.720,168.684 61.580 C 168.091 62.203,167.449 62.965,166.314 64.393 C 166.195 64.543,165.362 65.566,164.464 66.667 C 163.566 67.767,161.373 70.468,159.590 72.669 C 155.818 77.327,156.402 76.609,153.969 79.582 C 152.905 80.882,151.601 82.478,151.071 83.129 C 148.510 86.273,148.708 90.325,151.534 92.588 C 151.596 92.638,153.966 95.543,156.800 99.045 C 159.634 102.547,162.164 105.666,162.423 105.977 C 162.966 106.630,162.780 106.401,165.805 110.153 C 167.090 111.747,168.450 113.379,168.828 113.779 C 169.702 114.706,171.347 116.823,171.349 117.025 C 171.350 117.110,171.503 117.396,171.689 117.662 C 172.147 118.317,172.805 120.128,172.986 121.237 C 173.068 121.737,173.194 130.823,173.267 141.428 C 173.395 160.215,173.407 160.729,173.764 161.493 C 174.198 162.424,175.165 163.284,176.171 163.634 C 177.255 164.011,222.745 164.011,223.829 163.634 C 224.857 163.276,225.801 162.422,226.294 161.402 L 226.717 160.528 226.832 140.700 L 226.948 120.873 227.429 119.635 C 227.867 118.508,228.605 117.006,228.832 116.780 C 228.882 116.730,229.169 116.325,229.468 115.879 C 229.768 115.434,230.469 114.574,231.026 113.969 C 231.959 112.955,233.369 111.241,237.391 106.230 C 238.234 105.180,238.970 104.279,239.026 104.229 C 239.082 104.179,239.770 103.327,240.555 102.335 C 241.340 101.343,242.126 100.361,242.301 100.152 C 243.036 99.276,244.123 97.950,245.748 95.945 C 246.698 94.773,247.996 93.190,248.632 92.428 C 251.449 89.048,251.621 86.025,249.152 83.303 C 248.506 82.592,246.034 79.619,245.741 79.203 C 245.495 78.852,244.857 78.070,243.468 76.418 C 243.165 76.057,242.432 75.148,241.841 74.397 C 241.249 73.647,240.719 72.992,240.664 72.942 C 240.576 72.863,239.655 71.725,238.836 70.685 C 238.686 70.495,238.313 70.044,238.007 69.685 C 237.701 69.326,237.251 68.777,237.007 68.467 C 236.762 68.157,235.744 66.896,234.743 65.666 C 233.743 64.436,232.724 63.176,232.479 62.865 C 232.233 62.555,231.579 61.806,231.023 61.201 C 230.468 60.596,229.768 59.737,229.468 59.291 C 229.168 58.846,228.861 58.454,228.786 58.420 C 228.711 58.387,228.649 58.277,228.649 58.176 C 228.649 58.074,228.496 57.774,228.308 57.509 C 226.780 55.345,226.718 54.385,226.670 32.041 C 226.628 12.270,226.727 13.612,225.213 12.341 C 224.153 11.451,221.296 10.848,220.932 11.438 C 220.878 11.526,220.648 11.639,220.421 11.689 C 219.961 11.791,215.847 13.208,215.280 13.461 C 214.930 13.616,211.434 14.834,209.732 15.393 C 209.281 15.541,208.749 15.731,208.549 15.816 C 208.349 15.901,207.899 16.069,207.549 16.189 C 207.199 16.309,206.749 16.477,206.548 16.561 C 206.348 16.645,205.284 17.009,204.184 17.369 C 203.083 17.730,202.019 18.093,201.819 18.176 C 200.013 18.924,199.974 18.924,198.181 18.175 C 197.981 18.091,197.080 17.778,196.180 17.478 C 193.979 16.746,191.895 16.017,191.451 15.822 C 190.858 15.563,186.756 14.152,186.309 14.054 C 186.083 14.004,185.853 13.891,185.798 13.803 C 185.744 13.715,185.516 13.643,185.292 13.643 C 185.067 13.643,184.806 13.577,184.711 13.498 C 184.616 13.418,184.211 13.249,183.811 13.122 C 183.411 12.995,182.920 12.822,182.719 12.737 C 182.519 12.653,181.660 12.357,180.809 12.079 C 179.959 11.802,179.186 11.508,179.090 11.426 C 178.836 11.208,176.813 11.287,176.106 11.542"
+            fill="url(#liquidBody)"
+            fill-rule="evenodd"
+          />
+
+          <!-- Depth + highlight -->
+          <g clip-path="url(#shapeClip)">
+            <rect
+              x="142.5"
+              y="5.839188863210153"
+              width="116.25"
+              height="168.08522227669226"
+              fill="url(#liquidDepth)"
+            />
+            <rect
+              x="142.5"
+              y="5.839188863210153"
+              width="116.25"
+              height="168.08522227669226"
+              fill="url(#liquidHighlight)"
+            />
+          </g>
+
+          <!-- Subtle inner rim -->
+          <path
+            d="M176.106 11.542 ..."
+            fill="none"
+            stroke="#ffffff"
+            stroke-opacity="0.14"
+            stroke-width="1.0"
+            filter="url(#innerGlow)"
+          />
+        </svg>
+      </a>
+      <div class="article-nav-links">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+      </div>
+
+      <article>
+        <h1 id="non-sendable-core-sendable-shell" class="title">
+          Non-Sendable Core, Sendable Shell
+        </h1>
+        <p class="article-reading-time">-- Minutes to Read</p>
+        <p>
+          Swift Concurrency seems to be one of the hard Swift topics, and one
+          thing we can do in Computer Science is to continue pushing hard
+          problems away to another layer of abstraction. Naturally, we can do
+          that with Swift Concurrency too!
+        </p>
+        <p>
+          This isn’t an article about understanding isolation or Sendable. I
+          assume you already are somewhat familiar with basic Swift Concurrency
+          concepts. Rather, I more or less want to outline the pain points
+          around those concepts, and demonstrate a technique for pushing them to
+          the edge.
+        </p>
+        <h2 id="tldr-example">TLDR Example</h2>
+        <p>
+          Since this article naturally draws out the explanation to include many
+          details, I’ll give a TLDR code example right away. That is,
+          non-Sendable types are much more flexible than Sendable types.
+          Sendable types require either locking or actor isolation overhead, so
+          it’s much easier to defer such mechanisms as long as possible.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-comment">// ✅ By making CactusLanguageModel non-Sendable, we can reuse it </span>
+<span class="hljs-comment">// in any Sendable type whether it's an actor, or class with a lock.</span>
+
+<span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CactusLanguageModel</span> </span>{
+  <span class="hljs-comment">// A non-Sendable type that can be used from any actor isolation context...</span>
+}
+
+<span class="hljs-keyword">final</span> actor <span class="hljs-type">CactusLanguageModelActor</span> {
+  <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusLanguageModel</span>
+
+  <span class="hljs-keyword">init</span>(model: sending <span class="hljs-type">CactusLanguageModel</span>) {
+    <span class="hljs-keyword">self</span>.model = model
+  }
+
+  <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomeState</span>: <span class="hljs-title">Sendable</span> </span>{
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">State</span> </span>{
+    <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusLanguageModel</span>
+    <span class="hljs-keyword">var</span> otherState: <span class="hljs-type">Value</span>
+  }
+
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> state = <span class="hljs-type">Mutex</span>(<span class="hljs-type">State</span>())
+
+  <span class="hljs-comment">// ...</span>
+}
+      </code></pre>
+        <p>
+          With that out of the way, now we can focus on dragging out the
+          explanation from first principles. However, I would first like to look
+          at a corollary idea, and where this article gets its naming scheme
+          from.
+        </p>
+        <h2 id="functional-core-imperative-shell">
+          Functional Core, Imperative Shell
+        </h2>
+        <p>
+          The name of this article comes from the “Functional Core, Imperative
+          Shell” idea. If you’re unfamiliar with “Functional Core, Imperative
+          Shell”, here’s a simple code example to illustrate.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Item</span> </span>{
+  <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-comment">// ❌ Bad, mixes IO (side effects) and business logic.</span>
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">processBad</span><span class="hljs-params">()</span></span> async <span class="hljs-keyword">throws</span> {
+  <span class="hljs-keyword">let</span> items = <span class="hljs-keyword">try</span> await loadItems()
+  <span class="hljs-keyword">let</span> transformed = items.<span class="hljs-built_in">filter</span> { <span class="hljs-comment">/* ... */</span> }
+    .<span class="hljs-built_in">map</span> { <span class="hljs-comment">/* ... */</span> }
+    .reversed()
+    .<span class="hljs-built_in">dropFirst</span>()
+  <span class="hljs-keyword">try</span> await save(transformed)
+}
+
+<span class="hljs-comment">// ✅ Good, separates IO (side effect) from business logic</span>
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">processGood</span><span class="hljs-params">()</span></span> async <span class="hljs-keyword">throws</span> {
+  <span class="hljs-keyword">let</span> items = <span class="hljs-keyword">try</span> await loadItems()
+  <span class="hljs-keyword">try</span> await save(items.transformed)
+}
+
+<span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">Sequence</span> <span class="hljs-title">where</span> <span class="hljs-title">Element</span>: <span class="hljs-title">Item</span> </span>{
+  <span class="hljs-keyword">var</span> transformed: some <span class="hljs-type">Sequence</span>&lt;<span class="hljs-type">TransformedItem</span>&gt; {
+    items.<span class="hljs-built_in">filter</span> { <span class="hljs-comment">/* ... */</span> }
+      .<span class="hljs-built_in">map</span> { <span class="hljs-comment">/* ... */</span> }
+      .reversed()
+      .<span class="hljs-built_in">dropFirst</span>()
+  }
+}
+      </code></pre>
+        <p>
+          By separating out the collection transformation, we gain more
+          flexibility. That is, we can choose to reuse the transformation logic
+          regardless of how the underlying data is persisted, or even write
+          isolated unit tests just for the transformation logic. In general,
+          once IO or side effects are introduced to your code, it becomes much
+          less flexible.
+        </p>
+        <p>
+          In the above example, the transformation logic is what we call the
+          “functional core”, and the IO is what we call the “imperative shell”.
+        </p>
+        <h2 id="async-makes-things-harder">Async Makes Things Harder</h2>
+        <p>
+          It turns out, that we can also apply this concept to Swift
+          Concurrency. Generally speaking, once async/await is required to call
+          a method, things get much harder. If you’re in a synchronous context,
+          you’ll either have to create an unstructured task, or mark the
+          enclosing method as <code>async</code>.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span></span> {
+  <span class="hljs-comment">// ❌</span>
+  await someWork()
+}
+
+<span class="hljs-comment">// ✅ Either Approach Compiles</span>
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> <span class="hljs-title">async</span></span> {
+  <span class="hljs-comment">// 🔵 Delegates async responsibility to whoever calls foo</span>
+  await someWork()
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span></span> {
+  <span class="hljs-comment">// 🔵 Completely hides the fact that async unstructured work has been started</span>
+  Task { await someWork() }
+}
+      </code></pre>
+        <p>
+          Furthermore, you open a whole can of worms regarding
+          <code>Sendable</code> once you start getting into concurrency land.
+          When it comes to dealing with non-Sendable types, you have to take
+          special care when passing them across actor isolation boundaries,
+          otherwise the Swift compiler will hate you.
+        </p>
+        <p>
+          Thankfully, the <code>sending</code> keyword can help somewhat when it
+          comes to non-Sendable types and tasks. This keyword allows you to
+          transfer non-Sendable values across isolation boundaries, which means
+          that you can use non-Sendable values within tasks.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">foo</span><span class="hljs-params">(value: sending NonSendable)</span></span> {
+  <span class="hljs-type">Task</span> {
+    <span class="hljs-comment">// ✅ value is being explicitly transferred into the Task's </span>
+    <span class="hljs-comment">// isolation context</span>
+    <span class="hljs-keyword">let</span> v = value
+  }
+}
+      </code></pre>
+        <p>
+          For instance, you can’t use <code>sending</code> to capture a
+          non-Sendable value inside an <code>@Sendable</code> closure.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">badTransfer</span><span class="hljs-params">(
+  value: sending NonSendableValue
+)</span> -&gt; @<span class="hljs-title">Sendable</span> <span class="hljs-params">()</span> -&gt; <span class="hljs-title">Void</span></span> {
+  <span class="hljs-comment">// ❌</span>
+  <span class="hljs-keyword">return</span> { work(value) }
+}
+      </code></pre>
+        <p>
+          The reason this doesn’t work is because
+          <code>@Sendable</code> closures are meant to be thread-safe, and as a
+          result may be called multiple times from different threads. Once you
+          understand that fact, it becomes clear why the above code example
+          doesn’t work. The point of the <code>sending</code> keyword is only to
+          send a value to a different isolation context, and nothing more. In
+          fact, the original proposal for <code>sending</code> actually named
+          the keyword <code>transferring</code> at first.
+        </p>
+        <h2 id="conforming-to-sendable-can-be-annoying">
+          Conforming to Sendable can be Annoying
+        </h2>
+        <p>
+          If we can’t use the <code>sending</code> keyword to get around
+          concurrency issues, the next step up is to conform to Sendable
+          directly. For simple structs, this is trivial because the compiler can
+          infer thread-safety for you. In fact, I personally do this by
+          <em>default</em> whenever I make a new simple struct data type.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-comment">// ✅ Trivially Sendable.</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// I always tend to conform simple structs to Hashable and Sendable </span>
+<span class="hljs-comment">// without second thought.</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Item</span></span>: Hashable, Sendable {
+  <span class="hljs-keyword">let</span> fieldA: Int
+  <span class="hljs-keyword">let</span> fieldB: <span class="hljs-built_in">String</span>
+}
+      </code></pre>
+        <p>
+          However, things get harder when we need to deal with reference types.
+          Any non-final class, or even simple mutable properties will prevent an
+          auto synthesized Sendable conformance.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-comment">// ❌ Cannot have mutable properties</span>
+<span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Item</span>: <span class="hljs-type">Sendable {</span></span>
+  <span class="hljs-keyword">var</span> fieldA: <span class="hljs-built_in">Int</span>
+  <span class="hljs-keyword">var</span> fieldB: String
+}
+
+<span class="hljs-comment">// ❌ Must be a final class </span>
+<span class="hljs-comment">// (Subclasses could add mutable/non-Sendable properties otherwise)</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Item</span>: <span class="hljs-type">Sendable {</span></span>
+  let fieldA: <span class="hljs-built_in">Int</span>
+  let fieldB: String
+}
+      </code></pre>
+        <h3 id="unchecked-sendable">Unchecked Sendable</h3>
+        <p>
+          Of course, you can use <code>@unchecked Sendable</code>, but that
+          usually isn’t something you want to deliberately touch because it
+          turns off compiler checking for Sendable. That is, the compiler can no
+          longer offer any guarantees that your type is thread-safe. Think of it
+          in the same vein as force-unwrapping an optional. It’s allowed, but
+          you better know what you’re doing.
+        </p>
+        <p>
+          I’m not suggesting that you should never use
+          <code>@unchecked Sendable</code>. In fact, if you go deep enough it’s
+          almost certain that you will need to use it at some point. Just make
+          sure you justify yourself when you do so.
+        </p>
+        <h3 id="actors">Actors</h3>
+        <p>
+          Another way to get automatic an Sendable conformance is to convert
+          your type to an actor (or just throw a global actor like
+          <code>@MainActor</code> at the problem).
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-comment">// ✅ Actors are Sendable by default.</span>
+
+actor Item {
+  <span class="hljs-keyword">var</span> fieldA: Int
+  <span class="hljs-keyword">var</span> fieldB: <span class="hljs-built_in">String</span>
+}
+
+<span class="hljs-meta">@MainActor</span>
+<span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Item</span> </span>{
+  <span class="hljs-keyword">var</span> fieldA: Int
+  <span class="hljs-keyword">var</span> fieldB: <span class="hljs-built_in">String</span>
+}
+      </code></pre>
+        <p>
+          For <code>@MainActor</code> specifically, new Xcode projects even make
+          MainActor isolation the default for all declarations. However, if you
+          want a type be usable from multiple isolation contexts, you will have
+          to mark it <code>nonisolated</code> in addition to a Sendable
+          conformance.
+        </p>
+        <pre><code class="lang-swift">
+nonisolated struct Item: Sendable {
+  <span class="hljs-selector-tag">var</span> fieldA: Int
+  <span class="hljs-selector-tag">var</span> fieldB: String
+}
+      </code></pre>
+        <p>
+          On a personal note, I tend not to use default MainActor isolation. At
+          least for me, I like to be explicit when something is main actor
+          compatible, and since I tend to write a lot of thread-agnostic non-UI
+          code in addition UI code, I find it simpler to keep everything
+          consistent and turn off default Main Actor isolation.
+        </p>
+        <p>
+          Regardless of how you choose to use actors, you’ll be dealing with
+          async/await when you’re not isolated to the actor. As previously
+          mentioned above, adding async just complicates things.
+        </p>
+        <p>
+          With actors, there’s also more lesser-understood points of conceptual
+          overhead.
+        </p>
+        <ul>
+          <li>
+            The <code>SerialExecutor</code> protocol allows an actor to
+            customize its execution environment.
+            <ul>
+              <li>Useful if you need to run things on a dedicated thread.</li>
+            </ul>
+          </li>
+          <li>
+            Any non-Sendable type returned from an actor method also requires
+            <code>sending</code>
+            <ul>
+              <li>
+                Furthermore, the value returned from the method also cannot be
+                an instance member of the actor, because doing so would make the
+                non-Sendable type present in 2 separate isolation contexts.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Actor interleaving.
+            <ul>
+              <li>
+                Only 1 task can enter an actor at a time, so if a task must
+                await another <code>async</code> method within the actor, it
+                must leave the current actor to swap isolation contexts. This
+                allows another task to enter the actor in the meantime.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Actor re-entrancy.
+            <ul>
+              <li>
+                Once the original task from the interleaving explanation is done
+                performing its async work, it must re-enter the original actor
+                that it once left to continue execution past the suspension
+                point it previously awaited.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <code>isolated</code> parameters.
+            <ul>
+              <li>
+                This allows one to declare methods external to the actor as
+                being isolated to the actor.
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="avoiding-sendable">Avoiding Sendable</h2>
+        <p>
+          Since Sendable brings a lot of inconveniences, we have to ask
+          ourselves the question of how long it can be avoided. In today’s
+          world, the answer to this that we can get quite far with non-Sendable
+          types.
+        </p>
+        <h3 id="async-methods-in-non-sendable-types">
+          Async Methods in Non-Sendable Types
+        </h3>
+        <p>
+          One of the previous issues with non-Sendable types was the notion of
+          having async methods on them. Invoking them would cause an isolation
+          hop to a non-isolated context, which would produce often very
+          non-intuitive errors.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NonSendable</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">work</span><span class="hljs-params">()</span></span> async {
+    <span class="hljs-comment">// ...</span>
+  }
+}
+
+@<span class="hljs-type">MainActor</span>
+@<span class="hljs-type">Observable</span>
+<span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyViewModel</span> </span>{
+  <span class="hljs-keyword">let</span> nonSendable = <span class="hljs-type">NonSendable</span>()
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">buttonTapped</span><span class="hljs-params">()</span></span> async {
+    <span class="hljs-comment">// ❌</span>
+    await <span class="hljs-keyword">self</span>.nonSendable.work()
+  }
+}
+      </code></pre>
+        <p>
+          However, today you can use <code>nonisolated(nonsending)</code> to fix
+          this error.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NonSendable</span> </span>{
+  nonisolated(nonsending) <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">work</span><span class="hljs-params">()</span></span> async {
+    <span class="hljs-comment">// ...</span>
+  }
+}
+
+@<span class="hljs-type">MainActor</span>
+@<span class="hljs-type">Observable</span>
+<span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyViewModel</span> </span>{
+  <span class="hljs-keyword">let</span> nonSendable = <span class="hljs-type">NonSendable</span>()
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">buttonTapped</span><span class="hljs-params">()</span></span> async {
+    <span class="hljs-comment">// ✅</span>
+    await <span class="hljs-keyword">self</span>.nonSendable.work()
+  }
+}
+      </code></pre>
+        <p>
+          What this tells the compiler is that <code>work</code> will execute on
+          the isolation context that it is invoked on. In fact, you can even
+          enable this behavior by default through the
+          <code>NonIsolatedNonSendingByDefault</code> flag.
+        </p>
+        <p>
+          This theoretical example is a textbook definition of “NonSendable
+          core, Sendable Shell”. Now, we can look at some more practical
+          examples involving wrapping a C library that I’m involved in
+          semi-regularly.
+        </p>
+        <h2 id="practical-example-swift-cactus">
+          Practical Example: Swift Cactus
+        </h2>
+        <p>
+          In particular, say you need to wrap a C library with weird threading
+          semantics, but need to integrate it with Swift Concurrency. For this
+          example, I’ll wrap the
+          <a href="https://github.com/cactus-compute/cactus"
+            >cactus inference engine</a
+          >, which is highly energy efficient and performant alternative to MLX,
+          ONNX, llama, etc. that runs primarily on the CPU. I’m not going to
+          make a sales pitch for the engine in this article, and instead I’ll
+          focus on wrapping it from Swift. In fact, the principles in these code
+          examples can be found in the
+          <a href="https://github.com/mhayes853/swift-cactus">swift-cactus</a>
+          package that I actively maintain (which is much more idiomatic than
+          the Swift example in the main cactus repo).
+        </p>
+        <p>
+          The Cactus FFI exposes many functions, so I’ll only include heavily
+          simplified signatures of some of the basic FFI functions for
+          simplicity.
+        </p>
+        <pre><code class="lang-c">
+<span class="hljs-comment">// Loads model weights.</span>
+<span class="hljs-function">CACTUS_FFI_EXPORT cactus_model_t <span class="hljs-title">cactus_init</span><span class="hljs-params">(
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* model_path
+)</span></span>;
+
+<span class="hljs-comment">// Deallocate a model.</span>
+<span class="hljs-function">CACTUS_FFI_EXPORT <span class="hljs-keyword">void</span> <span class="hljs-title">cactus_destroy</span><span class="hljs-params">(<span class="hljs-keyword">cactus_model_t</span> model)</span></span>;
+
+<span class="hljs-comment">// Stops an active ongoing generation for a model.</span>
+<span class="hljs-function">CACTUS_FFI_EXPORT <span class="hljs-keyword">void</span> <span class="hljs-title">cactus_stop</span><span class="hljs-params">(<span class="hljs-keyword">cactus_model_t</span> model)</span></span>;
+
+<span class="hljs-comment">// Runs inference for a given model, and outputs the </span>
+<span class="hljs-comment">// result into response_buffer.</span>
+<span class="hljs-function">CACTUS_FFI_EXPORT <span class="hljs-keyword">int</span> <span class="hljs-title">cactus_complete</span><span class="hljs-params">(
+    <span class="hljs-keyword">cactus_model_t</span> model,
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* messages_json,
+    <span class="hljs-keyword">char</span>* response_buffer,
+    <span class="hljs-keyword">size_t</span> buffer_size
+)</span></span>;
+      </code></pre>
+        <p>
+          <code>cactus_model_t</code> itself is an opaque pointer, but under the
+          hood it’s represented as a struct in C++ that looks something like
+          this. (Once again, very simplified from the actual handle[^1].)
+        </p>
+        <pre><code class="lang-cpp">
+struct CactusModelHandle {
+    <span class="hljs-symbol">std:</span><span class="hljs-symbol">:unique_ptr&lt;cactus</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:engine</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:Model&gt;</span> model;
+    <span class="hljs-symbol">std:</span><span class="hljs-symbol">:atomic&lt;bool&gt;</span> should_stop;
+
+    CactusModelHandle() : should_stop(<span class="hljs-keyword">false</span>) {}
+};
+      </code></pre>
+        <p>
+          As we can see, we have an atomic for whether or not ongoing inference
+          should stop. Furthermore, the <code>Model</code> class does not use
+          any locks under the hood. This puts us in a weird case where
+          <code>cactus_stop</code> is safe to call from different isolation
+          contexts in Swift, but <code>cactus_complete</code> is not.
+        </p>
+        <p>
+          However, LLM inference is also incredibly expensive, and certainly you
+          should not be doing it from the Main Actor. However, only exposing the
+          model API behind an actor would limit the Swifty wrapper to purely
+          async contexts.
+        </p>
+        <p>
+          As such, I think this is a perfect case for non-Sendable core,
+          Sendable shell. Since we’re wrapping a pointer from an underlying C
+          library, we can use a non-Sendable and non-Copyable struct to ensure
+          ownership semantics when passing the language model around. Then, we
+          can create a wrapper <code>CactusLanguageModelActor</code> that wraps
+          our non-Copyable type to grant proper built-in Sendable and background
+          execution to the inference engine.
+        </p>
+        <pre><code class="lang-swift">
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">CactusLanguageModel</span>: ~<span class="hljs-title">Copyable</span> </span>{
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> pointer: cactus_model_t
+
+  <span class="hljs-keyword">init</span>(pointer: consuming cactus_model_t) {
+    <span class="hljs-keyword">self</span>.pointer = pointer
+  }
+
+  <span class="hljs-keyword">init</span>(path: <span class="hljs-type">URL</span>) {
+    <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> pointer = cactus_init(path.absoluteString) <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">throw</span> <span class="hljs-type">CactusLanguageModelError</span>.failedToLoadModel
+    }
+    <span class="hljs-keyword">self</span>.<span class="hljs-keyword">init</span>(pointer: pointer)
+  }
+
+  <span class="hljs-keyword">deinit</span> {
+    cactus_destroy(<span class="hljs-keyword">self</span>.pointer)
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">complete</span><span class="hljs-params">(messages: [ChatMessage])</span></span> <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">ChatCompletion</span> {
+    <span class="hljs-keyword">let</span> encodedMessages = <span class="hljs-keyword">try</span> <span class="hljs-type">JSONEncoder</span>().encode(messages)
+    <span class="hljs-keyword">let</span> buffer = <span class="hljs-type">UnsafeMutableBufferPointer</span>&lt;<span class="hljs-type">CChar</span>&gt;.allocate(capacity: <span class="hljs-number">8192</span>)
+    <span class="hljs-keyword">defer</span> { buffer.deallocate() }
+    <span class="hljs-keyword">let</span> result = cactus_complete(
+      <span class="hljs-keyword">self</span>.pointer,
+      <span class="hljs-type">String</span>(decoding: encodedMessages, <span class="hljs-keyword">as</span>: <span class="hljs-type">UTF8</span>.<span class="hljs-keyword">self</span>),
+      buffer,
+      <span class="hljs-number">8192</span> * <span class="hljs-type">MemoryLayout</span>&lt;<span class="hljs-type">CChar</span>&gt;.<span class="hljs-built_in">stride</span>
+    )
+    <span class="hljs-keyword">if</span> result &lt; <span class="hljs-number">0</span> {
+      <span class="hljs-keyword">throw</span> <span class="hljs-type">CactusLanguageModelError</span>.badResponse
+    }
+    <span class="hljs-keyword">let</span> data = bufferToData(buffer)
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">try</span> <span class="hljs-type">JSONDecoder</span>().decode(<span class="hljs-type">ChatCompletion</span>.<span class="hljs-keyword">self</span>, from: data)
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">stop</span><span class="hljs-params">()</span></span> {
+    cactus_stop(<span class="hljs-keyword">self</span>.pointer)
+  }
+}
+
+actor <span class="hljs-type">CactusLanguageModelActor</span> {
+  <span class="hljs-keyword">private</span> actor <span class="hljs-type">DefaultIsolation</span> {}
+
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> defaultIsolation = <span class="hljs-type">DefaultIsolation</span>()
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> executor: (any <span class="hljs-type">SerialExecutor</span>)?
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusLanguageModel</span>
+
+  nonisolated <span class="hljs-keyword">var</span> unownedSerialExeuctor: <span class="hljs-type">UnownedSerialExecutor</span> {
+    <span class="hljs-keyword">self</span>.executor?.asUnownedSerialExecutor() ?? <span class="hljs-keyword">self</span>.defaultIsolation.unownedSerialExecutor
+  }
+
+  <span class="hljs-keyword">init</span>(
+    executor: (any <span class="hljs-type">SerialExecutor</span>)? = <span class="hljs-literal">nil</span>,
+    model: consuming sending <span class="hljs-type">CactusLanguageModel</span>
+  ) {
+    <span class="hljs-keyword">self</span>.executor = executor
+    <span class="hljs-keyword">self</span>.model = model
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">complete</span><span class="hljs-params">(messages: [ChatMessage])</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">ChatCompletion</span> {
+    <span class="hljs-keyword">try</span> <span class="hljs-keyword">self</span>.model.complete(messages: messages)
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">stop</span><span class="hljs-params">()</span></span> {
+    <span class="hljs-keyword">self</span>.model.stop()
+  }
+
+  borrowing <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">withModel</span>&lt;T, E: Error&gt;<span class="hljs-params">(
+    operation: <span class="hljs-params">(CactusLanguageModel)</span></span></span> <span class="hljs-keyword">throws</span>(<span class="hljs-type">E</span>) -&gt; sending <span class="hljs-type">T</span>
+  ) <span class="hljs-keyword">throws</span>(<span class="hljs-type">E</span>) -&gt; sending <span class="hljs-type">T</span> {
+    <span class="hljs-keyword">try</span> operation(<span class="hljs-keyword">self</span>.model)
+  }
+}
+      </code></pre>
+        <p>
+          As you can see, the actor provides quite a few concurrency specific
+          additions, such as even allowing a custom
+          <code>SerialExecutor</code> to be used. This latter bit could be
+          useful for an application because the inference engine will block the
+          cooperative thread pool for a <em>long</em> time. A custom executor
+          allows you to create a dedicated thread outside of the cooperative
+          thread-pool for inference in your application.
+        </p>
+        <p>
+          However, because we split the non-Sendable core from the Sendable
+          shell, we could also decide to use the language model inside another
+          completely synchronous context. This could include a class with a
+          lock, a non-main global actor, or another actor that bundles various
+          non-Sendable types together. If our needs are simple enough, we could
+          even just rely on region based isolation with <code>sending</code>.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LockedModel</span>: <span class="hljs-title">Sendable</span> </span>{
+  <span class="hljs-keyword">let</span> model: <span class="hljs-type">Mutex</span>&lt;<span class="hljs-type">CactusLanguageModel</span>&gt;
+
+  <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-keyword">final</span> actor <span class="hljs-type">CactusModelAgent</span> {
+  <span class="hljs-keyword">var</span> transcript: [<span class="hljs-type">ChatMessage</span>]
+  <span class="hljs-keyword">var</span> nonSendable: <span class="hljs-type">NonSendable</span>
+  <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusLanguageModel</span>
+
+  <span class="hljs-comment">// ...</span>
+}
+
+@<span class="hljs-type">NonMainGlobalActor</span>
+<span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModelActor</span> </span>{
+  <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusLanguageModel</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">infer</span><span class="hljs-params">(model: sending CactusLanguageModel)</span></span> async <span class="hljs-keyword">throws</span> {
+  <span class="hljs-comment">// ...</span>
+}
+      </code></pre>
+        <p>
+          Of course, it is also possible to use
+          <code>CactusLanguageModel</code> irresponsibly like this.
+        </p>
+        <pre><code class="lang-swift">
+<span class="hljs-variable">@MainActor</span>
+<span class="hljs-variable">@Observable</span>
+final class Store {
+  <span class="hljs-comment">// ❌ Really bad idea</span>
+  <span class="hljs-selector-tag">let</span> <span class="hljs-selector-tag">model</span>: <span class="hljs-selector-tag">CactusLanguageModel</span>
+}
+      </code></pre>
+        <p>
+          However, the flexibility out weights the potential cons of doing
+          something not so bright. Even if someone were to attempt to do
+          inference on the main actor, we could always check if the caller is on
+          the main actor and emit a purple runtime warning discouraging that
+          behavior using a library such as
+          <a href="https://github.com/pointfreeco/swift-issue-reporting"
+            >IssueReporting</a
+          >.
+        </p>
+        <h2 id="conclusion">Conclusion</h2>
+        <p>
+          Non-Sendable types are actually quite nice to work with. You don’t
+          have to worry about thread-safety, isolation, or any other weird
+          cryptic errors. Even <code>nonisolated(nonsending)</code> will
+          eventually become the default for all <code>async</code> functions,
+          but you can enable default behavior for it today through the
+          <code>NonIsolatedNonSendingByDefault</code> flag.
+        </p>
+        <p>
+          Further, when you focus on making things non-Sendable, you gain more
+          control over how you want to handle the concurrency behavior for that
+          logic. Whether that’s through local actor isolation,
+          <code>@MainActor</code>/global actor isolation, a class with a lock,
+          or even just through region based isolation with <code>sending</code>,
+          you get that flexibility.
+        </p>
+        <p>
+          At the end of the day, concurrency is difficult, and it’s why we have
+          tools like Swift Concurrency in the first place. That being said, the
+          simplest form of concurrency is often no concurrency, so I would try
+          to stay in that land for as long as possible.
+        </p>
+        <p>— 2/25/26</p>
+        <p>
+          [^1]: At the time of writing this, if you look at the actual source
+          code for the engine, you will find a <code>model_mutex</code> inside
+          the handle struct. However, it isn’t actually used in
+          <code>cactus_complete</code>. As a result, the model pointer still
+          must be treated as non-thread-safe in higher level code that calls
+          into the inference engine.
+        </p>
+      </article>
+    </div>
+    <script
+      type="module"
+      src="./non-sendable-core-sendable-shell/index.ts"
+    ></script>
+  </body>
+</html>
