@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/jpeg" href="./shared-assets/icon.jpeg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>The Root</title>
+    <title>Non-Sendable Core, Sendable Shell</title>
     <meta property="og:title" content="Non-Sendable Core, Sendable Shell" />
     <meta
       property="og:description"
@@ -183,6 +183,7 @@
           at a corollary idea, and where this article gets its naming scheme
           from.
         </p>
+
         <h2 id="functional-core-imperative-shell">
           Functional Core, Imperative Shell
         </h2>
@@ -235,6 +236,7 @@
           In the above example, the transformation logic is what we call the
           “functional core”, and the IO is what we call the “imperative shell”.
         </p>
+
         <h2 id="async-makes-things-harder">Async Makes Things Harder</h2>
         <p>
           It turns out, that we can also apply this concept to Swift
@@ -305,6 +307,7 @@
           fact, the original proposal for <code>sending</code> actually named
           the keyword <code>transferring</code> at first.
         </p>
+
         <h2 id="conforming-to-sendable-can-be-annoying">
           Conforming to Sendable can be Annoying
         </h2>
@@ -459,6 +462,7 @@ nonisolated struct Item: Sendable {
             </ul>
           </li>
         </ul>
+
         <h2 id="avoiding-sendable">Avoiding Sendable</h2>
         <p>
           Since Sendable brings a lot of inconveniences, we have to ask
@@ -527,6 +531,7 @@ nonisolated struct Item: Sendable {
           examples involving wrapping a C library that I’m involved in
           semi-regularly.
         </p>
+
         <h2 id="practical-example-swift-cactus">
           Practical Example: Swift Cactus
         </h2>
@@ -744,6 +749,7 @@ final class Store {
             >IssueReporting</a
           >.
         </p>
+
         <h2 id="conclusion">Conclusion</h2>
         <p>
           Non-Sendable types are actually quite nice to work with. You don’t
