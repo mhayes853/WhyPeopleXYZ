@@ -3,6 +3,56 @@ import "./article.css";
 import initCodeBlocks from "./code";
 import { estimateReadingTime } from "./article-read-time";
 
+const initFootnotes = () => {
+  const article = document.querySelector("article");
+  if (!article) return;
+
+  const refRegex = /\[\^(\d+)\]/g;
+  const footnoteDefStartRegex = /^\s*\[\^(\d+)\]:/;
+
+  const processTextNodes = (node: Node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent || "";
+      refRegex.lastIndex = 0;
+      if (refRegex.test(text)) {
+        const wrapper = document.createElement("span");
+        refRegex.lastIndex = 0;
+        wrapper.innerHTML = text.replace(refRegex, (_, num) => {
+          const id = `footnote-ref-${num}`;
+          return `<a href="#footnote-def-${num}" id="${id}" class="footnote-ref">[^${num}]</a>`;
+        });
+        node.parentNode?.replaceChild(wrapper, node);
+      }
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      const el = node as Element;
+      if (el.tagName !== "A" && el.tagName !== "CODE") {
+        Array.from(el.childNodes).forEach(processTextNodes);
+      }
+    }
+  };
+
+  const pTags = Array.from(article.querySelectorAll("p"));
+  pTags.forEach((p) => {
+    if (footnoteDefStartRegex.test(p.textContent || "")) {
+      return;
+    }
+    if (!p.querySelector("a.footnote-ref")) {
+      processTextNodes(p);
+    }
+  });
+
+  const defParagraphs = Array.from(article.querySelectorAll("p"));
+  defParagraphs.forEach((p) => {
+    const text = p.textContent || "";
+    const match = text.match(footnoteDefStartRegex);
+    if (!match) return;
+
+    const num = match[1];
+    const content = p.innerHTML.replace(/^\s*\[\^\d+\]:\s*/, "");
+    p.innerHTML = `<span class="footnote-def" id="footnote-def-${num}"><a href="#footnote-ref-${num}" class="footnote-num">${num}.</a> ${content}</span>`;
+  });
+};
+
 const initHeroModal = () => {
   const modal = document.getElementById("hero-modal") as HTMLDialogElement | null;
   const trigger = document.querySelector<HTMLImageElement>(
@@ -71,3 +121,4 @@ const updateArticleReadingTime = () => {
 initCodeBlocks();
 updateArticleReadingTime();
 initHeroModal();
+initFootnotes();

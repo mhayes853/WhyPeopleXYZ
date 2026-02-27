@@ -430,3 +430,38 @@ li {
   margin-bottom: 1rem;
   line-height: 1.5;
 }
+
+.footnote-ref {
+  color: var(--accent-red);
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.75em;
+  vertical-align: super;
+}
+
+.footnote-ref:hover {
+  text-decoration: underline;
+}
+
+.footnote-def {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 0.85em;
+  color: rgba(0, 0, 0, 0.7);
+  margin-top: 0.5rem;
+  padding: 0.5rem 0 0.5rem 1rem;
+  border-left: 2px solid rgba(0, 0, 0, 0.15);
+  line-height: 1.5;
+}
+
+.footnote-def .footnote-num {
+  color: var(--accent-red);
+  font-weight: 600;
+  margin-right: 0.25rem;
+  text-decoration: none;
+}
+
+.footnote-def .footnote-num:hover {
+  text-decoration: underline;
+}
