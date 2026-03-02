@@ -140,6 +140,7 @@
           around those concepts, and demonstrate a technique for pushing them to
           the edge.
         </p>
+        <br />
         <h2 id="tldr-example">TLDR Example</h2>
         <p>
           Since this article naturally draws out the explanation to include many
@@ -149,32 +150,32 @@
           it’s much easier to defer such mechanisms as long as possible.
         </p>
         <pre><code class="lang-swift">
-<span class="hljs-comment">// ✅ By making CactusLanguageModel non-Sendable, we can reuse it </span>
+<span class="hljs-comment">// ✅ By making CactusModel non-Sendable, we can reuse it </span>
 <span class="hljs-comment">// in any Sendable type whether it's an actor, or class with a lock.</span>
 
-<span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CactusLanguageModel</span> </span>{
-  <span class="hljs-comment">// A non-Sendable type that can be used from any actor isolation context...</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">CactusModel</span>: ~<span class="hljs-title">Copyable</span> </span>{
+  <span class="hljs-comment">// Non-Sendable Core...</span>
 }
 
-<span class="hljs-keyword">final</span> actor <span class="hljs-type">CactusLanguageModelActor</span> {
-  <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusLanguageModel</span>
+<span class="hljs-keyword">final</span> actor <span class="hljs-type">CactusModelActor</span> {
+  <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusModel</span>
 
-  <span class="hljs-keyword">init</span>(model: sending <span class="hljs-type">CactusLanguageModel</span>) {
+  <span class="hljs-keyword">init</span>(model: sending <span class="hljs-type">CactusModel</span>) {
     <span class="hljs-keyword">self</span>.model = model
   }
 
-  <span class="hljs-comment">// ...</span>
+  <span class="hljs-comment">// Sendable Shell...</span>
 }
 
 <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomeState</span>: <span class="hljs-title">Sendable</span> </span>{
   <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">State</span> </span>{
-    <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusLanguageModel</span>
+    <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusModel</span>
     <span class="hljs-keyword">var</span> otherState: <span class="hljs-type">Value</span>
   }
 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> state = <span class="hljs-type">Mutex</span>(<span class="hljs-type">State</span>())
 
-  <span class="hljs-comment">// ...</span>
+  <span class="hljs-comment">// Sendable Shell...</span>
 }
       </code></pre>
         <p>
@@ -183,7 +184,7 @@
           at a corollary idea, and where this article gets its naming scheme
           from.
         </p>
-
+        <br />
         <h2 id="functional-core-imperative-shell">
           Functional Core, Imperative Shell
         </h2>
@@ -236,7 +237,7 @@
           In the above example, the transformation logic is what we call the
           “functional core”, and the IO is what we call the “imperative shell”.
         </p>
-
+        <br />
         <h2 id="async-makes-things-harder">Async Makes Things Harder</h2>
         <p>
           It turns out, that we can also apply this concept to Swift
@@ -293,7 +294,7 @@
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">badTransfer</span><span class="hljs-params">(
   value: sending NonSendableValue
 )</span> -&gt; @<span class="hljs-title">Sendable</span> <span class="hljs-params">()</span> -&gt; <span class="hljs-title">Void</span></span> {
-  <span class="hljs-comment">// ❌</span>
+  <span class="hljs-comment">// ❌ Capture of 'value' with non-Sendable type 'NonSendableValue' in a '@Sendable' closure</span>
   <span class="hljs-keyword">return</span> { work(value) }
 }
       </code></pre>
@@ -305,9 +306,11 @@
           doesn’t work. The point of the <code>sending</code> keyword is only to
           send a value to a different isolation context, and nothing more. In
           fact, the original proposal for <code>sending</code> actually named
-          the keyword <code>transferring</code> at first.
+          the keyword <code>transferring</code> at first until it was renamed
+          presumably due to naming conflation with Swift's ownership model and
+          to be more in line with Sendable.
         </p>
-
+        <br />
         <h2 id="conforming-to-sendable-can-be-annoying">
           Conforming to Sendable can be Annoying
         </h2>
@@ -358,9 +361,11 @@
         </p>
         <p>
           I’m not suggesting that you should never use
-          <code>@unchecked Sendable</code>. In fact, if you go deep enough it’s
+          <code>@unchecked Sendable</code>. In fact, if you go deep enough with
+          integrating legacy frameworks, low-level C libraries, or locks, it’s
           almost certain that you will need to use it at some point. Just make
-          sure you justify yourself when you do so.
+          sure you justify yourself when you do so, ideally through a comment
+          next to the <code>@unchecked Sendable</code> conformance.
         </p>
         <h3 id="actors">Actors</h3>
         <p>
@@ -462,7 +467,7 @@ nonisolated struct Item: Sendable {
             </ul>
           </li>
         </ul>
-
+        <br />
         <h2 id="avoiding-sendable">Avoiding Sendable</h2>
         <p>
           Since Sendable brings a lot of inconveniences, we have to ask
@@ -492,7 +497,7 @@ nonisolated struct Item: Sendable {
   <span class="hljs-keyword">let</span> nonSendable = <span class="hljs-type">NonSendable</span>()
 
   <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">buttonTapped</span><span class="hljs-params">()</span></span> async {
-    <span class="hljs-comment">// ❌</span>
+    <span class="hljs-comment">// ❌ Sending 'self.nonSendable' risks causing data races</span>
     await <span class="hljs-keyword">self</span>.nonSendable.work()
   }
 }
@@ -514,7 +519,7 @@ nonisolated struct Item: Sendable {
   <span class="hljs-keyword">let</span> nonSendable = <span class="hljs-type">NonSendable</span>()
 
   <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">buttonTapped</span><span class="hljs-params">()</span></span> async {
-    <span class="hljs-comment">// ✅</span>
+    <span class="hljs-comment">// ✅ No longer sending non-Sendable to a nonisolated context</span>
     await <span class="hljs-keyword">self</span>.nonSendable.work()
   }
 }
@@ -523,7 +528,7 @@ nonisolated struct Item: Sendable {
           What this tells the compiler is that <code>work</code> will execute on
           the isolation context that it is invoked on. In fact, you can even
           enable this behavior by default through the
-          <code>NonIsolatedNonSendingByDefault</code> flag.
+          <code>NonIsolatedNonSendingByDefault</code> feature.
         </p>
         <p>
           This theoretical example is a textbook definition of “NonSendable
@@ -531,7 +536,7 @@ nonisolated struct Item: Sendable {
           examples involving wrapping a C library that I’m involved in
           semi-regularly.
         </p>
-
+        <br />
         <h2 id="practical-example-swift-cactus">
           Practical Example: Swift Cactus
         </h2>
@@ -606,13 +611,13 @@ struct CactusModelHandle {
           As such, I think this is a perfect case for non-Sendable core,
           Sendable shell. Since we’re wrapping a pointer from an underlying C
           library, we can use a non-Sendable and non-Copyable struct to ensure
-          ownership semantics when passing the language model around. Then, we
-          can create a wrapper <code>CactusLanguageModelActor</code> that wraps
-          our non-Copyable type to grant proper built-in Sendable and background
-          execution to the inference engine.
+          ownership semantics when passing the model around. Then, we can create
+          a wrapper <code>CactusModelActor</code> that wraps our non-Copyable
+          type to grant proper built-in Sendable and background execution to the
+          inference engine.
         </p>
         <pre><code class="lang-swift">
-  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">CactusLanguageModel</span>: ~<span class="hljs-title">Copyable</span> </span>{
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">CactusModel</span>: ~<span class="hljs-title">Copyable</span> </span>{
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> pointer: cactus_model_t
 
   <span class="hljs-keyword">init</span>(pointer: consuming cactus_model_t) {
@@ -621,7 +626,7 @@ struct CactusModelHandle {
 
   <span class="hljs-keyword">init</span>(path: <span class="hljs-type">URL</span>) {
     <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> pointer = cactus_init(path.absoluteString) <span class="hljs-keyword">else</span> {
-      <span class="hljs-keyword">throw</span> <span class="hljs-type">CactusLanguageModelError</span>.failedToLoadModel
+      <span class="hljs-keyword">throw</span> <span class="hljs-type">CactusModelError</span>.failedToLoadModel
     }
     <span class="hljs-keyword">self</span>.<span class="hljs-keyword">init</span>(pointer: pointer)
   }
@@ -630,7 +635,7 @@ struct CactusModelHandle {
     cactus_destroy(<span class="hljs-keyword">self</span>.pointer)
   }
 
-  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">complete</span><span class="hljs-params">(messages: [ChatMessage])</span></span> <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">ChatCompletion</span> {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">complete</span><span class="hljs-params">(messages: [Message])</span></span> <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">Completion</span> {
     <span class="hljs-keyword">let</span> encodedMessages = <span class="hljs-keyword">try</span> <span class="hljs-type">JSONEncoder</span>().encode(messages)
     <span class="hljs-keyword">let</span> buffer = <span class="hljs-type">UnsafeMutableBufferPointer</span>&lt;<span class="hljs-type">CChar</span>&gt;.allocate(capacity: <span class="hljs-number">8192</span>)
     <span class="hljs-keyword">defer</span> { buffer.deallocate() }
@@ -641,7 +646,7 @@ struct CactusModelHandle {
       <span class="hljs-number">8192</span> * <span class="hljs-type">MemoryLayout</span>&lt;<span class="hljs-type">CChar</span>&gt;.<span class="hljs-built_in">stride</span>
     )
     <span class="hljs-keyword">if</span> result &lt; <span class="hljs-number">0</span> {
-      <span class="hljs-keyword">throw</span> <span class="hljs-type">CactusLanguageModelError</span>.badResponse
+      <span class="hljs-keyword">throw</span> <span class="hljs-type">CactusModelError</span>.badResponse
     }
     <span class="hljs-keyword">let</span> data = bufferToData(buffer)
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">try</span> <span class="hljs-type">JSONDecoder</span>().decode(<span class="hljs-type">ChatCompletion</span>.<span class="hljs-keyword">self</span>, from: data)
@@ -652,12 +657,12 @@ struct CactusModelHandle {
   }
 }
 
-actor <span class="hljs-type">CactusLanguageModelActor</span> {
+actor <span class="hljs-type">CactusModelActor</span> {
   <span class="hljs-keyword">private</span> actor <span class="hljs-type">DefaultIsolation</span> {}
 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> defaultIsolation = <span class="hljs-type">DefaultIsolation</span>()
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> executor: (any <span class="hljs-type">SerialExecutor</span>)?
-  <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusLanguageModel</span>
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusModel</span>
 
   nonisolated <span class="hljs-keyword">var</span> unownedSerialExeuctor: <span class="hljs-type">UnownedSerialExecutor</span> {
     <span class="hljs-keyword">self</span>.executor?.asUnownedSerialExecutor() ?? <span class="hljs-keyword">self</span>.defaultIsolation.unownedSerialExecutor
@@ -665,13 +670,13 @@ actor <span class="hljs-type">CactusLanguageModelActor</span> {
 
   <span class="hljs-keyword">init</span>(
     executor: (any <span class="hljs-type">SerialExecutor</span>)? = <span class="hljs-literal">nil</span>,
-    model: consuming sending <span class="hljs-type">CactusLanguageModel</span>
+    model: consuming sending <span class="hljs-type">CactusModel</span>
   ) {
     <span class="hljs-keyword">self</span>.executor = executor
     <span class="hljs-keyword">self</span>.model = model
   }
 
-  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">complete</span><span class="hljs-params">(messages: [ChatMessage])</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">ChatCompletion</span> {
+  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">complete</span><span class="hljs-params">(messages: [Message])</span></span> async <span class="hljs-keyword">throws</span> -&gt; <span class="hljs-type">Completion</span> {
     <span class="hljs-keyword">try</span> <span class="hljs-keyword">self</span>.model.complete(messages: messages)
   }
 
@@ -680,7 +685,7 @@ actor <span class="hljs-type">CactusLanguageModelActor</span> {
   }
 
   borrowing <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">withModel</span>&lt;T, E: Error&gt;<span class="hljs-params">(
-    operation: <span class="hljs-params">(CactusLanguageModel)</span></span></span> <span class="hljs-keyword">throws</span>(<span class="hljs-type">E</span>) -&gt; sending <span class="hljs-type">T</span>
+    operation: <span class="hljs-params">(CactusModel)</span></span></span> <span class="hljs-keyword">throws</span>(<span class="hljs-type">E</span>) -&gt; sending <span class="hljs-type">T</span>
   ) <span class="hljs-keyword">throws</span>(<span class="hljs-type">E</span>) -&gt; sending <span class="hljs-type">T</span> {
     <span class="hljs-keyword">try</span> operation(<span class="hljs-keyword">self</span>.model)
   }
@@ -697,46 +702,46 @@ actor <span class="hljs-type">CactusLanguageModelActor</span> {
         </p>
         <p>
           However, because we split the non-Sendable core from the Sendable
-          shell, we could also decide to use the language model inside another
-          completely synchronous context. This could include a class with a
-          lock, a non-main global actor, or another actor that bundles various
+          shell, we could also decide to use the model inside another completely
+          synchronous context. This could include a class with a lock, a
+          non-main global actor, or another actor that bundles various
           non-Sendable types together. If our needs are simple enough, we could
           even just rely on region based isolation with <code>sending</code>.
         </p>
         <pre><code class="lang-swift">
 <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LockedModel</span>: <span class="hljs-title">Sendable</span> </span>{
-  <span class="hljs-keyword">let</span> model: <span class="hljs-type">Mutex</span>&lt;<span class="hljs-type">CactusLanguageModel</span>&gt;
+  <span class="hljs-keyword">let</span> model: <span class="hljs-type">Mutex</span>&lt;<span class="hljs-type">CactusModel</span>&gt;
 
   <span class="hljs-comment">// ...</span>
 }
 
 <span class="hljs-keyword">final</span> actor <span class="hljs-type">CactusModelAgent</span> {
-  <span class="hljs-keyword">var</span> transcript: [<span class="hljs-type">ChatMessage</span>]
+  <span class="hljs-keyword">var</span> transcript: [<span class="hljs-type">Message</span>]
   <span class="hljs-keyword">var</span> nonSendable: <span class="hljs-type">NonSendable</span>
-  <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusLanguageModel</span>
+  <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusModel</span>
 
   <span class="hljs-comment">// ...</span>
 }
 
 @<span class="hljs-type">NonMainGlobalActor</span>
 <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModelActor</span> </span>{
-  <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusLanguageModel</span>
+  <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusModel</span>
 }
 
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">infer</span><span class="hljs-params">(model: sending CactusLanguageModel)</span></span> async <span class="hljs-keyword">throws</span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">infer</span><span class="hljs-params">(model: sending CactusModel)</span></span> async <span class="hljs-keyword">throws</span> {
   <span class="hljs-comment">// ...</span>
 }
       </code></pre>
         <p>
           Of course, it is also possible to use
-          <code>CactusLanguageModel</code> irresponsibly like this.
+          <code>CactusModel</code> irresponsibly like this.
         </p>
         <pre><code class="lang-swift">
 <span class="hljs-variable">@MainActor</span>
 <span class="hljs-variable">@Observable</span>
 final class Store {
-  <span class="hljs-comment">// ❌ Really bad idea</span>
-  <span class="hljs-selector-tag">let</span> <span class="hljs-selector-tag">model</span>: <span class="hljs-selector-tag">CactusLanguageModel</span>
+  <span class="hljs-comment">// ❌ Really bad idea, inference is insanely expensive and should not be run on the Main Actor</span>
+  <span class="hljs-selector-tag">let</span> <span class="hljs-selector-tag">model</span>: <span class="hljs-selector-tag">CactusModel</span>
 }
       </code></pre>
         <p>
@@ -749,7 +754,7 @@ final class Store {
             >IssueReporting</a
           >.
         </p>
-
+        <br />
         <h2 id="conclusion">Conclusion</h2>
         <p>
           Non-Sendable types are actually quite nice to work with. You don’t
@@ -757,7 +762,7 @@ final class Store {
           cryptic errors. Even <code>nonisolated(nonsending)</code> will
           eventually become the default for all <code>async</code> functions,
           but you can enable default behavior for it today through the
-          <code>NonIsolatedNonSendingByDefault</code> flag.
+          <code>NonIsolatedNonSendingByDefault</code> feature.
         </p>
         <p>
           Further, when you focus on making things non-Sendable, you gain more
