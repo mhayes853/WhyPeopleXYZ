@@ -25,21 +25,20 @@ const initFootnotes = () => {
       }
     } else if (node.nodeType === Node.ELEMENT_NODE) {
       const el = node as Element;
-      if (el.tagName !== "A" && el.tagName !== "CODE") {
-        Array.from(el.childNodes).forEach(processTextNodes);
+      if (
+        el.tagName === "A" ||
+        el.tagName === "CODE" ||
+        el.tagName === "PRE" ||
+        (el.tagName === "P" && footnoteDefStartRegex.test(el.textContent || ""))
+      ) {
+        return;
       }
+
+      Array.from(el.childNodes).forEach(processTextNodes);
     }
   };
 
-  const pTags = Array.from(article.querySelectorAll("p"));
-  pTags.forEach((p) => {
-    if (footnoteDefStartRegex.test(p.textContent || "")) {
-      return;
-    }
-    if (!p.querySelector("a.footnote-ref")) {
-      processTextNodes(p);
-    }
-  });
+  processTextNodes(article);
 
   const defParagraphs = Array.from(article.querySelectorAll("p"));
   defParagraphs.forEach((p) => {

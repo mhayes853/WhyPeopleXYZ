@@ -160,7 +160,7 @@
 <span class="hljs-keyword">final</span> actor <span class="hljs-type">CactusModelActor</span> {
   <span class="hljs-keyword">let</span> model: <span class="hljs-type">CactusModel</span>
 
-  <span class="hljs-keyword">init</span>(model: sending <span class="hljs-type">CactusModel</span>) {
+  <span class="hljs-keyword">init</span>(model: consuming sending <span class="hljs-type">CactusModel</span>) {
     <span class="hljs-keyword">self</span>.model = model
   }
 
@@ -231,7 +231,8 @@
           regardless of how the underlying data is persisted, or even write
           isolated unit tests just for the transformation logic. In general,
           once IO or side effects are introduced to your code, it becomes much
-          less flexible.
+          less flexible, so it's best to keep those isolated from the core to
+          maintain flexibility.
         </p>
         <p>
           In the above example, the transformation logic is what we call the
@@ -240,11 +241,10 @@
         <br />
         <h2 id="async-makes-things-harder">Async Makes Things Harder</h2>
         <p>
-          It turns out, that we can also apply this concept to Swift
-          Concurrency. Generally speaking, once async/await is required to call
-          a method, things get much harder. If you’re in a synchronous context,
-          you’ll either have to create an unstructured task, or mark the
-          enclosing method as <code>async</code>.
+          Generally speaking, once async/await is required to call a method,
+          things get much harder. If you’re in a synchronous context, you’ll
+          either have to create an unstructured task, or mark the enclosing
+          method as <code>async</code>.
         </p>
         <pre><code class="lang-swift">
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span></span> {
@@ -287,8 +287,9 @@
 }
       </code></pre>
         <p>
-          For instance, you can’t use <code>sending</code> to capture a
-          non-Sendable value inside an <code>@Sendable</code> closure.
+          However, it doesn't work everywhere. For instance, you can’t use
+          <code>sending</code> to capture a non-Sendable value inside an
+          <code>@Sendable</code> closure.
         </p>
         <pre><code class="lang-swift">
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">badTransfer</span><span class="hljs-params">(
@@ -442,7 +443,7 @@ nonisolated struct Item: Sendable {
                 Only 1 task can enter an actor at a time, so if a task must
                 await another <code>async</code> method within the actor, it
                 must leave the current actor to swap isolation contexts. This
-                allows another task to enter the actor in the meantime.
+                allows another task to enter[^1] the actor in the meantime.
               </li>
             </ul>
           </li>
@@ -462,7 +463,9 @@ nonisolated struct Item: Sendable {
             <ul>
               <li>
                 This allows one to declare methods external to the actor as
-                being isolated to the actor.
+                being isolated to the actor. Since a task can only be on at most
+                1 actor at a time, this also means that a function can only have
+                at most 1 isolated parameter.
               </li>
             </ul>
           </li>
@@ -531,10 +534,12 @@ nonisolated struct Item: Sendable {
           <code>NonIsolatedNonSendingByDefault</code> feature.
         </p>
         <p>
-          This theoretical example is a textbook definition of “NonSendable
-          core, Sendable Shell”. Now, we can look at some more practical
-          examples involving wrapping a C library that I’m involved in
-          semi-regularly.
+          However, it's also worth noting that this theoretical example is a
+          textbook definition of “NonSendable core, Sendable Shell” since the
+          <code>NonSendable</code> class acts as the non-Sendable core and
+          <code>MyViewModel</code> the Main Actor bound Sendable shell. Now, we
+          can look at some more practical examples involving wrapping a C
+          library that I’m involved in semi-regularly.
         </p>
         <br />
         <h2 id="practical-example-swift-cactus">
@@ -546,19 +551,20 @@ nonisolated struct Item: Sendable {
           example, I’ll wrap the
           <a href="https://github.com/cactus-compute/cactus"
             >cactus inference engine</a
-          >, which is highly energy efficient and performant alternative to MLX,
-          ONNX, llama, etc. that runs primarily on the CPU. I’m not going to
-          make a sales pitch for the engine in this article, and instead I’ll
-          focus on wrapping it from Swift. In fact, the principles in these code
-          examples can be found in the
+          >, which is a highly energy efficient, ARM optimized, and performant
+          alternative to MLX, ONNX, llama, etc. that runs primarily on the CPU.
+          I’m not going to make a sales pitch for the engine in this article
+          because I want the focus to be wrapping it properly from Swift. In
+          fact, the principles in these code examples can be found in the
           <a href="https://github.com/mhayes853/swift-cactus">swift-cactus</a>
-          package that I actively maintain (which is much more idiomatic than
-          the Swift example in the main cactus repo).
+          package that I actively maintain.
         </p>
         <p>
           The Cactus FFI exposes many functions, so I’ll only include heavily
           simplified signatures of some of the basic FFI functions for
-          simplicity.
+          simplicity. Just note that in reality the library supports many more
+          advanced features, but the underlying principles of the Swift API
+          design are the same.
         </p>
         <pre><code class="lang-c">
 <span class="hljs-comment">// Loads model weights.</span>
@@ -584,7 +590,7 @@ nonisolated struct Item: Sendable {
         <p>
           <code>cactus_model_t</code> itself is an opaque pointer, but under the
           hood it’s represented as a struct in C++ that looks something like
-          this. (Once again, very simplified from the actual handle[^1].)
+          this. (Once again, very simplified from the actual handle[^2].)
         </p>
         <pre><code class="lang-cpp">
 struct CactusModelHandle {
@@ -596,14 +602,14 @@ struct CactusModelHandle {
       </code></pre>
         <p>
           As we can see, we have an atomic for whether or not ongoing inference
-          should stop. Furthermore, the <code>Model</code> class does not use
-          any locks under the hood. This puts us in a weird case where
-          <code>cactus_stop</code> is safe to call from different isolation
-          contexts in Swift, but <code>cactus_complete</code> is not.
+          should stop. Furthermore, the <code>Model</code> class in the C++
+          engine does not use any locks under the hood. This puts us in a weird
+          case where <code>cactus_stop</code> is safe to call from different
+          isolation contexts in Swift, but <code>cactus_complete</code> is not.
         </p>
         <p>
           However, LLM inference is also incredibly expensive, and certainly you
-          should not be doing it from the Main Actor. However, only exposing the
+          should not be doing it from the Main Actor. Yet, only exposing the
           model API behind an actor would limit the Swifty wrapper to purely
           async contexts.
         </p>
@@ -620,7 +626,7 @@ struct CactusModelHandle {
 <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">CactusModel</span>: ~<span class="hljs-title">Copyable</span> </span>{
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> pointer: cactus_model_t
 
-  <span class="hljs-keyword">init</span>(pointer: consuming cactus_model_t) {
+  <span class="hljs-keyword">init</span>(pointer: consuming sending cactus_model_t) {
     <span class="hljs-keyword">self</span>.pointer = pointer
   }
 
@@ -780,7 +786,17 @@ final class Store {
         </p>
         <p>— 2/25/26</p>
         <p>
-          [^1]: At the time of writing this, if you look at the actual source
+          [^1]: I find it's best to think of actor interleaving in the sense
+          that tasks enter actors rather than actors executing tasks. If the
+          task must enter an actor, then it can therefore only be on 1 actor at
+          a time, just like how a human can only be in 1 physical location at
+          any given time. In order to hop to another isolation context, the task
+          therefore must leave the actor, just as a human must leave their
+          current location to go somewhere else. When speaking in these terms,
+          ideas like actor-interleaving and re-entrancy make a lot more sense.
+        </p>
+        <p>
+          [^2]: At the time of writing this, if you look at the actual source
           code for the engine, you will find a <code>model_mutex</code> inside
           the handle struct. However, it isn’t actually used in
           <code>cactus_complete</code>. As a result, the model pointer still
