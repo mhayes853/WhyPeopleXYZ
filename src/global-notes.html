@@ -134,6 +134,278 @@
           half-baking in my hollow cranium.
         </p>
         <br />
+        <h2 id="meaning-per-second">Meaning Per Second</h2>
+        <p>
+          When it comes to LLMs, we like to think of the idea of tokens per
+          second almost as a measure of quality in many cases. I suppose this is
+          similar to the focus on frames per second for graphics contexts.
+          Though, I think what I’m noting here applies a more to the LLM case
+          than it does the graphics case, it is applicable to the graphics case.
+        </p>
+        <p>
+          One interesting Alan Kay (or perhaps Xerox PARC) observation with
+          regards to performance is the idea that the bar is the speed of the
+          human nervous system. That is, as long as the human nervous system
+          doesn’t notice delay, then all is well and good. For graphical
+          contexts like those worked on at PARC, this makes a lot of sense.
+          However, LLMs are also often paired with graphical contexts, and thus
+          the human nervous system becomes the bar for speed yet again.
+        </p>
+        <p>
+          First, there are generally 2 kinds of speed metrics that we need to
+          worry about for inference, prefill and decode. Prefill relates to
+          forwarding tokens and building up the KV-cache, whereas decoding uses
+          the KV-cache to generate output tokens. Generally speaking, decode is
+          the more interesting measurement when we think about tokens per
+          second, and especially so in the context of user interfaces.
+          Prefilling can be hidden in the background for many applications, of
+          which such background work can be used to significantly reduce latency
+          to the first decoded token.
+        </p>
+        <p>
+          Secondly, we need to establish a base rate of speed for the human
+          nervous system. Movies use 24 FPS as a baseline, but modern
+          interactive user interfaces use 60-120 FPS. That being said, a
+          user-interface is often still useable even if it dips slightly below
+          that range, as long as the nervous system still perceives the
+          interactivity as motion. If we use 60 FPS as a base rate, that leaves
+          us about ~16.67ms between each frame.
+        </p>
+        <p>
+          Third, we need to consider what it means for a model to emit a token,
+          and for a frame to be drawn to the screen. Each token or frame is
+          generally used to build up a larger communication of some kind, such
+          as the words of an essay or the strokes of a drawing. Of course, the
+          most important substantial transfer in any communication is
+          <em>meaning</em>. Without being able to convey the meaning of
+          something, communications become misunderstood.
+        </p>
+        <p>
+          What this all means is that we have ~16.67ms to emit meaning in any
+          given scenario. Translate that into 60 TPS, and we’ll see that such a
+          speed is already relatively common for LLMs today. Therefore, we
+          already have the means of beating the nervous system from a raw
+          throughput perspective.
+        </p>
+        <p>
+          However, let’s take a moment to note the difference in output between
+          graphics and LLMs. LLMs generally emit text, where as graphics emit
+          pictures. This creates another bottleneck for LLMs, because human
+          minds absorb meaning from pictures much faster than words. Today’s
+          diffusion models are of course obviously not up to that level of
+          speed, and it’s likely they won’t be for another few iterations of
+          Moore’s Law (Perhaps one can buy their way into the future here
+          similarly to Xerox PARC).
+        </p>
+        <p>
+          Therefore, if we want to communicate in pictures today using an LLM,
+          our best approach from an engineering standpoint is to translate the
+          output tokens into pictures. However, once we start thinking in terms
+          of pictures, we stop thinking in terms of TPS, but rather a rate of
+          meaning per token. That is, how much can a token translate to the
+          right picture? Further, we only have ~16.67ms to do so as a base rate.
+        </p>
+        <p>
+          So we can see that changing the medium of communication itself brings
+          us different design and necessary throughput constraints. Pictures as
+          a medium have a higher throughput than words for certain kinds of
+          meaning, but words often win when it comes to precise formal meaning.
+          Regardless, if the point of all of this is optimization, then perhaps
+          “meaning per second” should be the optimization slogan.
+        </p>
+        <p>— 3/5/26</p>
+        <br />
+        <h2 id="i-actually-tried-a-ralph-loop">
+          I Actually Tried A Ralph Loop
+        </h2>
+        <p>
+          After 2 months of seriously using agents, I finally felt comfortable
+          trying a HIL version of Ralph on a recent internal tool to do some
+          marketing analysis for my company’s
+          <a href="https://stresyx.com/">pivot</a>. Also, I needed a test drive
+          for my latest and quite big release of swift-cactus 2.0. (I’ll write
+          something formal about this another time, CFG support in the main
+          engine is still needed to get it where it needs to be…)
+        </p>
+        <p>
+          Additionally, a model I’ve been playing around with quite a lot
+          recently is Minimax M2.5. A TLDR for why I like it is that it’s not
+          trying to be a cheap Codex or Opus like GLM and Kimi, and I wanted
+          something that wasn’t Codex for certain tasks. Regardless, this was
+          the model I decided to use for the sake of doing so.
+        </p>
+        <p>
+          The tool itself was a straightforward CLI to fetch some posts from
+          various data sources (Reddit primarily), and feed the content into
+          LFM2-8b-a1b running locally via the cactus engine to produce
+          suggestions and a report regarding the validity of a user defined
+          hypothesis. Additionally, qwen3-embed-0.6b was also used as an
+          embedding model for both vector indexing and aiding with
+          categorization for posts. I also used this chance to play with
+          <a href="https://github.com/christopherkarani/Wax">Wax</a>, a
+          single-file vector database written in pure Swift, and was the primary
+          persistence mechanism of choice. Also if it wasn’t obvious, Swift was
+          used as the programming language.
+        </p>
+        <p>
+          Overall, the task was completed with about ~4-5 hours of HIL ralphing,
+          though improvements can certainly still be made to the experience of
+          the tool itself. Therefore, the experiment was certainly a success
+          from the standpoint of being able to produce something that is
+          functional.
+        </p>
+        <p>
+          My overall idea itself was to start in one session by creating a plan
+          and detailed implementation specification document with the agent.
+          This specification was one large markdown file because I wasn’t trying
+          to build something incredibly complicated. Then, I ran another agent
+          session which broke down that implementation spec into 17 distinct
+          tasks listed in another document. Each task included, a title, a
+          description, completion criteria, and a list of tasks it depended on.
+          Since we are doing Ralph, the agent got to pick the order of task
+          completion. (It went mostly sequential with a slight exception towards
+          the later tasks where it actually backtracked for a bit.)
+        </p>
+        <p>
+          Of course, my thoughts on general software development techniques are
+          generally mixed, and Ralph is no exception to this rule. Generally
+          speaking, over dogmatic focus on patterns instead of systems is how
+          you get complexity, so we have to keep that in mind at the end of the
+          day. Nevertheless, here’s a somewhat comprehensive list that reflects
+          my experience.
+        </p>
+        <ul>
+          <li>
+            The code quality was absolutely terrible.
+            <ul>
+              <li>
+                Before listing individual cases here, I should mention that this
+                is a tool that will be thrown away in a few weeks time, so the
+                quality isn’t that important.
+              </li>
+              <li><code>@unchecked Sendable</code> everywhere.</li>
+              <li>
+                Loading the model weights from scratch every time embeddings or
+                inference was needed, instead of keeping the weights in memory.
+              </li>
+              <li>
+                Weird Java-like patterns that don’t make sense in Swift.
+                <ul>
+                  <li>Getter/Setter methods was common for some reason.</li>
+                </ul>
+              </li>
+              <li>
+                Writing tests for obvious things, like compiler-synthesized
+                Codable conformances.
+              </li>
+              <li>
+                Not using actors properly, and preferring NSLock when an actor
+                would make things simpler.
+                <ul>
+                  <li>
+                    In one case, it tried to use a serial dispatch queues within
+                    the actor itself to serialize work. Even worse, it would use
+                    <code>queue.async</code>, and await values via
+                    <code>withUnsafeContinuation</code>. I’m not making this up…
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Coupling generic logic with domain logic.
+                <ul>
+                  <li>
+                    In one case, it wrote a cosine similarity method that was
+                    private in a class. Generally speaking, I always try to
+                    extract such generic methods into a reusable place even if
+                    they are only used once.
+                  </li>
+                </ul>
+              </li>
+              <li>Etc.</li>
+            </ul>
+          </li>
+          <li>
+            It did a decent job separating interface from implementation via
+            protocols.
+            <ul>
+              <li>
+                That is, it was able to create mocks of things for testing which
+                was nice.
+              </li>
+              <li>
+                While it did create protocols, it often named/coupled the
+                protocol requirements to the implementation itself which isn’t
+                ideal.
+              </li>
+            </ul>
+          </li>
+          <li>
+            It completed the work in a very short period of time.
+            <ul>
+              <li>
+                ~8k LOC in 4-5 hours of work isn’t bad, the same amount of code
+                would’ve taken me at least a solid week of dedicated effort.
+              </li>
+            </ul>
+          </li>
+          <li>
+            It did a decent job of implementing the isolated and mundane things.
+            <ul>
+              <li>Reddit API Client</li>
+              <li>Wax memory wrapper</li>
+              <li>Cactus embedding provider for Wax</li>
+              <li>Domain model types/simple structs</li>
+              <li>Persistence</li>
+              <li>Configuration reading</li>
+              <li>Etc.</li>
+            </ul>
+          </li>
+          <li>
+            It did a terrible job of implementing the main tool loop.
+            <ul>
+              <li>
+                For some reason, it would avoid actually writing the part where
+                the LLM was called in the main loop of the tool.
+              </li>
+              <li>
+                Additionally, it avoided integrating in all of the isolated
+                modules in the code base, preferring to use mocks in the
+                production code.
+              </li>
+              <li>
+                Suffice to say, I had to break HIL Ralph and take over manually
+                via normal agentic coding to get it to actually build the main
+                loop of the tool.
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>What did we learn here?</p>
+        <p>
+          For one, I could probably be a better spec writer, and use Codex
+          instead of Minimax. Also, I’m sure with more practice the overall
+          output will become better regardless of the model choice. What I did
+          certainly find was that many trivial modules can easily be ralphed
+          with very little effort, however the fun parts of building are where
+          breaking out of the loop seems to be a better idea.
+        </p>
+        <p>
+          Ralph gives more control to the agent than you. In normal agentic
+          coding, you can generally get the agent to write decent code if you
+          direct it well. (Though it will still often miss critical performance
+          details, and make ~2-3 small mistakes per 1000 lines). However, the
+          quality seems to go way down when you hand full control to the agent.
+          This is ok if you limit its crappy output to a series of well-defined
+          interfaces in your spec, so make sure you nail your higher level
+          design decisions.
+        </p>
+        <p>
+          Overall, I once again think of this as a technique that’s great in the
+          sense of graphic design to art. That is, it can get stuff done like a
+          graphic designer, but it lacks the ability to produce incredible art.
+        </p>
+        <p>— 3/5/26</p>
+        <br />
         <h2 id="relativeness-relativeness-relativeness">
           Relativeness, Relativeness, Relativeness
         </h2>
