@@ -70,12 +70,18 @@ const attachCopyButton = (codeBlock: HTMLElement): void => {
     return;
   }
 
-  if (pre.querySelector(".code-copy-button")) {
+  const existingWrapper = pre.parentElement;
+  if (existingWrapper?.classList.contains("code-block-shell") && existingWrapper.querySelector(".code-copy-button")) {
     return;
   }
 
-  pre.classList.remove("code-block");
-  pre.style.position = "relative";
+  let wrapper = existingWrapper;
+  if (!wrapper || !wrapper.classList.contains("code-block-shell")) {
+    wrapper = document.createElement("div");
+    wrapper.className = "code-block-shell";
+    pre.parentNode?.insertBefore(wrapper, pre);
+    wrapper.appendChild(pre);
+  }
 
   const button = document.createElement("button");
   button.type = "button";
@@ -103,7 +109,7 @@ const attachCopyButton = (codeBlock: HTMLElement): void => {
     }, COPY_RESET_DELAY_MS);
   });
 
-  pre.appendChild(button);
+  wrapper.appendChild(button);
 };
 
 const initCodeBlocks = (): void => {
