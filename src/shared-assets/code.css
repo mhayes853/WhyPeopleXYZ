@@ -42,6 +42,11 @@ pre.code-block {
   background: var(--code-surface);
   box-shadow: var(--code-shadow), var(--code-inner-shadow);
   overflow: hidden;
+  margin: 1.25rem 0;
+}
+
+.code-block-shell + .code-block-shell {
+  margin-top: 1.75rem;
 }
 
 code {
@@ -107,6 +112,11 @@ pre code *::selection {
 
   .code-block-shell {
     border-radius: 20px;
+    margin: 1rem 0;
+  }
+
+  .code-block-shell + .code-block-shell {
+    margin-top: 1.35rem;
   }
 
   .code-copy-button {
