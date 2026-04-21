@@ -139,6 +139,101 @@
           sane person, and the evidence for that is in these writings below.
         </p>
         <br />
+        <h2 id="clean-code-is-good-ui-design-4-n-">
+          Clean Code is Good UI Design (4/N)
+        </h2>
+        <p>
+          If you know ARM NEON, you would know immediately what the following
+          code does.
+        </p>
+        <pre><code class="lang-c">
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f</span>(<span class="hljs-params">__fp16* <span class="hljs-keyword">out</span>, <span class="hljs-keyword">const</span> __fp16* values, size_t values_size</span>) </span>{
+    <span class="hljs-keyword">for</span> (size_t i = <span class="hljs-number">0</span>; i &lt; values_size; i += <span class="hljs-number">8</span>) {
+        vst1q_f16(<span class="hljs-keyword">out</span> + i, vaddq_f16(vld1q_f16(values + i), vld1q_f16(<span class="hljs-keyword">out</span> + i)));
+    }
+}
+        </code></pre>
+        <p>
+          However, I assume most of you reading this don’t, so here’s what it
+          actually does.
+        </p>
+        <pre><code class="lang-c">
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sum_all</span><span class="hljs-params">(<span class="hljs-keyword">float</span>* out, <span class="hljs-keyword">const</span> <span class="hljs-keyword">float</span>* values, <span class="hljs-keyword">size_t</span> values_size)</span> </span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; i &lt; values_size; i++) {
+        out[i] += values[i];
+    }
+}
+        </code></pre>
+        <p>
+          This really shows that the lack of understanding came from the fact
+          that the “UI” for the NEON version looks quite cryptic for such a
+          simple operation. That is, one doesn’t know what
+          <code>vst1q_f16</code> means unless they’ve read the ARM NEON ISA.
+        </p>
+        <p>
+          Furthermore, if you want to make the NEON version handle sums properly
+          when <code>values_size</code> is not a multiple of 8, you would need
+          to add the scalar section at the end to handle the remaining values. I
+          didn’t include that bit in the first NEON example because it would’ve
+          given the answer away.
+        </p>
+        <pre><code class="lang-c">
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sum_all_neon</span>(<span class="hljs-params">__fp16* <span class="hljs-keyword">out</span>, <span class="hljs-keyword">const</span> __fp16* values, size_t values_size</span>) </span>{
+    size_t i = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (; i + <span class="hljs-number">8</span> &lt;= values_size; i += <span class="hljs-number">8</span>) {
+        vst1q_f16(<span class="hljs-keyword">out</span> + i, vaddq_f16(vld1q_f16(values + i), vld1q_f16(<span class="hljs-keyword">out</span> + i)));
+    }
+
+    <span class="hljs-keyword">for</span> (; i &lt; values_size; i++) {
+        <span class="hljs-keyword">out</span>[i] += values[i];
+    }
+}
+        </code></pre>
+        <p>
+          Another thing worth noting is that you would generally not write NEON
+          code like that as an isolated function, but rather as a part of a
+          fused mathematical operation in practice.
+        </p>
+        <pre><code class="lang-c">
+<span class="hljs-keyword">void</span> fused<span class="hljs-number">_</span>op(<span class="hljs-number">__f</span>p<span class="hljs-number">16</span>* <span class="hljs-keyword">out</span>, const <span class="hljs-number">__f</span>p<span class="hljs-number">16</span>* values, size<span class="hljs-number">_</span>t values<span class="hljs-number">_</span>size) {
+    size<span class="hljs-number">_</span>t i = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (; i + <span class="hljs-number">8</span> &lt;= values<span class="hljs-number">_</span>size; i += <span class="hljs-number">8</span>) {
+        float<span class="hljs-number">16</span>x<span class="hljs-number">8</span> vals = vld<span class="hljs-number">1</span>q<span class="hljs-number">_f</span><span class="hljs-number">16</span>(values + i);
+        float<span class="hljs-number">16</span>x<span class="hljs-number">8</span> <span class="hljs-keyword">out</span><span class="hljs-number">_</span>vals = vld<span class="hljs-number">1</span>q<span class="hljs-number">_f</span><span class="hljs-number">16</span>(<span class="hljs-keyword">out</span> + i);
+        <span class="hljs-comment">// Other math ops that use vals and out_vals...</span>
+
+        vst<span class="hljs-number">1</span>q<span class="hljs-number">_f</span><span class="hljs-number">16</span>(<span class="hljs-keyword">out</span> + i, vaddq<span class="hljs-number">_f</span><span class="hljs-number">16</span>(vals, <span class="hljs-keyword">out</span><span class="hljs-number">_</span>vals));
+
+        <span class="hljs-comment">// Other math ops that use vals and out_vals...</span>
+    }
+
+    <span class="hljs-keyword">for</span> (; i &lt; values<span class="hljs-number">_</span>size; i++) {
+        <span class="hljs-comment">// Handle remaining values via scalar loop...</span>
+    }
+}
+        </code></pre>
+        <p>
+          There are a whole host of reasons for why that is, but the issue is
+          that such reasons are completely invisible to you whether or not you
+          write code by hand or through an agent. Agents, from my experience,
+          unfortunately tend to fall for the human tendencies of microbenchmark
+          optimization (at the expense of E2E performance) when it comes to
+          these kinds of things, so it isn’t of much help on its own. So even
+          the agent can have blindspots despite having far more trained
+          knowledge than you ever will.
+        </p>
+        <p>
+          In nearly all tools that deal with code today (Text Editors, IDEs,
+          Agent CLIs, Github, etc.), context about the production environment is
+          essentially invisible from within the tool itself. That is, all code
+          is displayed with the same visual hierarchy, regardless of how
+          critical or uncritical it is. This means that the context has to live
+          somewhere else, which is often one’s head or in model context/weights.
+          I wonder how well that’s worked so far.
+        </p>
+        <p>— 4/20/26</p>
+        <br />
+
         <h2 id="plugins">Plugins</h2>
         <p>
           My recent notes have mentioned a “universal medium” for apps to
