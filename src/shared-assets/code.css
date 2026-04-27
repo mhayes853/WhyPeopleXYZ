@@ -71,6 +71,8 @@ pre code {
   overflow: visible;
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 
   background: transparent;
   color: var(--code-text);
