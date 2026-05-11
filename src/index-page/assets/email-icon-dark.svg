@@ -1,14 +1,2 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Inverted version -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-     viewBox="0 0 512 512" xml:space="preserve">
-<circle cx="256" cy="256" r="256" fill="#FFFFFF"/>
-<g>
-  <path style="fill:#181d3b;" d="M400.288,356.112h-288.24V150.544h288.24V356.112z M128.048,340.112h256.24V166.544h-256.24V340.112
-    z"/>
-  <polygon style="fill:#181d3b;" points="256.192,279.888 115.824,192.752 124.272,179.152 256.16,261.04 388.032,178.528
-    396.528,192.096  "/>
-</g>
-<rect x="342.526" y="225.473" transform="matrix(-0.7864 0.6177 -0.6177 -0.7864 807.8389 308.8256)" style="fill:#181d3b;" width="16" height="137.215"/>
-<rect x="93.48" y="286.045" transform="matrix(-0.617 0.7869 -0.7869 -0.617 493.5035 347.9231)" style="fill:#181d3b;" width="137.225" height="15.999"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" fill="#000000"/></svg>
