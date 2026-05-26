@@ -146,6 +146,75 @@
           reality. I hope you enjoy!
         </p>
         <br />
+        <h2 id="the-problem-with-ai-terminals">
+          The Problem With AI Terminals
+        </h2>
+        <p>
+          Alan's answer to this
+          <a
+            href="https://www.quora.com/Can-an-AI-command-line-replace-the-GUI-as-the-primary-user-experience-for-computers-assuming-the-technology-improves-and-irrespective-of-today-s-state"
+            >question</a
+          >
+          puts more light on what I think regarding general chat interfaces, and
+          especially interfaces to agentic tools. One of the main issues being
+          the complete lack of visibility, feedback, and also as Alan says,
+          exploration (through all senses, which really can be a superset of the
+          "visibility" and "feedback" traits). Without such traits, the
+          effectiveness of these tools (in their existing forms, irrespective of
+          how good the models are) tends to depend on the existing domain
+          capabilities of the user, which can be a negative multiplier for more
+          incapable users.
+        </p>
+        <p>
+          In the long term, I don't see this particularly leading to mass good
+          outcomes, but rather many bad ones with a few possible good ones from
+          necessarily small teams of "responsible" users. This is already
+          <a
+            href="https://www.businessinsider.com/uber-coo-andrew-macdonald-ai-token-spending-harder-justify-2026-5"
+            >happening</a
+          >
+          at organizations that have the means to capture even the best talent.
+          (I also think much of this relates to "maintenance" vs "creation"
+          mode, of which the former tends to apply more to large companies like
+          Uber. In practice, maintenance is more about hardening and making a
+          system more robust, which is quite different from writing new
+          functionallity from scratch. That is, one cannot fix systems with the
+          same mindset used to create them.)
+        </p>
+        <p>— 5/24/26</p>
+        <br />
+        <h2 id="meaning-per-second-2-n">Meaning Per Second (2/N)</h2>
+        <p>
+          This
+          <a
+            href="https://mikeveerman.github.io/tokenspeed/?rate=76.5&mode=text"
+            >site</a
+          >
+          shows various token decode speeds visually from an "average" (they
+          all differ, but those differences don't matter for this) BPE-style
+          tokenizer. Try playing around with the speeds a bit.
+        </p>
+        <p>
+          What becomes strikingly clear is that at a certain point the
+          bottleneck becomes your eyes if you watch the stream visually, and you
+          cannot process text being decoded that quickly (also notice that your
+          eyes will try to "fill in the gaps" when line breaks for paragraphs
+          are decoded). In that sense, the rate of visual streaming should not
+          reasonably be the same as the decode speed in application code. So
+          when it comes to communicating meaning in a visual throughput context,
+          the ratio of meaning to throughput matters much more than the raw
+          throughput and raw content separately.
+        </p>
+        <p>
+          A lot of this can also be foreshadowed as to what an ideal
+          representation would be. That is, a representation that conveys visual
+          meaning, that can be incrementally expanded and explored in real-time,
+          and can be formed reasonably quickly. Throwing LLMs at this problem
+          isn't the full answer. Something different is needed, especially for
+          edge use cases.
+        </p>
+        <p>— 5/21/26</p>
+        <br />
         <h2 id="language-fungibility">
           Language Fungibility
         </h2>
