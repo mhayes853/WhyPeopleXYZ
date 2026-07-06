@@ -1,4 +1,5 @@
 import "./code.css";
+import "./katex.css";
 import "./article.css";
 import initCodeBlocks from "./code";
 import { estimateReadingTime } from "./article-read-time";
