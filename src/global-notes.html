@@ -216,16 +216,20 @@
           Foundation import to compare the bundle sizes. It came out with this.
         </p>
         <p><b>Original Prompt:</b></p>
-        <pre><code>I want you to run a quick experiment.
+        <pre class="code-wrap"><code>I want you to run a quick experiment.
  - Create a very simple Swift package that imports Foundation, and compile it for WASM.
  - Then change the Foundation import to FoundationEssentials, and compile it for WASM.
  - Then remove the import entirely, and compile it for WASM.
 
  At the end, report back the WASM binary sizes for each build. Make sure to build in release mode for each build.</code></pre>
         <p><b>Later Added:</b></p>
-        <pre><code>Ok, now run the same experiment, but add another build that imports a C target exporting and using yyjson. Compare the new binary size to the other cases (you don't have to run the other cases again, just compare the new case to the ones you have here.)</code></pre>
+        <pre
+          class="code-wrap"
+        ><code>Ok, now run the same experiment, but add another build that imports a C target exporting and using yyjson. Compare the new binary size to the other cases (you don't have to run the other cases again, just compare the new case to the ones you have here.)</code></pre>
         <p><b>Final Result:</b></p>
-        <pre><code>┌──────────────────────┬──────────────────┬──────────────────┐
+        <pre
+          class="code-wrap"
+        ><code>┌──────────────────────┬──────────────────┬──────────────────┐
 │ Variant              │ Pruned WASM      │ Brotli-11        │
 ├──────────────────────┼──────────────────┼──────────────────┤
 │ Foundation           │ 45,718,166 bytes │ 12,016,398 bytes │
