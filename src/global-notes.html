@@ -165,7 +165,7 @@
           understanding and editing. Just the most unquestioned one. For the
           record, my statements in this paragraph obviously don’t support a
           general purpose successor to today’s code either because of domain
-          specificity.
+          specificity (eg. Visual things need visual and not textual representations).
         </p>
         <p>
           A lot of talk has gone around about “writing slop to validate code”,
@@ -182,8 +182,8 @@
           for various inference engines (including Apple’s new CoreAI
           framework). These are quality improvements that are only worth it from
           a time standpoint because of agents. (Furthermore, it’s worth
-          mentioning that as humans we are quite bad at making decisions for
-          quite a lot of psychological/biological factors, this is where having
+          mentioning that as humans we are quite bad at making decisions due to
+          a lot of psychological/biological factors. This is where having
           tools that don’t succumb to those same flaws can help. See the
           <a href="https://en.wikipedia.org/wiki/Hungry_judge_effect"
             >hungry judge effect</a
@@ -198,12 +198,13 @@
           the product. For complex and safety critical domains (ie. hard to get
           write/dangerous to get wrong), it obviously still makes sense to read
           and verify everything alongside having formal verification tools to
-          make that process more robust. However, for traditional “glue
-          libraries/frameworks together” kinds of apps, it’s probably becoming
-          less important since the difficult part for those was never the code
-          in the first place, but rather architecture. (In fact, the intensive
-          focus on code may have taken away necessary focus on architecture!
-          This is something I’ve certainly been guilty of in the past.)
+          make that process more robust. However, for apps where the
+          code-level implementation consists of mostly “gluing libraries/frameworks
+          together”, it’s probably becoming less important since the difficult
+          part for those was never the code in the first place, but rather
+          architecture and domain complexity. (In fact, the intensive focus on
+          code may have taken  away necessary focus on architecture! This is
+          something I’ve certainly been guilty of in the past.)
         </p>
         <p>
           I still like handwriting some amount of code whenever I have spare
