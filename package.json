@@ -7,9 +7,11 @@
     "dev": "vite",
     "local": "vite --host",
     "build": "tsc && vite build",
+    "postbuild": "node scripts/generate-rss.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "generate:index": "node scripts/generate-index.mjs",
+    "generate:rss": "node scripts/generate-rss.mjs",
     "update:global-notes": "node scripts/update-recent-global-notes.mjs",
     "prepare": "husky install"
   },
