@@ -157,6 +157,95 @@
           <a href="/rss.xml">RSS</a>.
         </p>
         <br />
+        <h2 id="swift-as-a-universal-language">
+          Swift as a Universal Language
+        </h2>
+        <p>
+          C and C++ generally can run on all major platforms and embedded
+          devices, and as such I would call them &ldquo;universal
+          languages&rdquo;, in the context of mainstream languages. For the purposes of this
+          note, &ldquo;universal&rdquo; will mean &ldquo;runs anywhere
+          important&rdquo; and compiled. I&rsquo;m avoiding interpreted
+          languages since they often can&rsquo;t run in the performance
+          intensive environments, and they usually delegate those tasks to
+          compiled languages.
+        </p>
+        <p>
+          Despite the universality, C and C++ are quite antiquated, which leaves
+          Rust as the more modern alternative with the same universaility. That
+          being said, from my experience, Rust&rsquo;s model tends to work well
+          for lower-level systems that need to get things right, but this model
+          tends to be more obstructive for higher-level business logic. In
+          essence, I&rsquo;m not a fan of the 3 most &ldquo;universal&rdquo;
+          languages being limited by design (C), having invisible footguns
+          (C++), and being obstructive (Rust). I&rsquo;ll also be transparent
+          and state that I have not tried Zig, Odin, or Jai at the time of
+          writing this (though Zig is on the bucket list), but from the looks of
+          it each would fall into one of those aforementioned categories.
+        </p>
+        <p>
+          Do I hate manual memory management or excessive ownership/lifetime
+          enforcement? No, but I generally think the amount of usefulness of
+          those features is limited outside of low-level/systems programming
+          scenarios. It just gets in the way for higher-level scaffolding and
+          business logic, which happens to be the majority of code even in
+          systems that have a performance intensive hot path.
+        </p>
+        <p>
+          This brings us to Swift, which is compiled, has optional ownership and
+          lifetime semantics, direct interop with C (and C++ to an extent),
+          ability to do manual memory management through unsafe pointers, and
+          most importantly can actually run outside the Apple ecosystem. In
+          particular, even though it does many &ldquo;hidden allocations&rdquo;,
+          I like that I can opt into the lower-level constructs as needed and am
+          not forced to use them by default.
+        </p>
+        <p>
+          However, there are many problems with Swift outside of the Apple
+          ecosystem, like good tooling. Furthermore, much of the package
+          ecosystem only works on or is designed for Apple platforms
+          specifically, and don&rsquo;t realize the costs of
+          <code>import Foundation</code> (many of my recent notes show that this
+          has an adverse effect on binary sizes for WASM). There are also a few
+          more issues here like being forced to use <code>@available</code> on
+          Apple platforms, as well those APIs not being back-deployable to older
+          Apple OS versions. (<code>Mutex</code> being gated to iOS 18+ has made
+          me had to write a dedicated cross-platform <code>Lock</code> type so
+          many times.) There&rsquo;s also no SPM support for dynamic libraries
+          outside of XCFrameworks, which has been a bit of an issue for me
+          recently when trying to depend on ONNX.
+        </p>
+        <p>
+          That being said, agents can actually make fixing some of these issues
+          easier. Generally speaking, it&rsquo;s become more and more possible
+          to port libraries from one language to another, so it should be more
+          possible to port libraries from other languages into Swift packages to
+          help with the ecosystem problem. Better tooling though is a harder
+          one, because while agents can speed up development, good tools are
+          hard. Regardless, I think it will be more essential for languages to
+          become more agent-friendly in the near future, until we find a way to
+          get rid of languages all together perhaps.
+        </p>
+        <p>
+          My recent notes obviously indicate that I am working on something
+          heavily Swift related behind the scenes right now. That will be
+          revealed soon, but know that I plan on using Swift for the entire core
+          of this upcoming project (other languages are/will also be involved,
+          but they will most likely just call into the Swift core), despite it
+          being designed to run anywhere from Apple platforms to server-side
+          applications to embedded devices. Honestly, this level of
+          cross-platform support will probably warrant a dedicated polished
+          write-up that would be out of scope for a single note.
+        </p>
+        <p>
+          Another thing worth mentioning is that languages are more fungible
+          these days (see Bun rewrite), and it&rsquo;s easier to switch the primary language of
+          any given project from one to another. If Swift doesn&rsquo;t end up
+          working out in the long run, I have no doubt that it will be possible to
+          port to Rust or whatever else.
+        </p>
+        <p>— 8/5/26</p>
+        <br />
         <h2 id="when-everyone-has-agents">When Everyone Has Agents</h2>
         <p>
           Whenever a new widespread technology comes along, it’s early adopters
@@ -181,8 +270,8 @@
           Similar things happened with the web and social media, where both
           mediums became the center of public conversation and most notably your
           data. When only 1 in 100 people use a social media platform, no
-          advanced algorithm is necessary, but it is when 95 of those 100 people also
-          use social media. When only 1 in 100 people use the web, it’s not
+          advanced algorithm is necessary, but it is when 95 of those 100 people
+          also use social media. When only 1 in 100 people use the web, it’s not
           worth investing resources into advanced analytics/data tracking.
           However, when 99 of those 100 people use the web, such tracking
           becomes increasingly tempting, and even necessary for growth in many
@@ -214,9 +303,9 @@
           have to do with harmful spam of various kinds. While OpenAI and
           Anthropic will likely have certain guardrails in place, open weight
           models may not, and thus the population would be able to indirectly
-          (UIs will hide the model names) spin up Kimi/GLM swarms for harassment,
-          bullying, etc. This will likely lead to laws requiring guardrails for
-          a model to accessible by the general public.
+          (UIs will hide the model names) spin up Kimi/GLM swarms for
+          harassment, bullying, etc. This will likely lead to laws requiring
+          guardrails for a model to accessible by the general public.
         </p>
         <p>
           Another kind of “spam” is simply that the attack surface for many
