@@ -157,15 +157,165 @@
           <a href="/rss.xml">RSS</a>.
         </p>
         <br />
+        <h2 id="ios-and-hiding-power">iOS and Hiding Power</h2>
+        <p>
+          I recently came across
+          <a href="https://youtu.be/zqOrriq20Tc?si=-WYUzIiHGXibU0uo">this</a>.
+        </p>
+        <p>
+          One of my notes in the backlog is about Butler Lampson&rsquo;s
+          &ldquo;Don&rsquo;t Hide Power&rdquo; principle. While it goes over
+          many examples including SwiftUI, I wasn&rsquo;t able to find a natural
+          point to fit iOS in. That being said, iOS (and much of Apple
+          platforms) is a classic example of hiding power, and I think
+          Theo&rsquo;s rant on it exemplifies this, but doesn&rsquo;t state the
+          principle in clear terms.
+        </p>
+        <p>
+          First, I should clarify what it means to <em>not</em> hide power. That
+          is, an abstraction can hide underlying complexity from a host, but it
+          shouldn&rsquo;t prevent one from interfacing with the underlying host
+          if necessary.
+        </p>
+        <p>
+          By design iOS is designed to be &ldquo;simple and easy to use&rdquo;
+          which isn&rsquo;t bad on it&rsquo;s own, but once it becomes
+          &ldquo;absolutely brain-dead to use&rdquo; we&rsquo;re in hiding power
+          territory. (Bret Victor in
+          <a
+            href="https://vimeo.com/906418692?share=copy&amp;fl=cl&amp;fe=ci#t=3105.415"
+            >Inventing on Principle</a
+          >
+          even clarifies that &ldquo;simple and easy to use&rdquo; is &ldquo;too
+          vague&rdquo; of a principle to act on. A single button that launches
+          nukes is &ldquo;simple and easy to use&rdquo;, but is disastrous for
+          the planet.) To put this into perspective, the main drivers behind the
+          personal computer, internet, etc. was to <em>enlighten</em>
+          people by giving them tools to think and create upon better ideas.
+          Often, this means improving one&rsquo;s ability to express themselves
+          through a medium, like an artist being able to create better drawings
+          by practicing their skills.
+        </p>
+        <p>
+          iOS instead has kept everyone on the same homescreen for 20 years, and
+          has not enabled end-users to change the interaction model between
+          &ldquo;apps&rdquo; (or even modify apps themselves!) to suit their
+          needs. This is &ldquo;perpetual beginnership&rdquo; because the
+          ceiling for expression is disastrously low, and as a result
+          there&rsquo;s no intrinsic incentive to improve one&rsquo;s expressive
+          ability. When this happens, only a limited set of people, those who
+          learn the difficult task creating software, get even any semblence of
+          expression. Everyone else then must bend to the will of this tiny
+          handful of app developers, because they are the only ones who have any
+          sort of expressive power.
+        </p>
+        <p>
+          Of course, even as a developer your expression options are limited to
+          whatever Apple deems as &ldquo;allowable&rdquo; (see the video), which
+          is arbitrary and limited (eg. Requiring WebKit for browser engines, no
+          JIT for emulators, numerous private APIs, etc.). Adhoc app
+          distribution with end-users remains difficult as well, since the only
+          official methods of doing so are through TestFlight and the AppStore.
+          Many great creative works begin through adhoc and sloppily put
+          together creations (eg. a simple sketch that turns into a larger
+          drawing). However, there is no good way to share a
+          &ldquo;sketch&rdquo; that takes the form of an iOS app, which limits
+          how one may test an interactive idea with actual users. (Additionally,
+          most users of iOS don&rsquo;t even know what TestFlight is, so the
+          only place where you can distribute to these users is through the
+          AppStore itself.)
+        </p>
+        <p>
+          For development itself, I won&rsquo;t bring up the issues I have with
+          Xcode here, but suffice to say I&rsquo;m also on Theo&rsquo;s side
+          regarding it.
+        </p>
+        <p>
+          Moving on to the iPad, which in theory should be a more powerful and
+          capable machine than the Mac, simply because it allows more forms of
+          input (hands, keyboard, mouse, voice, etc.). However, it gets the same
+          locked down version of iOS as its base OS, thereby limiting what one
+          can create with it to many of the existing limitations of iOS. Theo
+          mentions that one should be able to create iPad apps on an iPad, to
+          which I agree and wonder why it isn&rsquo;t also the case for the
+          iPhone, Apple Watch, etc. If the iPad was to actually follow the
+          original concept of the dynabook, then this would be something
+          that&rsquo;s non-negotiable.
+        </p>
+        <p>
+          For the record, many of the problems that Theo has mentioned in his
+          video, and that I have mentioned in this note, also do apply more
+          generally. Even today&rsquo;s desktops are still stuck in an
+          &ldquo;Application Silo&rdquo;, though not to the extent that iOS is.
+          I won&rsquo;t re-open that rambling here, but you can check out some
+          other
+          <a
+            href="https://whypeople.xyz/global-notes#how-do-we-break-the-application-silo-"
+            >notes</a
+          >
+          on it. So while iOS is most affected by this, really I think the
+          larger part of personal computing needs reform.
+        </p>
+        <p>
+          Towards the end of the video, in typical Theo fashion, he enters his
+          &ldquo;enhanced emotional state&rdquo; of bashing Apple for
+          &ldquo;generational damage&rdquo;. I recently came across another
+          <a href="https://youtu.be/XwJHpMdrxEQ?si=-eTkaOAvmSxrpXjy">video</a>
+          on Gen-Z struggling to use a basic Windows desktop (Windows XP of all
+          things). While this video is obviously entertainment (and painful to
+          watch), it does highlight the level of &ldquo;perpetual
+          beginnership&rdquo; going on. Is the solution to yell at these people,
+          and tell them to learn how to use a basic desktop? No, I don&rsquo;t
+          think so since Windows itself has many issues, but I certainly think
+          one needs to be immersed in an environment that is sufficiently
+          expressive if they want to produce great things.
+        </p>
+        <p>
+          Therefore, when I see the term &ldquo;Generational Damage&rdquo; being
+          thrown around, I&rsquo;m not thinking about a general public that
+          &ldquo;can&rsquo;t use a computer&rdquo;, and is &ldquo;cooked in the
+          job market&rdquo;. Rather, I&rsquo;m thinking of a general public that
+          has had it&rsquo;s own intrinsic/autonomous/expressive growth stunted
+          by the &ldquo;simple and easy to use&rdquo; systems they use
+          day-to-day. A general public who has had power hidden from them. This
+          is concerning, especially as the world grows an order of magnitude
+          more complex and dynamic with the rise of agents.
+        </p>
+        <p>
+          By learning to express yourself through a medium, you gain a
+          perspective on how to approach such complexity through your
+          expressions, and even be inspired by it perhaps. This is necessary for
+          being able competently do things such as vote on policies that involve
+          complex domains (eg. climate change, AI, etc). If one isn&rsquo;t
+          sufficiently competent in a complex domain, they have to get their
+          competence from somewhere else in order to make an informed decision.
+          Today, this means whoever is the loudest on social media. Suffice to
+          say, experts in doing mass communication are quite different from
+          experts in the complex domain of question, and don&rsquo;t always
+          share the same interests.
+        </p>
+        <p>
+          Is Apple&rsquo;s monopoly the reason for this &ldquo;generational
+          damage&rdquo;? Perhaps to the extent that they aren&rsquo;t willing to
+          change much about it. However, many of the ideas were cemented long
+          ago when the available hardware was far more limited, and before their
+          monopoly. The good news is that no monopoly lasts forever, so
+          eventually they will have competition. Hopefully, such competition
+          won&rsquo;t just be trying to build an &ldquo;iOS for the agentic
+          era&rdquo;, but rather something that enables far more expression and
+          creation than iOS today.
+        </p>
+        <p>— 8/9/26</p>
+        <br />
         <h2 id="swift-as-a-universal-language">
           Swift as a Universal Language
         </h2>
         <p>
           C and C++ generally can run on all major platforms and embedded
           devices, and as such I would call them &ldquo;universal
-          languages&rdquo;, in the context of mainstream languages. For the purposes of this
-          note, &ldquo;universal&rdquo; will mean &ldquo;runs anywhere
-          important&rdquo; and compiled. I&rsquo;m avoiding interpreted
+          languages&rdquo;, in the context of mainstream languages. For the
+          purposes of this note, &ldquo;universal&rdquo; will mean &ldquo;runs
+          anywhere important&rdquo; and compiled. I&rsquo;m avoiding interpreted
           languages since they often can&rsquo;t run in the performance
           intensive environments, and they usually delegate those tasks to
           compiled languages.
@@ -239,10 +389,10 @@
         </p>
         <p>
           Another thing worth mentioning is that languages are more fungible
-          these days (see Bun rewrite), and it&rsquo;s easier to switch the primary language of
-          any given project from one to another. If Swift doesn&rsquo;t end up
-          working out in the long run, I have no doubt that it will be possible to
-          port to Rust or whatever else.
+          these days (see Bun rewrite), and it&rsquo;s easier to switch the
+          primary language of any given project from one to another. If Swift
+          doesn&rsquo;t end up working out in the long run, I have no doubt that
+          it will be possible to port to Rust or whatever else.
         </p>
         <p>— 8/5/26</p>
         <br />
