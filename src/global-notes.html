@@ -157,6 +157,372 @@
           <a href="/rss.xml">RSS</a>.
         </p>
         <br />
+        <h2 id="static-typing">Static Typing</h2>
+        <p>
+          Look, I don&rsquo;t know wtf I just wrote here, and it definitely
+          sounds like complete and banal gibberish and discovering
+          &ldquo;obvious&rdquo; principles at the same time. So to incriminate
+          myself, I thought I would share it on the internet for some reason.
+        </p>
+        <p>
+          Agents seemed to have shifted many projects to typed languages, or
+          additionally typed features in dynamic languages (eg. Python type
+          hints). This is generall good for agents because the types act as a
+          verification and documentation mechanism. However, it&rsquo;s not
+          everything, and there are certainly inefficiencies with how types are
+          reasoned about and explicitly written. This note is about what can be
+          taken further here.
+        </p>
+        <p>First, let&rsquo;s look at an example of redundancy.</p>
+        <pre><code>function foo(name: string, bio: string) {
+}</code></pre>
+        <p>
+          In this example, both <code>name</code> and <code>bio</code> are
+          strings, but we have to write out <code>: string</code> twice in the
+          function signature. What if instead we could bundle?
+        </p>
+        <pre><code>function foo(name, bio: string) {
+}</code></pre>
+        <p>
+          When tokenized with
+          <a href="https://platform.openai.com/tokenizer"
+            >GPT 5.x&rsquo;s tokenizer</a
+          >, example 1 comes out to 12 tokens, while example 2 comes out to 10
+          tokens. Therefore, the second is more token efficient, so let&rsquo;s
+          keep going.
+        </p>
+        <p>Often, we also like to pass down arguments to other functions.</p>
+        <pre><code>function foo(name, bio: string) {
+}
+
+function bar(name, bio: string) {
+}</code></pre>
+        <p>
+          This is duplication again, so we may extract a type this time to avoid
+          duplicating arguments.
+        </p>
+        <pre><code>type Person = { name, bio: string }
+
+function foo(person: Person) {
+}
+
+function bar(person: Person) {
+}</code></pre>
+        <p>
+          However, this time the second approach is less token efficient (26
+          tokens compared to just 20 tokens for the first approach), so the
+          duplication is actually better when there&rsquo;s only a small number
+          of variants. I measured that it would take about 6 functions with the
+          <code>name, bio</code> argument pair before extracting the explicit
+          type was more token efficient (it was roughly tied at 5).
+        </p>
+        <p>
+          We can take this kind of experiment get a sense of basic redundancies,
+          but in the long run this would likely only lead to a marginal token
+          efficiency gains. It&rsquo;s like taking a slow running function, and
+          optimizing it just by profiling and using benchmarks. This approach
+          yields some gains, but often only ones that are &ldquo;incremental
+          improvements&rdquo;. &ldquo;Order of magnitude&rdquo; improvements
+          require thinking about the &ldquo;theoretical maximum&rdquo;, and then
+          comparing the gap to the existing progress.
+        </p>
+        <p>
+          This poses a question, do we want to base our theoretical maximum on
+          token efficiency, or semantic meaning (ie. What the type actually
+          <em>means</em> in code.)? I theorize that these aren&rsquo;t separate
+          concepts, we need compact and powerful semantic meaning to achieve the
+          theoretical maximum regardless of how it&rsquo;s measured. Right now,
+          the meaning of types in most languages is primarily &ldquo;types as
+          documentation and static verification&rdquo;, and not &ldquo;types as
+          a container of semantic meaning&rdquo;. The latter sounds quite odd,
+          and is much more dynamic than the former.
+        </p>
+        <p>Let&rsquo;s illustrate with a simple example.</p>
+        <pre><code>class Mutation {
+  attemptArgs: any[] // `any` for simplicity
+
+  async mutate(args: any) {
+    this.attemptArgs.append(args)
+    await performWork(args)
+  }
+
+  async retryLatest() {
+    if (this.attemptArgs.size === 0) throw new Error("No attempts")
+    await this.mutate(this.attemptArgs[this.attemptArgs.size - 1])
+  }
+}</code></pre>
+        <p>
+          When we use <code>Mutation</code>, we cannot guarantee at compile time
+          that <code>retryLatest</code> has been called before
+          <code>mutate</code>. In other words, 2 instances of
+          <code>Mutation</code> may the same type statically, but not the same
+          type semantically. We would retryable and non-retryable mutations 2
+          separate &ldquo;types&rdquo; of <code>Mutation</code>.
+        </p>
+        <p>
+          Functional programming can fix this to an extent, we can return a
+          <code>RetryableMutation</code> from a <code>Mutation</code>. Only
+          <code>RetryableMutation</code> can now call <code>retryLatest</code>,
+          so we&rsquo;re able to capture more semantics at the type level.
+        </p>
+        <pre><code>class Mutation {
+  async mutate(args: any) {
+    const retryable = new RetryableMutation(args)
+    await retryable.retryLatest()
+    return retryable
+  }
+}
+
+class RetryableMutation {
+  attemptArgs: any[]
+
+  constructor(initialArgs: any) {
+    this.attemptArgs = [initialArgs]
+  }
+
+  async mutate(args: any) {
+    this.attemptArgs.append(args)
+    await performWork(args)
+  }
+
+  async retryLatest() {
+    await this.mutate(this.attemptArgs[this.attemptArgs.size - 1])
+  }
+}</code></pre>
+        <p>
+          However, this rabbit hole continues. For instance, are separate
+          <code>RetryableMutation</code> instances with 3 attempts and 5
+          attempts &ldquo;separate types&rdquo;? Some code may have a dependency
+          on needing a minimum of 5 attempts, and while we could encode this
+          statically, spelling out every possible variation on a mutation
+          statically (ie. in source code) quickly becomes impractical.
+          Furthermore, it certainly doesn&rsquo;t help token efficiency.
+        </p>
+        <p>
+          Another issue. What happens if you receive this HTTP blob from a
+          network request?
+        </p>
+        <pre><code>{ "name": "blob", "bio": "I am a blob." }</code></pre>
+        <p>
+          Clearly, we know this resembles the <code>Person</code> type from
+          earlier, but how do we express this notation statically? In
+          TypeScript, we have validation libraries like Zod to handle parts of
+          this.
+        </p>
+        <pre><code>const PersonSchema = z.object({ name: z.string(), bio: z.string() })
+
+type Person = z.infer&lt;typeof PersonSchema&gt;
+
+const blobFromNetwork = "{ JSON DATA }"
+const person: Person = PersonSchema.parse(JSON.parse(blobFromNetwork))</code></pre>
+        <p>
+          However, even here we&rsquo;re merely guessing. We simply don&rsquo;t
+          just &ldquo;know&rdquo; the type of network bytes. The most we can do
+          is assume a blueprint and validate for the best.
+        </p>
+        <p>
+          So generally speaking, we can&rsquo;t know <em>every</em> type, even
+          in so-called strongly-typed languages. This sounds weird, but it makes
+          intuitive sense when we look at things we don&rsquo;t know yet. For
+          instance, we don&rsquo;t know every &ldquo;type&rdquo; of species,
+          life form, etc. They have to be discovered somehow (this problem will
+          also get a lot worse in a bit).
+        </p>
+        <p>
+          When we do discover those additional &ldquo;types&rdquo;, we will want
+          to explicitly spell them out, but I reckon that our
+          <code>Mutation</code>
+          example from earlier should look more like this in order to compress
+          the semantic meaning easily.
+        </p>
+        <pre><code>Mutation = A container with attemptArgs
+  | Method mutate accepts args -&gt; invoke performWork -&gt; invoke attemptArgs.append with args
+
+RetryableMutation = Mutation where attemptArgs.size &gt; 0
+  | Method retryLatest -&gt; invoke mutate with last value of attemptArgs
+MutationOf5 = Mutation where attemptArgs.size === 5</code></pre>
+        <p>
+          This concludes what I believe to be a first order of magnitude step,
+          which is to make known variants easy to express. Having things known
+          is like having an L1 cache, but for type-safety. This implies
+          there&rsquo;s more to this if we&rsquo;re willing to make
+          type-checking more than a cache lookup.
+        </p>
+        <p>
+          Of course, we all know what type inference is, since compilers these
+          days do it all the time.
+        </p>
+        <pre><code>// We don't need to specify that num is a number in TypeScript
+const num = 1</code></pre>
+        <p>
+          However, inference is also a term we use often for
+          &ldquo;predicting&rdquo; in machine learning, as LLM&rsquo;s are often
+          described as &ldquo;next token predictors&rdquo; (yet we call the act
+          of using an LLM &ldquo;inference&rdquo;). Therefore, could we try
+          something akin to &ldquo;type prediction&rdquo;? Well it turns out
+          that we can&rsquo;t make predictions out of nothing, but rather we
+          need data to do so (a lot of data in the case of LLMs).
+        </p>
+        <p>
+          In terms of program data, we can collect &ldquo;real-world&rdquo; data
+          in many kinds of ways, this allows us to see all the
+          &ldquo;types&rdquo; of inputs to our program, and then we can optimize
+          or design around those types. For instance, while our
+          <code>Person</code> type accepts any <code>name</code> and
+          <code>bio</code>, the various &ldquo;types&rdquo; of most instances
+          may have a name within 5-50 characters and a bio of around 0-300
+          characters.
+        </p>
+        <p>
+          Often, this kind of knowledge is written implicitly in code, but not
+          the type-level. For example:
+        </p>
+        <pre><code>function PersonView({ person }: { person: Person }) {
+  return (
+    &lt;div&gt;
+      &lt;b&gt;{person.name}&lt;/b&gt;
+      &lt;p&gt;{person.bio}&lt;/p&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+        <p>
+          You may wonder what is so special about this React component. The
+          specialty is that we&rsquo;re implicitly deciding that the
+          <code>name</code> and <code>bio</code> of any <code>Person</code> is
+          sufficiently sized to be displayed in a user interface comfortably. In
+          other words, we&rsquo;re already expecting the &ldquo;type&rdquo; of
+          person to be reasonable for the UI, yet we semantically accept any
+          length of string. This is a &ldquo;type&rdquo; that we&rsquo;re
+          implicitly writing into code, but that we&rsquo;re not explictly
+          keeping track of in code.
+        </p>
+        <p>
+          So the next order of magnitude step seems to be some sort of
+          &ldquo;discovery&rdquo; of sorts, and ensuring that any
+          <code>Person</code> instance fits the discovery. Even better if we can
+          easily express new <code>Person</code> types, so they fit in our
+          &ldquo;cache&rdquo;.
+        </p>
+        <pre><code>Person = An object with a name string and bio string
+DisplayablePerson = A Person where name.size in [5, 50] and bio.size in [0, 300]</code></pre>
+        <p>
+          However, there&rsquo;s more to this than looking at code and inferring
+          a new &ldquo;type&rdquo; implicitly. Consider the network blob case
+          again.
+        </p>
+        <pre><code>{ "name": "blob", "bio": "I am a blob." }</code></pre>
+        <p>
+          Where did this blob come from? How much do we know about who sent it?
+          How much does the sender know about us receiving it? Clearly, the
+          sender knows that we&rsquo;re able to parse JSON, and that we
+          implicitly use <code>person.name</code> and <code>person.bio</code> in
+          some non-malicious manner. So there&rsquo;s some implicit contract of
+          &ldquo;trust&rdquo; here that we have to reason about. This contract
+          is yet another thing that needs to be &ldquo;type-checked&rdquo; (on
+          both sides continuously), even though we may not represent it
+          explicitly in code.
+        </p>
+        <p>
+          Furthermore, how was the instance of <code>person</code> created? What
+          procedures has it passed through? What processes have transformed it?
+          If we wanted to know, it would have to be modeled explicitly on the
+          type in today&rsquo;s programming languages.
+        </p>
+        <pre><code>type Person = {
+  name: string
+  bio: string
+
+  // A list of validation filters ("name length", "bio length", "profanity", etc.)
+  checks: string[]
+}</code></pre>
+        <p>
+          If this data is not present explicitly in the type, then we
+          can&rsquo;t distinguish between 2 <code>Person</code> instances that
+          have gone through the same checks, even if their <code>name</code> and
+          <code>bio</code> is the same. So even with equivalent names and bios,
+          2 <code>Person</code> instances may not be the same
+          &ldquo;type&rdquo;.
+        </p>
+        <p>
+          Think about someone reaching out to you, or otherwise sending a
+          message to you somehow. Often, you question where this
+          &ldquo;someone&rdquo; came from, what their circumstances are, and why
+          they are communicating with you. This way, you can respond
+          effectively. A higher degree of trust with the &ldquo;someone&rdquo;
+          lowers the need for those questions, but the trust itself is
+          constantly in check (ie. Once it&rsquo;s broken, we&rsquo;re back to
+          questioning their intentions).
+        </p>
+        <p>
+          Ok, so weren&rsquo;t we trying to optimize token efficiency, perhaps
+          so that agents can write code without burning through much usage? The
+          past many paragraphs of rambling were about defining our theoretical
+          maximum! So if you want token efficiency, we need:
+        </p>
+        <ul>
+          <li>
+            A compact way to represent &ldquo;types&rdquo; and their subsequent
+            variants.
+          </li>
+          <li>
+            A way to implicitly to discover &ldquo;types&rdquo;, or otherwise
+            represent them in a latent space without expending tokens.
+          </li>
+        </ul>
+        <p>
+          The bigger ideas here I think relate to the idea &ldquo;static
+          types&rdquo; to being a &ldquo;growing body of knowledge&rdquo;, and
+          not just mere constructs in source code. Such &ldquo;types&rdquo;
+          exist thoughout all sorts of boundaries that are often not represented
+          in code, and that any &ldquo;coding agent&rdquo; will need to be able
+          to &ldquo;type-check&rdquo; those boundaries somehow.
+        </p>
+        <p>
+          However, I think this says the following about programming with (and
+          without) agents today:
+        </p>
+        <ul>
+          <li>
+            Systems behaviors and ideas are more important than raw syntax.
+          </li>
+          <li>Many types in the system are not explicitly in the code.</li>
+          <li>
+            Reading the code isn&rsquo;t sufficient for understanding since many
+            things are implicit there, but understanding all the latent
+            behaviors and ideas of the system is.
+            <ul>
+              <li>
+                This doesn&rsquo;t necessarily require reading any code, in fact
+                reading too much code could take time away from using other
+                means to discover the real latent behaviors and ideas!
+              </li>
+              <li>
+                This is much more of a question about what the &ldquo;right kind
+                of code&rdquo; looks like for understanding more so than
+                treating existing codebases and programming languages as the
+                bible for understanding a system.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Modern programming needs better ways to explicitly represent types,
+            because a simple struct often masks unbounded variants.
+            <ul>
+              <li>
+                Often, representing a new variant means creating a new struct
+                with all sorts of behavior, which gets way out of hand in
+                today&rsquo;s programming languages.
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+          In other words, this note is much about programming with the
+          &ldquo;right&rdquo; programming languages and styles, which are not
+          necessarily the ones that exist today.
+        </p>
+        <p>— 9/2/26</p>
+        <br />
         <h2 id="what-i-use-various-models-for">
           What I use Various Models For
         </h2>
