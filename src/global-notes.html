@@ -157,6 +157,113 @@
           <a href="/rss.xml">RSS</a>.
         </p>
         <br />
+        <h2 id="generative-ui-vs-dynamic-ui">Generative UI vs Dynamic UI</h2>
+        <p>
+          With models like Jev being unleashed on the world, it seems more
+          people are beginning to see that AI is far more than just LLMs and
+          VLMs. Though one interesting thing about Jev is that I&rsquo;ve seen demos
+          of it being used for Generative UI. If you look at many of my past
+          notes, &ldquo;dynanicism&rdquo; is a common theme, and you may have even seen
+          the term &ldquo;dynamic UI&rdquo; in there. (This is a term I&rsquo;ve mostly spoken to
+          others rather than written about.)
+        </p>
+        <p>
+          Though Generative UI looks dynamic on the surface, I don&rsquo;t think it&rsquo;s
+          what I would call a fully dynamic UI. For starters, the typical way in
+          which most Generative UI SDKs work (eg. Tambo, JSON Render) is that
+          they use a catalog of schema objects using a schema library like Zod,
+          which represent the props of a UI component. The model then generates
+          arguments to one or more of the schema objects in the catalog using
+          structured outputs. The client-side SDK then pairs each schema to a
+          component in a UI framework (React, Svelte, SwiftUI, etc.), and
+          subsequently renders it using the model output.
+        </p>
+        <p>
+          Jev is fine for this process (though it&rsquo;s implemented differently
+          since Jev isn&rsquo;t an LLM) because this is essentially a classification
+          and extraction problem, in which the user prompt is mapped to a set
+          of UI components from a fixed catalog. Given the real-time component
+          of making a good UI, Jev&rsquo;s speed is a huge benefit here. However, it
+          suffers from being served over the network, which isn&rsquo;t ideal for
+          availability. (It&rsquo;s also worth noting that
+          <a href="https://github.com/cactus-compute/needle">Needle</a> is a
+          tiny edge model that handles extraction and tool calling, and could
+          also be used for this purpose although I haven&rsquo;t tried this. It
+          actually has been compared to Jev even though it&rsquo;s architecture seems
+          quite different.)
+        </p>
+        <p>
+          However, UIs are more than just visuals, but are rather forms of
+          communication. For example, the UI of this note is a wall of text that
+          you are reading for some reason. Walls of text are fine for
+          communicating some ideas, but are a poor choice for others. (This is a
+          bit hypocritical for me to be saying, but perhaps we tend rely on pure
+          writing too much.) So a model that generates any UI can&rsquo;t just think
+          categorically or linguistically, but rather geometrically. A catalog
+          of UI components simply isn&rsquo;t enough here. (Furthermore, I would
+          argue that its the wrong primitive since UIs are made through a
+          &ldquo;creative-expressive process&rdquo;, and most creative expression does not
+          come from merely combining catalog items together.)
+        </p>
+        <p>
+          Ok, so now what does that entail about a &ldquo;dynamic UI&rdquo; then? The way I
+          see it is that &ldquo;Generative UI&rdquo; is more about the act of generating a
+          UI in a context somehow, whereas dynamic UI is about the entire
+          question of what it means for a UI to always be dynamically changing.
+          That is, what it means that not every user has the same experience,
+          but rather the one that makes the most sense for them.
+        </p>
+        <p>
+          Of course, you may say that this is just part of the
+          &ldquo;personalization&rdquo; trend that&rsquo;s been a thing with agents. Sure, but how
+          far does such &ldquo;personalization&rdquo; extend? Does it mean literally
+          changing every aspect of the UI, including its primary forms of
+          interaction, for each and every user across time? Or does it mean just
+          serving personalized content on a UI that was explicitly designed by
+          a UI designer on the product team? I&rsquo;m mainly referring to one of
+          these possibilities with the term &ldquo;dynamic UI&rdquo;, and I&rsquo;ll leave it to
+          you to guess which one.
+        </p>
+        <p>
+          I find that it&rsquo;s quite difficult to explain this topic because
+          understanding it requires expanding your horizons on what a &ldquo;UI&rdquo; is
+          in the first place. For example, most people wouldn&rsquo;t consider me
+          writing $O(n)$ in latex as a UI, yet it&rsquo;s how we present mathematics
+          visually.
+        </p>
+        <p>$E = mc^2$</p>
+        <p>
+          Why name the output variable $E$ for energy? Why do we use
+          $a^\text{superscript}$ for exponents? Why do we write out $mc^2$
+          instead of writing &ldquo;mass times the speed of light times the speed of
+          light&rdquo;, $m * c * c$, or even $m * c^2$? Why use an $=$ sign? Etc.
+        </p>
+        <p>
+          However, a bigger question to ask is why a textual medium? Why not
+          show $E = mc^2$ visually or interactively? Who would learn best from a
+          textual medium vs a visual one? If textual, which form of the many
+          possibilities above would it be presented? If visual, do we use a graph
+          or scenario-based imagery? If interactive, do we use a 2D or 3D
+          simulation, and how much interactivity do we allow for?
+        </p>
+        <p>
+          I suspect from a teaching standpoint that this depends heavily on the
+          individual learner, and what they are actually trying to learn as well
+          as how they learn. So a real &ldquo;dynamic UI&rdquo; needs to be able to
+          &ldquo;personalize&rdquo; down to that granular level, at least when just showing
+          $E = mc^2$. This doesn&rsquo;t even account for all the other decisions that
+          must be made such as the surrounding curiculum, how the learner
+          applies it, etc. That also needs to be personalized.
+        </p>
+        <p>
+          In this sense, dynamic UI requires creativity, expressiveness,
+          adaptability, communication, geometry, some level of artistic ability,
+          an understanding of the user&rsquo;s context/environment, and an
+          understanding of human psychology. I think we can all tell that this
+          is much more than a classification problem.
+        </p>
+        <p>— 9/21/26</p>
+        <br />
         <h2 id="creating-understanding-1-n-what-are-we-after">
           Creating Understanding (1/N): What are we After?
         </h2>
