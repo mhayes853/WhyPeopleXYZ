@@ -157,6 +157,63 @@
           <a href="/rss.xml">RSS</a>.
         </p>
         <br />
+        <h2 id="should-it-all-be-assembly">Should it all be Assembly?</h2>
+        <p>
+          If humans aren&rsquo;t writing and reading as much code anymore, surely we
+          can just write everything in assembly, and it will therefore be the
+          most performant and compact it could possibly be. Yet, assembly
+          languages were also designed for humans in the first place, so I think
+          something else would be more ideal here for agents.
+        </p>
+        <p>
+          One of the biggest problems here seems to be what can information and
+          inferences can be derived from attention. Generally, assembly
+          languages are about expressing pure machine instructions, and not
+          about describing systems. With this in mind, a lot of work will likely
+          be needed to gather and train transformers to write these kind of
+          systems from a general level. Not to mention that the same verification
+          mechanisms that exist in many compiled languages today are not present
+          in pure assembler. Running the programming and measuring the output
+          will be the only way know if something words generally.
+        </p>
+        <p>
+          Another thing to consider is that assembly languages are architecture
+          specific, so an agent would have to write and maintain separate
+          implementations for each CPU architecture in the system. This has
+          massive implications on token costs, and overall volume of information
+          to maintain. WASM is a standard around this, but is WASM really the
+          best target here?
+        </p>
+        <p>
+          That being said, the idea of using a more compact/bare-metal language
+          for the implementation side of software seems plausible. I think
+          generally, it can be viable for common algorithms/stable infrastructure
+          can use assembly, while the rest of the system uses a slightly higher
+          level agent-centric language that adopts more of a &ldquo;write once,
+          compile anywhere&rdquo; philosophy. Also, I think a dynamic standard,
+          perhaps a more agent suitable kind of WASM that&rsquo;s self-hosted (ie.
+          Implemented in itself), could work here as well (eg. Squeak Smalltalk
+          was self-hosted and runs bit equivalent on 22 platforms).
+        </p>
+        <p>
+          Lastly, we have the understanding problem. Surely, it wouldn&rsquo;t be
+          viable for humans to understand every line of assembly, as most can&rsquo;t
+          read assembly. That being said, only time can tell here with regards to
+          how much of the actual implementation will need to be read by humans
+          in the future. I will make no predictions on that front.
+        </p>
+        <p>
+          In sumary, I don&rsquo;t think it would be ideal to make agents write
+          entirely in existing assembly languages. I think a language more
+          descriptive for agents that&rsquo;s closer to bare metal than Rust would be
+          more ideal. In other words, it would be a &ldquo;most of the performance of
+          raw assembly for agents&rdquo; kind of language perhaps with a way to ship it
+          and run it dynamically. This language can then call routines written in
+          assembly for common algorithms and other code that doesn&rsquo;t need to
+          change much.
+        </p>
+        <p>— 9/25/26</p>
+        <br />
         <h2 id="call-me-psychotic">Call Me Psychotic</h2>
         <p>
           I have to confess that I essentially no longer write real code by
