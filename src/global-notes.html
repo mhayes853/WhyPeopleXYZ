@@ -391,6 +391,19 @@
           new kind of code&rdquo; becoming a thing, and that kind of code is not
           limited to a textual language.
         </p>
+        <p><strong>Update (9/28/26)</strong></p>
+        <p>
+          I asked Opus 5.5 to rewrite the assembly versions of my UUID
+          algorithms in pure C. The throughput actually came out slightly
+          better (~1-2%) with the C version on ARM NEON, while remaining
+          virtually the same on x86 with AVX2. From my inquiries, Opus 5.5
+          concluded that the inlining behavior from the Swift build system was
+          simply &ldquo;nicer to C&rdquo; than assembly.
+        </p>
+        <p>
+          So, seemingly, there still seem to be ways to go here, at least in
+          terms of being smarter than the compiler.
+        </p>
         <p>— 9/25/26</p>
         <br />
         <h2 id="call-me-psychotic">Call Me Psychotic</h2>
