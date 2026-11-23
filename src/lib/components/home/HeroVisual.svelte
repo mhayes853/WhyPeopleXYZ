@@ -4,7 +4,11 @@
   the photo opens a small explanatory dialog.
 -->
 <script lang="ts">
-  import humanImage from "../../assets/human_image.png";
+  // Resized from a 2316x3088 photo for 2x and 3x screens; it's displayed in
+  // a 300px box.
+  import humanImage600Avif from "../../assets/human_image-600.avif";
+  import humanImage900Avif from "../../assets/human_image-900.avif";
+  import humanImage900Jpg from "../../assets/human_image-900.jpg";
   import CrystalLogo from "../CrystalLogo.svelte";
 
   let dialog: HTMLDialogElement;
@@ -27,13 +31,21 @@
         aria-haspopup="dialog"
         onclick={open}
       >
-        <img
-          class="block size-full rounded-2xl object-cover"
-          src={humanImage}
-          width="220"
-          height="220"
-          alt="Human silhouette in red"
-        />
+        <picture class="block size-full">
+          <source
+            type="image/avif"
+            srcset="{humanImage600Avif} 600w, {humanImage900Avif} 900w"
+            sizes="300px"
+          />
+          <img
+            class="block size-full rounded-2xl object-cover"
+            src={humanImage900Jpg}
+            width="220"
+            height="220"
+            alt="Human silhouette in red"
+            fetchpriority="high"
+          />
+        </picture>
       </button>
     </div>
   </div>
