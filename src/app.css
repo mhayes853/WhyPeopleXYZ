@@ -1,0 +1,238 @@
+/*
+ * Tailwind is loaded without its Preflight reset on purpose: the writing on
+ * this site relies on the browser's default typography (heading sizes, list
+ * indentation, paragraph margins, etc.), so only the theme and utility layers
+ * are pulled in. Long-form content is styled by the element rules in the base
+ * layer below, and everything else is styled with utility classes.
+ */
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@source not "../static";
+@import "./lib/styles/code.css" layer(base);
+@import "./lib/styles/katex.css" layer(base);
+
+@theme {
+  --font-sans: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-serif: "PT Serif", "Times New Roman", serif;
+
+  --color-ink: #1c1c1c;
+  --color-accent: #d6414b;
+  --color-page-start: #f0f3ff;
+  --color-page-end: #e2e6ff;
+  --color-link-hover: #747bff;
+
+  --animate-rotate-blob: rotate-blob 40s linear infinite;
+  --animate-rotate-blob-slow: rotate-blob 60s linear reverse infinite;
+  --animate-modal-enter: modal-enter 260ms cubic-bezier(0.2, 0, 0, 1);
+
+  @keyframes rotate-blob {
+    from {
+      transform: translate(-50%, 0) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, 0) rotate(360deg);
+    }
+  }
+
+  @keyframes modal-enter {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+@layer base {
+  :root {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+    color-scheme: light;
+    color: var(--color-ink);
+    background-color: var(--color-page-start);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-items: center;
+    min-width: 320px;
+    min-height: 100vh;
+    background-image: linear-gradient(
+      135deg,
+      var(--color-page-start),
+      var(--color-page-end)
+    );
+    overflow-x: hidden;
+  }
+
+  a {
+    font-weight: 500;
+    color: var(--color-accent);
+    text-decoration: inherit;
+  }
+
+  a:hover {
+    color: var(--color-accent);
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #fff;
+  }
+
+  h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+  }
+
+  p {
+    line-height: 1.5;
+  }
+
+  li {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
+  }
+
+  button:hover {
+    border-color: #646cff;
+  }
+
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+
+  @media (prefers-color-scheme: light) {
+    a:hover {
+      color: var(--color-link-hover);
+    }
+
+    button {
+      background-color: #f9f9f9;
+    }
+  }
+
+  blockquote {
+    font-family: var(--font-serif);
+    font-style: normal;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    opacity: 0.9;
+    color: var(--color-ink);
+    margin: 2rem 0;
+    padding: 0.75rem 0 0.75rem 1rem;
+    border-left: 4px solid rgba(28, 28, 28, 0.25);
+    line-height: 1.6;
+  }
+
+  blockquote a {
+    opacity: 1;
+  }
+
+  /* Long-form content. */
+
+  article {
+    text-align: left;
+    min-width: 0;
+  }
+
+  article img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    padding: 1em 0em 1em 0em;
+  }
+
+  article picture,
+  article svg,
+  article video,
+  article canvas {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @media (max-width: 720px) {
+    article img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .article-reading-time {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    font-size: 0.85em;
+  }
+
+  .footnote-ref {
+    color: var(--color-accent);
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.75em;
+    vertical-align: super;
+  }
+
+  .footnote-ref:hover {
+    text-decoration: underline;
+  }
+
+  .footnote-def {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.85em;
+    color: rgba(0, 0, 0, 0.7);
+    margin-top: 0.5rem;
+    padding: 0.5rem 0 0.5rem 1rem;
+    border-left: 2px solid rgba(0, 0, 0, 0.15);
+    line-height: 1.5;
+  }
+
+  .footnote-def .footnote-num {
+    color: var(--color-accent);
+    font-weight: 600;
+    margin-right: 0.25rem;
+    text-decoration: none;
+  }
+
+  .footnote-def .footnote-num:hover {
+    text-decoration: underline;
+  }
+}
