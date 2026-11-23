@@ -1,0 +1,224 @@
+<script module lang="ts">
+  import ReadingTime from "#lib/components/ReadingTime.svelte";
+  import type { PageMetadata } from "#lib/content/pages.ts";
+
+  export const metadata: PageMetadata = {
+    title: "Thoughts on Liquid Glass",
+    description: "What I think of Apple's new aesthetic in the grand scheme of things.",
+    nav: ["home", "about", "now"],
+  };
+</script>
+
+<script lang="ts">
+  import { onMount } from "svelte";
+  import { startLiquidGlass } from "./liquid-glass/liquid-glass";
+
+  let canvas: HTMLCanvasElement;
+  let title: HTMLDivElement;
+
+  onMount(() => startLiquidGlass(canvas, title));
+</script>
+
+<div class="glass-container">
+  <canvas bind:this={canvas}></canvas>
+  <div class="glass-title" bind:this={title}>
+    <h2>Thoughts on Liquid Glass</h2>
+    <b>By Matthew Hayes</b>
+  </div>
+</div>
+<p class="caption">
+  Move your cursor around, or tap around the image on mobile to see how
+  accessible the text is in different areas.
+</p>
+<br>
+<article>
+  <ReadingTime />
+
+  <p>
+    I’ve installed the new iPadOS 26 beta on my iPad Pro this week, and
+    have built an Xcode project a singular time on an iOS 26 simulator. As
+    of now, that has been my exposure to using “liquid glass”. It seems to
+    have gotten quite some attention during this past WWDC week.
+  </p>
+  <p>
+    As a whole, with how Apple has trended towards a “smaller window”
+    design across all of their platforms I think this aesthetic makes
+    sense. It looks refreshing and the visuals are done well, but of
+    course
+    <a href="https://www.reddit.com/r/UXDesign/comments/1l7fexe/apples_new_liquid_glass_ui_doesnt_look_accessible/">a bit more work</a>
+    seems to be needed here. Pure navigation elements also take up less
+    screen space meaning more room for the actual screen content, which is
+    generally a good thing. Overall, it’s new and fun to use, though I’m
+    sure that feeling will eventually wear off over time.
+  </p>
+  <p>
+    However, nothing really fundamental changed here. Notes still lets you
+    write notes, photos still lets you view photos, camera still lets your
+    shoot photos and video. The overall navigation of these apps may have
+    improved, and thus have become “easier to use”. Virtually all of the
+    same features exist in each of these apps, and none of them have been
+    changed substanially outside of these navigation concerns.
+  </p>
+  <p>
+    Making an app look visually pleasing, “easy to use”, and “accessible”
+    are only some of the more superficial concerns of an app’s overall
+    design. They are a neccessary evil to represent and obtain the "real
+    value" of software. You can have all 3 of those things, but still have
+    a terrible overall experience if your app doesn’t provide "real
+    value”. “Real value” generally comes from providing the information
+    necessary to answer the user’s questions and help to guide them make
+    decisions on navigating their life.
+  </p>
+  <p>
+    For instance, take an empty day on the newly liquid glassified
+    calendar app.
+    <img src="/images/liquid-glass/calendar-1.jpeg" alt="An empty day on the newly designed iPadOS calendar app depicting Friday, June 20th, 2025.">
+    It’s clear that I have no events planned for this day, and that the
+    date of the day is Friday, June 20th, 2025. Unfortunately, that’s all
+    the information I get. Other events planned on the other days of the
+    week are not hinted at or shown in the week day tab view, so all the
+    useful information I get can only be events scheduled on Friday, June
+    20th, 2025.
+  </p>
+  <p>
+    Some very important questions that I may have as a user are left
+    unanswered:
+  </p>
+  <ul>
+    <li>
+      What the heck should I do today after work or when I have free time?
+    </li>
+    <li>
+      This is a Friday, so should I decide to have some fun with friends
+      before the weekend?
+    </li>
+    <li><del>Should I deploy my app to production?</del></li>
+    <li>
+      If I decide to “go out” tonight, how will that impact the growth of
+      my side business that I’ve been working on?
+    </li>
+    <li>
+      If I’m physically active, what kind of workout should I do today?
+      Should I take a rest day?
+    </li>
+    <li>
+      What is the weather going to be on this day? Will it affect what I
+      have in mind?
+    </li>
+    <li>etc.</li>
+  </ul>
+  <p>
+    Calendar doesn’t help me answer these questions in any way shape or
+    form. If I were a daily user of the calendar app, I’m almost certain
+    it would be possible for the app to use my past data to help me answer
+    such questions.
+  </p>
+  <p>
+    Many say that they use a calendar to “plan” or “organize” their day,
+    almost like they “command” events to happen at certain times of the
+    day. This true to the extent that the visual representations of those
+    events in the calendar app have been <em>understood</em> as the events
+    that an individual will likely attend to in real life. However, the
+    key point is “understanding”, that’s the end goal “planning” or
+    “organzing”.
+  </p>
+  <p>
+    For instance, take this slice of a particular day.
+    <img src="/images/liquid-glass/calendar-2.jpeg" alt="A view of part of my day on Tuesday, June 10th, 2025 on the new iPadOS calendar app.">
+    Here, I’m attending an all day event known as “CommunityKit”. Though,
+    I also have some other events planned such as a morning workout, the
+    act of driving from where I live to the location of all the WWDC
+    events, and a meetup with a friend.
+  </p>
+  <p>
+    This view shows me visuals of the times and durations of each event
+    throughout the day, and <em>correlates</em> them by showing a vertical
+    overlapping list with the list markers being the hours of the day.
+    When I add a new event to this day, I can visually see the time it
+    occurs in relation to other events in my day. This in turn, allows me
+    to <em>understand</em> when and where I might plan another event. The
+    calendar view correlates an event with time, and where it is
+    temporally located in relation to other events. Therefore, I am now
+    equipped with more information to make a decision on where and when to
+    schedule my next event during the day.
+  </p>
+  <p>
+    On it’s own, the sequence of events you attend to during a day is a
+    heavily abstract systemic model that’s hard to visualize, which is why
+    the concept of a calendar was invented. A calendar on its own is a
+    tool to visualize such an abstract data model, allowing you to
+    organize your day with it to better <em>understand</em> your day. By
+    contrast, the calendar itself is not a control center for “planning”,
+    though it may seem like it when describing it to others. Instead, the
+    calendar collaborates with you by giving you the information necessary
+    to come to an <em>understanding</em> of what how your day looks like.
+  </p>
+  <p>
+    In today’s digital medium, and with the available hardware, more
+    correlations and questions can be answered about a user’s day than a
+    traditional physical calendar. A physical calendar cannot read and
+    understand past events, cannot understand the user’s goals, cannot aid
+    in the process of organization, cannot read possible future
+    world-events and tell the user to prepare, etc. No amount of “liquid
+    glass” will draw more of those correlations.
+  </p>
+  <p>
+    Generally, the amount of discussions on how to best answer the user’s
+    questions through design seems to be far lower than the discussions on
+    whether or not liquid glass looks visually pleasing or is
+    “accessible”. If a user cannot navigate or appreciate the visual
+    design, then ultimately their questions will be left unanswered, but
+    that is only an aspect of why we actually use software.
+  </p>
+  <p>— 6/14/2025</p>
+  <p>
+    PS. The liquid glass effects in this article were replicated from
+    <a href="https://github.com/bergice/liquidglass">here</a>. Thanks!
+  </p>
+</article>
+
+<style>
+  canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+  }
+
+  h2 {
+    font-size: clamp(1.2rem, 5vw, 2.5rem);
+    line-height: 1.1;
+  }
+
+  .glass-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    transform: translateZ(0);
+    padding-top: 1em;
+  }
+
+  .glass-title {
+    max-width: 400px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    pointer-events: none;
+    color: white;
+    top: 0;
+    left: 0;
+  }
+
+  .caption {
+    opacity: 0.5;
+  }
+
+  @media (max-width: 768px) {
+    .glass-title {
+      max-width: 180px;
+    }
+  }
+</style>

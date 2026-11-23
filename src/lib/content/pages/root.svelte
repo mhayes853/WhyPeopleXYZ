@@ -1,0 +1,157 @@
+<script module lang="ts">
+  import ReadingTime from "#lib/components/ReadingTime.svelte";
+  import type { PageMetadata } from "#lib/content/pages.ts";
+
+  export const metadata: PageMetadata = {
+    title: "The Root",
+    description: "A formal declaration of my insanity (AKA my motivations for wanting to write about my work).",
+    nav: ["home", "about", "now"],
+  };
+</script>
+
+<article>
+  <h1 id="the-root" class="title">The Root</h1>
+  <ReadingTime />
+
+  <p>
+    Whether this is the root of all evil, or of something else entirely is
+    entirely up to you to decide.
+  </p>
+  <p>
+    In a certain
+    <a href="https://www.google.com/search?client=firefox-b-1-d&amp;q=Witch+on+the+Holy+Night">visual novel series</a>, one may terribly try to describe the root as the sun, and this
+    would get you certain looks from characters in said series for the
+    description. Just a few centuries ago, if you suggested that the sun
+    was the root of the solar system you would receive the reward of
+    condemnation, and possibly an additional gift of having your
+    <a href="https://en.wikipedia.org/wiki/Galileo_Galilei#/media/File:Galileo%E2%80%99s_finger.jpg">middle finger preserved for eternity</a>
+    in your honor.
+  </p>
+  <p>
+    With these examples in mind, a logical human can only conclude that
+    humans are inherently illogical. What has materialized as “progress”
+    in the past few centuries first had to come from millenia of book
+    burnings, and largely failing models of civilization. In it’s ~200,000
+    year history, only the most recent 400-500 of those years have been
+    spent in a world of “modern science”.
+  </p>
+  <p>
+    One may ask why it took so long for the human race to adopt such a
+    methodology of “progress”. A century before the Scientific Revolution
+    began in the 1500s, the Printing Press came about and allowed for the
+    widespread circulation of previously hand written material. Over the
+    next few centuries, the literacy rate in Europe grew dramatically, and
+    this would eventually lead to the invention and use of the modern
+    state in the 1600s and 1700s. The US Constitution was drafted only
+    ~350 years after the printing press, and at the time the previously
+    established notion of a “monarchy” was now under heavy scrutiny for
+    first time in thousands of years.
+  </p>
+  <p>
+    Only ~200 years after the ratification of the US constitution, far
+    more mediums that enabled the widespread circulation of ideas had come
+    into fruition. Namely, one of those being the internet, and built on
+    top of it, the web. We’ve also now somewhat figured out how to
+    “emulate” the output of human thought in a digital medium, though it
+    seems that much more work is needed in this area.
+  </p>
+  <p>
+    In just 600 years, we’ve largely flipped the structure of society
+    upside down, and dispelled many previously conceived notions of
+    societal operation. This came about largely due to the ability to
+    distribute ideas effectively across long distances, which in turn led
+    to the “know-how” to create mediums that further made this process
+    more efficient and effective.
+  </p>
+  <p>
+    Yet, this is a movement that is still in its infancy, as our world
+    still has a strong notion of a minority of “developed” and a majority
+    of “undeveloped” nations. Even in “developed” nations, citizens
+    experience problems largely unique (eg. obsesity, mental health
+    struggles, etc.) to the nature of the “developments” in their nation.
+    Our time period is also likely the first in which we fear that human
+    technology can “end the world”. Previously such “world-ending” events
+    were largely religious.
+  </p>
+  <p>
+    When a large volume of ideas are circulated in increasingly short time
+    spans, it is no doubt that many bad ideas will make their way through
+    the mediums, and eventually be implemented in the world somehow. In
+    fact, it’s quite common today to hear ideas circulated such as “ideas
+    are cheap” or “ideas are a dime a dozen”. This is generally a kind of
+    thinking that is oriented towards people building new products or
+    services, as much of the burden of doing such a venture is on the
+    execution and implementation details. Therefore, “coming up with good
+    ideas” is often seen as a waste of time. Of course, such thinking was
+    only enabled by systems that enabled universal human literacy in the
+    first place.
+  </p>
+  <p>
+    Bad ideas are certainly not cheap when they are successfully
+    implemented and widespread. In fact, they are quite expensive in both
+    time, human life, and monetary value. Monarchies persisted for
+    millenia, and many revolutions in different parts of the world had to
+    be fought to dispell them. That only came after the few centuries it
+    took to convince a part of the world that they were a bad idea in the
+    first place. Of course, wars are quite monetarily expensive as well.
+  </p>
+  <p>
+    In business, the products that best solve their designated problems
+    often don’t win, or are never brought into fruition because they have
+    no potential at replacing the already established solutions. If
+    smaller players cannot dethrone larger players, you get stagnation.
+  </p>
+  <p>
+    Social media apps format all content the same, and provide the same
+    basic interaction tools (liking, upvoting, downvoting, commenting) for
+    each unit of content. If a unit of content is best represented by
+    another format, it cannot be shared on the social media platform. If
+    the format’s medium that would best reflect the content is not
+    widespread, then the content cannot be expressed in full. If the
+    content cannot be expressed in full then many of its ideas are lost,
+    and you get stagnation.
+  </p>
+  <p>
+    If you <i>solely</i> rely on the use of AI (or any technology that can
+    automate creation) to complete tasks, your ability to complete such
+    tasks is inherently tied to the ability of AI. If such a technology
+    plateaus, then your ability to complete the task can no longer grow
+    whilst you’re solely dependent on AI, and you get stagnation.
+  </p>
+  <p>
+    Thus far, we have quite literally failed at finding a scalable set of
+    mediums that addresses the needs of 8 billion (and increasing) people
+    on a single planet. This is in spite of the massive hardware and to an
+    extent software advantages we have today compared to the last decade.
+    If the species were to become multi-planetary, this is an even a
+    bigger problem due to the need to understand the even greater number
+    of personal contexts that entails. Stagnation is therefore fatal in
+    such circumstances.
+  </p>
+  <p>
+    In the near-term, improving our usage of existing and emerging
+    technologies can help address these challenges in the products we
+    create on a daily basis.
+  </p>
+  <p>
+    As such, I figure it's best that I record my experiences and thoughts
+    on developing apps that better enhance content-creation, and address
+    many of the public mental and physical health challenges stemming from
+    existing apps. In particular, a focus on "enhancement" of innate user
+    ability (ie. enhancing their ability to understand themselves and
+    navigate the world) is missing from many of today's products.
+  </p>
+  <p>
+    However, in the long-term something greater seems to be needed to
+    address the scaling problems we are currently facing. Such requires
+    going beyond current societal and industry ideas, and requires
+    developing new and qualitatively different systemic foundations.
+  </p>
+  <p>
+    I don't know what the exact answer is at this current moment as to
+    what those will look like. However, I believe it's essential that I
+    document my findings and experiences to help put into context the
+    eventual "understanding" of those ideas.
+  </p>
+  <p>— 6/7/2025</p>
+</article>

@@ -1,0 +1,434 @@
+<script module lang="ts">
+  import CodeBlock from "#lib/components/CodeBlock.svelte";
+  import ReadingTime from "#lib/components/ReadingTime.svelte";
+  import type { PageMetadata } from "#lib/content/pages.ts";
+
+  export const metadata: PageMetadata = {
+    title: "The Root",
+    description: "What are package traits, and how I used this lesser known SPM feature in swift-uuidv7.",
+    nav: ["home", "about", "now"],
+  };
+</script>
+
+<article>
+  <h1 id="on-swift-package-traits" class="title">
+    On Swift Package Traits
+  </h1>
+  <ReadingTime />
+
+  <p>
+    I recently released a
+    <a href="https://github.com/mhayes853/swift-uuidv7">small little library</a>
+    for generating version 7 UUIDs in Swift that integrates with popular
+    libraries such as GRDB, Structured Queries, Tagged, and more. Some of
+    the interesting comments I’ve gotten relate to one of SPM’s relatively
+    new features (introduced in Swift 6.1) called <em>package traits</em>.
+    From what it seems, this new SPM feature is relatively unknown, yet I
+    think many packages would benefit from utilizing this feature to
+    support integrations with other packages.
+  </p>
+  <p>
+    If you’ve written Rust before, you may be familiar with
+    <a href="https://doc.rust-lang.org/cargo/reference/features.html">cargo features</a>. Package traits are essentially the equivalent of cargo features,
+    but for Swift.
+  </p>
+  <p>
+    Though, I’m guessing that most people reading this are unfamiliar with
+    Rust, so this article should give enough of an overview of traits.
+    Alternatively, you can read the
+    <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0450-swiftpm-package-traits.md">proposal</a>
+    for package traits, but that won’t tell you about how I used them in
+    <code>swift-uuidv7</code>.
+  </p>
+  <br>
+  <h2 id="what-are-package-traits-">What are Package Traits?</h2>
+  <p>Great question!</p>
+  <p>
+    Package traits allow you to selectively enable functionality on a
+    swift package. As a package author, you declare them in your
+    <code>Package.swift</code> file like so.
+  </p>
+  <CodeBlock language="swift" code={`
+
+// swift-tools-version: 6.1
+// The swift-tools-version declares the minimum version of Swift required to build this package.
+
+import PackageDescription
+
+let package = Package(
+  name: "swift-uuidv7",
+  platforms: [.iOS(.v13), .macOS(.v10_15), .tvOS(.v13), .watchOS(.v7), .macCatalyst(.v13)],
+  products: [.library(name: "UUIDV7", targets: ["UUIDV7"])],
+  traits: [
+    .trait(
+      name: "SwiftUUIDV7Tagged",
+      description: "Adds integrated swift-tagged support to the UUIDV7 type."
+    ),
+    .trait(
+      name: "SwiftUUIDV7StructuredQueries",
+      description:
+        "Adds swift-structured-queries support and column representations to the UUIDV7 type."
+    ),
+    .trait(
+      name: "SwiftUUIDV7GRDB",
+      description: """
+        Conforms UUIDV7 to GRDB's DatabaseValueConvertible and StatementColumnConvertible \\
+        protocols, and adds database functions to generate, parse, and extract data from UUIDV7s.
+        """
+    ),
+    .trait(
+      name: "SwiftUUIDV7Dependencies",
+      description:
+        """
+        Adds a dependency value to generate UUIDV7s, and interops the base UUID dependency with \\
+        UUIDV7 generation.
+        """
+    )
+  ],
+  // ...
+)
+`} />
+  <p>
+    Then, inside your package, you can selectively compile bits of your
+    code by using them as a flag within compiler directive.
+  </p>
+  <CodeBlock language="swift" code={`
+
+// If SwiftUUIDV7StructuredQueries is enabled, then UUIDV7 conforms to
+// QueryBindable from StructuredQueries.
+
+#if SwiftUUIDV7StructuredQueries
+  import Foundation
+  import StructuredQueriesCore
+
+  extension UUIDV7: QueryBindable {}
+
+  // ...
+#endif
+`} />
+  <h3 id="selective-dependency-compilation">
+    Selective Dependency Compilation
+  </h3>
+  <p>
+    You can also choose to only selectively compile package dependencies
+    when a specific trait is enabled. This works similarly to how you can
+    tell a Swift Package to selectively compile a dependency for a
+    specific platform. In other words, as a package author, your
+    <code>Package.swift</code> will look like this.
+  </p>
+  <CodeBlock language="swift" code={`
+
+// swift-tools-version: 6.1
+// The swift-tools-version declares the minimum version of Swift required to build this package.
+
+import PackageDescription
+
+let package = Package(
+  // ...
+  targets: [
+    .target(
+      name: "UUIDV7",
+      dependencies: [
+        // ...
+        .product(
+          name: "StructuredQueriesCore",
+          package: "swift-structured-queries",
+          condition: .when(traits: ["SwiftUUIDV7StructuredQueries"])
+        ),
+        // ...
+      ]
+    ),
+    .testTarget(name: "UUIDV7Tests", dependencies: ["UUIDV7"])
+  ]
+)
+`} />
+  <p>
+    In this example, <code>StructuredQueriesCore</code> is only compiled
+    when the <code>SwiftUUIDV7StructuredQueries</code> trait is enabled.
+    This feature is how <code>swift-uuidv7</code> is able to integrate
+    with many different large libraries whilst still keeping the build
+    time as minimal as possible.
+  </p>
+  <h3 id="dependent-traits">Dependent Traits</h3>
+  <p>
+    You may have traits that depend on other traits being enabled. For
+    instance, there’s a branch in <code>swift-uuidv7</code> that adds a
+    new <code>SwiftUUIDV7SharingGRDB</code> trait that will be merged once
+    <a href="https://www.pointfree.co/blog/posts/181-a-swiftdata-alternative-with-sqlite-cloudkit-public-beta">CloudKit support</a>
+    for SharingGRDB is publicly released.
+  </p>
+  <p>
+    SharingGRDB depends both on StructuredQueries and GRDB, so enabling
+    <code>SwiftUUIDV7SharingGRDB</code> trait should also enable
+    <code>SwiftUUIDV7StructuredQueries</code> and
+    <code>SwiftUUIDV7GRDB</code>. This is accomplished like so.
+  </p>
+  <CodeBlock language="swift" code={`
+
+// swift-tools-version: 6.1
+// The swift-tools-version declares the minimum version of Swift required to build this package.
+
+import PackageDescription
+
+let package = Package(
+  // ...,
+  traits: [
+    // ...
+    .trait(
+      name: "SwiftUUIDV7SharingGRDB",
+      description: """
+        Conforms UUIDV7 to IdentifierStringConvertible to make it compatible with CloudKit sync.
+
+        This trait also enables SwiftUUIDV7GRDB and SwiftUUIDV7StructuredQueries.
+        """,
+      enabledTraits: ["SwiftUUIDV7GRDB", "SwiftUUIDV7StructuredQueries"]
+    )
+  ],
+  // ...
+)
+`} />
+  <h3 id="default-traits">Default Traits</h3>
+  <p>
+    You can also choose to enable some traits by default on a package.
+    <code>swift-uuidv7</code> has no need for this because all of its
+    traits conditionally compile external dependencies. If the user has no
+    need for those external dependencies, and just wants the base
+    <code>UUIDV7</code> type, then we shouldn’t compile them.
+  </p>
+  <p>
+    Regardless, default traits are enabled like so (this is a simplified
+    example taken from
+    <a href="https://github.com/swiftlang/swift-subprocess"><code>swift-subprocess</code></a>).
+  </p>
+  <CodeBlock language="swift" code={`
+
+let package = Package(
+  // ...
+  traits: [
+    "SubprocessFoundation",
+    "SubprocessSpan",
+    .default(enabledTraits: ["SubprocessFoundation", "SubprocessSpan"])
+  ],
+  // ...
+)
+`} />
+  <h3 id="building-with-traits-enabled">Building With Traits Enabled</h3>
+  <p>
+    When building your package, you can specify which traits you want to
+    build the package with like so.
+  </p>
+  <CodeBlock language="bash" code={`
+swift build --traits SwiftUUIDV7Tagged
+`} />
+  <p>You can also enable all traits like so.</p>
+  <CodeBlock language="bash" code={`
+swift build --enable-all-traits
+`} />
+  <br>
+  <h2 id="how-do-i-use-package-traits-">How do I use package traits?</h2>
+  <p>
+    We’ve gone over how to add package traits to a package, so now let’s
+    go over how you can use them.
+  </p>
+  <p>
+    <strong><em>Unfortunately, at the time of writing this, Xcode’s UI does not
+        support enabling traits on a Swift Package. Therefore, you cannot
+        use package traits in a traditional Xcode project.</em></strong>
+  </p>
+  <p>
+    Instead, you must enable them in your own packages through your
+    <code>Package.swift</code> file. Here’s how that is done.
+  </p>
+  <CodeBlock language="swift" code={`
+
+// swift-tools-version: 6.2
+// The swift-tools-version declares the minimum version of Swift required to build this package.
+
+import PackageDescription
+
+let package = Package(
+  // ...
+  dependencies: [
+    // ...
+    .package(
+      url: "https://github.com/mhayes853/swift-uuidv7",
+      branch: "sharing-grdb-icloud",
+      traits: ["SwiftUUIDV7SharingGRDB", "SwiftUUIDV7Tagged", "SwiftUUIDV7Dependencies"]
+    )
+  ],
+)
+`} />
+  <p>That’s all, you can now begin using them right away!</p>
+  <p>
+    However, passing an explicit set of traits will disable the default
+    trait. If you still want to enable the default trait, you must also
+    pass <code>.default</code> to the set of traits.
+  </p>
+  <CodeBlock language="swift" code={`
+
+// swift-tools-version: 6.2
+// The swift-tools-version declares the minimum version of Swift required to build this package.
+
+import PackageDescription
+
+let package = Package(
+  // ...
+  dependencies: [
+    // ...
+    .package(
+      url: "https://github.com/swiftlang/swift-subprocess.git",
+      branch: "main",
+
+      // Keeps the default trait enabled despite passing an explicit set of traits.
+      traits: [.default]
+    )
+  ],
+)
+`} />
+  <br>
+  <h2 id="using-traits-to-integrate-with-other-packages">
+    Using Traits to Integrate with Other Packages
+  </h2>
+  <p>
+    On its own, <code>swift-uuidv7</code> provides a simple
+    <code>UUIDV7</code> type that’s more robust than other Swift
+    implementations in the wild by offering timestamp extraction, a
+    Comparable conformance, and sub-millisecond monotonicity. Yet almost
+    certainly you’ll want to store instances of <code>UUIDV7</code> in
+    your database using GRDB and Structured Queries, use them as entity
+    identifiers for App Intents, and much more.
+  </p>
+  <p>
+    You can certainly create the very trivial
+    <code>@retroactive</code> conformances on <code>UUIDV7</code> in your
+    own project. For instance.
+  </p>
+  <CodeBlock language="swift" code={`
+
+// Inside your project...
+
+import UUIDV7
+import StructuredQueries
+
+extension UUIDV7: @retroactive QueryBindable {}
+`} />
+  <p>
+    However, this conformance would only live inside your own project.
+    Either you would have to duplicate it between different projects, or
+    you would have to create a dedicated package for this 1 line
+    conformance. For many, copying it between different projects is
+    probably fine, but it still isn’t the most ideal solution here. The
+    latter option of creating a tiny package at scale would probably
+    create the same micro-package culture that can be found in the NPM
+    ecosystem.
+  </p>
+  <p>
+    Rather, we can use package traits to solve this issue, and provide an
+    official conformance that can be used in any project.
+  </p>
+  <CodeBlock language="swift" code={`
+
+// Inside swift-uuidv7...
+
+#if SwiftUUIDV7StructuredQueries
+  import Foundation
+  import StructuredQueriesCore
+
+  extension UUIDV7: QueryBindable {}
+#endif
+`} />
+  <h3 id="who-adds-the-trait-">Who adds the trait?</h3>
+  <p>
+    In the above example, either <code>StructuredQueries</code> or
+    <code>UUIDV7</code> can add a trait to support this integration.
+  </p>
+  <p>
+    For instance, <code>StructuredQueries</code> could create a
+    <code>StructuredQueriesUUIDV7</code> trait that adds a dependency on
+    <code>swift-uuidv7</code>, and that trait would provide the
+    conformance that you see above. Alternatively,
+    <code>UUIDV7</code> could create a
+    <code>SwiftUUIDV7StructuredQueries</code> trait that adds a dependency
+    on <code>swift-structured-queries</code>, and that trait would provide
+    the conformance you see above. Obviously, only 1 package can actually
+    make such a trait because we would be in circular hell otherwise.
+  </p>
+  <p>
+    Since <code>UUIDV7</code> is designed to integrate with numerous
+    different libraries (5 at the time of writing this), it would be quite
+    cumbersome if I had to convince the maintainers of each library to add
+    a trait specifically for my very niche package. Therefore, it’s for
+    the best if I provided all the integrations myself through
+    <code>UUIDV7</code>, and in return it keeps all the integrations
+    bundled in 1 simple place.
+  </p>
+  <h3 id="a-coordination-problem">A Coordination Problem</h3>
+  <p>
+    That being said, this can turn into a nasty coordination problem if
+    there isn’t any consideration around which packages add certain
+    traits.
+  </p>
+  <p>
+    For instance, what if a hot new library comes around and adds
+    <code>UUIDV7</code> support through a trait of its own? Now the
+    simplicity of having all of <code>UUIDV7</code>s integrations in a
+    single place is lost, because a new library now maintains its own
+    integration with <code>UUIDV7</code>.
+  </p>
+  <p>
+    We could define best practices that state that smaller and more stable
+    packages like <code>UUIDV7</code> should not offer any package
+    integration traits, and instead only let other more volatile and
+    larger packages (eg. GRDB, Structured Queries) define such traits.
+    From the standpoint of how I
+    <a href="/personal-laws-of-design#objects-are-best-used-as-agents-of-knowledge">think of objects</a>, this makes a lot of sense because larger packages with more
+    knowledge give meaning to the smaller and simpler packages with less
+    knowledge.
+  </p>
+  <p>
+    However, this now creates a problem where maintainers of more volatile
+    and larger packages have to specifically set out to implement their
+    own integration of such smaller packages. On one hand, this can be a
+    maintenance burden if those maintainers decide to integrate with a lot
+    of smaller packages. On the other hand, it also means that
+    integrations with smaller packages are not readily available because
+    it would require the efforts of several large package maintainers,
+    each with their own more important concerns.
+  </p>
+  <p>
+    If we want the best outcome, I don’t think we can rely on an entirely
+    dogmatic standard. Rather, this may need to be solved on a package by
+    package basis, where each package defines how it integrates with
+    others. Of course, the definition of integration will likely change as
+    the package evolves. For instance, I don’t think directly supporting
+    300 package integrations in <code>UUIDV7</code> is necessarily the
+    best maintenance idea, and at that point I would rather delegate those
+    integrations to those package maintainers.
+  </p>
+  <p>
+    The larger community would of course have to adhere to those socially
+    agreed upon practices for each package, and be informed when those
+    practices change. Seeing how this will scale may be quite interesting.
+  </p>
+  <p>— 8/8/25</p>
+  <br>
+  <hr>
+  <br>
+  <p>
+    PS. I’m creating a new series of content that I will call “Swift Bits”
+    that will contain small Swift-specific articles such as these.
+  </p>
+  <p>
+    I mainly want to focus my writing more on higher level ideas that
+    apply to building products and creating new mediums of spreading
+    ideas. Those ideas carry over into how I write Swift on a day-to-day
+    basis, but I think only focusing on Swift as a whole is quite a narrow
+    viewpoint on designing real systems.
+  </p>
+  <p>
+    Still, seeing language specifics directly can be useful given the
+    detachment most programming languages have from the systems they
+    create. In that sense, I do believe that this kind of writing is
+    worthwhile from time to time.
+  </p>
+</article>

@@ -1,0 +1,20 @@
+# Legacy HTML links must redirect even though the static build still emits those files.
+/index.html / 301!
+/a-realization-on-low-and-high-level-languages.html /a-realization-on-low-and-high-level-languages 301!
+/about.html /about 301!
+/approach-to-work-ethic.html /approach-to-work-ethic 301!
+/command-handlers-dont-scale.html /command-handlers-dont-scale 301!
+/global-notes.html /global-notes 301!
+/liquid-glass.html /liquid-glass 301!
+/monads.html /monads 301!
+/non-sendable-core-sendable-shell.html /non-sendable-core-sendable-shell 301!
+/now.html /now 301!
+/on-package-traits.html /on-package-traits 301!
+/personal-laws-of-design.html /personal-laws-of-design 301!
+/processes-are-central-to-programming.html /processes-are-central-to-programming 301!
+/protocols-and-possibility.html /protocols-and-possibility 301!
+/root.html /root 301!
+/swift-cactus.html /swift-cactus 301!
+/swift-operation.html /swift-operation 301!
+/swift-query.html /swift-query 301!
+/swift-stream-parsing.html /swift-stream-parsing 301!

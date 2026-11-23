@@ -1,0 +1,595 @@
+<script module lang="ts">
+  import CodeBlock from "#lib/components/CodeBlock.svelte";
+  import ReadingTime from "#lib/components/ReadingTime.svelte";
+  import type { PageMetadata } from "#lib/content/pages.ts";
+
+  export const metadata: PageMetadata = {
+    title: "Swift Query, a Library for Asynchronous State Management",
+    description: "Bringing over Tanstack Query into Swift.",
+    nav: ["home", "about", "now"],
+  };
+</script>
+
+<article>
+  <h1 class="title" id="swift-query-a-library-for-asynchronous-state-management">
+    Swift Query, a Library for Asynchronous State Management
+  </h1>
+  <ReadingTime />
+
+  <p>
+    These past few months, I’ve been working on standardizing a set of
+    tools that I’ve been using across a few of my Swift projects. Today,
+    I’m opening them up to you to use in your applications, and I believe
+    these tools will largely remove headaches around data consistency from
+    remote/asynchronous data for you. This article will largely be about
+    my inspirations for building such a library, and what I think it means
+    for how we manage application state derived from asynchronous data in
+    Swift.
+  </p>
+  <p>
+    You can check out the library
+    <a href="https://github.com/mhayes853/swift-query">here</a> for a more
+    direct dive into its features, and the many demos, case studies, and
+    documentation articles I’ve prepared. I believe that this library is
+    quite flexible, and can be used in a variety of ways that I don’t even
+    know of yet. I wanted to document as many of the strategies that I’ve
+    used it in real projects in its documentation, and I believe you will
+    also be able to find ones that I haven’t figured out myself. If you
+    find some cool use cases that I haven’t documented, let me know such
+    that we can either get a case study or an article going.
+  </p>
+  <p>
+    As a whole, I want to keep this article related to the higher-level
+    problems that are being solved by the library. Checkout the
+    <a href="https://github.com/mhayes853/swift-query">repo</a> if you
+    want a typical overview of its features with plenty of examples.
+  </p>
+  <br>
+  <h2 id="background-and-inspirations">Background and Inspirations</h2>
+  <p>
+    The past 1.5 years using React Native at a startup is largely
+    responsible for my inspirations for building Swift Query. In
+    particular, I was often responsible for combining all sorts of
+    data (Location, Travel Estimates, Geo-spatially Separated Events,
+    Arrivals at Locations, and of course “Users”) from different sources
+    (Device APIs, SQLite, AWS, and our REST API). Additionally, much of
+    this data also needed to be observed in real-time. In other words,
+    it’s quite safe to say that many of us have worked on applications
+    like these, and managing such data in many different ways is common
+    place for today’s apps.
+  </p>
+  <p>
+    That being said, all of this data comes asynchronously, and takes a
+    non-trivial but varying amounts of time to load from its source. The
+    code itself to fetch the data often isn’t the hard part (unless it’s
+    paired with complex algorithmic processing afterwards), and can be
+    done in just a few lines for most data sources.
+  </p>
+  <p>
+    Yet, what does it mean to load asynchronous data? Such data comes
+    from the physical world, because something physical must work to
+    provide it, otherwise it we wouldn’t consider it “asynchronous”. As
+    software developers, we rarely ever have to think of design in the
+    context of the physical world. Rather, we love to create our own
+    abstract worlds, and demand physical reality bends to our world. As
+    such, we loathe error handling, keeping asynchronous data consistent
+    when displayed in the UI, and creating systems with the expectation
+    of failure. This is especially difficult considering modern UI
+    frameworks are declarative and are driven via local state variables,
+    whereas most data fetching is strictly imperative and affects the
+    application’s global state.
+  </p>
+  <p>
+    <strong><em>Yet, if we want to build great experiences for our users, we need
+        to collaborate with physical reality, and augment their ability
+        beyond physical reality in our abstract worlds.</em></strong>
+  </p>
+  <p>
+    This all sounds incredibly philosophical, but it is exactly the reason
+    why <a href="https://tanstack.com/query/latest">tanstack query</a> is
+    popular in the JavaScript world. The meaning of asynchronous data is
+    incredibly complex in any given system, and if we’re to collaborate
+    with physical reality we must <em>design</em> for failure. As such, we
+    must implement retry mechanisms, caching, informative loading/error UI
+    states, cancellation, keeping data consistent between screens,
+    automatic refetching, stale-while-revalidate, network connection
+    monitoring, exponential/fibonacci/linear backoff strategies,
+    pagination, deduplication, and logging on top of our already existing
+    application features. Tanstack query has an answer for all of this in
+    the JavaScript world.
+  </p>
+  <p>
+    I get it, you have better things to be doing rather than implementing
+    all of those mechanisms to collaborate with physical reality in Swift.
+    Your users also think the same for the record. Therefore, I have
+    decided to build a port of Tanstack Query that’s tuned for Swift,
+    SwiftUI,
+    <a href="https://github.com/pointfreeco/swift-sharing">swift-sharing</a>, Concurrency, UIKit, Linux, WASM, and much more in the future. I
+    want this library to aid the development of Swift as a true
+    cross-platform language by solving such a common problem at the most
+    literal level possible.
+  </p>
+  <p>
+    I built this library because I missed Tanstack Query when working in
+    Swift.
+  </p>
+  <br>
+  <h2 id="addressing-tanstack-query-s-limitations-in-swift-query">
+    Addressing Tanstack Query’s Limitations in Swift Query
+  </h2>
+  <p>
+    Additionally, I aim to address many long-standing issues that Tanstack
+    Query has in order to make something that can fit in to any of your
+    asynchronous data needs. In other words, this library is meant to
+    provide you a framework of thinking about asynchronous data by
+    providing far more generic abstractions than Tanstack Query. This in
+    turn may increase the overall learning curve of the library, but such
+    a fate is better than it not being able to serve your needs.
+  </p>
+  <h3 id="automatic-refetching">Automatic Refetching</h3>
+  <p>
+    Tanstack Query will automatically refetch data when the user
+    foregrounds your app, or the moment user’s network connection status
+    flips from offline to online. Swift Query also provides these tools,
+    but it also allows you to create your own custom refetch triggers by
+    using the <code>FetchCondition</code> protocol. Therefore, you could
+    make it so that data is automatically refetched when a user logs
+    in/out, or when
+    <a href="https://github.com/mhayes853/swift-query/blob/main/Examples/CaseStudies/CaseStudies/03-CustomFetchConditions.swift">low-power mode is enabled</a>, and much more.
+  </p>
+  <h3 id="data-fetching-methods">Data Fetching Methods</h3>
+  <p>
+    Tanstack Query has 3 methods of fetching data suited for different
+    purposes:
+  </p>
+  <ul>
+    <li>
+      Queries
+      <ul>
+        <li>
+          Fetching data as a single entire entity (this is the most common
+          method).
+        </li>
+      </ul>
+    </li>
+    <li>
+      Mutations
+      <ul>
+        <li>Mutating asynchronous data. (eg. HTTP POST request)</li>
+      </ul>
+    </li>
+    <li>
+      Infinite Queries
+      <ul>
+        <li>For paginating data (eg. Infinite scrolling lists).</li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    Swift Query provides these 3 methods out of the box, but also allows
+    you to create your own methods via the
+    <code>QueryRequest</code> protocol. For instance, you could create a
+    method that specializes in fetching recursive data, or combining
+    multiple paginated data streams together.
+  </p>
+  <p>
+    Another difference from Tanstack Query is that in Swift Query,
+    infinite queries and mutations are derived from typical queries. That
+    is, <code>MutationRequest</code> and
+    <code>InfiniteQueryRequest</code> are conformances to
+    <code>QueryRequest</code>. In Tanstack Query, mutations are a
+    completely separate concept not derived from queries, and there’s even
+    a special <code>MutationCache</code> for caching their state. Such a
+    cache is not needed in Swift Query, because mutations are queries.
+    Additionally, deriving both infinite queries and mutations from
+    typical queries allows <code>QueryModifier</code> conformances to work
+    with all 3 methods by default.
+  </p>
+  <p>
+    Swift Query also differs slightly in how infinite query refetching
+    works. In Tanstack Query, refetching an infinite query would refetch
+    every single page starting from the beginning in a waterfall style. In
+    Swift Query, only the initial page is refetched, and all other pages
+    are simply removed. If you want to retain the Tanstack Query behavior,
+    calling <code>refetchAllPages</code> on a <code>QueryStore</code> will
+    do exactly that.
+  </p>
+  <p>
+    As for mutations, Swift Query adds 1 additional feature not found in
+    Tanstack Query. In Tanstack Query, multiple calls to
+    <code>mutation.mutate</code> will run concurrently, however the
+    mutation state from <code>useMutation</code> only displays updates
+    from <em>the most recent</em> call. Swift Query also works this way,
+    but an additional <code>history</code> property exists that allows you
+    to inspect the previous results from other calls to
+    <code>mutate</code>.
+  </p>
+  <h3 id="query-cache">Query Cache</h3>
+  <p>
+    Tanstack Query holds all of your query data in something called the
+    <code>QueryCache</code>. This cache will evict entries based on a
+    running timer in order to properly manage memory. Swift Query also
+    implements uses a similar cache, but it evicts entries based on memory
+    pressure warnings from the operating system instead of by a timer.
+    However, the good news is that you can write your own custom query
+    cache in Swift Query by conforming to the
+    <code>QueryClient.StoreCache</code> protocol. Therefore, if you want
+    the timer approach, you have the option to implement it yourself.
+  </p>
+  <h3 id="query-client">Query Client</h3>
+  <p>
+    The <code>QueryClient</code> in Tanstack Query holds all of your
+    queries, and allows you to operate on them (eg. Refetching,
+    invalidation, etc.). This is also the case for Swift Query, except
+    that you aren’t required to attach a query to the
+    <code>QueryClient</code>. You can use
+    <code>QueryStore.detached</code> instead of obtaining a
+    <code>QueryStore</code> through a <code>QueryClient</code>, and this
+    will give you a store that runs its query in isolation. By doing this,
+    you can even create your own state management system if you find that
+    <code>QueryClient</code> does not suit your needs.
+  </p>
+  <p>
+    Additionally, the way one interacts with <code>QueryClient</code> in
+    Tanstack Query is by calling methods such as <code>refetch</code> or
+    <code>invalidate</code> directly on the client. Swift Query does not
+    provide those methods on <code>QueryClient</code>. Instead, it
+    provides methods that return <code>QueryStore</code> instances
+    directly, and <code>QueryStore</code> has the appropriate refetch and
+    invalidation methods. This allows you to perform advanced and
+    composable operations on the <code>QueryClient</code> without you
+    having to pester me to add a new method on <code>QueryClient</code>.
+  </p>
+  <p>
+    For example, the following (which is real-world code) can be done in 1
+    operation. Here, we’re removing queries from the client that
+    correspond to files being deleted from a directory. Then, we’re
+    refetching all queries that have a corresponding file that has had its
+    data updated, and that are actively being displayed in the visible UI
+    somewhere.
+  </p>
+  <CodeBlock language="swift" code={`
+
+extension QueryClient {
+  public func processDirectoryChanges(
+    _ changes: IdentifiedArrayOf
+  ) async throws {
+    let storesToRefetch = self.withStores(
+      matching: .audioProperties,
+      of: HapticaAudioProperties.Query.State.self
+    ) { entries in
+      let filesToRemove = changes.filter { $0.kind == .deleted }
+        .map { HapticaAudioFile(id: $0.id) }
+      for file in filesToRemove {
+        entries.removeValue(forPath: .audioProperties(for: file))
+      }
+      return changes.filter { $0.kind == .dataUpdated }
+        .compactMap { entries[.audioProperties(for: HapticaAudioFile(id: $0.id))] }
+        .filter { $0.subscriberCount > 0 }
+    }
+    await withThrowingTaskGroup(of: Void.self) { group in
+      for store in storesToRefetch {
+        group.addTask { try await store.fetch() }
+      }
+    }
+  }
+}
+`} />
+  <p>
+    You have access to all the necessary properties and methods directly
+    on <code>QueryStore</code> to perform whatever state management you
+    need. The <code>withStores</code> method takes a closure that allows
+    you to edit the existing stores inside the
+    <code>QueryClient</code> like you would a dictionary.
+  </p>
+  <h3 id="query-keys">Query Keys</h3>
+  <p>
+    Swift Query’s <code>QueryClient</code> also supports pattern matching
+    using a query key like in Tanstack Query. However, the query key is
+    called a <code>QueryPath</code> in Swift Query, and
+    <code>QueryPath</code> is a dedicated struct that can be constructed
+    with an array literal of Hashable and Sendable elements.
+  </p>
+  <p>
+    Unlike Tanstack Query, your query <em>is not</em> required to specify
+    a <code>QueryPath</code> if it conforms to Hashable or Identifiable.
+    In such a case, the <code>QueryRequest</code> synthesizes a
+    conformance for you. To visualize:
+  </p>
+  <CodeBlock language="swift" code={`
+
+struct MyQuery: QueryRequest, Hashable {
+  // Does not need a query path...
+}
+
+struct MyQuery2: QueryRequest {
+  // You must provide a query path because it is not Hashable or Identifiable...
+  var path: QueryPath {
+    ["my-query-2"]
+  }
+}
+`} />
+  <p>
+    As an internal implementation note, a query key in Tanstack Query is
+    represented by the full bloat of a JavaScript array. In Swift Query,
+    the <code>QueryPath</code> type is optimized to not allocate an array
+    when the path is either empty or only contains a single element.
+  </p>
+  <p>
+    By using a dedicated type for the paths, you can also create dedicated
+    domain-specific constants by extending <code>QueryPath</code>.
+  </p>
+  <CodeBlock language="swift" code={`
+
+extension QueryPath {
+  static let currentUser = Self("current-user")
+
+  static func currentUserProject(for projectId: Int) -> Self {
+    .currentUser.appending(projectId)
+  }
+}
+`} />
+  <h3 id="query-options">Query Options</h3>
+  <p>
+    In Tanstack Query, you customize the behavior of a query by passing a
+    bag of options, which looks like such:
+  </p>
+  <CodeBlock language="typescript" code={`
+
+const myQuery = useQuery({
+  queryKey: ["my-query"],
+  queryFn: async () => {
+    // Fetch the data...
+  },
+  retry: 3,
+  staleTime: 5000
+})
+`} />
+  <p>
+    The problem with this approach is that the structure of the object is
+    solely determined by the maintainers of Tanstack Query. You are
+    essentially stuck with whatever configuration is deemed necessary by
+    the library. There are ways around this, but generally they are not
+    the most intuitive.
+  </p>
+  <p>
+    Instead, Swift Query defines queries as types, which allows for a
+    modifier system similar to SwiftUI. In fact, you can create your own
+    custom modifiers through the <code>QueryModifier</code> protocol. The
+    disadvantage of this however is that queries require a some additional
+    boilerplate due to needing to create an entire separate type for each
+    one.
+  </p>
+  <p>Here’s the same query written in swift query.</p>
+  <CodeBlock language="swift" code={`
+
+struct MyQuery: QueryRequest {
+  var path: QueryPath { QueryPath("my-query") }
+
+  func fetch(
+    in context: QueryContext,
+    with continuation: QueryContinuation<Value>
+  ) async throws -> Value {
+    // Fetch the data...
+  }
+}
+
+let myQuery = MyQuery().retry(limit: 3).stale(after: 5)
+`} />
+  <p>
+    Having a custom modifier system means that you can configure your
+    queries in ways that the library doesn’t natively support, and work
+    such support into your own app. For instance, the library doesn’t ship
+    with a native method to artificial delay a query, but such a modifier
+    can easily be written and used across many different queries.
+  </p>
+  <CodeBlock language="swift" code={`
+
+struct DelayModifier<Query: QueryRequest>: QueryModifier {
+  let delay: Duration
+
+  func fetch(
+    in context: QueryContext,
+    using query: Query,
+    with continuation: QueryContinuation<Query.Value>
+  ) async throws -> Query.Value {
+    try await Task.sleep(for: self.delay)
+    return try await query.fetch(in: context, with: continuation)
+  }
+}
+
+extension QueryRequest {
+  func delay(for duration: Duration) -> ModifiedQuery<Self, DelayModifier<Self>> {
+    self.modifier(DelayModifier(delay: duration))
+  }
+}
+
+let myQuery = MyQuery().delay(for: .seconds(0.3))
+`} />
+  <h3 id="multiple-data-updates">Multiple Data Updates</h3>
+  <p>
+    Tanstack Query provides a <code>streamedQuery</code> utility to allow
+    you to yield multiple updates from your queries. This function
+    requires that your query returns a JavaScript
+    <code>AsyncIterable</code>, and the library handles the rest. Instead,
+    Swift Query allows you to yield multiple updates from your queries via
+    the <code>QueryContinuation</code> handed to your query.
+  </p>
+  <p>This makes it easy to implement patterns such as.</p>
+  <CodeBlock language="swift" code={`
+
+struct SomeQuery: QueryRequest, Hashable {
+  func fetch(
+    in context: QueryContext,
+    with continuation: QueryContinuation<Value>
+  ) async throws -> Value {
+    let localValue = try await LocalDatabase.fetchValue()
+    continuation.yield(localValue)
+    return try await Server.fetchValue()
+  }
+}
+`} />
+  <p>
+    Ultimately, you’re still forced to return a final value from your
+    query. If that value is no different from the last yielded value, then
+    simply return the last yielded value.
+  </p>
+  <br>
+  <h2 id="integrating-with-your-app-architecture">
+    Integrating with your App Architecture
+  </h2>
+  <p>
+    One of my core principles with this library was to not care about your
+    architecture as much as possible. That is, whether or not you use
+    MVVM, TCA, MV, or some other combination of MXX, the library should
+    still work for your use case. From my usage so far, I’ve had no
+    trouble using the library in each of those architectural patterns. I
+    also have taken making the act of writing tests heavily into
+    consideration, and all the demos and case studies in the repo have
+    sufficient test coverage to demonstrate this.
+  </p>
+  <h3 id="concurrency">Concurrency</h3>
+  <p>
+    The library is also on the bleeding edge of Swift Concurrency, and
+    provides tools that let you run your queries on custom
+    <code>TaskExecutor</code> conformances and more. Everything is
+    appropriately <code>Sendable</code>, and you can use the library from
+    any actor or thread in your app. The only limitations are that the
+    data types you return from your queries must also be
+    <code>Sendable</code>, your query structs themselves must also be
+    <code>Sendable</code>, and to make sure that you hop to the main
+    thread if you’re observing <code>QueryStore</code> directly for UI
+    updates.
+  </p>
+  <p>
+    The library also runs its work via the <code>QueryTask</code> type.
+    This is a special wrapper around a typical Swift
+    <code>Task</code> that doesn’t begin scheduling its work immediately
+    after initialization. Rather, you tell it explicitly when to run via
+    <code>runIfNeeded</code>, and you can also use it to schedule work in
+    a serial manner compared to other tasks via calling
+    <code>task1.schedule(after: task2)</code>. If you end up scheduling
+    tasks in a cycle, the library will warn you about this. In particular,
+    you’ll find the flexibility of this type to be very useful for
+    testing, as it gives you control over when your query is executed.
+  </p>
+  <h3 id="network-layers">Network Layers</h3>
+  <p>
+    Another principle of the library is abtstracting over an
+    <code>async</code> function in general, and not over the network.
+  </p>
+  <p>
+    You may find that you want to write all of your networking code
+    directly inline inside your query structs, like so.
+  </p>
+  <CodeBlock language="swift" code={`
+
+struct UserQuery: QueryRequest, Hashable {
+  let id: Int
+
+  func fetch(
+    in context: QueryContext,
+    with continuation: QueryContinuation<User>
+  ) async throws -> User {
+    let url = URL(string: "https://api.myapp.com/user/\\(self.id)")!
+    let (data, _) = try await URLSession.shared.data(from: url)
+    return try JSONDecoder().decode(User.self, from: data)
+  }
+}
+`} />
+  <p>
+    Certainly, you can do this, and it is definitely fine for smaller
+    apps.
+    <strong><em>However, Swift Query was designed to enhance your network layer,
+        and not replace it.</em></strong>
+    In fact, you’ll find that in all of the demos and case studies that
+    the query structs themselves are actually quite small, and that they
+    usually call out to a method (on some API class) that actually
+    performs the real data fetching.
+  </p>
+  <p>
+    Regardless, the library’s choice to abstract over a plain
+    <code>async</code> function allows you to implement your queries no
+    matter how well defined your app’s network layer is.
+  </p>
+  <br>
+  <h2 id="future-directions">Future Directions</h2>
+  <p>
+    In general, I think the library provides all of the essentials today,
+    but there are a few things that I want to look into in the potential
+    future.
+  </p>
+  <ol>
+    <li>
+      <strong>Better defaults on Linux.</strong>
+      <ul>
+        <li>
+          As of now, the library will compile and run on Linux, but there
+          is no default <code>NetworkObserver</code> or
+          <code>ApplicationActivityObserver</code> provided by the
+          library. As such, you’ll be forced to create your own
+          conformances if you want your queries to automatically be
+          refetched when the your app foregrounds, or when the user’s
+          network connection flips from offline to online.
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>A better default store cache on non-Apple platforms.</strong>
+      <ul>
+        <li>
+          Currently, the default store cache listens for memory pressure
+          warnings from the operating system via
+          <code>DispatchSource.makeMemoryPressureSource</code>. This API,
+          or really it seems any memory pressure API, is not available on
+          non-Apple platforms. As of now, the default store cache on
+          non-Apple platforms will not automatically cleanup unused
+          queries in any way. Of course, you can implement your own store
+          cache to get around this, but a better default would be ideal
+          here.
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>Typed <code>QueryContext</code>.</strong>
+      <ul>
+        <li>
+          Right now the <code>QueryContext</code> is untyped and has no
+          generics. As such, context properties often have to be stored as
+          <code>any Sendable</code> or <code>any MyProtocol</code>, and
+          then casted to the appropriate strong types in the right
+          contexts. I would like to see if it’s possible to add some sort
+          of strong typing to this in the future.
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>An official headless mode.</strong>
+      <ul>
+        <li>
+          In some cases, you may want to run a query in some background
+          process (eg. In a <code>Tool</code> in the new Foundation Models
+          framework) instead of in the UI. This way, you can still benefit
+          from modifiers such as retries, exponential backoff, duration
+          logging, and much more. However, doing so would require
+          constructing a <code>QueryStore</code>, which is explicitly
+          meant for managing the query’s active running state in your
+          application. In a background context, this additional state
+          management is largely unnecessary because you’re not rendering
+          any UI.
+        </li>
+      </ul>
+    </li>
+  </ol>
+  <br>
+  <h2 id="start-using-swift-query-today">
+    Start Using Swift Query Today
+  </h2>
+  <p>
+    You can start using Swift Query today in your apps.
+    <strong>However, I have not yet declared that the library is fully stable,
+      so proceed at your own risks.</strong>
+    In any case, try it out and let me know how it goes.
+  </p>
+  <p>— 6/29/2025</p>
+</article>
